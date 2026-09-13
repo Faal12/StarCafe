@@ -1,0 +1,36 @@
+[gd_scene format=3 uid="uid://cqn3uvxjv33dv"]
+
+[ext_resource type="Script" uid="uid://cn68mh02kpsjm" path="res://Main.cs" id="1_glv2v"]
+[ext_resource type="Script" uid="uid://dvxl6uwm5e1mg" path="res://Scripts/Npc/NpcPersona.cs" id="3_r0du0"]
+
+[sub_resource type="Resource" id="Resource_glv2v"]
+script = ExtResource("3_r0du0")
+metadata/_custom_type_script = "uid://dvxl6uwm5e1mg"
+
+[node name="Main" type="Node2D" unique_id=39816766 node_paths=PackedStringArray("_dialogueLabel", "_inputField", "_sendButton")]
+script = ExtResource("1_glv2v")
+_dialogueLabel = NodePath("DialogueLabel")
+_inputField = NodePath("InputField")
+_sendButton = NodePath("SendButton")
+_persona = SubResource("Resource_glv2v")
+
+[node name="DialogueLabel" type="Label" parent="." unique_id=42485545]
+offset_left = 122.0
+offset_top = 542.0
+offset_right = 1031.0
+offset_bottom = 594.0
+
+[node name="InputField" type="LineEdit" parent="." unique_id=606172926]
+offset_left = 331.0
+offset_top = 459.0
+offset_right = 869.0
+offset_bottom = 490.0
+
+[node name="SendButton" type="Button" parent="." unique_id=555138190]
+offset_left = 882.0
+offset_top = 460.0
+offset_right = 918.0
+offset_bottom = 491.0
+text = "Ask"
+
+[connection signal="pressed" from="SendButton" to="." method="_on_send_button_pressed"]
