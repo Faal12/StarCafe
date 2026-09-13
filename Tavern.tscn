@@ -13,6 +13,7 @@
 [ext_resource type="Texture2D" path="res://Assets/Sprites/player_front.png" id="11_player_front_tex"]
 [ext_resource type="Texture2D" path="res://Assets/Sprites/player_back.png" id="12_player_back_tex"]
 [ext_resource type="Texture2D" path="res://Assets/Sprites/npc_customer.png" id="13_npc_tex"]
+[ext_resource type="Texture2D" path="res://Assets/Portraits/player_portrait.png" id="14_player_portrait_tex"]
 
 [sub_resource type="RectangleShape2D" id="shape_top_wall"]
 size = Vector2(1152, 32)
@@ -146,6 +147,15 @@ offset_left = 100.0
 offset_top = 440.0
 offset_right = 1052.0
 offset_bottom = 620.0
+
+[node name="PlayerPortrait" type="TextureRect" parent="DialogueUI/Panel"]
+offset_left = 16.0
+offset_top = -160.0
+offset_right = 166.0
+offset_bottom = -10.0
+texture = ExtResource("14_player_portrait_tex")
+expand_mode = 1
+stretch_mode = 5
 
 [node name="NameLabel" type="Label" parent="DialogueUI/Panel"]
 offset_left = 16.0
