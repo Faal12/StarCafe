@@ -1,0 +1,175 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://Scripts/Player/Player.cs" id="1_player_script"]
+[ext_resource type="Script" path="res://Scripts/Npc/NpcInteractable.cs" id="2_npc_script"]
+[ext_resource type="Script" path="res://Scripts/Dialogue/DialogueController.cs" id="3_dialogue_script"]
+[ext_resource type="Resource" path="res://Resources/Npc/Guard.tres" id="4_guard_persona"]
+[ext_resource type="Texture2D" path="res://Assets/Env/floor_tavern.png" id="5_floor_tex"]
+[ext_resource type="Texture2D" path="res://Assets/Env/wall_top.png" id="6_wall_top_tex"]
+[ext_resource type="Texture2D" path="res://Assets/Env/wall_bottom.png" id="7_wall_bottom_tex"]
+[ext_resource type="Texture2D" path="res://Assets/Env/wall_left.png" id="8_wall_left_tex"]
+[ext_resource type="Texture2D" path="res://Assets/Env/wall_right.png" id="9_wall_right_tex"]
+[ext_resource type="Texture2D" path="res://Assets/Env/bar_counter.png" id="10_counter_tex"]
+[ext_resource type="Texture2D" path="res://Assets/Sprites/player_front.png" id="11_player_front_tex"]
+[ext_resource type="Texture2D" path="res://Assets/Sprites/player_back.png" id="12_player_back_tex"]
+[ext_resource type="Texture2D" path="res://Assets/Sprites/npc_customer.png" id="13_npc_tex"]
+
+[sub_resource type="RectangleShape2D" id="shape_top_wall"]
+size = Vector2(1152, 32)
+
+[sub_resource type="RectangleShape2D" id="shape_bottom_wall"]
+size = Vector2(1152, 32)
+
+[sub_resource type="RectangleShape2D" id="shape_side_wall"]
+size = Vector2(32, 648)
+
+[sub_resource type="RectangleShape2D" id="shape_counter"]
+size = Vector2(400, 64)
+
+[sub_resource type="RectangleShape2D" id="shape_npc_body"]
+size = Vector2(20, 16)
+
+[sub_resource type="CircleShape2D" id="shape_interaction"]
+radius = 70.0
+
+[sub_resource type="CapsuleShape2D" id="shape_player_body"]
+radius = 9.0
+height = 20.0
+
+[node name="Tavern" type="Node2D"]
+
+[node name="Floor" type="Sprite2D" parent="."]
+position = Vector2(576, 324)
+texture = ExtResource("5_floor_tex")
+
+[node name="TopWall" type="StaticBody2D" parent="."]
+position = Vector2(576, 16)
+
+[node name="Sprite2D" type="Sprite2D" parent="TopWall"]
+texture = ExtResource("6_wall_top_tex")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TopWall"]
+shape = SubResource("shape_top_wall")
+
+[node name="BottomWall" type="StaticBody2D" parent="."]
+position = Vector2(576, 632)
+
+[node name="Sprite2D" type="Sprite2D" parent="BottomWall"]
+texture = ExtResource("7_wall_bottom_tex")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BottomWall"]
+shape = SubResource("shape_bottom_wall")
+
+[node name="LeftWall" type="StaticBody2D" parent="."]
+position = Vector2(16, 324)
+
+[node name="Sprite2D" type="Sprite2D" parent="LeftWall"]
+texture = ExtResource("8_wall_left_tex")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LeftWall"]
+shape = SubResource("shape_side_wall")
+
+[node name="RightWall" type="StaticBody2D" parent="."]
+position = Vector2(1136, 324)
+
+[node name="Sprite2D" type="Sprite2D" parent="RightWall"]
+texture = ExtResource("9_wall_right_tex")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RightWall"]
+shape = SubResource("shape_side_wall")
+
+[node name="BarCounter" type="StaticBody2D" parent="."]
+position = Vector2(576, 96)
+
+[node name="Sprite2D" type="Sprite2D" parent="BarCounter"]
+texture = ExtResource("10_counter_tex")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BarCounter"]
+shape = SubResource("shape_counter")
+
+[node name="NpcCustomer" type="Node2D" parent="."]
+position = Vector2(576, 190)
+
+[node name="Sprite2D" type="Sprite2D" parent="NpcCustomer"]
+texture = ExtResource("13_npc_tex")
+offset = Vector2(0, -20)
+
+[node name="Body" type="StaticBody2D" parent="NpcCustomer"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="NpcCustomer/Body"]
+shape = SubResource("shape_npc_body")
+position = Vector2(0, -8)
+
+[node name="PromptLabel" type="Label" parent="NpcCustomer"]
+offset_left = -70.0
+offset_top = -84.0
+offset_right = 70.0
+offset_bottom = -62.0
+horizontal_alignment = 1
+text = "[Enter] Поговорить"
+
+[node name="InteractionArea" type="Area2D" parent="NpcCustomer" node_paths=PackedStringArray("_promptLabel", "_dialogueController")]
+script = ExtResource("2_npc_script")
+Persona = ExtResource("4_guard_persona")
+_promptLabel = NodePath("../PromptLabel")
+_dialogueController = NodePath("../../DialogueUI")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="NpcCustomer/InteractionArea"]
+shape = SubResource("shape_interaction")
+
+[node name="Player" type="CharacterBody2D" parent="." node_paths=PackedStringArray("_sprite")]
+position = Vector2(576, 470)
+script = ExtResource("1_player_script")
+_sprite = NodePath("Sprite2D")
+_frontTexture = ExtResource("11_player_front_tex")
+_backTexture = ExtResource("12_player_back_tex")
+
+[node name="Sprite2D" type="Sprite2D" parent="Player"]
+texture = ExtResource("11_player_front_tex")
+offset = Vector2(0, -20)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
+shape = SubResource("shape_player_body")
+position = Vector2(0, -8)
+
+[node name="DialogueUI" type="CanvasLayer" parent="." node_paths=PackedStringArray("_panel", "_nameLabel", "_dialogueLabel", "_inputField", "_sendButton", "_player")]
+script = ExtResource("3_dialogue_script")
+_panel = NodePath("Panel")
+_nameLabel = NodePath("Panel/NameLabel")
+_dialogueLabel = NodePath("Panel/DialogueLabel")
+_inputField = NodePath("Panel/InputField")
+_sendButton = NodePath("Panel/SendButton")
+_player = NodePath("../Player")
+
+[node name="Panel" type="Panel" parent="DialogueUI"]
+offset_left = 100.0
+offset_top = 440.0
+offset_right = 1052.0
+offset_bottom = 620.0
+
+[node name="NameLabel" type="Label" parent="DialogueUI/Panel"]
+offset_left = 16.0
+offset_top = 8.0
+offset_right = 300.0
+offset_bottom = 32.0
+text = "NPC"
+
+[node name="DialogueLabel" type="Label" parent="DialogueUI/Panel"]
+offset_left = 16.0
+offset_top = 36.0
+offset_right = 936.0
+offset_bottom = 110.0
+autowrap_mode = 3
+
+[node name="InputField" type="LineEdit" parent="DialogueUI/Panel"]
+offset_left = 16.0
+offset_top = 118.0
+offset_right = 760.0
+offset_bottom = 148.0
+
+[node name="SendButton" type="Button" parent="DialogueUI/Panel"]
+offset_left = 770.0
+offset_top = 118.0
+offset_right = 936.0
+offset_bottom = 148.0
+text = "Отправить"
