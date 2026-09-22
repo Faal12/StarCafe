@@ -470,7 +470,7 @@ color = Color(0, 0, 0, 0.55)
 [node name="PlayerPortraitBig" type="TextureRect" parent="DialogueUI"]
 offset_left = 30.0
 offset_top = 16.0
-offset_right = 379.0
+offset_right = 413.0
 offset_bottom = 648.0
 texture = ExtResource("14b_player_fullbody_tex")
 expand_mode = 1
