@@ -1,43 +1,43 @@
-[gd_scene format=3]
+[gd_scene format=3 uid="uid://b8d4idw06d6kx"]
 
-[ext_resource type="Script" path="res://Scripts/Player/Player.cs" id="1_player_script"]
-[ext_resource type="Script" path="res://Scripts/Npc/NpcInteractable.cs" id="2_npc_script"]
-[ext_resource type="Script" path="res://Scripts/Dialogue/DialogueController.cs" id="3_dialogue_script"]
+[ext_resource type="Script" uid="uid://c5k7pgpdjso5d" path="res://Scripts/Player/Player.cs" id="1_player_script"]
+[ext_resource type="Script" uid="uid://bg1twepmpwfdo" path="res://Scripts/Npc/NpcInteractable.cs" id="2_npc_script"]
+[ext_resource type="Script" uid="uid://yt2akma8kjuq" path="res://Scripts/Dialogue/DialogueController.cs" id="3_dialogue_script"]
 [ext_resource type="Resource" path="res://Resources/Npc/Guard.tres" id="4_guard_persona"]
-[ext_resource type="Texture2D" path="res://Assets/Ship/floor_hall.png" id="5_floor_tex"]
-[ext_resource type="Texture2D" path="res://Assets/Ship/wall_top.png" id="6_wall_top_tex"]
-[ext_resource type="Texture2D" path="res://Assets/Ship/wall_bottom.png" id="7_wall_bottom_tex"]
-[ext_resource type="Texture2D" path="res://Assets/Ship/wall_left.png" id="8_wall_left_tex"]
-[ext_resource type="Texture2D" path="res://Assets/Ship/wall_right.png" id="9_wall_right_tex"]
-[ext_resource type="Texture2D" path="res://Assets/Ship/bar_counter_scifi.png" id="10_counter_tex"]
-[ext_resource type="Texture2D" path="res://Assets/Ship/bar_screen.png" id="10b_barscreen_tex"]
-[ext_resource type="Texture2D" path="res://Assets/Sprites/player_front.png" id="11_player_front_tex"]
-[ext_resource type="Texture2D" path="res://Assets/Sprites/player_back.png" id="12_player_back_tex"]
-[ext_resource type="Texture2D" path="res://Assets/Sprites/npc_customer.png" id="13_npc_tex"]
-[ext_resource type="Texture2D" path="res://Assets/Portraits/player_portrait.png" id="14_player_portrait_tex"]
-[ext_resource type="Texture2D" path="res://Assets/Ship/door_airlock.png" id="15_door_tex"]
-[ext_resource type="Texture2D" path="res://Assets/Ship/elevator_door.png" id="16_elevator_tex"]
-[ext_resource type="Texture2D" path="res://Assets/Ship/service_robot.png" id="17_robot_tex"]
-[ext_resource type="Texture2D" path="res://Assets/Ship/table_round.png" id="18_table_tex"]
-[ext_resource type="Texture2D" path="res://Assets/Ship/chair.png" id="19_chair_tex"]
-[ext_resource type="Texture2D" path="res://Assets/Ship/couch.png" id="20_couch_tex"]
-[ext_resource type="Texture2D" path="res://Assets/Ship/Decor/armor_statue.png" id="21_statue_tex"]
-[ext_resource type="Texture2D" path="res://Assets/Ship/Decor/grandfather_clock.png" id="22_clock_tex"]
-[ext_resource type="Texture2D" path="res://Assets/Ship/Decor/weapon_rack.png" id="23_weaponrack_tex"]
-[ext_resource type="Texture2D" path="res://Assets/Ship/Decor/bottle_shelf.png" id="24_bottleshelf_tex"]
-[ext_resource type="Texture2D" path="res://Assets/Ship/Decor/curiosity_shelf.png" id="25_curioshelf_tex"]
-[ext_resource type="Texture2D" path="res://Assets/Ship/Decor/room_divider.png" id="26_divider_tex"]
-[ext_resource type="Texture2D" path="res://Assets/Ship/Decor/holo_table.png" id="27_holo_tex"]
-[ext_resource type="Texture2D" path="res://Assets/Ship/Decor/owner_chair.png" id="28_ownerchair_tex"]
-[ext_resource type="Texture2D" path="res://Assets/Ship/Decor/lounge_sofa.png" id="29_loungesofa_tex"]
-[ext_resource type="Texture2D" path="res://Assets/Ship/Decor/bench.png" id="30_bench_tex"]
-[ext_resource type="Texture2D" path="res://Assets/Ship/Decor/vase.png" id="31_vase_tex"]
-[ext_resource type="Texture2D" path="res://Assets/Ship/Decor/server_rack.png" id="32_serverrack_tex"]
-[ext_resource type="Texture2D" path="res://Assets/Ship/Decor/monitor_wall.png" id="33_monitorwall_tex"]
-[ext_resource type="Texture2D" path="res://Assets/Ship/Decor/tech_pod.png" id="34_techpod_tex"]
-[ext_resource type="Texture2D" path="res://Assets/Ship/Decor/spider_drone.png" id="35_spiderdrone_tex"]
-[ext_resource type="Texture2D" path="res://Assets/Ship/Decor/couch_curved_a.png" id="36_curvedcoucha_tex"]
-[ext_resource type="Texture2D" path="res://Assets/Ship/Decor/couch_curved_b.png" id="37_curvedcouchb_tex"]
+[ext_resource type="Texture2D" uid="uid://dwnh4wps0srrg" path="res://Assets/Ship/floor_hall.png" id="5_floor_tex"]
+[ext_resource type="Texture2D" uid="uid://db1210e0t1cnk" path="res://Assets/Ship/wall_top.png" id="6_wall_top_tex"]
+[ext_resource type="Texture2D" uid="uid://bkxdy740h4sbt" path="res://Assets/Ship/wall_bottom.png" id="7_wall_bottom_tex"]
+[ext_resource type="Texture2D" uid="uid://dgd35on2kyjlr" path="res://Assets/Ship/wall_left.png" id="8_wall_left_tex"]
+[ext_resource type="Texture2D" uid="uid://dn3apj74ntjop" path="res://Assets/Ship/wall_right.png" id="9_wall_right_tex"]
+[ext_resource type="Texture2D" uid="uid://bx1fug0dhxvr0" path="res://Assets/Ship/bar_screen.png" id="10b_barscreen_tex"]
+[ext_resource type="Texture2D" uid="uid://crl0qs5bnvdww" path="res://Assets/Ship/bar_counter_scifi.png" id="10_counter_tex"]
+[ext_resource type="Texture2D" uid="uid://brk4i6f1wbwv6" path="res://Assets/Sprites/player_front.png" id="11_player_front_tex"]
+[ext_resource type="Texture2D" uid="uid://ci1qdgx8nrieg" path="res://Assets/Sprites/player_back.png" id="12_player_back_tex"]
+[ext_resource type="Texture2D" uid="uid://60mef8apbj6v" path="res://Assets/Sprites/npc_customer.png" id="13_npc_tex"]
+[ext_resource type="Texture2D" uid="uid://dmdisyk0a40s0" path="res://Assets/Portraits/player_portrait.png" id="14_player_portrait_tex"]
+[ext_resource type="Texture2D" uid="uid://bf1a5riijyji2" path="res://Assets/Ship/door_airlock.png" id="15_door_tex"]
+[ext_resource type="Texture2D" uid="uid://s31aj8xv6aln" path="res://Assets/Ship/elevator_door.png" id="16_elevator_tex"]
+[ext_resource type="Texture2D" uid="uid://c824xo6joh8fl" path="res://Assets/Ship/service_robot.png" id="17_robot_tex"]
+[ext_resource type="Texture2D" uid="uid://crav0txgsicy1" path="res://Assets/Ship/table_round.png" id="18_table_tex"]
+[ext_resource type="Texture2D" uid="uid://bd7y7hdg4fw44" path="res://Assets/Ship/chair.png" id="19_chair_tex"]
+[ext_resource type="Texture2D" uid="uid://bux2j1w3vuq1r" path="res://Assets/Ship/couch.png" id="20_couch_tex"]
+[ext_resource type="Texture2D" uid="uid://blh7bx1kshygo" path="res://Assets/Ship/Decor/armor_statue.png" id="21_statue_tex"]
+[ext_resource type="Texture2D" uid="uid://bdqchwj773s78" path="res://Assets/Ship/Decor/grandfather_clock.png" id="22_clock_tex"]
+[ext_resource type="Texture2D" uid="uid://c07rju31yl3qw" path="res://Assets/Ship/Decor/weapon_rack.png" id="23_weaponrack_tex"]
+[ext_resource type="Texture2D" uid="uid://cr3suedtthpd" path="res://Assets/Ship/Decor/bottle_shelf.png" id="24_bottleshelf_tex"]
+[ext_resource type="Texture2D" uid="uid://d16gbqxu0l18r" path="res://Assets/Ship/Decor/curiosity_shelf.png" id="25_curioshelf_tex"]
+[ext_resource type="Texture2D" uid="uid://nrycqiaryb0h" path="res://Assets/Ship/Decor/room_divider.png" id="26_divider_tex"]
+[ext_resource type="Texture2D" uid="uid://daig50u14xcjk" path="res://Assets/Ship/Decor/holo_table.png" id="27_holo_tex"]
+[ext_resource type="Texture2D" uid="uid://o5uwh4j410n4" path="res://Assets/Ship/Decor/owner_chair.png" id="28_ownerchair_tex"]
+[ext_resource type="Texture2D" uid="uid://br8u3kxwdh54d" path="res://Assets/Ship/Decor/lounge_sofa.png" id="29_loungesofa_tex"]
+[ext_resource type="Texture2D" uid="uid://de67nhr3ntvea" path="res://Assets/Ship/Decor/bench.png" id="30_bench_tex"]
+[ext_resource type="Texture2D" uid="uid://c4xg0xd4k7sfp" path="res://Assets/Ship/Decor/vase.png" id="31_vase_tex"]
+[ext_resource type="Texture2D" uid="uid://ciogevua63sj8" path="res://Assets/Ship/Decor/server_rack.png" id="32_serverrack_tex"]
+[ext_resource type="Texture2D" uid="uid://cn0fv76sbycly" path="res://Assets/Ship/Decor/monitor_wall.png" id="33_monitorwall_tex"]
+[ext_resource type="Texture2D" uid="uid://bg2j57kmwj4r0" path="res://Assets/Ship/Decor/tech_pod.png" id="34_techpod_tex"]
+[ext_resource type="Texture2D" uid="uid://c8m1pp1a3q2uc" path="res://Assets/Ship/Decor/spider_drone.png" id="35_spiderdrone_tex"]
+[ext_resource type="Texture2D" uid="uid://dxymedikxbl48" path="res://Assets/Ship/Decor/couch_curved_a.png" id="36_curvedcoucha_tex"]
+[ext_resource type="Texture2D" uid="uid://c483kh3826rig" path="res://Assets/Ship/Decor/couch_curved_b.png" id="37_curvedcouchb_tex"]
 
 [sub_resource type="RectangleShape2D" id="shape_top_wall"]
 size = Vector2(1872, 96)
@@ -51,15 +51,8 @@ size = Vector2(96, 1152)
 [sub_resource type="RectangleShape2D" id="shape_counter"]
 size = Vector2(800, 80)
 
-[sub_resource type="RectangleShape2D" id="shape_npc_body"]
-size = Vector2(20, 16)
-
-[sub_resource type="CircleShape2D" id="shape_interaction"]
-radius = 70.0
-
-[sub_resource type="CapsuleShape2D" id="shape_player_body"]
-radius = 9.0
-height = 20.0
+[sub_resource type="RectangleShape2D" id="shape_elevator"]
+size = Vector2(110, 70)
 
 [sub_resource type="CircleShape2D" id="shape_table"]
 radius = 30.0
@@ -67,14 +60,14 @@ radius = 30.0
 [sub_resource type="RectangleShape2D" id="shape_couch"]
 size = Vector2(92, 36)
 
-[sub_resource type="RectangleShape2D" id="shape_elevator"]
-size = Vector2(110, 70)
-
 [sub_resource type="RectangleShape2D" id="shape_statue"]
 size = Vector2(30, 45)
 
 [sub_resource type="RectangleShape2D" id="shape_clock"]
 size = Vector2(24, 45)
+
+[sub_resource type="RectangleShape2D" id="shape_bench"]
+size = Vector2(65, 34)
 
 [sub_resource type="RectangleShape2D" id="shape_shelf"]
 size = Vector2(50, 50)
@@ -97,357 +90,365 @@ size = Vector2(38, 30)
 [sub_resource type="RectangleShape2D" id="shape_loungesofa"]
 size = Vector2(50, 26)
 
-[sub_resource type="RectangleShape2D" id="shape_bench"]
-size = Vector2(65, 34)
-
 [sub_resource type="RectangleShape2D" id="shape_serverrack"]
 size = Vector2(42, 30)
 
 [sub_resource type="RectangleShape2D" id="shape_techpod"]
 size = Vector2(32, 32)
 
-[node name="Tavern" type="Node2D"]
+[sub_resource type="RectangleShape2D" id="shape_npc_body"]
+size = Vector2(20, 16)
 
-[node name="Floor" type="Sprite2D" parent="."]
+[sub_resource type="CircleShape2D" id="shape_interaction"]
+radius = 70.0
+
+[sub_resource type="CapsuleShape2D" id="shape_player_body"]
+radius = 9.0
+height = 20.0
+
+[node name="Tavern" type="Node2D" unique_id=1559072604]
+
+[node name="Floor" type="Sprite2D" parent="." unique_id=1572768887]
 position = Vector2(936, 576)
 texture = ExtResource("5_floor_tex")
 
-[node name="TopWall" type="StaticBody2D" parent="."]
+[node name="TopWall" type="StaticBody2D" parent="." unique_id=2003707611]
 position = Vector2(936, 48)
 
-[node name="Sprite2D" type="Sprite2D" parent="TopWall"]
+[node name="Sprite2D" type="Sprite2D" parent="TopWall" unique_id=1008116186]
 texture = ExtResource("6_wall_top_tex")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="TopWall"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TopWall" unique_id=1708326376]
 shape = SubResource("shape_top_wall")
 
-[node name="BottomWall" type="StaticBody2D" parent="."]
+[node name="BottomWall" type="StaticBody2D" parent="." unique_id=1562071041]
 position = Vector2(936, 1104)
 
-[node name="Sprite2D" type="Sprite2D" parent="BottomWall"]
+[node name="Sprite2D" type="Sprite2D" parent="BottomWall" unique_id=197917904]
 texture = ExtResource("7_wall_bottom_tex")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="BottomWall"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BottomWall" unique_id=313070770]
 shape = SubResource("shape_bottom_wall")
 
-[node name="LeftWall" type="StaticBody2D" parent="."]
+[node name="LeftWall" type="StaticBody2D" parent="." unique_id=704237097]
 position = Vector2(48, 576)
 
-[node name="Sprite2D" type="Sprite2D" parent="LeftWall"]
+[node name="Sprite2D" type="Sprite2D" parent="LeftWall" unique_id=579695512]
 texture = ExtResource("8_wall_left_tex")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="LeftWall"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LeftWall" unique_id=127437826]
 shape = SubResource("shape_side_wall")
 
-[node name="RightWall" type="StaticBody2D" parent="."]
+[node name="RightWall" type="StaticBody2D" parent="." unique_id=896817889]
 position = Vector2(1824, 576)
 
-[node name="Sprite2D" type="Sprite2D" parent="RightWall"]
+[node name="Sprite2D" type="Sprite2D" parent="RightWall" unique_id=960781539]
 texture = ExtResource("9_wall_right_tex")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="RightWall"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RightWall" unique_id=923023069]
 shape = SubResource("shape_side_wall")
 
-[node name="EntranceDoor" type="Sprite2D" parent="."]
+[node name="EntranceDoor" type="Sprite2D" parent="." unique_id=1565809738]
 position = Vector2(936, 1104)
 texture = ExtResource("15_door_tex")
 
-[node name="BarScreen" type="Sprite2D" parent="."]
-position = Vector2(936, 70)
+[node name="BarScreen" type="Sprite2D" parent="." unique_id=2025961048]
+position = Vector2(933, -77)
+scale = Vector2(1, 0.9742857)
 texture = ExtResource("10b_barscreen_tex")
 
-[node name="BarCounter" type="StaticBody2D" parent="."]
+[node name="BarCounter" type="StaticBody2D" parent="." unique_id=1139699414]
 position = Vector2(936, 200)
 
-[node name="Sprite2D" type="Sprite2D" parent="BarCounter"]
+[node name="Sprite2D" type="Sprite2D" parent="BarCounter" unique_id=1115765322]
 texture = ExtResource("10_counter_tex")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="BarCounter"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BarCounter" unique_id=2017286305]
 shape = SubResource("shape_counter")
 
-[node name="WeaponRack" type="Sprite2D" parent="."]
+[node name="WeaponRack" type="Sprite2D" parent="." unique_id=1951899711]
 position = Vector2(450, 130)
 texture = ExtResource("23_weaponrack_tex")
 
-[node name="BottleShelf" type="Sprite2D" parent="."]
+[node name="BottleShelf" type="Sprite2D" parent="." unique_id=271915161]
 position = Vector2(1350, 130)
 texture = ExtResource("24_bottleshelf_tex")
 
-[node name="Elevator" type="StaticBody2D" parent="."]
+[node name="Elevator" type="StaticBody2D" parent="." unique_id=1945557689]
 position = Vector2(1650, 950)
 
-[node name="Sprite2D" type="Sprite2D" parent="Elevator"]
-texture = ExtResource("16_elevator_tex")
+[node name="Sprite2D" type="Sprite2D" parent="Elevator" unique_id=1152358240]
 scale = Vector2(0.6, 0.6)
+texture = ExtResource("16_elevator_tex")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Elevator"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Elevator" unique_id=1566141437]
 shape = SubResource("shape_elevator")
 
-[node name="Table1" type="StaticBody2D" parent="."]
+[node name="Table1" type="StaticBody2D" parent="." unique_id=796682890]
 position = Vector2(350, 450)
 
-[node name="Sprite2D" type="Sprite2D" parent="Table1"]
+[node name="Sprite2D" type="Sprite2D" parent="Table1" unique_id=713257089]
 texture = ExtResource("18_table_tex")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Table1"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Table1" unique_id=1837954960]
 shape = SubResource("shape_table")
 
-[node name="Table1ChairN" type="Sprite2D" parent="."]
+[node name="Table1ChairN" type="Sprite2D" parent="." unique_id=1553158082]
 position = Vector2(350, 400)
 texture = ExtResource("19_chair_tex")
 
-[node name="Table1ChairS" type="Sprite2D" parent="."]
+[node name="Table1ChairS" type="Sprite2D" parent="." unique_id=1742072248]
 position = Vector2(350, 500)
 texture = ExtResource("19_chair_tex")
 
-[node name="Table2" type="StaticBody2D" parent="."]
+[node name="Table2" type="StaticBody2D" parent="." unique_id=1278835615]
 position = Vector2(850, 450)
 
-[node name="Sprite2D" type="Sprite2D" parent="Table2"]
+[node name="Sprite2D" type="Sprite2D" parent="Table2" unique_id=1907323614]
 texture = ExtResource("18_table_tex")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Table2"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Table2" unique_id=1918484209]
 shape = SubResource("shape_table")
 
-[node name="Table2ChairN" type="Sprite2D" parent="."]
+[node name="Table2ChairN" type="Sprite2D" parent="." unique_id=2046306195]
 position = Vector2(850, 400)
 texture = ExtResource("19_chair_tex")
 
-[node name="Table2ChairS" type="Sprite2D" parent="."]
+[node name="Table2ChairS" type="Sprite2D" parent="." unique_id=743844408]
 position = Vector2(850, 500)
 texture = ExtResource("19_chair_tex")
 
-[node name="Table3" type="StaticBody2D" parent="."]
+[node name="Table3" type="StaticBody2D" parent="." unique_id=2145982775]
 position = Vector2(1350, 450)
 
-[node name="Sprite2D" type="Sprite2D" parent="Table3"]
+[node name="Sprite2D" type="Sprite2D" parent="Table3" unique_id=1270257647]
 texture = ExtResource("18_table_tex")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Table3"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Table3" unique_id=816675847]
 shape = SubResource("shape_table")
 
-[node name="Table3ChairN" type="Sprite2D" parent="."]
+[node name="Table3ChairN" type="Sprite2D" parent="." unique_id=763411334]
 position = Vector2(1350, 400)
 texture = ExtResource("19_chair_tex")
 
-[node name="Table3ChairS" type="Sprite2D" parent="."]
+[node name="Table3ChairS" type="Sprite2D" parent="." unique_id=1651414480]
 position = Vector2(1350, 500)
 texture = ExtResource("19_chair_tex")
 
-[node name="Table4" type="StaticBody2D" parent="."]
+[node name="Table4" type="StaticBody2D" parent="." unique_id=1735960528]
 position = Vector2(850, 780)
 
-[node name="Sprite2D" type="Sprite2D" parent="Table4"]
+[node name="Sprite2D" type="Sprite2D" parent="Table4" unique_id=2114072747]
 texture = ExtResource("18_table_tex")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Table4"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Table4" unique_id=1694853644]
 shape = SubResource("shape_table")
 
-[node name="Table4ChairN" type="Sprite2D" parent="."]
+[node name="Table4ChairN" type="Sprite2D" parent="." unique_id=1656693395]
 position = Vector2(850, 730)
 texture = ExtResource("19_chair_tex")
 
-[node name="Table4ChairS" type="Sprite2D" parent="."]
+[node name="Table4ChairS" type="Sprite2D" parent="." unique_id=949760465]
 position = Vector2(850, 830)
 texture = ExtResource("19_chair_tex")
 
-[node name="Couch1" type="StaticBody2D" parent="."]
+[node name="Couch1" type="StaticBody2D" parent="." unique_id=30523356]
 position = Vector2(250, 900)
 
-[node name="Sprite2D" type="Sprite2D" parent="Couch1"]
+[node name="Sprite2D" type="Sprite2D" parent="Couch1" unique_id=1914301276]
 texture = ExtResource("20_couch_tex")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Couch1"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Couch1" unique_id=2059984193]
 shape = SubResource("shape_couch")
 
-[node name="Couch2" type="StaticBody2D" parent="."]
+[node name="Couch2" type="StaticBody2D" parent="." unique_id=312181879]
 position = Vector2(450, 900)
 
-[node name="Sprite2D" type="Sprite2D" parent="Couch2"]
+[node name="Sprite2D" type="Sprite2D" parent="Couch2" unique_id=654245348]
 texture = ExtResource("20_couch_tex")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Couch2"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Couch2" unique_id=1217097582]
 shape = SubResource("shape_couch")
 
-[node name="ServiceRobot" type="Sprite2D" parent="."]
+[node name="ServiceRobot" type="Sprite2D" parent="." unique_id=206475987]
 position = Vector2(1100, 650)
 texture = ExtResource("17_robot_tex")
 
-[node name="ArmorStatue" type="StaticBody2D" parent="."]
+[node name="ArmorStatue" type="StaticBody2D" parent="." unique_id=910193670]
 position = Vector2(750, 1000)
 
-[node name="Sprite2D" type="Sprite2D" parent="ArmorStatue"]
-texture = ExtResource("21_statue_tex")
+[node name="Sprite2D" type="Sprite2D" parent="ArmorStatue" unique_id=684097747]
 scale = Vector2(1.8, 1.8)
+texture = ExtResource("21_statue_tex")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="ArmorStatue"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ArmorStatue" unique_id=572554768]
 shape = SubResource("shape_statue")
 
-[node name="GrandfatherClock" type="StaticBody2D" parent="."]
+[node name="GrandfatherClock" type="StaticBody2D" parent="." unique_id=1662434594]
 position = Vector2(1150, 1000)
 
-[node name="Sprite2D" type="Sprite2D" parent="GrandfatherClock"]
-texture = ExtResource("22_clock_tex")
+[node name="Sprite2D" type="Sprite2D" parent="GrandfatherClock" unique_id=1960196539]
 scale = Vector2(1.8, 1.8)
+texture = ExtResource("22_clock_tex")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="GrandfatherClock"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GrandfatherClock" unique_id=1954003479]
 shape = SubResource("shape_clock")
 
-[node name="Bench" type="StaticBody2D" parent="."]
+[node name="Bench" type="StaticBody2D" parent="." unique_id=668347584]
 position = Vector2(1000, 1000)
 
-[node name="Sprite2D" type="Sprite2D" parent="Bench"]
+[node name="Sprite2D" type="Sprite2D" parent="Bench" unique_id=1240157876]
 texture = ExtResource("30_bench_tex")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Bench"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Bench" unique_id=1243693112]
 shape = SubResource("shape_bench")
 
-[node name="CuriosityShelf" type="StaticBody2D" parent="."]
+[node name="CuriosityShelf" type="StaticBody2D" parent="." unique_id=955657472]
 position = Vector2(180, 300)
 
-[node name="Sprite2D" type="Sprite2D" parent="CuriosityShelf"]
+[node name="Sprite2D" type="Sprite2D" parent="CuriosityShelf" unique_id=1191323086]
 texture = ExtResource("25_curioshelf_tex")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CuriosityShelf"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CuriosityShelf" unique_id=2062191505]
 shape = SubResource("shape_shelf")
 
-[node name="Vase" type="Sprite2D" parent="."]
+[node name="Vase" type="Sprite2D" parent="." unique_id=1894896670]
 position = Vector2(280, 300)
 texture = ExtResource("31_vase_tex")
 
-[node name="CurvedCouchA" type="StaticBody2D" parent="."]
+[node name="CurvedCouchA" type="StaticBody2D" parent="." unique_id=1745662263]
 position = Vector2(220, 430)
 
-[node name="Sprite2D" type="Sprite2D" parent="CurvedCouchA"]
+[node name="Sprite2D" type="Sprite2D" parent="CurvedCouchA" unique_id=1609454076]
 texture = ExtResource("36_curvedcoucha_tex")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CurvedCouchA"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CurvedCouchA" unique_id=1978127817]
 shape = SubResource("shape_curvedcoucha")
 
-[node name="CurvedCouchB" type="StaticBody2D" parent="."]
+[node name="CurvedCouchB" type="StaticBody2D" parent="." unique_id=1626239575]
 position = Vector2(220, 600)
 
-[node name="Sprite2D" type="Sprite2D" parent="CurvedCouchB"]
+[node name="Sprite2D" type="Sprite2D" parent="CurvedCouchB" unique_id=906018449]
 texture = ExtResource("37_curvedcouchb_tex")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CurvedCouchB"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CurvedCouchB" unique_id=233654677]
 shape = SubResource("shape_curvedcouchb")
 
-[node name="RoomDivider" type="StaticBody2D" parent="."]
+[node name="RoomDivider" type="StaticBody2D" parent="." unique_id=1932341574]
 position = Vector2(1480, 480)
 
-[node name="Sprite2D" type="Sprite2D" parent="RoomDivider"]
+[node name="Sprite2D" type="Sprite2D" parent="RoomDivider" unique_id=247255266]
 texture = ExtResource("26_divider_tex")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="RoomDivider"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RoomDivider" unique_id=1901982326]
 shape = SubResource("shape_divider")
 
-[node name="HoloTable" type="StaticBody2D" parent="."]
+[node name="HoloTable" type="StaticBody2D" parent="." unique_id=1841408979]
 position = Vector2(1580, 560)
 
-[node name="Sprite2D" type="Sprite2D" parent="HoloTable"]
+[node name="Sprite2D" type="Sprite2D" parent="HoloTable" unique_id=1737507888]
 texture = ExtResource("27_holo_tex")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="HoloTable"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HoloTable" unique_id=756851354]
 shape = SubResource("shape_holo")
 
-[node name="OwnerChair" type="StaticBody2D" parent="."]
+[node name="OwnerChair" type="StaticBody2D" parent="." unique_id=1544401829]
 position = Vector2(1580, 630)
 
-[node name="Sprite2D" type="Sprite2D" parent="OwnerChair"]
+[node name="Sprite2D" type="Sprite2D" parent="OwnerChair" unique_id=1831490950]
 texture = ExtResource("28_ownerchair_tex")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="OwnerChair"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="OwnerChair" unique_id=158504914]
 shape = SubResource("shape_ownerchair")
 
-[node name="LoungeSofa" type="StaticBody2D" parent="."]
+[node name="LoungeSofa" type="StaticBody2D" parent="." unique_id=829548617]
 position = Vector2(1420, 700)
 
-[node name="Sprite2D" type="Sprite2D" parent="LoungeSofa"]
+[node name="Sprite2D" type="Sprite2D" parent="LoungeSofa" unique_id=1309335498]
 texture = ExtResource("29_loungesofa_tex")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="LoungeSofa"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LoungeSofa" unique_id=2016360088]
 shape = SubResource("shape_loungesofa")
 
-[node name="ServerRack" type="StaticBody2D" parent="."]
+[node name="ServerRack" type="StaticBody2D" parent="." unique_id=921733492]
 position = Vector2(1560, 780)
 
-[node name="Sprite2D" type="Sprite2D" parent="ServerRack"]
+[node name="Sprite2D" type="Sprite2D" parent="ServerRack" unique_id=352954571]
 texture = ExtResource("32_serverrack_tex")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="ServerRack"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ServerRack" unique_id=127292012]
 shape = SubResource("shape_serverrack")
 
-[node name="MonitorWall" type="Sprite2D" parent="."]
+[node name="MonitorWall" type="Sprite2D" parent="." unique_id=969090342]
 position = Vector2(1750, 650)
 texture = ExtResource("33_monitorwall_tex")
 
-[node name="TechPod" type="StaticBody2D" parent="."]
+[node name="TechPod" type="StaticBody2D" parent="." unique_id=1577215009]
 position = Vector2(1680, 800)
 
-[node name="Sprite2D" type="Sprite2D" parent="TechPod"]
+[node name="Sprite2D" type="Sprite2D" parent="TechPod" unique_id=153485109]
 texture = ExtResource("34_techpod_tex")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="TechPod"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TechPod" unique_id=544427168]
 shape = SubResource("shape_techpod")
 
-[node name="SpiderDrone" type="Sprite2D" parent="."]
+[node name="SpiderDrone" type="Sprite2D" parent="." unique_id=377827928]
 position = Vector2(1500, 900)
 texture = ExtResource("35_spiderdrone_tex")
 
-[node name="NpcCustomer" type="Node2D" parent="."]
+[node name="NpcCustomer" type="Node2D" parent="." unique_id=1054952415]
 position = Vector2(936, 300)
 
-[node name="Sprite2D" type="Sprite2D" parent="NpcCustomer"]
+[node name="Sprite2D" type="Sprite2D" parent="NpcCustomer" unique_id=664627261]
 texture = ExtResource("13_npc_tex")
 offset = Vector2(0, -20)
 
-[node name="Body" type="StaticBody2D" parent="NpcCustomer"]
+[node name="Body" type="StaticBody2D" parent="NpcCustomer" unique_id=1716214941]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="NpcCustomer/Body"]
-shape = SubResource("shape_npc_body")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="NpcCustomer/Body" unique_id=1357149900]
 position = Vector2(0, -8)
+shape = SubResource("shape_npc_body")
 
-[node name="PromptLabel" type="Label" parent="NpcCustomer"]
+[node name="PromptLabel" type="Label" parent="NpcCustomer" unique_id=1648033304]
 offset_left = -70.0
 offset_top = -84.0
 offset_right = 70.0
 offset_bottom = -62.0
-horizontal_alignment = 1
 text = "[Enter] Поговорить"
+horizontal_alignment = 1
 
-[node name="InteractionArea" type="Area2D" parent="NpcCustomer" node_paths=PackedStringArray("_promptLabel", "_dialogueController")]
+[node name="InteractionArea" type="Area2D" parent="NpcCustomer" unique_id=1700359529 node_paths=PackedStringArray("_promptLabel", "_dialogueController")]
 script = ExtResource("2_npc_script")
 Persona = ExtResource("4_guard_persona")
 _promptLabel = NodePath("../PromptLabel")
 _dialogueController = NodePath("../../DialogueUI")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="NpcCustomer/InteractionArea"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="NpcCustomer/InteractionArea" unique_id=1856979459]
 shape = SubResource("shape_interaction")
 
-[node name="Player" type="CharacterBody2D" parent="." node_paths=PackedStringArray("_sprite")]
+[node name="Player" type="CharacterBody2D" parent="." unique_id=2104138456 node_paths=PackedStringArray("_sprite")]
 position = Vector2(936, 980)
 script = ExtResource("1_player_script")
 _sprite = NodePath("Sprite2D")
 _frontTexture = ExtResource("11_player_front_tex")
 _backTexture = ExtResource("12_player_back_tex")
 
-[node name="Sprite2D" type="Sprite2D" parent="Player"]
+[node name="Sprite2D" type="Sprite2D" parent="Player" unique_id=1183537308]
 texture = ExtResource("11_player_front_tex")
 offset = Vector2(0, -20)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
-shape = SubResource("shape_player_body")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player" unique_id=256018482]
 position = Vector2(0, -8)
+shape = SubResource("shape_player_body")
 
-[node name="Camera2D" type="Camera2D" parent="Player"]
-position_smoothing_enabled = true
+[node name="Camera2D" type="Camera2D" parent="Player" unique_id=1308245037]
 limit_left = 0
 limit_top = 0
 limit_right = 1872
 limit_bottom = 1152
+position_smoothing_enabled = true
 
-[node name="DialogueUI" type="CanvasLayer" parent="." node_paths=PackedStringArray("_panel", "_nameLabel", "_dialogueLabel", "_inputField", "_sendButton", "_player")]
+[node name="DialogueUI" type="CanvasLayer" parent="." unique_id=1869773562 node_paths=PackedStringArray("_panel", "_nameLabel", "_dialogueLabel", "_inputField", "_sendButton", "_player", "_dimBackground", "_playerPortraitBig", "_npcPortraitBig")]
 script = ExtResource("3_dialogue_script")
 _panel = NodePath("Panel")
 _nameLabel = NodePath("Panel/NameLabel")
@@ -455,43 +456,65 @@ _dialogueLabel = NodePath("Panel/DialogueLabel")
 _inputField = NodePath("Panel/InputField")
 _sendButton = NodePath("Panel/SendButton")
 _player = NodePath("../Player")
+_dimBackground = NodePath("DimBackground")
+_playerPortraitBig = NodePath("PlayerPortraitBig")
+_npcPortraitBig = NodePath("NpcPortraitBig")
 
-[node name="Panel" type="Panel" parent="DialogueUI"]
+[node name="DimBackground" type="ColorRect" parent="DialogueUI"]
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 1152.0
+offset_bottom = 648.0
+color = Color(0, 0, 0, 0.55)
+
+[node name="PlayerPortraitBig" type="TextureRect" parent="DialogueUI"]
+offset_left = 20.0
+offset_top = 80.0
+offset_right = 380.0
+offset_bottom = 620.0
+texture = ExtResource("14_player_portrait_tex")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="NpcPortraitBig" type="TextureRect" parent="DialogueUI"]
+offset_left = 772.0
+offset_top = 80.0
+offset_right = 1132.0
+offset_bottom = 620.0
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Panel" type="Panel" parent="DialogueUI" unique_id=1909741969]
 offset_left = 100.0
 offset_top = 440.0
 offset_right = 1052.0
 offset_bottom = 620.0
 
-[node name="PlayerPortrait" type="TextureRect" parent="DialogueUI/Panel"]
-offset_left = 16.0
-offset_top = -160.0
-offset_right = 166.0
-offset_bottom = -10.0
-texture = ExtResource("14_player_portrait_tex")
-expand_mode = 1
-stretch_mode = 5
-
-[node name="NameLabel" type="Label" parent="DialogueUI/Panel"]
+[node name="NameLabel" type="Label" parent="DialogueUI/Panel" unique_id=806357499]
+layout_mode = 0
 offset_left = 16.0
 offset_top = 8.0
 offset_right = 300.0
 offset_bottom = 32.0
 text = "NPC"
 
-[node name="DialogueLabel" type="Label" parent="DialogueUI/Panel"]
+[node name="DialogueLabel" type="Label" parent="DialogueUI/Panel" unique_id=1405595196]
+layout_mode = 0
 offset_left = 16.0
 offset_top = 36.0
 offset_right = 936.0
 offset_bottom = 110.0
 autowrap_mode = 3
 
-[node name="InputField" type="LineEdit" parent="DialogueUI/Panel"]
+[node name="InputField" type="LineEdit" parent="DialogueUI/Panel" unique_id=2042570676]
+layout_mode = 0
 offset_left = 16.0
 offset_top = 118.0
 offset_right = 760.0
 offset_bottom = 148.0
 
-[node name="SendButton" type="Button" parent="DialogueUI/Panel"]
+[node name="SendButton" type="Button" parent="DialogueUI/Panel" unique_id=1558333463]
+layout_mode = 0
 offset_left = 770.0
 offset_top = 118.0
 offset_right = 936.0

@@ -7,4 +7,6 @@ public partial class NpcPersona : Resource
 
     [Export(PropertyHint.MultilineText)]
     public string SystemPrompt { get; set; } = "";
+
+    [Export] public Texture2D Portrait { get; set; }
 }
