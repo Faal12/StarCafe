@@ -468,18 +468,18 @@ offset_bottom = 648.0
 color = Color(0, 0, 0, 0.55)
 
 [node name="PlayerPortraitBig" type="TextureRect" parent="DialogueUI"]
-offset_left = 0.0
+offset_left = 30.0
 offset_top = 16.0
-offset_right = 380.0
+offset_right = 379.0
 offset_bottom = 648.0
 texture = ExtResource("14b_player_fullbody_tex")
 expand_mode = 1
-stretch_mode = 4
+stretch_mode = 5
 
 [node name="NpcPortraitBig" type="TextureRect" parent="DialogueUI"]
-offset_left = 772.0
+offset_left = 786.0
 offset_top = 16.0
-offset_right = 1152.0
+offset_right = 1102.0
 offset_bottom = 648.0
 expand_mode = 1
 stretch_mode = 5
