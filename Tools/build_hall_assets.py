@@ -102,15 +102,11 @@ def sci_counter(path, w=800, h=80):
     img.save(path)
 
 
-# --- Floor: Scifi_Panels_05 (locker/access-panel look) as main floor ---
-# Source is a 4096x4096 sheet containing 4 distinct labeled panels (B-32..B-35) —
-# downscale first so tiling repeats a reasonably sized cell, not one giant corner.
-tile_texture(os.path.join(PACKS, "Scifi_Panels_05", "Scifi_Panels_05_basecolor.jpg"),
-             os.path.join(SHIP, "floor_hall.png"), 1680, 960, tile_size=400)
-
-# --- Floor accent near the bar: glowing-seam panel ---
-tile_texture(os.path.join(PACKS, "Floor Tile 1", "PNG", "1k", "floor_tile_1_color.png"),
-             os.path.join(SHIP, "floor_accent.png"), 900, 220)
+# --- Floor: single material for now, floor_tile_1 at 2k (glowing-seam panel) ---
+# Source is 2048x2048 — downscale so the baked-in repeat cell reads at game scale
+# (comparable to the ~150-220px furniture/tile scale used elsewhere in the hall).
+tile_texture(os.path.join(PACKS, "Floor Tile 1", "PNG", "2k", "floor_tile_1_color_2k.png"),
+             os.path.join(SHIP, "floor_hall.png"), 1680, 960, tile_size=900)
 
 # --- Walls: calm painted-wall base on all four sides ---
 WALL_THICKNESS = 96

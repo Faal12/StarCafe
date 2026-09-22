@@ -5,7 +5,6 @@
 [ext_resource type="Script" path="res://Scripts/Dialogue/DialogueController.cs" id="3_dialogue_script"]
 [ext_resource type="Resource" path="res://Resources/Npc/Guard.tres" id="4_guard_persona"]
 [ext_resource type="Texture2D" path="res://Assets/Ship/floor_hall.png" id="5_floor_tex"]
-[ext_resource type="Texture2D" path="res://Assets/Ship/floor_accent.png" id="5b_floor_accent_tex"]
 [ext_resource type="Texture2D" path="res://Assets/Ship/wall_top.png" id="6_wall_top_tex"]
 [ext_resource type="Texture2D" path="res://Assets/Ship/wall_bottom.png" id="7_wall_bottom_tex"]
 [ext_resource type="Texture2D" path="res://Assets/Ship/wall_left.png" id="8_wall_left_tex"]
@@ -112,10 +111,6 @@ size = Vector2(32, 32)
 [node name="Floor" type="Sprite2D" parent="."]
 position = Vector2(936, 576)
 texture = ExtResource("5_floor_tex")
-
-[node name="FloorAccent" type="Sprite2D" parent="."]
-position = Vector2(936, 290)
-texture = ExtResource("5b_floor_accent_tex")
 
 [node name="TopWall" type="StaticBody2D" parent="."]
 position = Vector2(936, 48)
