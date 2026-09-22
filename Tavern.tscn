@@ -474,7 +474,7 @@ offset_right = 380.0
 offset_bottom = 648.0
 texture = ExtResource("14b_player_fullbody_tex")
 expand_mode = 1
-stretch_mode = 5
+stretch_mode = 4
 
 [node name="NpcPortraitBig" type="TextureRect" parent="DialogueUI"]
 offset_left = 772.0
