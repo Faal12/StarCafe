@@ -25,3 +25,6 @@ obj/
 /TopView_Robot_Asset_Pack/
 /TopView_Robot_Asset_Pack 2/
 /cyb assets/
+
+# Raw working files Godot can't import anyway — keep the PNG derivatives only
+*.tiff
