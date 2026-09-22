@@ -5,11 +5,13 @@
 [ext_resource type="Script" path="res://Scripts/Dialogue/DialogueController.cs" id="3_dialogue_script"]
 [ext_resource type="Resource" path="res://Resources/Npc/Guard.tres" id="4_guard_persona"]
 [ext_resource type="Texture2D" path="res://Assets/Ship/floor_hall.png" id="5_floor_tex"]
+[ext_resource type="Texture2D" path="res://Assets/Ship/floor_accent.png" id="5b_floor_accent_tex"]
 [ext_resource type="Texture2D" path="res://Assets/Ship/wall_top.png" id="6_wall_top_tex"]
 [ext_resource type="Texture2D" path="res://Assets/Ship/wall_bottom.png" id="7_wall_bottom_tex"]
 [ext_resource type="Texture2D" path="res://Assets/Ship/wall_left.png" id="8_wall_left_tex"]
 [ext_resource type="Texture2D" path="res://Assets/Ship/wall_right.png" id="9_wall_right_tex"]
 [ext_resource type="Texture2D" path="res://Assets/Ship/bar_counter_scifi.png" id="10_counter_tex"]
+[ext_resource type="Texture2D" path="res://Assets/Ship/bar_screen.png" id="10b_barscreen_tex"]
 [ext_resource type="Texture2D" path="res://Assets/Sprites/player_front.png" id="11_player_front_tex"]
 [ext_resource type="Texture2D" path="res://Assets/Sprites/player_back.png" id="12_player_back_tex"]
 [ext_resource type="Texture2D" path="res://Assets/Sprites/npc_customer.png" id="13_npc_tex"]
@@ -20,6 +22,23 @@
 [ext_resource type="Texture2D" path="res://Assets/Ship/table_round.png" id="18_table_tex"]
 [ext_resource type="Texture2D" path="res://Assets/Ship/chair.png" id="19_chair_tex"]
 [ext_resource type="Texture2D" path="res://Assets/Ship/couch.png" id="20_couch_tex"]
+[ext_resource type="Texture2D" path="res://Assets/Ship/Decor/armor_statue.png" id="21_statue_tex"]
+[ext_resource type="Texture2D" path="res://Assets/Ship/Decor/grandfather_clock.png" id="22_clock_tex"]
+[ext_resource type="Texture2D" path="res://Assets/Ship/Decor/weapon_rack.png" id="23_weaponrack_tex"]
+[ext_resource type="Texture2D" path="res://Assets/Ship/Decor/bottle_shelf.png" id="24_bottleshelf_tex"]
+[ext_resource type="Texture2D" path="res://Assets/Ship/Decor/curiosity_shelf.png" id="25_curioshelf_tex"]
+[ext_resource type="Texture2D" path="res://Assets/Ship/Decor/room_divider.png" id="26_divider_tex"]
+[ext_resource type="Texture2D" path="res://Assets/Ship/Decor/holo_table.png" id="27_holo_tex"]
+[ext_resource type="Texture2D" path="res://Assets/Ship/Decor/owner_chair.png" id="28_ownerchair_tex"]
+[ext_resource type="Texture2D" path="res://Assets/Ship/Decor/lounge_sofa.png" id="29_loungesofa_tex"]
+[ext_resource type="Texture2D" path="res://Assets/Ship/Decor/bench.png" id="30_bench_tex"]
+[ext_resource type="Texture2D" path="res://Assets/Ship/Decor/vase.png" id="31_vase_tex"]
+[ext_resource type="Texture2D" path="res://Assets/Ship/Decor/server_rack.png" id="32_serverrack_tex"]
+[ext_resource type="Texture2D" path="res://Assets/Ship/Decor/monitor_wall.png" id="33_monitorwall_tex"]
+[ext_resource type="Texture2D" path="res://Assets/Ship/Decor/tech_pod.png" id="34_techpod_tex"]
+[ext_resource type="Texture2D" path="res://Assets/Ship/Decor/spider_drone.png" id="35_spiderdrone_tex"]
+[ext_resource type="Texture2D" path="res://Assets/Ship/Decor/couch_curved_a.png" id="36_curvedcoucha_tex"]
+[ext_resource type="Texture2D" path="res://Assets/Ship/Decor/couch_curved_b.png" id="37_curvedcouchb_tex"]
 
 [sub_resource type="RectangleShape2D" id="shape_top_wall"]
 size = Vector2(1872, 96)
@@ -52,11 +71,51 @@ size = Vector2(92, 36)
 [sub_resource type="RectangleShape2D" id="shape_elevator"]
 size = Vector2(110, 70)
 
+[sub_resource type="RectangleShape2D" id="shape_statue"]
+size = Vector2(30, 45)
+
+[sub_resource type="RectangleShape2D" id="shape_clock"]
+size = Vector2(24, 45)
+
+[sub_resource type="RectangleShape2D" id="shape_shelf"]
+size = Vector2(50, 50)
+
+[sub_resource type="RectangleShape2D" id="shape_curvedcoucha"]
+size = Vector2(60, 32)
+
+[sub_resource type="RectangleShape2D" id="shape_curvedcouchb"]
+size = Vector2(53, 28)
+
+[sub_resource type="RectangleShape2D" id="shape_divider"]
+size = Vector2(36, 32)
+
+[sub_resource type="CircleShape2D" id="shape_holo"]
+radius = 26.0
+
+[sub_resource type="RectangleShape2D" id="shape_ownerchair"]
+size = Vector2(38, 30)
+
+[sub_resource type="RectangleShape2D" id="shape_loungesofa"]
+size = Vector2(50, 26)
+
+[sub_resource type="RectangleShape2D" id="shape_bench"]
+size = Vector2(65, 34)
+
+[sub_resource type="RectangleShape2D" id="shape_serverrack"]
+size = Vector2(42, 30)
+
+[sub_resource type="RectangleShape2D" id="shape_techpod"]
+size = Vector2(32, 32)
+
 [node name="Tavern" type="Node2D"]
 
 [node name="Floor" type="Sprite2D" parent="."]
 position = Vector2(936, 576)
 texture = ExtResource("5_floor_tex")
+
+[node name="FloorAccent" type="Sprite2D" parent="."]
+position = Vector2(936, 290)
+texture = ExtResource("5b_floor_accent_tex")
 
 [node name="TopWall" type="StaticBody2D" parent="."]
 position = Vector2(936, 48)
@@ -98,6 +157,10 @@ shape = SubResource("shape_side_wall")
 position = Vector2(936, 1104)
 texture = ExtResource("15_door_tex")
 
+[node name="BarScreen" type="Sprite2D" parent="."]
+position = Vector2(936, 70)
+texture = ExtResource("10b_barscreen_tex")
+
 [node name="BarCounter" type="StaticBody2D" parent="."]
 position = Vector2(936, 200)
 
@@ -106,6 +169,14 @@ texture = ExtResource("10_counter_tex")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BarCounter"]
 shape = SubResource("shape_counter")
+
+[node name="WeaponRack" type="Sprite2D" parent="."]
+position = Vector2(450, 130)
+texture = ExtResource("23_weaponrack_tex")
+
+[node name="BottleShelf" type="Sprite2D" parent="."]
+position = Vector2(1350, 130)
+texture = ExtResource("24_bottleshelf_tex")
 
 [node name="Elevator" type="StaticBody2D" parent="."]
 position = Vector2(1650, 950)
@@ -206,6 +277,128 @@ shape = SubResource("shape_couch")
 [node name="ServiceRobot" type="Sprite2D" parent="."]
 position = Vector2(1100, 650)
 texture = ExtResource("17_robot_tex")
+
+[node name="ArmorStatue" type="StaticBody2D" parent="."]
+position = Vector2(750, 1000)
+
+[node name="Sprite2D" type="Sprite2D" parent="ArmorStatue"]
+texture = ExtResource("21_statue_tex")
+scale = Vector2(1.8, 1.8)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ArmorStatue"]
+shape = SubResource("shape_statue")
+
+[node name="GrandfatherClock" type="StaticBody2D" parent="."]
+position = Vector2(1150, 1000)
+
+[node name="Sprite2D" type="Sprite2D" parent="GrandfatherClock"]
+texture = ExtResource("22_clock_tex")
+scale = Vector2(1.8, 1.8)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GrandfatherClock"]
+shape = SubResource("shape_clock")
+
+[node name="Bench" type="StaticBody2D" parent="."]
+position = Vector2(1000, 1000)
+
+[node name="Sprite2D" type="Sprite2D" parent="Bench"]
+texture = ExtResource("30_bench_tex")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Bench"]
+shape = SubResource("shape_bench")
+
+[node name="CuriosityShelf" type="StaticBody2D" parent="."]
+position = Vector2(180, 300)
+
+[node name="Sprite2D" type="Sprite2D" parent="CuriosityShelf"]
+texture = ExtResource("25_curioshelf_tex")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CuriosityShelf"]
+shape = SubResource("shape_shelf")
+
+[node name="Vase" type="Sprite2D" parent="."]
+position = Vector2(280, 300)
+texture = ExtResource("31_vase_tex")
+
+[node name="CurvedCouchA" type="StaticBody2D" parent="."]
+position = Vector2(220, 430)
+
+[node name="Sprite2D" type="Sprite2D" parent="CurvedCouchA"]
+texture = ExtResource("36_curvedcoucha_tex")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CurvedCouchA"]
+shape = SubResource("shape_curvedcoucha")
+
+[node name="CurvedCouchB" type="StaticBody2D" parent="."]
+position = Vector2(220, 600)
+
+[node name="Sprite2D" type="Sprite2D" parent="CurvedCouchB"]
+texture = ExtResource("37_curvedcouchb_tex")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CurvedCouchB"]
+shape = SubResource("shape_curvedcouchb")
+
+[node name="RoomDivider" type="StaticBody2D" parent="."]
+position = Vector2(1480, 480)
+
+[node name="Sprite2D" type="Sprite2D" parent="RoomDivider"]
+texture = ExtResource("26_divider_tex")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RoomDivider"]
+shape = SubResource("shape_divider")
+
+[node name="HoloTable" type="StaticBody2D" parent="."]
+position = Vector2(1580, 560)
+
+[node name="Sprite2D" type="Sprite2D" parent="HoloTable"]
+texture = ExtResource("27_holo_tex")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HoloTable"]
+shape = SubResource("shape_holo")
+
+[node name="OwnerChair" type="StaticBody2D" parent="."]
+position = Vector2(1580, 630)
+
+[node name="Sprite2D" type="Sprite2D" parent="OwnerChair"]
+texture = ExtResource("28_ownerchair_tex")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="OwnerChair"]
+shape = SubResource("shape_ownerchair")
+
+[node name="LoungeSofa" type="StaticBody2D" parent="."]
+position = Vector2(1420, 700)
+
+[node name="Sprite2D" type="Sprite2D" parent="LoungeSofa"]
+texture = ExtResource("29_loungesofa_tex")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LoungeSofa"]
+shape = SubResource("shape_loungesofa")
+
+[node name="ServerRack" type="StaticBody2D" parent="."]
+position = Vector2(1560, 780)
+
+[node name="Sprite2D" type="Sprite2D" parent="ServerRack"]
+texture = ExtResource("32_serverrack_tex")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ServerRack"]
+shape = SubResource("shape_serverrack")
+
+[node name="MonitorWall" type="Sprite2D" parent="."]
+position = Vector2(1750, 650)
+texture = ExtResource("33_monitorwall_tex")
+
+[node name="TechPod" type="StaticBody2D" parent="."]
+position = Vector2(1680, 800)
+
+[node name="Sprite2D" type="Sprite2D" parent="TechPod"]
+texture = ExtResource("34_techpod_tex")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TechPod"]
+shape = SubResource("shape_techpod")
+
+[node name="SpiderDrone" type="Sprite2D" parent="."]
+position = Vector2(1500, 900)
+texture = ExtResource("35_spiderdrone_tex")
 
 [node name="NpcCustomer" type="Node2D" parent="."]
 position = Vector2(936, 300)

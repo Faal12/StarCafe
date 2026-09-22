@@ -10,3 +10,18 @@ obj/
 # Raw third-party asset packs (source material, not shipped directly —
 # only the derived/used textures in Assets/Ship etc. are tracked)
 /Assets/packs/
+
+# Same asset packs also ended up extracted directly into the project root
+# by mistake (see chat) — ignore them here too until they're cleaned up.
+/128x128/
+/64x64/
+/CYBER TOWN-V02/
+/Free Sample/
+/FreeSample/
+/Hotel-Labratory-Sprites/
+/ModernHouse/
+/Sci-FiSpaceship&Station2DMegaPropsPack_Sample_v1.0/
+/Spaceship Objects/
+/TopView_Robot_Asset_Pack/
+/TopView_Robot_Asset_Pack 2/
+/cyb assets/
