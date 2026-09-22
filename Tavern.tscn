@@ -4,28 +4,34 @@
 [ext_resource type="Script" path="res://Scripts/Npc/NpcInteractable.cs" id="2_npc_script"]
 [ext_resource type="Script" path="res://Scripts/Dialogue/DialogueController.cs" id="3_dialogue_script"]
 [ext_resource type="Resource" path="res://Resources/Npc/Guard.tres" id="4_guard_persona"]
-[ext_resource type="Texture2D" path="res://Assets/Env/floor_tavern.png" id="5_floor_tex"]
-[ext_resource type="Texture2D" path="res://Assets/Env/wall_top.png" id="6_wall_top_tex"]
-[ext_resource type="Texture2D" path="res://Assets/Env/wall_bottom.png" id="7_wall_bottom_tex"]
-[ext_resource type="Texture2D" path="res://Assets/Env/wall_left.png" id="8_wall_left_tex"]
-[ext_resource type="Texture2D" path="res://Assets/Env/wall_right.png" id="9_wall_right_tex"]
-[ext_resource type="Texture2D" path="res://Assets/Env/bar_counter.png" id="10_counter_tex"]
+[ext_resource type="Texture2D" path="res://Assets/Ship/floor_hall.png" id="5_floor_tex"]
+[ext_resource type="Texture2D" path="res://Assets/Ship/wall_top.png" id="6_wall_top_tex"]
+[ext_resource type="Texture2D" path="res://Assets/Ship/wall_bottom.png" id="7_wall_bottom_tex"]
+[ext_resource type="Texture2D" path="res://Assets/Ship/wall_left.png" id="8_wall_left_tex"]
+[ext_resource type="Texture2D" path="res://Assets/Ship/wall_right.png" id="9_wall_right_tex"]
+[ext_resource type="Texture2D" path="res://Assets/Ship/bar_counter_scifi.png" id="10_counter_tex"]
 [ext_resource type="Texture2D" path="res://Assets/Sprites/player_front.png" id="11_player_front_tex"]
 [ext_resource type="Texture2D" path="res://Assets/Sprites/player_back.png" id="12_player_back_tex"]
 [ext_resource type="Texture2D" path="res://Assets/Sprites/npc_customer.png" id="13_npc_tex"]
 [ext_resource type="Texture2D" path="res://Assets/Portraits/player_portrait.png" id="14_player_portrait_tex"]
+[ext_resource type="Texture2D" path="res://Assets/Ship/door_airlock.png" id="15_door_tex"]
+[ext_resource type="Texture2D" path="res://Assets/Ship/elevator_door.png" id="16_elevator_tex"]
+[ext_resource type="Texture2D" path="res://Assets/Ship/service_robot.png" id="17_robot_tex"]
+[ext_resource type="Texture2D" path="res://Assets/Ship/table_round.png" id="18_table_tex"]
+[ext_resource type="Texture2D" path="res://Assets/Ship/chair.png" id="19_chair_tex"]
+[ext_resource type="Texture2D" path="res://Assets/Ship/couch.png" id="20_couch_tex"]
 
 [sub_resource type="RectangleShape2D" id="shape_top_wall"]
-size = Vector2(1152, 32)
+size = Vector2(1872, 96)
 
 [sub_resource type="RectangleShape2D" id="shape_bottom_wall"]
-size = Vector2(1152, 32)
+size = Vector2(1872, 96)
 
 [sub_resource type="RectangleShape2D" id="shape_side_wall"]
-size = Vector2(32, 648)
+size = Vector2(96, 1152)
 
 [sub_resource type="RectangleShape2D" id="shape_counter"]
-size = Vector2(400, 64)
+size = Vector2(800, 80)
 
 [sub_resource type="RectangleShape2D" id="shape_npc_body"]
 size = Vector2(20, 16)
@@ -37,14 +43,23 @@ radius = 70.0
 radius = 9.0
 height = 20.0
 
+[sub_resource type="CircleShape2D" id="shape_table"]
+radius = 30.0
+
+[sub_resource type="RectangleShape2D" id="shape_couch"]
+size = Vector2(92, 36)
+
+[sub_resource type="RectangleShape2D" id="shape_elevator"]
+size = Vector2(110, 70)
+
 [node name="Tavern" type="Node2D"]
 
 [node name="Floor" type="Sprite2D" parent="."]
-position = Vector2(576, 324)
+position = Vector2(936, 576)
 texture = ExtResource("5_floor_tex")
 
 [node name="TopWall" type="StaticBody2D" parent="."]
-position = Vector2(576, 16)
+position = Vector2(936, 48)
 
 [node name="Sprite2D" type="Sprite2D" parent="TopWall"]
 texture = ExtResource("6_wall_top_tex")
@@ -53,7 +68,7 @@ texture = ExtResource("6_wall_top_tex")
 shape = SubResource("shape_top_wall")
 
 [node name="BottomWall" type="StaticBody2D" parent="."]
-position = Vector2(576, 632)
+position = Vector2(936, 1104)
 
 [node name="Sprite2D" type="Sprite2D" parent="BottomWall"]
 texture = ExtResource("7_wall_bottom_tex")
@@ -62,7 +77,7 @@ texture = ExtResource("7_wall_bottom_tex")
 shape = SubResource("shape_bottom_wall")
 
 [node name="LeftWall" type="StaticBody2D" parent="."]
-position = Vector2(16, 324)
+position = Vector2(48, 576)
 
 [node name="Sprite2D" type="Sprite2D" parent="LeftWall"]
 texture = ExtResource("8_wall_left_tex")
@@ -71,7 +86,7 @@ texture = ExtResource("8_wall_left_tex")
 shape = SubResource("shape_side_wall")
 
 [node name="RightWall" type="StaticBody2D" parent="."]
-position = Vector2(1136, 324)
+position = Vector2(1824, 576)
 
 [node name="Sprite2D" type="Sprite2D" parent="RightWall"]
 texture = ExtResource("9_wall_right_tex")
@@ -79,8 +94,12 @@ texture = ExtResource("9_wall_right_tex")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RightWall"]
 shape = SubResource("shape_side_wall")
 
+[node name="EntranceDoor" type="Sprite2D" parent="."]
+position = Vector2(936, 1104)
+texture = ExtResource("15_door_tex")
+
 [node name="BarCounter" type="StaticBody2D" parent="."]
-position = Vector2(576, 96)
+position = Vector2(936, 200)
 
 [node name="Sprite2D" type="Sprite2D" parent="BarCounter"]
 texture = ExtResource("10_counter_tex")
@@ -88,8 +107,108 @@ texture = ExtResource("10_counter_tex")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BarCounter"]
 shape = SubResource("shape_counter")
 
+[node name="Elevator" type="StaticBody2D" parent="."]
+position = Vector2(1650, 950)
+
+[node name="Sprite2D" type="Sprite2D" parent="Elevator"]
+texture = ExtResource("16_elevator_tex")
+scale = Vector2(0.6, 0.6)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Elevator"]
+shape = SubResource("shape_elevator")
+
+[node name="Table1" type="StaticBody2D" parent="."]
+position = Vector2(350, 450)
+
+[node name="Sprite2D" type="Sprite2D" parent="Table1"]
+texture = ExtResource("18_table_tex")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Table1"]
+shape = SubResource("shape_table")
+
+[node name="Table1ChairN" type="Sprite2D" parent="."]
+position = Vector2(350, 400)
+texture = ExtResource("19_chair_tex")
+
+[node name="Table1ChairS" type="Sprite2D" parent="."]
+position = Vector2(350, 500)
+texture = ExtResource("19_chair_tex")
+
+[node name="Table2" type="StaticBody2D" parent="."]
+position = Vector2(850, 450)
+
+[node name="Sprite2D" type="Sprite2D" parent="Table2"]
+texture = ExtResource("18_table_tex")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Table2"]
+shape = SubResource("shape_table")
+
+[node name="Table2ChairN" type="Sprite2D" parent="."]
+position = Vector2(850, 400)
+texture = ExtResource("19_chair_tex")
+
+[node name="Table2ChairS" type="Sprite2D" parent="."]
+position = Vector2(850, 500)
+texture = ExtResource("19_chair_tex")
+
+[node name="Table3" type="StaticBody2D" parent="."]
+position = Vector2(1350, 450)
+
+[node name="Sprite2D" type="Sprite2D" parent="Table3"]
+texture = ExtResource("18_table_tex")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Table3"]
+shape = SubResource("shape_table")
+
+[node name="Table3ChairN" type="Sprite2D" parent="."]
+position = Vector2(1350, 400)
+texture = ExtResource("19_chair_tex")
+
+[node name="Table3ChairS" type="Sprite2D" parent="."]
+position = Vector2(1350, 500)
+texture = ExtResource("19_chair_tex")
+
+[node name="Table4" type="StaticBody2D" parent="."]
+position = Vector2(850, 780)
+
+[node name="Sprite2D" type="Sprite2D" parent="Table4"]
+texture = ExtResource("18_table_tex")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Table4"]
+shape = SubResource("shape_table")
+
+[node name="Table4ChairN" type="Sprite2D" parent="."]
+position = Vector2(850, 730)
+texture = ExtResource("19_chair_tex")
+
+[node name="Table4ChairS" type="Sprite2D" parent="."]
+position = Vector2(850, 830)
+texture = ExtResource("19_chair_tex")
+
+[node name="Couch1" type="StaticBody2D" parent="."]
+position = Vector2(250, 900)
+
+[node name="Sprite2D" type="Sprite2D" parent="Couch1"]
+texture = ExtResource("20_couch_tex")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Couch1"]
+shape = SubResource("shape_couch")
+
+[node name="Couch2" type="StaticBody2D" parent="."]
+position = Vector2(450, 900)
+
+[node name="Sprite2D" type="Sprite2D" parent="Couch2"]
+texture = ExtResource("20_couch_tex")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Couch2"]
+shape = SubResource("shape_couch")
+
+[node name="ServiceRobot" type="Sprite2D" parent="."]
+position = Vector2(1100, 650)
+texture = ExtResource("17_robot_tex")
+
 [node name="NpcCustomer" type="Node2D" parent="."]
-position = Vector2(576, 190)
+position = Vector2(936, 300)
 
 [node name="Sprite2D" type="Sprite2D" parent="NpcCustomer"]
 texture = ExtResource("13_npc_tex")
@@ -119,7 +238,7 @@ _dialogueController = NodePath("../../DialogueUI")
 shape = SubResource("shape_interaction")
 
 [node name="Player" type="CharacterBody2D" parent="." node_paths=PackedStringArray("_sprite")]
-position = Vector2(576, 470)
+position = Vector2(936, 980)
 script = ExtResource("1_player_script")
 _sprite = NodePath("Sprite2D")
 _frontTexture = ExtResource("11_player_front_tex")
@@ -132,6 +251,13 @@ offset = Vector2(0, -20)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
 shape = SubResource("shape_player_body")
 position = Vector2(0, -8)
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+position_smoothing_enabled = true
+limit_left = 0
+limit_top = 0
+limit_right = 1872
+limit_bottom = 1152
 
 [node name="DialogueUI" type="CanvasLayer" parent="." node_paths=PackedStringArray("_panel", "_nameLabel", "_dialogueLabel", "_inputField", "_sendButton", "_player")]
 script = ExtResource("3_dialogue_script")

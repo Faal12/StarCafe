@@ -6,3 +6,7 @@
 bin/
 obj/
 .vs/
+
+# Raw third-party asset packs (source material, not shipped directly —
+# only the derived/used textures in Assets/Ship etc. are tracked)
+/Assets/packs/
