@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="NpcPersona" format=3]
 
 [ext_resource type="Script" path="res://Scripts/Npc/NpcPersona.cs" id="1_persona"]
-[ext_resource type="Texture2D" path="res://Assets/Portraits/npc_guard_portrait.png" id="2_portrait"]
+[ext_resource type="Texture2D" path="res://Assets/Portraits/npc_guard_fullbody.png" id="2_portrait"]
 
 [resource]
 script = ExtResource("1_persona")

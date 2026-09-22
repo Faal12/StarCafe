@@ -18,10 +18,15 @@ public partial class DialogueController : CanvasLayer
 	private static readonly Color ForegroundColor = Colors.White;
 	private static readonly Color BackgroundColor = new Color(0.42f, 0.42f, 0.42f);
 	private const double SpeakerTransitionSeconds = 0.25;
+	private const double EntranceSeconds = 0.4;
+	private const float EntranceSlideDistance = 500f;
 
 	private ILlmProvider _llmProvider;
 	private NpcPersona _persona;
 	private bool _isRequestInFlight;
+
+	private Vector2 _playerRestPosition;
+	private Vector2 _npcRestPosition;
 
 	public override void _Ready()
 	{
@@ -34,6 +39,9 @@ public partial class DialogueController : CanvasLayer
 		// Pivot at bottom-center so foreground/background scaling grows from the "feet", not the top-left corner.
 		_playerPortraitBig.PivotOffset = new Vector2(_playerPortraitBig.Size.X / 2f, _playerPortraitBig.Size.Y);
 		_npcPortraitBig.PivotOffset = new Vector2(_npcPortraitBig.Size.X / 2f, _npcPortraitBig.Size.Y);
+
+		_playerRestPosition = _playerPortraitBig.Position;
+		_npcRestPosition = _npcPortraitBig.Position;
 
 		_sendButton.Pressed += OnSendPressed;
 		_inputField.TextSubmitted += _ => OnSendPressed();
@@ -53,6 +61,17 @@ public partial class DialogueController : CanvasLayer
 		_inputField.GrabFocus();
 
 		SetSpeaker(playerSpeaking: true, animate: false);
+
+		// Slide both characters in from off-screen for an entrance beat.
+		_playerPortraitBig.Position = _playerRestPosition + new Vector2(-EntranceSlideDistance, 0);
+		_npcPortraitBig.Position = _npcRestPosition + new Vector2(EntranceSlideDistance, 0);
+
+		Tween entrance = CreateTween();
+		entrance.SetParallel(true);
+		entrance.TweenProperty(_playerPortraitBig, "position", _playerRestPosition, EntranceSeconds)
+			.SetTrans(Tween.TransitionType.Back).SetEase(Tween.EaseType.Out);
+		entrance.TweenProperty(_npcPortraitBig, "position", _npcRestPosition, EntranceSeconds)
+			.SetTrans(Tween.TransitionType.Back).SetEase(Tween.EaseType.Out);
 
 		if (_player != null)
 			_player.CanMove = false;
@@ -98,7 +117,8 @@ public partial class DialogueController : CanvasLayer
 
 		Tween tween = CreateTween();
 		tween.SetParallel(true);
-		tween.TweenProperty(portrait, "scale", new Vector2(targetScale, targetScale), SpeakerTransitionSeconds);
+		tween.TweenProperty(portrait, "scale", new Vector2(targetScale, targetScale), SpeakerTransitionSeconds)
+			.SetTrans(Tween.TransitionType.Back).SetEase(Tween.EaseType.Out);
 		tween.TweenProperty(portrait, "modulate", targetColor, SpeakerTransitionSeconds);
 	}
 
