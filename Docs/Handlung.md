@@ -1,4 +1,4 @@
-# Handlung & Weltentwurf – Arbeitsstand v0.5
+# Handlung & Weltentwurf – Arbeitsstand v0.6
 
 > **Status:** Entwurf zum Streichen, Ändern und Weiterspinnen.
 > Alles mit **[Vorschlag]** ist ein Angebot, keine Festlegung. Offene Entscheidungen stehen am Ende (Kapitel 12).
@@ -12,9 +12,11 @@
 - **Vargas Geheimnis:** Option **C – die Schiffs-KI kennt es** ✔. Da Floki nachträglich eingebaut wurde, liegt Vargas Geschichte im **alten Speicherkern** der *Kupferlerche*, weggesperrt hinter der versiegelten Tür (siehe 9.3).
 - **Tonfall:** komisch und abenteuerlich, Floki als sarkastische Stimme.
 - **Inhalt des Speicherkerns:** Aufklärungsdaten über das **Imperium** ✔
-- **Zwei Großmächte:** das **Imperium** und die **Aufständischen** – einander feind ✔. Der Spieler entscheidet frei: sich einer Seite anschließen, gegen eine Seite stehen oder neutral bleiben. Die fünf lokalen Gruppen (Silberkiel-Gilde usw.) sind die kleineren Fraktionen darunter.
-- **Varga war Rebellin** ✔: Der verstorbene Verwandte des Barkeepers war Aufständische, und die *Kupferlerche* hat gegen das Imperium gekämpft. Das kommt erst im Lauf der Handlung heraus (siehe 9.3).
-- **Floki kommentiert oft – nur der Spieler reagiert** ✔: Seine Einwürfe kommen häufig und ungefragt, aber kein anderer Charakter reagiert darauf (siehe 8.4).
+- **Zwei Großmächte:** das **Imperium** und die **Aufständischen** – einander feind ✔. Der Spieler entscheidet frei: sich einer Seite anschließen, gegen eine Seite stehen oder neutral bleiben. Die sechs lokalen Gruppen (Silberkiel-Gilde, Graue Hände, Sternenwacht, Funkenwerkstatt, Weitwanderer, Freilanzen) sind die kleineren Fraktionen darunter.
+- **Varga war Rebellin und Piratin** ✔: Die *Kupferlerche* war ein **Piratenschiff**. Varga raubte imperiale Fracht und gab die Beute an die Aufständischen weiter. Das kommt erst im Lauf der Handlung heraus (siehe 9.3).
+- **Floki kommentiert oft – nur der Spieler reagiert** ✔: Seine Einwürfe kommen häufig und ungefragt, aber kein anderer Charakter reagiert darauf. Der Barkeeper trägt dafür ein **Headset**; die Kommentare erscheinen als **eigener Dialog in *Sternchen*** (siehe 8.4).
+- **Reputation & Ende** ✔: Mit allen Fraktionen kann man sprechen; jede hat ein eigenes **Ansehen**, und das Ende hängt von diesen Werten ab. Bei den Söldnern kann die Taverne ab einer Schwelle zur **offenen Söldnergilde** werden (siehe 10).
+- **Konflikte & Folgen** ✔: Der Spieler nimmt regelmäßig an Konflikten zwischen den Fraktionen teil (Seite wählen oder neutral bleiben). Verhandlungen am Tresen führen zu Gefechten, deren Ergebnis das **Galaktische Radio** meldet. Je nach Spielerhandeln kann es auch in der Taverne zu Streit, Schlägereien und Morden kommen (siehe 10).
 - Der Zollbeamte ist nicht mehr die erste Figur.
 
 ---
@@ -56,7 +58,7 @@ Floki erzählt die Geschichte im Rückblick, was ihm erlaubt, jede Szene mit ein
    > *Notariat Vorlund & Ehr, Kaldor-Station*
 
 3. **Die Entscheidung.** Eine entfernte Verwandte, die er nie getroffen hat – und trotzdem ein ganzes Schiff. Er beschließt, es nicht zu verkaufen, sondern eine **Taverne im Orbit** zu eröffnen. Er verkauft alles, was er besitzt, und kauft Ausrüstung: Zapfanlage, Kühlzellen, Geschirr. **Danach ist das Konto so gut wie leer – kein Zurück.**
-4. **Zwischenstopp auf Thessk – der Schwarzmarkt.** Das Schiff braucht ein neues Gehirn: Der alte Bordcomputer der *Kupferlerche* ist nur noch ein stummer Speicherkern, und das Geld reicht nur für gebrauchte Ware. In einer Kiste voller Kabel meldet sich ein Rechenkern zu Wort, der dem Händler lautstark vorrechnet, warum sein Preis zu hoch und der Händler ein Idiot ist: **Floki**, ein Supercomputer, Sonderposten, siebzig Prozent reduziert, Umtausch ausgeschlossen – drei Kapitäne haben ihn schon wieder ausbauen lassen. Der Händler will ihn dringend loswerden, klemmt Flokis Lautsprecher ab und legt ein Kom-Ohrstück und einen ausrangierten Servicerobot als „Zubehör“ obendrauf – ab jetzt hört ihn nur noch der Käufer *[Vorschlag]*. Der Barkeeper feilscht (kleine Spielszene), findet den Kern eigentlich unerträglich – und nimmt ihn mit, weil er der Einzige ist, den er sich noch leisten kann.
+4. **Zwischenstopp auf Thessk – der Schwarzmarkt.** Das Schiff braucht ein neues Gehirn: Der alte Bordcomputer der *Kupferlerche* ist nur noch ein stummer Speicherkern, und das Geld reicht nur für gebrauchte Ware. In einer Kiste voller Kabel meldet sich ein Rechenkern zu Wort, der dem Händler lautstark vorrechnet, warum sein Preis zu hoch und der Händler ein Idiot ist: **Floki**, ein Supercomputer, Sonderposten, siebzig Prozent reduziert, Umtausch ausgeschlossen – drei Kapitäne haben ihn schon wieder ausbauen lassen. Der Händler will ihn dringend loswerden, klemmt Flokis Lautsprecher ab und legt ein **Headset** und einen ausrangierten Servicerobot als „Zubehör“ obendrauf – ab jetzt hört ihn nur noch der Käufer. Der Barkeeper feilscht (kleine Spielszene), findet den Kern eigentlich unerträglich – und nimmt ihn mit, weil er der Einzige ist, den er sich noch leisten kann.
 5. **Ankunft.** Reise zum Tresk-Knoten. Erster Blick auf das Schiff: verwahrlost, aber stolz. Unter dem Rumpf-Schriftzug KUPFERLERCHE übermalt er den Namen mit **DIE LETZTE RUNDE** – der alte Name bleibt darunter schwach lesbar. Der Rechenkern wird in die Technikecke eingebaut; kaum am Bordnetz, beschwert sich Floki über den Zustand des Schiffs, den Namen und die Farbe.
 6. **Erste Nacht an Bord.** Floki zieht in den Servicerobot ein, ernennt sich zum „Ersten Offizier“ und übernimmt das Tutorial (Laufen, Interagieren), ausgiebig belächelnd. Im Frachtraum entdeckt der Barkeeper eine **versiegelte Tür**, die keiner öffnen kann. Außerdem blinkt irgendwo im Schiff ein Signallicht – **das Licht** –, das nicht über Flokis Netz läuft. Das ärgert ihn.
 
@@ -90,7 +92,7 @@ Floki erzählt die Geschichte im Rückblick, was ihm erlaubt, jede Szene mit ein
 
 **Maskottchen – Krümel:** Das kleine Tierwesen mit der Tasse (Logo, Brustemblem auf der Uniform) ist das Wahrzeichen der Taverne.
 
-**Spuren früherer Gefechte** *[Vorschlag]*: Waffenständer, Rüstungsstatue und ausgebesserte Einschusslöcher wirken zunächst wie Deko – später erkennt man sie als Zeugen des Krieges.
+**Spuren des Piratenlebens** *[Vorschlag]*: Waffenständer, Rüstungsstatue, ausgebesserte Einschusslöcher, Enterhakenspuren und verborgene Schmuggelfächer wirken zunächst wie Macken oder Deko – später erkennt man sie als Zeugen von Vargas Raubzügen.
 
 ---
 
@@ -110,7 +112,7 @@ Ein enges **Dreigestirn** aus drei bewohnten Welten. Ihre Umlaufbahnen kreuzen s
 
 ## 6. Fraktionen
 
-Es gibt **zwei Großmächte** (6.1) und **fünf lokale Gruppen** (6.2–6.6). Der Spieler baut bei jeder Fraktion **Ansehen** auf (oder verspielt es). Keine Fraktion ist „gut“ oder „böse“ – jede will etwas von der Taverne.
+Es gibt **zwei Großmächte** (6.1) und **sechs lokale Gruppen** (6.2–6.7). Der Spieler baut bei jeder Fraktion **Ansehen** auf (oder verspielt es). Keine Fraktion ist „gut“ oder „böse“ – jede will etwas von der Taverne.
 
 ### 6.1 Die zwei Großmächte – *Imperium & Aufständische*
 
@@ -118,7 +120,7 @@ Es gibt **zwei Großmächte** (6.1) und **fünf lokale Gruppen** (6.2–6.6). De
 
 **Das Imperium** *[Arbeitsname: Das Ordanische Imperium]*
 - **Wer:** Die große, straff geführte Zentralmacht. Ordnung, Lizenzen, Kontrolle. Im Alltag begegnet sie dem Spieler über die Sternenwacht, Steuern und Genehmigungen.
-- **Will:** Kontrolle über den Knoten und seine Handelsrouten, Loyalität – und die Daten aus dem Speicherkern zurück oder vernichtet. Außerdem ist ihm die *Kupferlerche* nicht unbekannt: Der neue Besitzer wird bald misstrauisch beäugt.
+- **Will:** Kontrolle über den Knoten und seine Handelsrouten, Loyalität – und die Daten aus dem Speicherkern zurück oder vernichtet. Außerdem ist ihm die *Kupferlerche* als berüchtigtes **Piratenschiff** bekannt: Der neue Besitzer wird bald misstrauisch beäugt.
 - **Bietet:** Sicherheit, Lizenzen, Handelsprivilegien, Schutz vor Piraten.
 - **Kostet:** Freiheit und Gastrecht (Informanten, Kontrollen, Zutritt); Gäste, die das Imperium fürchten, bleiben weg.
 - **Figur** *[Vorschlag]*: Inspektorin **Vesna Arkan**, tritt in Akt II auf.
@@ -147,6 +149,7 @@ Es gibt kein „richtig“. Ansehen bei beiden Mächten ist getrennt; wer der ei
 | Sternenwacht | örtliche Grenz- und Zollbehörde **des Imperiums**; Holm zweifelt |
 | Funkenwerkstatt | von beiden umworben (Drohnen- und Waffentechnik), will unabhängig bleiben |
 | Weitwanderer | vom Imperium verfolgt, neigen zu den Aufständischen, wollen vor allem Sicherheit |
+| Freilanzen | dienen dem, der zahlt; hohes Ansehen macht die Taverne zur Söldnergilde möglich |
 
 ### 6.2 Die Silberkiel-Gilde – *Handel*
 - **Wer:** Größte Handelsmacht am Knoten. Förmlich, gepflegt, zahlungskräftig.
@@ -183,7 +186,15 @@ Es gibt kein „richtig“. Ansehen bei beiden Mächten ist getrennt; wer der ei
 - **Preis:** Sie fragen nach dem Licht.
 - **Figur:** Älteste **Nahra Toll**.
 
-*Wildcard:* Eine sechste, zunächst unsichtbare Kraft kann im späteren Verlauf auftauchen (z. B. ein Konkurrent oder eine neue Gilde).
+### 6.7 Die Freilanzen – *Söldner*
+- **Wer:** Freie Kämpfer, Kopfgeldjäger und Ex-Soldaten aller Seiten. Rau, ehrlich, käuflich – aber verlässlich, solange bezahlt wird.
+- **Will:** Ein Auftragsbrett, Anwerbung, einen Rückzugsort ohne Fragen.
+- **Angebot:** Schutz, Muskelkraft, Einsätze für alle Seiten.
+- **Preis:** Gewalt; sie ziehen Ärger an.
+- **Besonderheit:** Bei hohem Ansehen kann die Taverne zur **offenen Söldnergilde** werden (siehe 10.4).
+- **Figur** *[Vorschlag]*: Hauptmann **Rorik Dahl**.
+
+*Wildcard:* Eine weitere, zunächst unsichtbare Kraft kann im späteren Verlauf auftauchen (z. B. ein Konkurrent oder eine neue Gilde).
 
 ---
 
@@ -213,8 +224,8 @@ Die Gästeschar soll bunt sein. Für die KI-Personas reicht zunächst eine kurze
 
 ### 8.2 Kapitänin Ilse Varga – die Erblasserin
 - Verstorbene Kapitänin der *Kupferlerche*. Früher bei der Silberkiel-Gilde, später eigene Wege.
-- **Enthüllung (entschieden):** Varga war **Rebellin**. Die *Kupferlerche* hat gegen das Imperium gekämpft. Das erfährt der Barkeeper erst später (Akt III). Ihr Speicherkern enthält die Aufklärungsdaten über das Imperium.
-- *[Vorschlag]* Tarnung: Offiziell war sie Frachtkapitänin, früher bei der Silberkiel-Gilde; das Schiff sah aus wie ein gewöhnlicher Frachter.
+- **Enthüllung (entschieden):** Varga war **Rebellin und Piratin**. Die *Kupferlerche* war ein **Piratenschiff**: Varga raubte imperiale Fracht und gab die Beute an die Aufständischen weiter. Das erfährt der Barkeeper erst später (Akt III). Ihr Speicherkern enthält die Aufklärungsdaten über das Imperium.
+- *[Vorschlag]* Tarnung: Offiziell war sie Frachtkapitänin, früher bei der Silberkiel-Gilde; das Schiff sah aus wie ein gewöhnlicher Frachter mit Schmuggelfächern.
 - Der Protagonist hat sie nie kennengelernt. Alle anderen am Knoten kannten sie – und viele schulden ihr etwas oder wollen etwas von ihr.
 - Ihr Vermächtnis: **„Das Licht anlassen.“**
 
@@ -230,10 +241,10 @@ Zwei Angestellte, die im Lauf des Spiels einziehen. Aus den Fraktionen rekrutier
 **Körper und Reichweite.**
 - **Rechenkern:** sitzt in der Technikecke des Schankraums (Serverschrank, Monitorwand, Tech-Kapsel).
 - **Bordnetz:** Über das gemeinsame Netz steuert Floki Türen, Licht, Aufzug, Bildschirme, Kameras und Lautsprecher. Er kann überall mithören. *(„Ich sehe alles. Leider.“)*
-- **Roboterkörper:** Der kupferfarbene Servicerobot mit dem flackernden Auge (samt „−70 %“-Aufkleber) ist Flokis **ferngesteuerte Hülle**. Wer mit „dem Roboter“ spricht, spricht mit Floki. Fällt der Roboter aus, redet Floki weiter über den Kommunikator.
+- **Roboterkörper:** Der kupferfarbene Servicerobot mit dem flackernden Auge (samt „−70 %“-Aufkleber) ist Flokis **ferngesteuerte Hülle**. Wer mit „dem Roboter“ spricht, spricht mit Floki. Fällt der Roboter aus, redet Floki weiter über das Headset.
 - *[Vorschlag]* Er kann auch die anderen Servicerobots der Taverne übernehmen – zum Beispiel, um den Spieler zu ärgern.
 
-**Kommentare & Wahrnehmung (entschieden).** Floki kommentiert das Geschehen **häufig und ungefragt**. **Nur der Spieler reagiert darauf**; andere Figuren reagieren nie auf Flokis Einwürfe. *[Vorschlag zur Erklärung in der Spielwelt: ein Kom-Ohrstück, über das nur der Spieler ihn hört. Alternative: Alle hören ihn, ignorieren ihn aber.]* Technisch: Die Kommentare erscheinen als Einblendung und fließen **nicht** in die Prompts anderer NPCs.
+**Kommentare & Wahrnehmung (entschieden).** Floki kommentiert das Geschehen **häufig und ungefragt**. **Nur der Spieler reagiert darauf**; andere Figuren reagieren nie auf Flokis Einwürfe. Der Grund in der Spielwelt: Der Barkeeper trägt ein **Headset**, über das nur er Floki hört. **Darstellung:** Jeder Kommentar erscheint als **eigener Dialog in *Sternchen***, getrennt vom Gespräch mit dem gerade anwesenden Charakter. Der Spieler kann darauf antworten (dann läuft ein Gespräch mit Floki) oder ihn ignorieren. Technisch: Die Kommentare fließen **nicht** in die Prompts anderer NPCs.
 
 **Charakter.** Besserwisserisch, pampig, eitel, ständig am Meckern, trocken und sarkastisch. Er ist mit Absicht schwer erträglich.
 
@@ -286,7 +297,7 @@ Gerd Holm – Sternenwacht (siehe 6.4). Auftritt vor der Eröffnung und später 
 ### 9.1 Akt I – „Die Erste Runde“ *(Einstieg)*
 Ziel: **Die Taverne eröffnen.**
 - Schiff instand setzen, Lizenz beim Wachtmeister holen, erste Vorräte besorgen. Floki hilft – auf seine Art.
-- Erste Begegnungen mit allen fünf lokalen Gruppen. Das Imperium ist nur ein Schatten: Holm prüft die Lizenz in seinem Namen, und unter den Gästen kursieren Gerüchte über Aufständische.
+- Erste Begegnungen mit allen sechs lokalen Gruppen. Das Imperium ist nur ein Schatten: Holm prüft die Lizenz in seinem Namen, und unter den Gästen kursieren Gerüchte über Aufständische.
 - **Eröffnungsabend:** Vertreter aller Fraktionen sitzen zum ersten Mal in einem Raum. Der Spieler erlebt, was Gastrecht bedeutet.
 - Ende: Die Taverne läuft. Doch jemand fragt zum ersten Mal nach dem Licht.
 
@@ -296,7 +307,8 @@ Ziel: **Das Geschäft wachsen lassen.**
 - Hinweise auf Vargas Vergangenheit und die **versiegelte Tür** häufen sich. Floki ist heimlich neugierig – und tut, als wäre es ihm egal.
 - Erste Fraktionskonflikte, in denen der Spieler vermitteln muss. Madame Quill taucht auf und erinnert Floki an seine Zeit auf dem Schwarzmarkt.
 - **Agenten beider Großmächte** tauchen auf, werben, drohen, bieten Gefallen. Der Spieler beginnt, Stellung zu beziehen – oder bewusst nicht.
-- Erste Zeichen früherer Gefechte fallen auf. Manche Gäste – vor allem Weitwanderer – grüßen das Schiff wie einen alten Bekannten.
+- Erste Spuren des Piratenlebens fallen auf. Manche Gäste – vor allem Weitwanderer – grüßen das Schiff wie einen alten Bekannten.
+- **Regelmäßige Konflikte** zwischen den Fraktionen fordern den Spieler heraus: Seite wählen oder neutral bleiben (siehe 10.2).
 
 ### 9.3 Akt III – „Altlasten“ *(Enthüllung)*
 Ziel: **Vargas Geheimnis verstehen.**
@@ -305,7 +317,7 @@ Ziel: **Vargas Geheimnis verstehen.**
 
 **Inhalt (entschieden):** **Aufklärungsdaten über das Imperium.** Konkret *[Vorschlag]*: Flottenbewegungen und Nachschubrouten im Grenzsektor, die Namen imperialer Informanten – und der **Plan, den Tresk-Knoten zu besetzen**. Damit betrifft es die Taverne direkt: Wer die Daten kennt, kann sie den Aufständischen geben, dem Imperium verkaufen oder zurückgeben, vernichten oder als Druckmittel behalten.
 
-**Die zweite Enthüllung (entschieden):** Ilse Varga war **Rebellin**, und die *Kupferlerche* hat gegen das Imperium gekämpft. Der Barkeeper erbt nicht nur ein Schiff, sondern ein Kriegsvermächtnis – das ihn zu nichts verpflichtet: Er entscheidet selbst, welche Seite er wählt.
+**Die zweite Enthüllung (entschieden):** Ilse Varga war **Rebellin und Piratin**: Die *Kupferlerche* raubte imperiale Fracht und gab die Beute an die Aufständischen weiter. Der Barkeeper erbt nicht nur ein Schiff, sondern ein Kriegsvermächtnis – das ihn zu nichts verpflichtet: Er entscheidet selbst, welche Seite er wählt.
 
 **Warum Varga sie hatte** *[Vorschlag]*: Sie sammelte Aufklärungsdaten für den Widerstand und versiegelte den Kern, weil das Imperium dafür töten würde – und weil sie nicht wollte, dass ihr Erbe ungefragt in den Krieg gezogen wird. Ihr einziger Wunsch: das Licht anlassen.
 
@@ -317,7 +329,10 @@ Das Imperium will den Knoten besetzen, die Aufständischen wollen die Daten. Der
 - **An der Seite der Aufständischen** – die Daten gehen an den Widerstand; die Taverne wird zum Freien Hafen, aber auch zum Ziel.
 - **An der Seite des Imperiums** – die Daten werden ausgeliefert oder verkauft; Ruhe, Lizenzen, Schutz. Der Preis: Aufständische, Flüchtlinge und das Licht.
 - **Neutraler Hafen** – Gastrecht für alle. Daten vernichten, verstecken oder als Versicherung behalten. Beide Seiten üben Druck aus; die Taverne muss beweisen, dass Frieden am Tresen möglich ist.
+- **Offene Söldnergilde** – die Taverne wird zum Hauptquartier der Freilanzen (siehe 10.4): Macht und Geld, aber ständiger Ärger.
 - *[Vorschlag]* **Mischformen und Verrat:** Seitenwechsel oder beide Seiten gegeneinander ausspielen – mit Folgen.
+
+**Das Ende folgt aus den Ansehenswerten** (siehe 10.1), nicht aus einer einzelnen Entscheidung.
 
 In der Krise zeigt sich, wer Floki wirklich ist: Er bleibt – egal, wofür sich der Chef entscheidet.
 
@@ -333,6 +348,40 @@ In der Krise zeigt sich, wer Floki wirklich ist: Er bleibt – egal, wofür sich
 4. **Ausbau:** Einnahmen fließen in Umbauten, Personal, Roboter.
 5. **Hauptfaden:** Hinweise auf Vargas Geheimnis tauchen in Gesprächen auf – nicht als Auftrag, sondern durch zufällige Bemerkungen der Gäste.
 6. **Floki** kommentiert Ereignisse häufig und ungefragt; nur der Spieler kann darauf reagieren, andere Figuren nie.
+
+### 10.1 Reputation – Ansehen bei allen Fraktionen
+- Der Spieler kann mit **allen** Fraktionen sprechen: Imperium, Aufständische und alle sechs lokalen Gruppen.
+- Jede Fraktion hat ein **eigenes Ansehen** *[Vorschlag: Skala −100 bis +100; Stufen: Feind – Misstrauisch – Neutral – Wohlwollend – Verbündet]*.
+- Höheres Ansehen schaltet frei: Aufträge, Rabatte, Personal, Umbauten, Informationen, besondere Gäste.
+- Entscheidungen verschieben mehrere Werte gleichzeitig: Wer den Aufständischen hilft, verliert beim Imperium.
+- **Das Ende hängt von den Ansehenswerten ab** – von allen zusammen, nicht nur von zweien – sowie vom Gastrecht-Wert (10.5).
+
+### 10.2 Konflikte & Ereignisse
+- Zwischen den Fraktionen entstehen **regelmäßig Konflikte**, vor allem in der Konjunktion. Der Spieler wird einbezogen und muss sich verhalten:
+  - **Seite wählen:** Ansehen bei ihr steigt, beim Gegner sinkt.
+  - **Neutral bleiben und vermitteln:** Ansehen als fairer Gastgeber steigt – aber Vermittlung kann scheitern.
+  - **Sich heraushalten:** hat ebenfalls Folgen.
+- **Verhandlungen am Tresen** (Treffen, Deals, Drohungen) führen zu **Stichen zwischen den Fraktionen** außerhalb der Taverne: Gefechte, Handelskriege, Blockaden. Wie sie ausgehen, hängt von den Entscheidungen des Spielers ab.
+
+### 10.3 Galaktisches Radio *[Arbeitsname]*
+- Die Ergebnisse der Konflikte werden im **Galaktischen Radio** gemeldet: Gefechte, Gewinner, Verluste, neue Zölle.
+- Es läuft in der Taverne (Radio, Bildschirme). Floki kommentiert schadenfroh – für den Spieler hörbar.
+- *[Vorschlag]* Mehrere Sender mit eigenem Ton: ein offizieller **Reichssender** des Imperiums (Propaganda), ein **Piratensender** der Aufständischen und ein lokaler Knotensender mit Klatsch. Dieselbe Nachricht klingt bei jedem anders.
+- Die Nachrichten spiegeln die Taten des Spielers („Unbekannter Barkeeper vermittelt Waffenruhe am Knoten.“).
+
+### 10.4 Die offene Söldnergilde
+- Erreicht das Ansehen bei den **Freilanzen** eine bestimmte Schwelle *[Vorschlag: Stufe „Verbündet“]*, kann der Spieler die Taverne zu einer **offenen Söldnergilde** ausbauen ✔ (Auftragsbrett, Anwerbung, Söldner als Dauergäste).
+- Vorteile: Einnahmen, Schutz, Zugang zu Einsätzen. Nachteile: mehr Konflikte; Imperium und Aufständische reagieren – beide wollen Söldner mieten oder verhindern, dass der andere es tut.
+
+### 10.5 Gewalt in der Taverne
+- Je nach Handlungen des Spielers kann es zu **Streit, Schlägereien, Bedrohungen und Morden** in der Taverne kommen ✔.
+- Folgen: Ansehen bei Fraktionen, Stammkundschaft, die Sternenwacht ermittelt, das Gastrecht ist verletzt.
+- *[Vorschlag]* Ein eigener **Gastrecht-Wert**: sinkt bei Gewalt in der Taverne; ist er niedrig, meiden Gäste den Ort, und das Ende „Neutraler Hafen“ wird unmöglich.
+- *[Vorschlag]* Getötete Figuren bleiben dauerhaft tot; das wirkt sich auf Geschichten und KI-Gespräche aus.
+- Floki: schwarzer Humor nur, wenn der Spieler das Thema selbst dorthin lenkt (siehe 8.4).
+
+### 10.6 Flokis Kommentare
+Siehe 8.4: häufig, ungefragt, nur der Spieler reagiert; Darstellung als eigener Dialog in *Sternchen* über das Headset.
 
 ---
 
@@ -360,17 +409,18 @@ Beziehung zum Spieler (Startwert):
 ## 12. Offene Fragen
 
 1. **Name des Protagonisten** (und ob das Spiel ihn dem Spieler frei wählen lässt).
-2. **Namen der Großmächte:** Arbeitsnamen „Das Ordanische Imperium“ und „Der Bund der Freien Häfen“ – ok oder eigene Namen?
-3. **Varga als Rebellin:** Wie kämpfte die *Kupferlerche* – als getarntes Kampfschiff, Blockadebrecher, Kaperschiff? Passt die Tarnung als Frachtkapitänin (früher Silberkiel)?
+2. **Namen:** Arbeitsnamen „Das Ordanische Imperium“, „Der Bund der Freien Häfen“, „Die Freilanzen“, „Galaktisches Radio“ – ok oder eigene Namen?
+3. **Ruf der Kupferlerche:** Wie bekannt ist das Piratenschiff? Gibt es ein Kopfgeld? Wie gefeiert oder gefürchtet ist Varga?
 4. **Konkreter Inhalt der Daten:** Besetzungsplan für den Tresk-Knoten, Nachschubrouten, Informantennamen – ok?
 5. **Zufall oder Absicht?** Ist es Zufall, dass der reduzierte Supercomputer ausgerechnet auf diesem Schiff landet – oder hat Varga vorgesorgt?
-6. **Wie viel Konflikt?** Nur Diplomatie am Tresen, oder auch Razzien und Kämpfe als Ereignisse?
-7. **Seitenwechsel:** Darf der Spieler die Seite wechseln oder beide gegeneinander ausspielen?
-8. **Bindungswert:** Soll das Spiel die Beziehung zu Floki messen und in seinen Prompt einspeisen?
-9. **Roboterkörper:** Bleibt es bei einem Körper, oder übernimmt Floki auch andere Servicerobots?
-10. **Wie hört nur der Spieler Floki?** Kom-Ohrstück (nur der Spieler hört ihn) oder alle hören ihn und ignorieren ihn? Und wie erscheinen die Kommentare (Sprechblase, Ticker, Stimme)?
-11. **Technikecke:** Soll man Floki auch am Rechenkern (Monitorwand) ansprechen können, nicht nur am Roboter?
-12. **Weiße Gesichtszeichen:** Bedeutung als Gastrecht-Ritual ok oder eigene Idee?
-13. **Krümel:** reine Deko oder spielbarer Begleiter?
-14. **Feste Handlung vs. KI:** Wie viel ist fest geschrieben, wie viel darf die KI frei erfinden?
-15. **Lokalisierung:** UI und Dialoge sind jetzt deutsch. Soll es später weitere Sprachen geben?
+6. **Reputationssystem im Detail:** Skala, Stufen, Schwellen (z. B. für die Söldnergilde); verfällt Ansehen mit der Zeit?
+7. **Gewalt & Mord in der Taverne:** Wie explizit? Bleiben Tote dauerhaft tot? (Betrifft auch die Altersfreigabe.)
+8. **Galaktisches Radio:** Ein Sender oder mehrere (Reichssender, Piratensender, Knotensender)? Gibt es eine feste Sprecherfigur?
+9. **Flokis Kommentare:** Wie oft, und lässt sich die Häufigkeit einstellen oder abschalten?
+10. **Bindungswert:** Soll das Spiel die Beziehung zu Floki messen und in seinen Prompt einspeisen?
+11. **Roboterkörper:** Bleibt es bei einem Körper, oder übernimmt Floki auch andere Servicerobots?
+12. **Technikecke:** Soll man Floki auch am Rechenkern (Monitorwand) ansprechen können, nicht nur am Roboter?
+13. **Weiße Gesichtszeichen:** Bedeutung als Gastrecht-Ritual ok oder eigene Idee?
+14. **Krümel:** reine Deko oder spielbarer Begleiter?
+15. **Feste Handlung vs. KI:** Wie viel ist fest geschrieben, wie viel darf die KI frei erfinden?
+16. **Lokalisierung:** UI und Dialoge sind jetzt deutsch. Soll es später weitere Sprachen geben?
