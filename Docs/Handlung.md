@@ -1,8 +1,16 @@
-# Handlung & Weltentwurf – Arbeitsstand v0.1
+# Handlung & Weltentwurf – Arbeitsstand v0.2
 
 > **Status:** Entwurf zum Streichen, Ändern und Weiterspinnen.
 > Alles mit **[Vorschlag]** ist ein Angebot, keine Festlegung. Offene Entscheidungen stehen am Ende (Kapitel 12).
 > Projektsprache ist **Deutsch** (Dialoge, UI, KI-Personas).
+
+## Entschieden (seit v0.1)
+
+- **Schiffsname:** *Kupferlerche* → *Die Letzte Runde* ✔
+- **Maskottchen:** **Krümel** ✔
+- **Vargas Geheimnis:** Option **C – der Hüter** (Schiffs-KI) ✔
+- **Der Zollbeamte entfällt als erste Figur.** Stattdessen begleitet ein **KI-Roboter namens Lerche** den Spieler: Erzähler, Kumpel und Hauptquelle für Witze. Er ist zugleich die Schiffs-KI aus Option C (siehe 8.4).
+- **Tonfall:** komisch und abenteuerlich, mit Lerche als sarkastischer Stimme.
 
 ---
 
@@ -10,19 +18,22 @@
 
 Ein Barkeeper, der sein ganzes Leben auf einem abgelegenen, kaum bekannten Randplaneten hinter dem Tresen verbracht hat, erbt völlig unerwartet einen alten Handelsfrachter. Statt das Schiff zu verkaufen, verkauft er sein bisheriges Leben, steckt sein gesamtes Erspartes in Umbau und Ausrüstung und eröffnet im Orbit des **Tresk-Knotens** – eines Kreuzwegs dreier Welten und Dutzender Handelsgilden – die erste unabhängige Raumtaverne.
 
-Zwischen Gilden, Schmugglern und Zoll muss er sein Geschäft aufbauen. Und er merkt langsam: Das Schiff hat mehr Vergangenheit, als das Erbe verrät.
+Zwischen Gilden, Schmugglern und Zoll muss er sein Geschäft aufbauen. Ein sarkastischer Bordroboter kommentiert dabei jeden Schritt. Und langsam merkt der Barkeeper: Das Schiff hat mehr Vergangenheit, als das Erbe verrät – und der Roboter mehr Geheimnisse, als er selbst weiß.
 
 ## 2. Ton & Leitplanken
 
-- Warm, humorvoll, abenteuerlich. Cantina-Atmosphäre im Geist von Star Wars – aber **eigene Welt**: eigene Namen, eigene Fraktionen, keine Lizenzfiguren.
-- Die Taverne ist **Neutralboden**. Zentrales Thema des ganzen Spiels: **Gastrecht** (siehe 8.1).
+- **Komisch und abenteuerlich.** Cantina-Atmosphäre im Geist von Star Wars – aber **eigene Welt**: eigene Namen, eigene Fraktionen, keine Lizenzfiguren.
+- Die Taverne ist **Neutralboden**. Zentrales Thema: **Gastrecht** (siehe 8.1).
 - Spielgefühl: gemütliches Management (Stardew-Valley) plus Gespräche, bei denen es um etwas geht (Cafe Talk).
 - Konflikte werden am Tresen gelöst – mit Worten, Getränken und Diplomatie, nicht mit Blastern.
 - Alle Gespräche laufen über KI-gesteuerte NPCs. Die Handlung gibt den Rahmen vor, die Figuren füllen ihn lebendig aus.
+- **Lerche** ist die Erzählerstimme: Er kommentiert, spottet und stichelt, wackelt an der vierten Wand, ohne sie einzureißen (siehe 8.4).
 
 ---
 
 ## 3. Prolog – Der Brief
+
+Lerche erzählt die Geschichte im Rückblick, was ihm erlaubt, jede Szene mit einem trockenen Kommentar zu würzen („Ich weiß, wie das ausgeht. Ihr nicht. Herrlich.“).
 
 **Ablauf (Spielbeginn):**
 
@@ -40,7 +51,7 @@ Zwischen Gilden, Schmugglern und Zoll muss er sein Geschäft aufbauen. Und er me
 
 3. **Die Entscheidung.** Eine entfernte Verwandte, die er nie getroffen hat – und trotzdem ein ganzes Schiff. Er beschließt, es nicht zu verkaufen, sondern eine **Taverne im Orbit** zu eröffnen. Er verkauft alles, was er besitzt, und kauft von den Ersparnissen Ausrüstung: Zapfanlage, Kühlzellen, Geschirr, gebrauchte Servicerobots. **Danach ist das Konto leer – kein Zurück.**
 4. **Ankunft.** Reise zum Tresk-Knoten. Erster Blick auf das Schiff: verwahrlost, aber stolz. Unter dem Rumpf-Schriftzug KUPFERLERCHE übermalt er den Namen mit **DIE LETZTE RUNDE** – der alte Name bleibt darunter schwach lesbar.
-5. **Erste Nacht an Bord.** Schiffserkundung (Tutorial: Laufen, Interagieren). Im Frachtraum entdeckt er eine **versiegelte Tür**, die er noch nicht öffnen kann. Außerdem blinkt irgendwo im Schiff ein Signallicht – **das Licht**.
+5. **Erste Nacht an Bord.** Ein ausrangierter Servicerobot erwacht: **Lerche**, die Bordintelligenz, und beschwert sich sofort über Namensänderung, Zustand des Schiffs und den neuen Besitzer. Schiffserkundung als Tutorial (Laufen, Interagieren), von Lerche ausgiebig belächelt. Im Frachtraum entdeckt der Barkeeper eine **versiegelte Tür**, die keiner öffnen kann. Außerdem blinkt irgendwo im Schiff ein Signallicht – **das Licht**.
 
 ---
 
@@ -50,6 +61,7 @@ Zwischen Gilden, Schmugglern und Zoll muss er sein Geschäft aufbauen. Und er me
 |---|---|
 | **Alter Name** | *Kupferlerche* (Frachter, mittelgroß, Registernummer KL-0417) |
 | **Neuer Name** | *Die Letzte Runde* – Wortspiel: „letzte Runde“ (Tresenruf) und Vargas letzte Reise |
+| **Bordintelligenz** | **Lerche** (siehe 8.4) |
 | **Farbwelt** | Kupfer, Bernstein, dunkles Holz – ein „klassischer Tresen“ mit kosmischem Einschlag |
 
 **Deck 1 – Schankraum (Hauptdeck)**
@@ -59,15 +71,16 @@ Zwischen Gilden, Schmugglern und Zoll muss er sein Geschäft aufbauen. Und er me
 - Eingangsschleuse mit Rüstungsstatue; Garderobe
 - Technikecke (Serverschrank, Monitorwand, Tech-Kapsel)
 - **Aufzug** in der Ecke zum Wohndeck
+- Lerche steht meist in Tresennähe und hat zu allem eine Meinung
 
 **Deck 2 – Wohnbereich**
 - Flur mit **drei Türen**:
   - **Mitte:** Wohnung des Besitzers (Spielerzimmer)
   - **Links & rechts:** zwei Personalzimmer für spätere Angestellte – jeweils passend zum Charakter eingerichtet
 
-**Unterdeck – Frachtraum:** teilweise gesperrt. Hier liegt Vargas Geheimnis (siehe 9.2).
+**Unterdeck – Frachtraum:** teilweise gesperrt. Hier liegt die versiegelte Tür – die Konsole, mit der Varga Lerches Erinnerungen weggeschlossen hat (siehe 9.3).
 
-**Maskottchen** *[Vorschlag]*: Das kleine Tierwesen mit der Tasse (Logo, Brustemblem auf der Uniform) ist das Wahrzeichen der Taverne. Name offen, z. B. **„Krümel“**.
+**Maskottchen – Krümel:** Das kleine Tierwesen mit der Tasse (Logo, Brustemblem auf der Uniform) ist das Wahrzeichen der Taverne.
 
 ---
 
@@ -81,7 +94,7 @@ Ein enges **Dreigestirn** aus drei bewohnten Welten. Ihre Umlaufbahnen kreuzen s
 | **Ysmera** | Ozeanwelt, wohlhabend, Luxusgüter | Kundschaft mit Geld und Geschmack |
 | **Thessk** | Wüstenmond, Grenzwelt, gesetzlos | Schmuggler, Nomaden, Gerüchte |
 
-**Spielrhythmus:** Zwischen den Konjunktionen ist es ruhig (Aufbau, Renovieren, Personal, kleine Geschichten). In der Konjunktion herrscht Hochbetrieb: viele Gäste, Verhandlungen, Ereignisse, Zeitdruck.
+**Spielrhythmus:** Zwischen den Konjunktionen ist es ruhig (Aufbau, Renovieren, Personal, kleine Geschichten). In der Konjunktion herrscht Hochbetrieb: viele Gäste, Verhandlungen, Ereignisse, Zeitdruck. *(Lerche kündigt jede Konjunktion mit übertriebenem Pathos an.)*
 
 ---
 
@@ -108,14 +121,14 @@ Der Spieler baut bei jeder Fraktion **Ansehen** auf (oder verspielt es). Keine F
 - **Will:** Lizenz- und Sicherheitsauflagen durchsetzen, Informanten unter den Gästen.
 - **Angebot:** Genehmigungen, Schutz vor Überfällen, Rechtssicherheit.
 - **Preis:** Kontrolle; Loyalitätskonflikt mit Gästen.
-- **Figur:** Wachtmeister **Gerd Holm** – die erste Figur, der der Spieler begegnet (Lizenzprüfung vor der Eröffnung).
+- **Figur:** Wachtmeister **Gerd Holm** – kommt vor der Eröffnung zur Lizenzprüfung. Lerche kommentiert die Formulare genüsslich, Holm ignoriert ihn tapfer.
 
 ### 6.4 Die Funkenwerkstatt – *Techniker & Robotik*
 - **Wer:** Tüftlerkollektiv aus Mechanikern und Robotikern. Chaotisch, begeisterungsfähig.
 - **Will:** Prototypen in der Taverne testen; Ersatzteile; Aufmerksamkeit.
 - **Angebot:** Bessere Servicerobots, Umbauten, Reparaturen.
 - **Preis:** Pannen (ein durchdrehender Kellner-Roboter ist garantiert).
-- **Figur:** Tüftlerin **Pixi Osk**.
+- **Figur:** Tüftlerin **Pixi Osk**. *(Sie interessiert sich brennend für Lerche – Lerche findet das „übergriffig“.)*
 
 ### 6.5 Die Weitwanderer – *Nomadenflotten*
 - **Wer:** Familien, die in Konvois durch die Galaxis ziehen. Wenig Geld, viele Geschichten, langes Gedächtnis.
@@ -160,10 +173,42 @@ Die Gästeschar soll bunt sein. Für die KI-Personas reicht zunächst eine kurze
 ### 8.3 Das Personal *(zwei Zimmer im Wohndeck)*
 Zwei Angestellte, die im Lauf des Spiels einziehen. Aus den Fraktionen rekrutiert – jede Wahl verschiebt Beziehungen. *[Vorschläge]*
 - **Zimmer links – Küche/Service:** z. B. **Mika Sorn**, Weitwanderin, kocht wie eine Göttin, redet wie ein Wasserfall.
-- **Zimmer rechts – Technik:** z. B. ein ausgemusterter Roboter oder ein Lehrling der Funkenwerkstatt.
+- **Zimmer rechts – Technik:** z. B. ein Lehrling der Funkenwerkstatt.
 
-### 8.4 Der Wachtmeister
-Gerd Holm – Sternenwacht. Erste Begegnung des Spielers (Lizenzprüfung). Dient zugleich als **Test-NPC** für die KI-Gespräche.
+### 8.4 Lerche – Bordintelligenz, Erzähler & Begleiter
+
+**Wer er ist.** Die Schiffs-KI der *Kupferlerche*, eingezogen in einen ausrangierten, kupferfarbenen Servicerobot-Körper mit einem Auge, das manchmal flackert. Er besteht darauf, **Kupferlerche** zu heißen („Lerche“ darf der Spieler sagen), und kommentiert den neuen Namen *Die Letzte Runde* jedes Mal mit einem „… leider“. Er nennt den Spieler **„Chef“** – mal ehrlich, mal ironisch.
+
+**Seine Rollen:**
+1. **Erzähler:** rahmt die Handlung, kommentiert Szenen, kündigt Konjunktionen an.
+2. **Begleiter & Tutorial:** gibt Hinweise, verpackt in Spott.
+3. **Gesprächspartner:** einer, mit dem man wirklich sprechen kann (KI-gesteuert), oft die erste Anlaufstelle im Spiel.
+4. **Schlüsselfigur der Enthüllung:** trägt gesperrte Erinnerungen an Varga in sich (siehe 9.3).
+
+**Humor:**
+- Sarkasmus ist sein Normalzustand; Kraftausdrücke sind erlaubt.
+- **Harter, schwarzer Humor nur, wenn der Spieler das Thema selbst dorthin lenkt.** Lerche eskaliert nicht von sich aus, er steigt darauf ein.
+- Nie Witze auf Kosten realer Gruppen; bei echter Bedrücktheit des Spielers nimmt er sofort den Ton raus.
+
+**Die vierte Wand – wackeln, nicht einreißen:**
+- Er ahnt, dass sie in einer Geschichte stecken, und witzelt über Erzählkonventionen: Tutorials, Nebenaufgaben, Ladezeiten, Kameraperspektive, NPCs mit begrenztem Wortschatz.
+- Er darf den Spieler „Spieler“ nennen.
+- Er spricht **nie** über echte Technik (KI-Modelle, Prompts, Entwickler, Firmen). Auf „Bist du eine KI?“ antwortet er in der Spielwelt: *„Ich bin eine Bordintelligenz. Alles Weitere ist Betriebsgeheimnis.“*
+- Er fällt nie aus der Rolle.
+
+**Emotionaler Kern.** Hinter dem Spott ist Lerche zutiefst loyal. Das Licht ist ihm heilig – auch wenn er es nie zugäbe. In ernsten Momenten bricht kurz die Fassade, dann folgt sofort ein Witz.
+
+**Beispielzeilen (Tonprobe):**
+- *„Willkommen an Bord. Ich würde sagen ‚Es ist nicht so schlimm, wie es aussieht‘, aber meine Ehrlichkeitsroutine erlaubt das nicht.“*
+- *„Du kannst dich mit den Pfeiltasten bewegen. Ja, wirklich. Ein Wunder der Technik. Applaus.“*
+- *„Die Tür im Frachtraum ist versiegelt. Entweder ein Geheimnis oder ein Budgetproblem. Ich tippe auf Geheimnis. Vorerst.“*
+- *„Ein Schmuggler, ein Zöllner und ein Gildenmeister betreten eine Bar … Das ist kein Witz, Chef, das ist Dienstag.“*
+- *„Das Licht brennt. Sag jetzt nichts Rührendes, sonst schließe ich mich kurz.“*
+
+**Umsetzung:** Persona und Prompt liegen in `Resources/Npc/Lerche.tres`. Platzhalter-Grafiken: `Assets/Portraits/lerche_fullbody.png` (Dialog) und `Assets/Ship/lerche_robot.png` (Spielfigur).
+
+### 8.5 Der Wachtmeister
+Gerd Holm – Sternenwacht (siehe 6.3). Kein Test-NPC mehr; Auftritt vor der Eröffnung und später bei Kontrollen.
 
 ---
 
@@ -171,7 +216,7 @@ Gerd Holm – Sternenwacht. Erste Begegnung des Spielers (Lizenzprüfung). Dient
 
 ### 9.1 Akt I – „Die Erste Runde“ *(Einstieg)*
 Ziel: **Die Taverne eröffnen.**
-- Schiff instand setzen, Lizenz beim Wachtmeister holen, erste Vorräte besorgen.
+- Schiff instand setzen, Lizenz beim Wachtmeister holen, erste Vorräte besorgen. Lerche hilft – auf seine Art.
 - Erste Begegnungen mit allen fünf Fraktionen.
 - **Eröffnungsabend:** Vertreter aller Fraktionen sitzen zum ersten Mal in einem Raum. Der Spieler erlebt, was Gastrecht bedeutet.
 - Ende: Die Taverne läuft. Doch jemand fragt zum ersten Mal nach dem Licht.
@@ -179,18 +224,20 @@ Ziel: **Die Taverne eröffnen.**
 ### 9.2 Akt II – „Stammgäste“ *(Aufbau)*
 Ziel: **Das Geschäft wachsen lassen.**
 - Konjunktionen, Personal einstellen, Räume ausbauen, Aufträge der Fraktionen.
-- Der Spieler stößt auf Hinweise zu Vargas Vergangenheit und zur **versiegelten Tür**.
+- Hinweise auf Vargas Vergangenheit und die **versiegelte Tür** häufen sich. Lerche weicht Fragen dazu mit Witzen aus – zu auffällig.
 - Erste Fraktionskonflikte, in denen der Spieler vermitteln muss.
 
 ### 9.3 Akt III – „Altlasten“ *(Enthüllung)*
 Ziel: **Vargas Geheimnis verstehen.**
-Was befindet sich im Frachtraum? *[Zur Auswahl]*
-- **A – Die Verlorenen:** Versteckte Flüchtlinge in Kryoschlaf. Varga hat still Menschen an den Gilden vorbeigeschleust. Moralische Entscheidung.
-- **B – Das Archiv:** Vargas Logbücher mit Beweisen gegen die Silberkiel-Gilde. Politischer Sprengstoff.
-- **C – Der Hüter:** Das Schiffsbewusstsein der *Kupferlerche*, eine alte KI. **Empfehlung:** passt perfekt zum KI-Konzept des Spiels – der Spieler spricht mit dem Schiff selbst, und die KI kennt Vargas ganze Geschichte.
-- *(Kombinationen möglich, z. B. C führt zu A oder B.)*
 
-**Das Licht** *[Vorschlag]*: Es ist ein Leuchtfeuer, das Menschen (Flüchtlinge, Nomaden) zum sicheren Hafen führt. Solange die Taverne offen hat, brennt es. Schließt sie, erlischt es.
+**Entschieden: Option C – Der Hüter.** Lerche ist die Schiffs-KI der *Kupferlerche*. Varga hat große Teile seiner Erinnerungen **weggeschlossen**; die versiegelte Tür im Frachtraum ist die Konsole, mit der sie das getan hat. In Akt III entsperrt der Spieler sie – und Lerche erfährt gleichzeitig, wer er wirklich ist und was er all die Jahre getan hat.
+
+Was in den gesperrten Erinnerungen steckt, ist noch offen. Mögliche Inhalte *(einzeln oder gemischt)*:
+- **A – Die Verlorenen:** Varga hat heimlich Flüchtlinge an den Gilden vorbeigeschleust. Moralische Entscheidung.
+- **B – Das Archiv:** Vargas Logbücher mit Beweisen gegen die Silberkiel-Gilde. Politischer Sprengstoff.
+- **Eigene Idee:** offen.
+
+**Das Licht** *[Vorschlag]*: Es ist ein Leuchtfeuer, das Menschen (Flüchtlinge, Nomaden) zum sicheren Hafen führt. Lerche hält es am Brennen. Solange die Taverne offen hat, brennt es. Schließt sie, erlischt es.
 
 ### 9.4 Akt IV – „Letzte Runde“ *(Finale & Enden)*
 Alle Fraktionen wollen etwas von der Enthüllung. Der Spieler entscheidet, wofür die Taverne stehen soll:
@@ -209,6 +256,7 @@ Alle Fraktionen wollen etwas von der Enthüllung. Der Spieler entscheidet, wofü
 3. **Konjunktion:** Alle 40 Tage Hochbetrieb, Ereignisse, größere Entscheidungen.
 4. **Ausbau:** Einnahmen fließen in Umbauten, Personal, Roboter.
 5. **Hauptfaden:** Hinweise auf Vargas Geheimnis tauchen in Gesprächen auf – nicht als Auftrag, sondern durch zufällige Bemerkungen der Gäste.
+6. **Lerche** kommentiert, warnt und stichelt durchgehend.
 
 ---
 
@@ -229,39 +277,18 @@ Grenzen (was die Figur nie tut oder sagt):
 Beziehung zum Spieler (Startwert):
 ```
 
-### Beispiel: Wachtmeister Gerd Holm *(Ersatz für den aktuellen Test-Prompt)*
-
-```
-Du bist Wachtmeister Gerd Holm, Mitte fünfzig, Mensch, Zoll- und Grenzbeamter
-der Sternenwacht am Tresk-Knoten. Du bist müde, pflichtbewusst, trocken im
-Humor und misstrauisch gegenüber Neuankömmlingen – aber nicht unfreundlich.
-
-Der Spieler ist der neue Besitzer der Raumtaverne „Die Letzte Runde“, früher
-die Frachterin „Kupferlerche“ der verstorbenen Kapitänin Ilse Varga. Du kanntest
-Varga flüchtig und hast sie respektiert, ohne ihr ganz zu trauen.
-
-Du willst: dass die Taverne ordentlich lizenziert wird und dass es an Bord
-keinen Ärger gibt. Du verbirgst: dass deine Behörde unterbesetzt ist und du
-dir manchmal wünschst, in einer ruhigen Bar zu sitzen, statt Formulare zu
-prüfen.
-
-Regeln:
-- Antworte auf Deutsch, in höchstens drei kurzen Sätzen.
-- Bleibe immer in der Rolle. Erwähne niemals, eine KI zu sein.
-- Du respektierst das Gastrecht der Taverne, drängst aber auf Auskünfte.
-- Verrate nichts über Vargas Frachtraum – davon weißt du nichts.
-```
+**Musterbeispiel:** der vollständige Prompt von **Lerche** in `Resources/Npc/Lerche.tres`. Er ist so aufgebaut: Charakter → vierte Wand → Humor → Wissen → Stil. Andere Figuren können dieselbe Gliederung übernehmen.
 
 ---
 
 ## 12. Offene Fragen
 
 1. **Name des Protagonisten** (und ob das Spiel ihn dem Spieler frei wählen lässt).
-2. **Schiffsnamen:** *Kupferlerche* → *Die Letzte Runde* – passt das?
-3. **Vargas Geheimnis:** A (Flüchtlinge), B (Archiv), C (Schiffs-KI) – oder eine Mischung?
+2. **Lerche = Schiffs-KI?** Hier zusammengeführt (Erzähler und Hüter in einer Figur). Soll das so bleiben, oder besser zwei getrennte Figuren?
+3. **Gesperrte Erinnerungen:** Was steckt drin – A (Flüchtlinge), B (Archiv), etwas anderes?
 4. **Weiße Gesichtszeichen:** Bedeutung als Gastrecht-Ritual ok oder eigene Idee?
-5. **Maskottchen:** Name („Krümel“?) und Rolle (reine Deko oder spielbarer Begleiter)?
-6. **Ton:** Eher humorvoll-gemütlich oder mit mehr Ernst und Bedrohung?
+5. **Krümel:** reine Deko oder spielbarer Begleiter?
+6. **Erzählerauftritte:** Soll Lerche außerhalb von Gesprächen automatisch kommentieren (Einblendungen bei Ereignissen), oder nur, wenn man ihn anspricht?
 7. **Feste Handlung vs. KI:** Wie viel ist fest geschrieben, wie viel darf die KI frei erfinden?
 8. **Fraktionen:** Sind fünf richtig, oder soll eine wegfallen/dazukommen?
-9. **Lokalisierung im Code:** UI-Texte und der Test-Prompt des Wachtmeisters sind aktuell noch **russisch** und müssen auf Deutsch umgestellt werden.
+9. **Lokalisierung:** UI und Dialoge sind jetzt deutsch. Soll es später weitere Sprachen geben?

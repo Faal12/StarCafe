@@ -133,7 +133,7 @@ public partial class DialogueController : CanvasLayer
 
 		_isRequestInFlight = true;
 		_sendButton.Disabled = true;
-		_dialogueLabel.Text = $"{_persona.DisplayName} задумался...";
+		_dialogueLabel.Text = $"{_persona.DisplayName} denkt nach...";
 		SetSpeaker(playerSpeaking: true);
 
 		try
@@ -145,7 +145,7 @@ public partial class DialogueController : CanvasLayer
 		catch (LlmRequestException ex)
 		{
 			GD.PrintErr(ex.Message);
-			_dialogueLabel.Text = $"{_persona.DisplayName} молчит — {ex.Message}.";
+			_dialogueLabel.Text = $"{_persona.DisplayName} schweigt – {ex.Message}.";
 		}
 		finally
 		{

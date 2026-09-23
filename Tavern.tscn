@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://c5k7pgpdjso5d" path="res://Scripts/Player/Player.cs" id="1_player_script"]
 [ext_resource type="Script" uid="uid://bg1twepmpwfdo" path="res://Scripts/Npc/NpcInteractable.cs" id="2_npc_script"]
 [ext_resource type="Script" uid="uid://yt2akma8kjuq" path="res://Scripts/Dialogue/DialogueController.cs" id="3_dialogue_script"]
-[ext_resource type="Resource" path="res://Resources/Npc/Guard.tres" id="4_guard_persona"]
+[ext_resource type="Resource" path="res://Resources/Npc/Lerche.tres" id="4_lerche_persona"]
 [ext_resource type="Texture2D" uid="uid://dwnh4wps0srrg" path="res://Assets/Ship/floor_hall.png" id="5_floor_tex"]
 [ext_resource type="Texture2D" uid="uid://db1210e0t1cnk" path="res://Assets/Ship/wall_top.png" id="6_wall_top_tex"]
 [ext_resource type="Texture2D" uid="uid://bkxdy740h4sbt" path="res://Assets/Ship/wall_bottom.png" id="7_wall_bottom_tex"]
@@ -13,7 +13,7 @@
 [ext_resource type="Texture2D" uid="uid://crl0qs5bnvdww" path="res://Assets/Ship/bar_counter_scifi.png" id="10_counter_tex"]
 [ext_resource type="Texture2D" uid="uid://brk4i6f1wbwv6" path="res://Assets/Sprites/player_front.png" id="11_player_front_tex"]
 [ext_resource type="Texture2D" uid="uid://ci1qdgx8nrieg" path="res://Assets/Sprites/player_back.png" id="12_player_back_tex"]
-[ext_resource type="Texture2D" uid="uid://60mef8apbj6v" path="res://Assets/Sprites/npc_customer.png" id="13_npc_tex"]
+[ext_resource type="Texture2D" path="res://Assets/Ship/lerche_robot.png" id="13_npc_tex"]
 [ext_resource type="Texture2D" path="res://Assets/Portraits/player_fullbody.png" id="14b_player_fullbody_tex"]
 [ext_resource type="Texture2D" uid="uid://bf1a5riijyji2" path="res://Assets/Ship/door_airlock.png" id="15_door_tex"]
 [ext_resource type="Texture2D" uid="uid://s31aj8xv6aln" path="res://Assets/Ship/elevator_door.png" id="16_elevator_tex"]
@@ -396,34 +396,35 @@ shape = SubResource("shape_techpod")
 position = Vector2(1500, 900)
 texture = ExtResource("35_spiderdrone_tex")
 
-[node name="NpcCustomer" type="Node2D" parent="." unique_id=1054952415]
+[node name="Lerche" type="Node2D" parent="." unique_id=1054952415]
 position = Vector2(936, 300)
 
-[node name="Sprite2D" type="Sprite2D" parent="NpcCustomer" unique_id=664627261]
+[node name="Sprite2D" type="Sprite2D" parent="Lerche" unique_id=664627261]
 texture = ExtResource("13_npc_tex")
-offset = Vector2(0, -20)
+scale = Vector2(0.75, 0.75)
+offset = Vector2(0, -30)
 
-[node name="Body" type="StaticBody2D" parent="NpcCustomer" unique_id=1716214941]
+[node name="Body" type="StaticBody2D" parent="Lerche" unique_id=1716214941]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="NpcCustomer/Body" unique_id=1357149900]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Lerche/Body" unique_id=1357149900]
 position = Vector2(0, -8)
 shape = SubResource("shape_npc_body")
 
-[node name="PromptLabel" type="Label" parent="NpcCustomer" unique_id=1648033304]
+[node name="PromptLabel" type="Label" parent="Lerche" unique_id=1648033304]
 offset_left = -70.0
 offset_top = -84.0
 offset_right = 70.0
 offset_bottom = -62.0
-text = "[Enter] Поговорить"
+text = "[Enter] Sprechen"
 horizontal_alignment = 1
 
-[node name="InteractionArea" type="Area2D" parent="NpcCustomer" unique_id=1700359529 node_paths=PackedStringArray("_promptLabel", "_dialogueController")]
+[node name="InteractionArea" type="Area2D" parent="Lerche" unique_id=1700359529 node_paths=PackedStringArray("_promptLabel", "_dialogueController")]
 script = ExtResource("2_npc_script")
-Persona = ExtResource("4_guard_persona")
+Persona = ExtResource("4_lerche_persona")
 _promptLabel = NodePath("../PromptLabel")
 _dialogueController = NodePath("../../DialogueUI")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="NpcCustomer/InteractionArea" unique_id=1856979459]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Lerche/InteractionArea" unique_id=1856979459]
 shape = SubResource("shape_interaction")
 
 [node name="Player" type="CharacterBody2D" parent="." unique_id=2104138456 node_paths=PackedStringArray("_sprite")]
@@ -519,4 +520,4 @@ offset_left = 870.0
 offset_top = 96.0
 offset_right = 1056.0
 offset_bottom = 124.0
-text = "Отправить"
+text = "Senden"

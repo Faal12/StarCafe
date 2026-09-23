@@ -142,6 +142,8 @@ robot_img = Image.open(robot_src).convert("RGBA")
 robot_single = robot_img.crop((0, 0, robot_img.width // 2, robot_img.height))
 robot_single.save(os.path.join(SHIP, "_robot_raw.png"))
 recolor_hue(os.path.join(SHIP, "_robot_raw.png"), os.path.join(SHIP, "service_robot.png"), hue_shift=90)
+# Lerche (narrator/ship AI): same chassis, warm copper instead of the cyan waiter bots
+recolor_hue(os.path.join(SHIP, "_robot_raw.png"), os.path.join(SHIP, "lerche_robot.png"), hue_shift=212)
 os.remove(os.path.join(SHIP, "_robot_raw.png"))
 
 # --- Procedural furniture, warm amber/wood palette (contrasts with the cool floor/walls) ---

@@ -53,19 +53,19 @@ public class GeminiProvider : ILlmProvider
                 GD.PrintErr($"Gemini API error {statusCode}: {responseText}");
 
                 if (!isTemporary || attempt == MaxAttempts)
-                    throw new LlmRequestException($"ошибка запроса к ИИ ({statusCode})");
+                    throw new LlmRequestException($"Fehler bei der KI-Anfrage ({statusCode})");
             }
             catch (HttpRequestException ex)
             {
-                GD.PrintErr($"Сетевая ошибка: {ex.Message}");
+                GD.PrintErr($"Netzwerkfehler: {ex.Message}");
                 if (attempt == MaxAttempts)
-                    throw new LlmRequestException("нет связи с интернетом", ex);
+                    throw new LlmRequestException("keine Internetverbindung", ex);
             }
 
             await Task.Delay(RetryDelayMs);
         }
 
-        throw new LlmRequestException("не удалось получить ответ");
+        throw new LlmRequestException("keine Antwort erhalten");
     }
 }
 
