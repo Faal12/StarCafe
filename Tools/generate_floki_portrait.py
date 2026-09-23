@@ -1,11 +1,11 @@
-"""Placeholder full-body portrait for Lerche (ship AI / narrator robot), until real art exists.
-Run with: python3 Tools/generate_lerche_portrait.py
+"""Placeholder full-body portrait for Floki (narrator robot, black-market Sonderposten), until real art exists.
+Run with: python3 Tools/generate_floki_portrait.py
 """
-from PIL import Image, ImageDraw
+from PIL import Image, ImageDraw, ImageFont
 import os
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-OUT = os.path.join(ROOT, "Assets", "Portraits", "lerche_fullbody.png")
+OUT = os.path.join(ROOT, "Assets", "Portraits", "floki_fullbody.png")
 
 W, H = 500, 1000
 img = Image.new("RGBA", (W, H), (0, 0, 0, 0))
@@ -55,7 +55,7 @@ d.rounded_rectangle([100, 340, 400, 680], radius=40, fill=COPPER, outline=OUTLIN
 d.rounded_rectangle([120, 360, 380, 400], radius=16, fill=COPPER_LIGHT)
 d.line([(250, 400), (250, 660)], fill=COPPER_DARK, width=4)
 
-# Chest lamp: "das Licht"
+# Chest lamp
 d.ellipse([214, 470, 286, 542], fill=METAL_DARK, outline=OUTLINE, width=5)
 d.ellipse([228, 484, 272, 528], fill=AMBER_GLOW)
 
@@ -70,6 +70,14 @@ d.rounded_rectangle([265, 680, 360, 940], radius=18, fill=COPPER_DARK, outline=O
 # Feet
 d.rounded_rectangle([120, 920, 245, 985], radius=16, fill=METAL_DARK, outline=OUTLINE, width=5)
 d.rounded_rectangle([255, 920, 380, 985], radius=16, fill=METAL_DARK, outline=OUTLINE, width=5)
+
+# Price sticker: bought at a discount on the black market ("Sonderposten")
+sticker = Image.new("RGBA", (130, 64), (0, 0, 0, 0))
+sd = ImageDraw.Draw(sticker)
+sd.rounded_rectangle([0, 0, 129, 63], radius=8, fill=(214, 48, 49, 255), outline=(255, 235, 200, 255), width=3)
+sd.text((65, 32), "-70%", fill=(255, 255, 255, 255), font=ImageFont.load_default(size=34), anchor="mm")
+sticker = sticker.rotate(12, expand=True, resample=Image.BICUBIC)
+img.paste(sticker, (112, 560), sticker)
 
 img.save(OUT)
 print("saved", OUT, img.size)
