@@ -1,4 +1,4 @@
-# Handlung & Weltentwurf – Arbeitsstand v0.8
+# Handlung & Weltentwurf – Arbeitsstand v0.9
 
 > **Status:** Entwurf zum Streichen, Ändern und Weiterspinnen.
 > Alles mit **[Vorschlag]** ist ein Angebot, keine Festlegung. Offene Entscheidungen stehen am Ende (Kapitel 12).
@@ -18,8 +18,8 @@
 - **Reputation & Ende** ✔: Mit allen Fraktionen kann man sprechen; jede hat ein eigenes **Ansehen**, und das Ende hängt von diesen Werten ab. Bei den Söldnern kann die Taverne ab einer Schwelle zur **offenen Söldnergilde** werden (siehe 10).
 - **Konflikte & Folgen** ✔: Der Spieler nimmt regelmäßig an Konflikten zwischen den Fraktionen teil (Seite wählen oder neutral bleiben). Verhandlungen am Tresen führen zu Gefechten, deren Ergebnis das **Galaktische Radio** meldet. Je nach Spielerhandeln kann es auch in der Taverne zu Streit, Schlägereien und Morden kommen (siehe 10).
 - **Altersziel ca. 16+** ✔ (in Deutschland entspräche das der USK 16): Gewalt und Mord gehören zur Geschichte, werden aber eher angedeutet als drastisch gezeigt (siehe 10.5).
-- **Tote bleiben tot** ✔: getötete Figuren sind dauerhaft weg. Stirbt eine **Schlüsselfigur**, schließt sich der Pfad ihrer Fraktion – und mit ihm die Enden, die an sie gebunden sind (siehe 10.5).
-- **Einstellungsmenü im Spiel** ✔: Spielbezogenes (z. B. Flokis Kommentarhäufigkeit) lässt sich dort regulieren (siehe 10.7). **KI und Sprachausgabe** steuert ein separater **Launcher** (siehe 10.8).
+- **Tote bleiben tot** ✔: getötete Figuren sind dauerhaft weg. Stirbt eine **Schlüsselfigur**, schließt sich der Pfad ihrer Fraktion – und mit ihm die Enden, die an sie gebunden sind (siehe 10.5). Ein Nachfolger rückt nur **außerhalb des Bildes** nach; die Fraktion wird dadurch schwächer.
+- **Einstellungsmenü im Spiel** ✔: Spielbezogenes (z. B. Flokis Kommentarhäufigkeit) lässt sich dort regulieren (siehe 10.7). **KI und Sprachausgabe** steuert ein eigener **Launcher-Bildschirm** (siehe 10.8).
 - Der Zollbeamte ist nicht mehr die erste Figur.
 
 ---
@@ -371,6 +371,7 @@ In der Krise zeigt sich, wer Floki wirklich ist: Er bleibt – egal, wofür sich
 - Es läuft in der Taverne (Radio, Bildschirme). Floki kommentiert schadenfroh – für den Spieler hörbar.
 - *[Vorschlag]* Mehrere Sender mit eigenem Ton: ein offizieller **Reichssender** des Imperiums (Propaganda), ein **Piratensender** der Aufständischen und ein lokaler Knotensender mit Klatsch. Dieselbe Nachricht klingt bei jedem anders.
 - Die Nachrichten spiegeln die Taten des Spielers („Unbekannter Barkeeper vermittelt Waffenruhe am Knoten.“).
+- Auch **Nachfolge und Machtkämpfe** in geschwächten Fraktionen werden hier gemeldet – das ist die einzige Stelle, an der der Spieler Nachfolger zu Gesicht bekommt (bzw. zu Ohren).
 
 ### 10.4 Die offene Söldnergilde
 - Erreicht das Ansehen bei den **Freilanzen** eine bestimmte Schwelle *[Vorschlag: Stufe „Verbündet“]*, kann der Spieler die Taverne zu einer **offenen Söldnergilde** ausbauen ✔ (Auftragsbrett, Anwerbung, Söldner als Dauergäste).
@@ -388,6 +389,7 @@ In der Krise zeigt sich, wer Floki wirklich ist: Er bleibt – egal, wofür sich
   - Silberkiel-Gilde: **Odile Kraal**, Graue Hände: **Madame Quill**, Sternenwacht: **Gerd Holm**, Funkenwerkstatt: **Pixi Osk**, Weitwanderer: **Nahra Toll** → jeweils Aufträge, Freischaltungen und Nebenenden der Gruppe
   - „Neutraler Hafen“ hängt am Gastrecht-Wert und daran, dass beide Großmächte noch mit dem Spieler reden können
 - *[Vorschlag]* Floki darf vor endgültigen Entscheidungen ironisch warnen (nur der Spieler hört ihn).
+- **Nachfolger nur außerhalb des Bildes** ✔: Nach dem Tod einer Schlüsselfigur rückt zwar jemand nach, aber **nicht im Spiel** – der Nachfolger ist nie ein Gesprächspartner. Man erfährt davon nur über das Galaktische Radio, Gerüchte und Gäste. Die Nachfolge stürzt die Fraktion in **Unruhe**: Sie wird **schwächer** *[Vorschlag: weniger Einfluss, interne Machtkämpfe, verlorene Ressourcen; das schlägt sich in den Ergebnissen der Konflikte nieder]*. Der Pfad für den Spieler bleibt geschlossen.
 - **Altersziel ca. 16+ (USK 16)** ✔: Gewalt und Tod gehören zur Geschichte, werden aber eher angedeutet und mit Galgenhumor behandelt als drastisch gezeigt – kein detaillierter Gore, keine expliziten sexuellen Inhalte.
 - Floki: schwarzer Humor nur, wenn der Spieler das Thema selbst dorthin lenkt (siehe 8.4).
 
@@ -407,11 +409,11 @@ Ein Menü im Spiel, in dem sich vieles regulieren lässt. *[Vorschlag für den U
 - **Technisch:** Einstellungen wie „Kraftausdrücke aus“ oder „Kommentare selten“ werden dem jeweiligen KI-Prompt als zusätzliche Regel mitgegeben oder direkt vom Spiel umgesetzt.
 
 ### 10.8 Launcher – KI & Sprachausgabe ✔
-Ein separater **Launcher** steuert **die KI und die Sprachausgabe** (und weitere technische Dinge). *[Vorschlag für den Umfang:]*
+Ein eigener **Launcher-Bildschirm** vor dem Spielstart steuert **die KI und die Sprachausgabe** (und weitere technische Dinge). Er ist kein eigenes Programm, sondern ein Bildschirm des Spiels. *[Vorschlag für den Umfang:]*
 - Anbieter der Dialog-KI wählen (Modell, API-Schlüssel), Ersatzanbieter festlegen.
 - Anbieter und Stimmen der Sprachausgabe wählen; eine Stimme pro Figur.
 - Antwortlänge, Tempo- und Kostenlimits, Verbindungstest.
-- Echtzeit-Kontrolle: Anfragen und Antworten mitlesen, Fehler und Ausfälle sehen.
+- Echtzeit-Kontrolle: Anfragen und Antworten mitlesen, Fehler und Ausfälle sehen. *[Vorschlag: Dafür ist der Bildschirm auch während des Spiels erreichbar, etwa über das Pausenmenü.]*
 - **Abgrenzung:** Alles, was das **Spielerlebnis** betrifft (Kommentare, Inhalt, Tempo), liegt im Menü im Spiel (10.7); alles Technische im Launcher.
 
 ---
@@ -447,9 +449,9 @@ Beziehung zum Spieler (Startwert):
 4. **Konkreter Inhalt der Daten:** Besetzungsplan für den Tresk-Knoten, Nachschubrouten, Informantennamen – ok?
 5. **Zufall oder Absicht?** Ist es Zufall, dass der reduzierte Supercomputer ausgerechnet auf diesem Schiff landet – oder hat Varga vorgesorgt?
 6. **Reputationssystem im Detail:** Skala, Stufen, Schwellen (z. B. für die Söldnergilde); verfällt Ansehen mit der Zeit?
-7. **Nachfolger?** Wenn eine Schlüsselfigur stirbt und sich der Pfad ihrer Fraktion schließt: Gibt es später einen Nachfolger, oder ist die Fraktion für immer aus dem Spiel? Kann auch Floki sterben oder abgeschaltet werden?
+7. **Kann Floki sterben oder abgeschaltet werden?** (Die Schlüsselfiguren der Fraktionen werden außerhalb des Bildes ersetzt; Floki ist als Erzähler ein Sonderfall.)
 8. **Galaktisches Radio:** Ein Sender oder mehrere (Reichssender, Piratensender, Knotensender)? Gibt es eine feste Sprecherfigur?
-9. **Menü & Launcher:** Passen die Optionen aus 10.7 und der Umfang des Launchers (10.8)? Ist der Launcher ein eigenes Programm oder ein Menü vor dem Spielstart?
+9. **Menü & Launcher:** Passen die Optionen aus 10.7 und der Umfang des Launchers (10.8)? Soll der Launcher-Bildschirm auch während des Spiels erreichbar sein (für Echtzeit-Kontrolle)?
 10. **Bindungswert:** Soll das Spiel die Beziehung zu Floki messen und in seinen Prompt einspeisen?
 11. **Roboterkörper:** Bleibt es bei einem Körper, oder übernimmt Floki auch andere Servicerobots?
 12. **Technikecke:** Soll man Floki auch am Rechenkern (Monitorwand) ansprechen können, nicht nur am Roboter?
