@@ -1,4 +1,4 @@
-# Handlung & Weltentwurf – Arbeitsstand v0.6
+# Handlung & Weltentwurf – Arbeitsstand v0.7
 
 > **Status:** Entwurf zum Streichen, Ändern und Weiterspinnen.
 > Alles mit **[Vorschlag]** ist ein Angebot, keine Festlegung. Offene Entscheidungen stehen am Ende (Kapitel 12).
@@ -17,6 +17,9 @@
 - **Floki kommentiert oft – nur der Spieler reagiert** ✔: Seine Einwürfe kommen häufig und ungefragt, aber kein anderer Charakter reagiert darauf. Der Barkeeper trägt dafür ein **Headset**; die Kommentare erscheinen als **eigener Dialog in *Sternchen*** (siehe 8.4).
 - **Reputation & Ende** ✔: Mit allen Fraktionen kann man sprechen; jede hat ein eigenes **Ansehen**, und das Ende hängt von diesen Werten ab. Bei den Söldnern kann die Taverne ab einer Schwelle zur **offenen Söldnergilde** werden (siehe 10).
 - **Konflikte & Folgen** ✔: Der Spieler nimmt regelmäßig an Konflikten zwischen den Fraktionen teil (Seite wählen oder neutral bleiben). Verhandlungen am Tresen führen zu Gefechten, deren Ergebnis das **Galaktische Radio** meldet. Je nach Spielerhandeln kann es auch in der Taverne zu Streit, Schlägereien und Morden kommen (siehe 10).
+- **Altersziel ca. 16+** ✔ (in Deutschland entspräche das der USK 16): Gewalt und Mord gehören zur Geschichte, werden aber eher angedeutet als drastisch gezeigt (siehe 10.5).
+- **Tote bleiben tot** ✔: getötete Figuren sind dauerhaft weg.
+- **Einstellungsmenü im Spiel** ✔: Vieles (z. B. Flokis Kommentarhäufigkeit) lässt sich dort regulieren (siehe 10.7).
 - Der Zollbeamte ist nicht mehr die erste Figur.
 
 ---
@@ -377,11 +380,26 @@ In der Krise zeigt sich, wer Floki wirklich ist: Er bleibt – egal, wofür sich
 - Je nach Handlungen des Spielers kann es zu **Streit, Schlägereien, Bedrohungen und Morden** in der Taverne kommen ✔.
 - Folgen: Ansehen bei Fraktionen, Stammkundschaft, die Sternenwacht ermittelt, das Gastrecht ist verletzt.
 - *[Vorschlag]* Ein eigener **Gastrecht-Wert**: sinkt bei Gewalt in der Taverne; ist er niedrig, meiden Gäste den Ort, und das Ende „Neutraler Hafen“ wird unmöglich.
-- *[Vorschlag]* Getötete Figuren bleiben dauerhaft tot; das wirkt sich auf Geschichten und KI-Gespräche aus.
+- **Getötete Figuren bleiben dauerhaft tot** ✔; das wirkt sich auf Geschichten und KI-Gespräche aus.
+- **Altersziel ca. 16+ (USK 16)** ✔: Gewalt und Tod gehören zur Geschichte, werden aber eher angedeutet und mit Galgenhumor behandelt als drastisch gezeigt – kein detaillierter Gore, keine expliziten sexuellen Inhalte.
 - Floki: schwarzer Humor nur, wenn der Spieler das Thema selbst dorthin lenkt (siehe 8.4).
 
 ### 10.6 Flokis Kommentare
-Siehe 8.4: häufig, ungefragt, nur der Spieler reagiert; Darstellung als eigener Dialog in *Sternchen* über das Headset.
+Siehe 8.4: häufig, ungefragt, nur der Spieler reagiert; Darstellung als eigener Dialog in *Sternchen* über das Headset. Die Häufigkeit ist im Einstellungsmenü regelbar (siehe 10.7).
+
+### 10.7 Einstellungsmenü ✔
+Ein Menü im Spiel, in dem sich vieles regulieren lässt. *[Vorschlag für den Umfang:]*
+
+| Bereich | Mögliche Einstellungen |
+|---|---|
+| **Floki** | Häufigkeit der Kommentare (aus / selten / normal / oft); Kraftausdrücke an/aus; Härte des Humors |
+| **Inhalt** | Gewaltdarstellung (angedeutet / normal); Häufigkeit von Konflikten; Radio-Nachrichten an/aus |
+| **Spielgefühl** | Textgeschwindigkeit; Schwierigkeit (Ansehensverlust, Wirtschaft); Länge der Konjunktion |
+| **KI** | Anbieter für Dialoge und Sprachausgabe, Stimme, Antwortlänge |
+| **Anzeige & Ton** | Lautstärke, Sprache, Untertitelgröße |
+
+- **Technisch:** Einstellungen wie „Kraftausdrücke aus“ oder „Kommentare selten“ werden dem jeweiligen KI-Prompt als zusätzliche Regel mitgegeben oder direkt vom Spiel umgesetzt.
+- **Launcher:** Der ursprüngliche Plan eines Launchers (Anbieter und Schlüssel wählen, Echtzeit-Kontrolle) bleibt möglich. Das Menü im Spiel deckt die Einstellungen ab, die man im Alltag ändert.
 
 ---
 
@@ -404,6 +422,8 @@ Beziehung zum Spieler (Startwert):
 
 **Musterbeispiel:** der vollständige Prompt von **Floki** in `Resources/Npc/Floki.tres`. Er ist so aufgebaut: Vorgeschichte → Charakter → vierte Wand → Humor → Wissen → Stil. Andere Figuren können dieselbe Gliederung übernehmen.
 
+**Inhaltsleitplanken für alle Figuren** *[Vorschlag]* (Ziel ca. 16+): Gewalt und Tod nur andeutend, ohne blutrünstige Details; keine expliziten sexuellen Inhalte; keine Herabwürdigung realer Gruppen; Kraftausdrücke sind erlaubt. Sie gelten zusätzlich zu jedem Persona-Prompt und lassen sich im Einstellungsmenü verschärfen oder lockern (siehe 10.7).
+
 ---
 
 ## 12. Offene Fragen
@@ -414,9 +434,9 @@ Beziehung zum Spieler (Startwert):
 4. **Konkreter Inhalt der Daten:** Besetzungsplan für den Tresk-Knoten, Nachschubrouten, Informantennamen – ok?
 5. **Zufall oder Absicht?** Ist es Zufall, dass der reduzierte Supercomputer ausgerechnet auf diesem Schiff landet – oder hat Varga vorgesorgt?
 6. **Reputationssystem im Detail:** Skala, Stufen, Schwellen (z. B. für die Söldnergilde); verfällt Ansehen mit der Zeit?
-7. **Gewalt & Mord in der Taverne:** Wie explizit? Bleiben Tote dauerhaft tot? (Betrifft auch die Altersfreigabe.)
+7. **Tote Schlüsselfiguren:** Da Tote tot bleiben – können auch wichtige Figuren sterben, ohne dass die Geschichte bricht? Braucht die Handlung Ersatz oder Alternativwege?
 8. **Galaktisches Radio:** Ein Sender oder mehrere (Reichssender, Piratensender, Knotensender)? Gibt es eine feste Sprecherfigur?
-9. **Flokis Kommentare:** Wie oft, und lässt sich die Häufigkeit einstellen oder abschalten?
+9. **Einstellungsmenü:** Welche Optionen genau (Vorschlag siehe 10.7)? Kommt zusätzlich ein Launcher?
 10. **Bindungswert:** Soll das Spiel die Beziehung zu Floki messen und in seinen Prompt einspeisen?
 11. **Roboterkörper:** Bleibt es bei einem Körper, oder übernimmt Floki auch andere Servicerobots?
 12. **Technikecke:** Soll man Floki auch am Rechenkern (Monitorwand) ansprechen können, nicht nur am Roboter?
