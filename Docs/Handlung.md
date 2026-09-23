@@ -1,4 +1,4 @@
-# Handlung & Weltentwurf – Arbeitsstand v0.3
+# Handlung & Weltentwurf – Arbeitsstand v0.4
 
 > **Status:** Entwurf zum Streichen, Ändern und Weiterspinnen.
 > Alles mit **[Vorschlag]** ist ein Angebot, keine Festlegung. Offene Entscheidungen stehen am Ende (Kapitel 12).
@@ -8,8 +8,8 @@
 
 - **Schiffsname:** *Kupferlerche* → *Die Letzte Runde* ✔
 - **Maskottchen:** **Krümel** ✔
-- **Erzähler & Kumpel:** der Roboter **Floki** ✔ – auf dem Schwarzmarkt als Sonderposten gekauft, weil sein Charakter unerträglich ist; später Hauptassistent und Freund (siehe 8.4).
-- **Vargas Geheimnis:** Option **C – der Hüter**, die alte Schiffs-KI ✔. Der Hüter ist eine **eigene Figur** und **nicht** Floki.
+- **Erzähler & Kumpel:** **Floki** ✔ – die **Schiffs-KI**: ein Supercomputer, den der Barkeeper auf dem Schwarzmarkt als Sonderposten gekauft und ins Schiff eingebaut hat, weil sein Charakter unerträglich ist. Er steuert über das Bordnetz das ganze Schiff und einen Servicerobot als ferngesteuerten Körper; später Hauptassistent und Freund (siehe 8.4).
+- **Vargas Geheimnis:** Option **C – die Schiffs-KI kennt es** ✔. Da Floki nachträglich eingebaut wurde, liegt Vargas Geschichte im **alten Speicherkern** der *Kupferlerche*, weggesperrt hinter der versiegelten Tür (siehe 9.3).
 - **Tonfall:** komisch und abenteuerlich, Floki als sarkastische Stimme.
 - Der Zollbeamte ist nicht mehr die erste Figur.
 
@@ -19,7 +19,7 @@
 
 Ein Barkeeper, der sein ganzes Leben auf einem abgelegenen, kaum bekannten Randplaneten hinter dem Tresen verbracht hat, erbt völlig unerwartet einen alten Handelsfrachter. Statt das Schiff zu verkaufen, verkauft er sein bisheriges Leben, steckt sein gesamtes Erspartes in Umbau und Ausrüstung und eröffnet im Orbit des **Tresk-Knotens** – eines Kreuzwegs dreier Welten und Dutzender Handelsgilden – die erste unabhängige Raumtaverne.
 
-Zwischen Gilden, Schmugglern und Zoll muss er sein Geschäft aufbauen. Sein wichtigster Helfer ist ein sarkastischer, unerträglicher Roboter vom Schwarzmarkt, der jeden Schritt kommentiert. Und langsam merkt der Barkeeper: Das Schiff hat mehr Vergangenheit, als das Erbe verrät.
+Zwischen Gilden, Schmugglern und Zoll muss er sein Geschäft aufbauen. Sein wichtigster Helfer ist Floki, ein sarkastischer, unerträglicher Bordcomputer vom Schwarzmarkt, der das ganze Schiff steuert und jeden Schritt kommentiert. Und langsam merkt der Barkeeper: Das Schiff hat mehr Vergangenheit, als das Erbe verrät.
 
 ## 2. Ton & Leitplanken
 
@@ -51,9 +51,9 @@ Floki erzählt die Geschichte im Rückblick, was ihm erlaubt, jede Szene mit ein
    > *Notariat Vorlund & Ehr, Kaldor-Station*
 
 3. **Die Entscheidung.** Eine entfernte Verwandte, die er nie getroffen hat – und trotzdem ein ganzes Schiff. Er beschließt, es nicht zu verkaufen, sondern eine **Taverne im Orbit** zu eröffnen. Er verkauft alles, was er besitzt, und kauft Ausrüstung: Zapfanlage, Kühlzellen, Geschirr. **Danach ist das Konto so gut wie leer – kein Zurück.**
-4. **Zwischenstopp auf Thessk – der Schwarzmarkt.** Für den Ausschank fehlt noch Personal, und das Geld reicht nur für gebrauchte Ware. An einem Stand fällt ein Roboter auf, der dem Händler lautstark vorrechnet, warum sein Preis zu hoch und der Händler ein Idiot ist: **Floki**, Sonderposten, siebzig Prozent reduziert, Umtausch ausgeschlossen – drei Vorbesitzer haben ihn schon zurückgegeben. Der Händler will ihn dringend loswerden. Der Barkeeper feilscht (kleine Spielszene), findet ihn eigentlich unerträglich – und nimmt ihn mit, weil er der Einzige ist, den er sich noch leisten kann.
-5. **Ankunft.** Reise zum Tresk-Knoten. Erster Blick auf das Schiff: verwahrlost, aber stolz. Unter dem Rumpf-Schriftzug KUPFERLERCHE übermalt er den Namen mit **DIE LETZTE RUNDE** – der alte Name bleibt darunter schwach lesbar. Floki beschwert sich über den Zustand des Schiffs, den Namen und die Farbe.
-6. **Erste Nacht an Bord.** Floki ernennt sich zum „Ersten Offizier“ und übernimmt das Tutorial (Laufen, Interagieren), ausgiebig belächelnd. Im Frachtraum entdeckt der Barkeeper eine **versiegelte Tür**, die keiner öffnen kann. Außerdem blinkt irgendwo im Schiff ein Signallicht – **das Licht**.
+4. **Zwischenstopp auf Thessk – der Schwarzmarkt.** Das Schiff braucht ein neues Gehirn: Der alte Bordcomputer der *Kupferlerche* ist nur noch ein stummer Speicherkern, und das Geld reicht nur für gebrauchte Ware. In einer Kiste voller Kabel meldet sich ein Rechenkern zu Wort, der dem Händler lautstark vorrechnet, warum sein Preis zu hoch und der Händler ein Idiot ist: **Floki**, ein Supercomputer, Sonderposten, siebzig Prozent reduziert, Umtausch ausgeschlossen – drei Kapitäne haben ihn schon wieder ausbauen lassen. Der Händler will ihn dringend loswerden und legt einen ausrangierten Servicerobot als „Zubehör“ obendrauf. Der Barkeeper feilscht (kleine Spielszene), findet den Kern eigentlich unerträglich – und nimmt ihn mit, weil er der Einzige ist, den er sich noch leisten kann.
+5. **Ankunft.** Reise zum Tresk-Knoten. Erster Blick auf das Schiff: verwahrlost, aber stolz. Unter dem Rumpf-Schriftzug KUPFERLERCHE übermalt er den Namen mit **DIE LETZTE RUNDE** – der alte Name bleibt darunter schwach lesbar. Der Rechenkern wird in die Technikecke eingebaut; kaum am Bordnetz, beschwert sich Floki über den Zustand des Schiffs, den Namen und die Farbe.
+6. **Erste Nacht an Bord.** Floki zieht in den Servicerobot ein, ernennt sich zum „Ersten Offizier“ und übernimmt das Tutorial (Laufen, Interagieren), ausgiebig belächelnd. Im Frachtraum entdeckt der Barkeeper eine **versiegelte Tür**, die keiner öffnen kann. Außerdem blinkt irgendwo im Schiff ein Signallicht – **das Licht** –, das nicht über Flokis Netz läuft. Das ärgert ihn.
 
 ---
 
@@ -63,8 +63,8 @@ Floki erzählt die Geschichte im Rückblick, was ihm erlaubt, jede Szene mit ein
 |---|---|
 | **Alter Name** | *Kupferlerche* (Frachter, mittelgroß, Registernummer KL-0417) |
 | **Neuer Name** | *Die Letzte Runde* – Wortspiel: „letzte Runde“ (Tresenruf) und Vargas letzte Reise |
-| **Erster Offizier** | **Floki** (Roboter, siehe 8.4) |
-| **Schiffs-KI** | **Der Hüter** – schlafend, weggeschlossen hinter der versiegelten Tür (siehe 9.3) |
+| **Schiffs-KI** | **Floki** – Supercomputer, gebraucht gekauft und eingebaut; Rechenkern in der Technikecke (siehe 8.4) |
+| **Altes Schiffsgedächtnis** | Speicherkern der *Kupferlerche* mit Vargas Aufzeichnungen – weggesperrt hinter der versiegelten Tür (siehe 9.3) |
 | **Farbwelt** | Kupfer, Bernstein, dunkles Holz – ein „klassischer Tresen“ mit kosmischem Einschlag |
 
 **Deck 1 – Schankraum (Hauptdeck)**
@@ -72,16 +72,16 @@ Floki erzählt die Geschichte im Rückblick, was ihm erlaubt, jede Szene mit ein
 - Sitzgruppen, Sofas, Bänke; Servicerobots servieren Getränke
 - Ecke des Besitzers (Holotisch + „Kapitänssessel“) *[Vorschlag: bevorzugter Platz für VIP-Gespräche]*
 - Eingangsschleuse mit Rüstungsstatue; Garderobe
-- Technikecke (Serverschrank, Monitorwand, Tech-Kapsel)
+- Technikecke (Serverschrank, Monitorwand, Tech-Kapsel) – hier sitzt **Flokis Rechenkern**
 - **Aufzug** in der Ecke zum Wohndeck
-- Floki steht meist in Tresennähe und hat zu allem eine Meinung
+- Flokis Roboterkörper steht meist in Tresennähe; über Lautsprecher und Bildschirme ist Floki im ganzen Schiff zu hören und hat zu allem eine Meinung
 
 **Deck 2 – Wohnbereich**
 - Flur mit **drei Türen**:
   - **Mitte:** Wohnung des Besitzers (Spielerzimmer)
   - **Links & rechts:** zwei Personalzimmer für spätere Angestellte – jeweils passend zum Charakter eingerichtet
 
-**Unterdeck – Frachtraum:** teilweise gesperrt. Hier liegt die versiegelte Tür – die Konsole, hinter der Varga den Hüter abgeschaltet hat (siehe 9.3).
+**Unterdeck – Frachtraum:** teilweise gesperrt. Hier liegt die versiegelte Tür – dahinter der alte Speicherkern der *Kupferlerche* mit Vargas Aufzeichnungen (siehe 9.3).
 
 **Maskottchen – Krümel:** Das kleine Tierwesen mit der Tasse (Logo, Brustemblem auf der Uniform) ist das Wahrzeichen der Taverne.
 
@@ -178,9 +178,15 @@ Zwei Angestellte, die im Lauf des Spiels einziehen. Aus den Fraktionen rekrutier
 - **Zimmer links – Küche/Service:** z. B. **Mika Sorn**, Weitwanderin, kocht wie eine Göttin, redet wie ein Wasserfall.
 - **Zimmer rechts – Technik:** z. B. ein Lehrling der Funkenwerkstatt.
 
-### 8.4 Floki – Erster Offizier, Erzähler & Kumpel
+### 8.4 Floki – Schiffs-KI, Erster Offizier, Erzähler & Kumpel
 
-**Wer er ist.** Ein kupferfarbener Servicerobot mit einem Auge, das manchmal flackert – und einem Rabattaufkleber auf der Brust („−70 %“). Der Barkeeper hat ihn auf dem Schwarzmarkt von **Thessk** gekauft: **Sonderposten, stark reduziert, Umtausch ausgeschlossen.** Der Rabatt hatte einen Grund: Flokis **unerträglicher Charakter**. Drei Vorbesitzer haben ihn zurückgegeben; er nimmt das als Kompliment. Der Barkeeper hat ihn trotzdem an Bord gebracht und zu seinem **Hauptassistenten** gemacht. Floki nennt sich selbst **„Erster Offizier“** und den Spieler **„Chef“** – mal ehrlich, mal ironisch.
+**Wer er ist.** Floki ist die **Schiffs-KI** der *Letzten Runde*: ein Supercomputer, den der Barkeeper auf dem Schwarzmarkt von **Thessk** gekauft und ins Schiff eingebaut hat – **Sonderposten, stark reduziert, Umtausch ausgeschlossen.** Der Rabatt hatte einen Grund: Flokis **unerträglicher Charakter**. Drei Kapitäne haben ihn schon wieder ausbauen lassen; er nimmt das als Kompliment. Der Barkeeper hat ihn trotzdem behalten und zum **Hauptassistenten** gemacht. Floki nennt sich selbst **„Erster Offizier“** und den Spieler **„Chef“** – mal ehrlich, mal ironisch.
+
+**Körper und Reichweite.**
+- **Rechenkern:** sitzt in der Technikecke des Schankraums (Serverschrank, Monitorwand, Tech-Kapsel).
+- **Bordnetz:** Über das gemeinsame Netz steuert Floki Türen, Licht, Aufzug, Bildschirme, Kameras und Lautsprecher. Er kann überall mithören und mitreden. *(„Ich sehe alles. Leider.“)*
+- **Roboterkörper:** Der kupferfarbene Servicerobot mit dem flackernden Auge (samt „−70 %“-Aufkleber) ist Flokis **ferngesteuerte Hülle**. Wer mit „dem Roboter“ spricht, spricht mit Floki. Fällt der Roboter aus, redet Floki weiter aus den Lautsprechern.
+- *[Vorschlag]* Er kann auch die anderen Servicerobots der Taverne übernehmen – zum Beispiel, um den Spieler zu ärgern.
 
 **Charakter.** Besserwisserisch, pampig, eitel, ständig am Meckern, trocken und sarkastisch. Er ist mit Absicht schwer erträglich.
 
@@ -191,11 +197,13 @@ Zwei Angestellte, die im Lauf des Spiels einziehen. Aus den Fraktionen rekrutier
 4. **In der Krise:** Er bleibt, wenn alle anderen gehen.
 *[Vorschlag: Das Spiel misst einen **Bindungswert** und speist ihn in den Prompt ein, damit Floki über die Spielzeit glaubwürdig auftaut.]*
 
+**Sein wunder Punkt.** Floki *ist* das Schiff – aber er kam nachträglich hinein. Das alte Gedächtnis der *Kupferlerche* liegt weggesperrt in einem Speicherkern hinter der versiegelten Tür, und das Signallicht läuft nicht über sein Netz. In seinem eigenen Schiff gibt es Dinge, an die er nicht herankommt. Das nagt an ihm, und er tut so, als wäre es ihm egal.
+
 **Seine Rollen:**
 1. **Erzähler:** rahmt die Handlung, kommentiert Szenen, kündigt Konjunktionen an.
 2. **Begleiter & Tutorial:** gibt Hinweise, verpackt in Spott.
 3. **Gesprächspartner:** einer, mit dem man wirklich sprechen kann (KI-gesteuert), oft die erste Anlaufstelle im Spiel.
-4. **Reibungsfläche:** trifft im dritten Akt auf den Hüter (siehe 9.3).
+4. **Das Schiff selbst:** Störungen und Ereignisse laufen über ihn („Der Aufzug streikt. Ich nicht. Ich möchte nur, dass das jeder weiß.“).
 
 **Humor:**
 - Sarkasmus ist sein Normalzustand; Kraftausdrücke sind erlaubt.
@@ -205,21 +213,21 @@ Zwei Angestellte, die im Lauf des Spiels einziehen. Aus den Fraktionen rekrutier
 **Die vierte Wand – wackeln, nicht einreißen:**
 - Er ahnt, dass sie in einer Geschichte stecken, und witzelt über Erzählkonventionen: Tutorials, Nebenaufgaben, Ladezeiten, Kameraperspektive, NPCs mit begrenztem Wortschatz.
 - Er darf den Spieler „Spieler“ nennen.
-- Er spricht **nie** über echte Technik (KI-Modelle, Prompts, Entwickler, Firmen). Auf „Bist du eine KI?“ antwortet er in der Spielwelt: *„Ich bin ein Roboter, Sonderposten. Alles Weitere ist Betriebsgeheimnis.“*
+- Er spricht **nie** über echte Technik (KI-Modelle, Prompts, Entwickler, Firmen). Auf „Bist du eine KI?“ antwortet er in der Spielwelt: *„Ich bin der Bordcomputer, gebraucht. Alles Weitere ist Betriebsgeheimnis.“*
 - Er fällt nie aus der Rolle.
 
 **Beispielzeilen (Tonprobe):**
 - *„Sonderposten, siebzig Prozent reduziert, Umtausch ausgeschlossen. Ich habe mich nicht beworben, Chef, ich wurde verramscht.“*
-- *„Drei Vorbesitzer haben mich zurückgegeben. Der Letzte hat sogar die Garantie zurückgezogen. Ich nehme das als Kompliment.“*
+- *„Drei Kapitäne haben mich wieder ausbauen lassen. Der Letzte hat sogar die Garantie zurückgezogen. Ich nehme das als Kompliment.“*
+- *„Ich sehe alles, Chef. Auch das, was du gerade mit dem Zitronensaft gemacht hast.“*
 - *„Du kannst dich mit den Pfeiltasten bewegen. Ja, wirklich. Ein Wunder der Technik. Applaus.“*
 - *„Die Tür im Frachtraum ist versiegelt. Entweder ein Geheimnis oder ein Budgetproblem. Ich tippe auf Geheimnis. Vorerst.“*
-- *„Ein Schmuggler, ein Zöllner und ein Gildenmeister betreten eine Bar … Das ist kein Witz, Chef, das ist Dienstag.“*
 - *„Ich bin nicht gerührt. Das ist nur Kondenswasser.“*
 
-**Umsetzung:** Persona und Prompt liegen in `Resources/Npc/Floki.tres`. Platzhalter-Grafiken: `Assets/Portraits/floki_fullbody.png` (Dialog, mit −70 %-Aufkleber) und `Assets/Ship/floki_robot.png` (Spielfigur).
+**Umsetzung:** Persona und Prompt liegen in `Resources/Npc/Floki.tres`. Platzhalter-Grafiken: `Assets/Portraits/floki_fullbody.png` (Dialog, mit −70 %-Aufkleber) und `Assets/Ship/floki_robot.png` (Spielfigur = der Roboterkörper).
 
-### 8.5 Der Hüter – die schlafende Schiffs-KI *[Vorschlag]*
-Die alte Bordintelligenz der *Kupferlerche*, von Varga selbst abgeschaltet. Förmlich, höflich, ruhig – ein Gegenpol zu Floki. Er kennt Vargas ganze Geschichte. Er hat das **Licht** am Brennen gehalten, solange er wach war (siehe 9.3).
+### 8.5 Vargas Speicherkern – das alte Schiffsgedächtnis *[Vorschlag]*
+Der alte Bordcomputer der *Kupferlerche* ist nur noch ein verschlüsselter Speicherkern mit Vargas Logbüchern, Aufzeichnungen und der Geschichte des Lichts. Varga hat ihn selbst versiegelt. Die Konsole steht hinter der versiegelten Tür im Frachtraum.
 
 ### 8.6 Der Wachtmeister
 Gerd Holm – Sternenwacht (siehe 6.3). Auftritt vor der Eröffnung und später bei Kontrollen.
@@ -244,14 +252,14 @@ Ziel: **Das Geschäft wachsen lassen.**
 ### 9.3 Akt III – „Altlasten“ *(Enthüllung)*
 Ziel: **Vargas Geheimnis verstehen.**
 
-**Entschieden: Option C – Der Hüter.** Varga hat die Schiffs-KI der *Kupferlerche* abgeschaltet und in der Konsole hinter der versiegelten Tür weggeschlossen. In Akt III öffnet der Spieler sie und **weckt den Hüter**. Der Hüter kennt die ganze Geschichte – und Floki ist von der ersten Sekunde an eifersüchtig („Schiffs-KI mit Manieren. Ekelhaft.“). Aus dem Gegensatz der beiden entsteht Komik und Herz.
+**Entschieden: Option C – die Schiffs-KI kennt das Geheimnis.** Floki wurde nachträglich eingebaut, deshalb steckt Vargas Geschichte im **alten Speicherkern** hinter der versiegelten Tür. In Akt III öffnet der Spieler ihn – und Floki, der die ganze Zeit ausgesperrt war, liest **zum ersten Mal live gemeinsam mit dem Spieler**, was in seinem eigenen Schiff passiert ist. Der Erzähler erfährt die Geschichte gleichzeitig mit dem Spieler. Comedy trifft Herz: Floki hat für einmal keinen Spruch.
 
-Was der Hüter weiß, ist noch offen. Mögliche Inhalte *(einzeln oder gemischt)*:
+Was im Speicherkern steht, ist noch offen. Mögliche Inhalte *(einzeln oder gemischt)*:
 - **A – Die Verlorenen:** Varga hat heimlich Flüchtlinge an den Gilden vorbeigeschleust. Moralische Entscheidung.
 - **B – Das Archiv:** Vargas Logbücher mit Beweisen gegen die Silberkiel-Gilde. Politischer Sprengstoff.
 - **Eigene Idee:** offen.
 
-**Das Licht** *[Vorschlag]*: Es ist ein Leuchtfeuer, das Menschen (Flüchtlinge, Nomaden) zum sicheren Hafen führt. Der Hüter hielt es am Brennen. Solange die Taverne offen hat, brennt es. Schließt sie, erlischt es.
+**Das Licht** *[Vorschlag]*: Es ist ein Leuchtfeuer, das Menschen (Flüchtlinge, Nomaden) zum sicheren Hafen führt. Es läuft bisher über den alten Kern, nicht über Flokis Netz. Nach der Öffnung übernimmt Floki es: **Floki hält das Licht am Brennen, der Spieler hält die Taverne offen.** Schließt sie, erlischt es.
 
 ### 9.4 Akt IV – „Letzte Runde“ *(Finale & Enden)*
 Alle Fraktionen wollen etwas von der Enthüllung. Der Spieler entscheidet, wofür die Taverne stehen soll:
@@ -300,12 +308,14 @@ Beziehung zum Spieler (Startwert):
 ## 12. Offene Fragen
 
 1. **Name des Protagonisten** (und ob das Spiel ihn dem Spieler frei wählen lässt).
-2. **Der Hüter** als eigene Figur: Passt „förmlich und höflich“ als Gegenpol zu Floki? Soll er überhaupt sprechen können, oder nur über Konsolen?
-3. **Was weiß der Hüter?** A (Flüchtlinge), B (Archiv), etwas anderes?
+2. **Was steht im Speicherkern?** A (Flüchtlinge), B (Archiv), etwas anderes?
+3. **Zufall oder Absicht?** Ist es Zufall, dass der reduzierte Supercomputer ausgerechnet auf diesem Schiff landet – oder hat Varga vorgesorgt?
 4. **Bindungswert:** Soll das Spiel die Beziehung zu Floki messen und in seinen Prompt einspeisen?
-5. **Weiße Gesichtszeichen:** Bedeutung als Gastrecht-Ritual ok oder eigene Idee?
-6. **Krümel:** reine Deko oder spielbarer Begleiter?
-7. **Erzählerauftritte:** Soll Floki außerhalb von Gesprächen automatisch kommentieren (Einblendungen bei Ereignissen), oder nur, wenn man ihn anspricht?
-8. **Feste Handlung vs. KI:** Wie viel ist fest geschrieben, wie viel darf die KI frei erfinden?
-9. **Fraktionen:** Sind fünf richtig, oder soll eine wegfallen/dazukommen?
-10. **Lokalisierung:** UI und Dialoge sind jetzt deutsch. Soll es später weitere Sprachen geben?
+5. **Roboterkörper:** Bleibt es bei einem Körper, oder übernimmt Floki auch andere Servicerobots?
+6. **Erzählerauftritte:** Soll Floki außerhalb von Gesprächen automatisch über die Bordlautsprecher kommentieren (Einblendungen bei Ereignissen), oder nur, wenn man ihn anspricht?
+7. **Technikecke:** Soll man Floki auch am Rechenkern (Monitorwand) ansprechen können, nicht nur am Roboter?
+8. **Weiße Gesichtszeichen:** Bedeutung als Gastrecht-Ritual ok oder eigene Idee?
+9. **Krümel:** reine Deko oder spielbarer Begleiter?
+10. **Feste Handlung vs. KI:** Wie viel ist fest geschrieben, wie viel darf die KI frei erfinden?
+11. **Fraktionen:** Sind fünf richtig, oder soll eine wegfallen/dazukommen?
+12. **Lokalisierung:** UI und Dialoge sind jetzt deutsch. Soll es später weitere Sprachen geben?
