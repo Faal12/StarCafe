@@ -11,20 +11,15 @@ obj/
 # only the derived/used textures in Assets/Ship etc. are tracked)
 /Assets/packs/
 
-# Same asset packs also ended up extracted directly into the project root
-# by mistake (see chat) — ignore them here too until they're cleaned up.
+# Planet images that currently live outside Assets/packs and are not used yet
 /128x128/
 /64x64/
-/CYBER TOWN-V02/
-/Free Sample/
-/FreeSample/
-/Hotel-Labratory-Sprites/
-/ModernHouse/
-/Sci-FiSpaceship&Station2DMegaPropsPack_Sample_v1.0/
-/Spaceship Objects/
-/TopView_Robot_Asset_Pack/
-/TopView_Robot_Asset_Pack 2/
-/cyb assets/
+
+# Source artwork the game does not load directly (the derived, cropped
+# Assets/Portraits/*_fullbody.png files are what ships). Kept on disk only.
+/Assets/Portraits/Character.png*
+/Assets/Portraits/Characteronly.png*
+/Assets/Portraits/Logo.png*
 
 # Raw working files Godot can't import anyway — keep the PNG derivatives only
 *.tiff
