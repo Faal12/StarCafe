@@ -13,7 +13,7 @@ public partial class Main : Node2D
 	public override void _Ready()
 	{
 		GD.Print("Труппа готова.");
-		_llmProvider = new GeminiProvider();
+		_llmProvider = LlmProviderFactory.Create();
 	}
 
 	private async void _on_send_button_pressed()

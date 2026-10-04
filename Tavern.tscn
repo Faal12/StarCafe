@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://c5k7pgpdjso5d" path="res://Scripts/Player/Player.cs" id="1_player_script"]
 [ext_resource type="Script" uid="uid://bg1twepmpwfdo" path="res://Scripts/Npc/NpcInteractable.cs" id="2_npc_script"]
 [ext_resource type="Script" uid="uid://yt2akma8kjuq" path="res://Scripts/Dialogue/DialogueController.cs" id="3_dialogue_script"]
+[ext_resource type="Script" path="res://Scripts/Ui/PauseMenu.cs" id="38_pause_script"]
 [ext_resource type="Resource" path="res://Resources/Npc/Floki.tres" id="4_floki_persona"]
 [ext_resource type="Texture2D" uid="uid://dwnh4wps0srrg" path="res://Assets/Ship/floor_hall.png" id="5_floor_tex"]
 [ext_resource type="Texture2D" uid="uid://db1210e0t1cnk" path="res://Assets/Ship/wall_top.png" id="6_wall_top_tex"]
@@ -521,3 +522,6 @@ offset_top = 96.0
 offset_right = 1056.0
 offset_bottom = 124.0
 text = "Senden"
+
+[node name="PauseMenu" type="CanvasLayer" parent="."]
+script = ExtResource("38_pause_script")

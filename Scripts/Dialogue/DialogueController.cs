@@ -21,16 +21,20 @@ public partial class DialogueController : CanvasLayer
 	private const double EntranceSeconds = 0.4;
 	private const float EntranceSlideDistance = 500f;
 
-	private ILlmProvider _llmProvider;
 	private NpcPersona _persona;
 	private bool _isRequestInFlight;
+	private Tween _textTween;
 
 	private Vector2 _playerRestPosition;
 	private Vector2 _npcRestPosition;
 
+	// The pause menu uses this to leave Escape to the dialogue while one is open.
+	public static bool IsOpen { get; private set; }
+
 	public override void _Ready()
 	{
-		_llmProvider = new GeminiProvider();
+		GameSettings.Apply();
+
 		_panel.Visible = false;
 		_dimBackground.Visible = false;
 		_playerPortraitBig.Visible = false;
@@ -47,11 +51,19 @@ public partial class DialogueController : CanvasLayer
 		_inputField.TextSubmitted += _ => OnSendPressed();
 	}
 
+	public override void _ExitTree()
+	{
+		IsOpen = false;
+		TtsService.Stop();
+	}
+
 	public void OpenDialogue(NpcPersona persona)
 	{
+		IsOpen = true;
 		_persona = persona;
 		_nameLabel.Text = persona.DisplayName;
-		_dialogueLabel.Text = "...";
+		_dialogueLabel.AddThemeFontSizeOverride("font_size", GameSettings.DialogueFontSize);
+		ShowText("...", animate: false);
 		_inputField.Text = "";
 		_panel.Visible = true;
 		_dimBackground.Visible = true;
@@ -79,6 +91,10 @@ public partial class DialogueController : CanvasLayer
 
 	public void CloseDialogue()
 	{
+		IsOpen = false;
+		_textTween?.Kill();
+		TtsService.Stop();
+
 		_panel.Visible = false;
 		_dimBackground.Visible = false;
 		_playerPortraitBig.Visible = false;
@@ -95,6 +111,23 @@ public partial class DialogueController : CanvasLayer
 			CloseDialogue();
 			GetViewport().SetInputAsHandled();
 		}
+	}
+
+	private void ShowText(string text, bool animate = true)
+	{
+		_textTween?.Kill();
+		_dialogueLabel.Text = text;
+
+		float charactersPerSecond = GameSettings.CharactersPerSecond;
+		if (!animate || charactersPerSecond <= 0f || text.Length == 0)
+		{
+			_dialogueLabel.VisibleRatio = 1f;
+			return;
+		}
+
+		_dialogueLabel.VisibleRatio = 0f;
+		_textTween = CreateTween();
+		_textTween.TweenProperty(_dialogueLabel, "visible_ratio", 1.0f, text.Length / charactersPerSecond);
 	}
 
 	private void SetSpeaker(bool playerSpeaking, bool animate = true)
@@ -133,19 +166,33 @@ public partial class DialogueController : CanvasLayer
 
 		_isRequestInFlight = true;
 		_sendButton.Disabled = true;
-		_dialogueLabel.Text = $"{_persona.DisplayName} denkt nach...";
+		TtsService.Stop();
+		ShowText($"{_persona.DisplayName} denkt nach...", animate: false);
 		SetSpeaker(playerSpeaking: true);
 
 		try
 		{
-			string reply = await _llmProvider.GetReplyAsync(_persona.SystemPrompt, playerText);
-			_dialogueLabel.Text = reply;
-			SetSpeaker(playerSpeaking: false);
+			string systemPrompt = PromptComposer.Compose(_persona);
+			string reply = await LlmProviderFactory.Create().GetReplyAsync(systemPrompt, playerText);
+
+			// The player may have closed the dialogue while the reply was on its way.
+			if (IsOpen)
+			{
+				ShowText(reply);
+				SetSpeaker(playerSpeaking: false);
+				TtsService.Speak(_persona.DisplayName, reply);
+			}
 		}
 		catch (LlmRequestException ex)
 		{
-			GD.PrintErr(ex.Message);
-			_dialogueLabel.Text = $"{_persona.DisplayName} schweigt – {ex.Message}.";
+			if (IsOpen)
+				ShowText($"{_persona.DisplayName} schweigt – {ex.Message}.", animate: false);
+		}
+		catch (System.Exception ex)
+		{
+			LlmLog.Add("Dialog", LlmLogKind.Fehler, $"Unerwarteter Fehler: {ex.Message}");
+			if (IsOpen)
+				ShowText($"{_persona.DisplayName} schweigt – unerwarteter Fehler.", animate: false);
 		}
 		finally
 		{
