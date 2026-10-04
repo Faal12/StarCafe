@@ -1,4 +1,4 @@
-# Handlung & Weltentwurf – Arbeitsstand v0.10
+# Handlung & Weltentwurf – Arbeitsstand v0.11
 
 > **Status:** Entwurf zum Streichen, Ändern und Weiterspinnen.
 > Alles mit **[Vorschlag]** ist ein Angebot, keine Festlegung. Offene Entscheidungen stehen am Ende (Kapitel 12).
@@ -360,7 +360,8 @@ In der Krise zeigt sich, wer Floki wirklich ist: Er bleibt – egal, wofür sich
 ### 10.1 Reputation – Ansehen bei allen Fraktionen
 - Der Spieler kann mit **allen** Fraktionen sprechen: Imperium, Rebellen und alle sechs lokalen Gruppen.
 - **Startwert: 0 (neutral) bei allen Fraktionen** ✔. Nach der Komplettsanierung ist die Taverne ein unbeschriebenes Blatt; niemand kennt sie, und Vargas Ruf überträgt sich nicht.
-- Jede Fraktion hat ein **eigenes Ansehen** *[Vorschlag: Skala −100 bis +100; Stufen: Feind – Misstrauisch – Neutral – Wohlwollend – Verbündet]*.
+- Jede Fraktion hat ein **eigenes Ansehen**. **Umgesetzt:** Skala −100 bis +100; Stufen **Feind** (bis −60), **Misstrauisch** (bis −20), **Neutral**, **Wohlwollend** (ab +20), **Verbündet** (ab +60).
+- **Rivalität (umgesetzt):** Eine Tat für das Imperium oder die Rebellen wirkt zur Hälfte gegenläufig auf die Gegenseite – das Gewicht der *Tat* zählt, nicht, was am Maximum noch hineinpasst. Die lokalen Gruppen haben keinen festen Rivalen.
 - Höheres Ansehen schaltet frei: Aufträge, Rabatte, Personal, Umbauten, Informationen, besondere Gäste.
 - Entscheidungen verschieben mehrere Werte gleichzeitig: Wer den Rebellen hilft, verliert beim Imperium.
 - **Das Ende hängt von den Ansehenswerten ab** – von allen zusammen, nicht nur von zweien – sowie vom Gastrecht-Wert (10.5).
@@ -386,7 +387,8 @@ In der Krise zeigt sich, wer Floki wirklich ist: Er bleibt – egal, wofür sich
 ### 10.5 Gewalt in der Taverne
 - Je nach Handlungen des Spielers kann es zu **Streit, Schlägereien, Bedrohungen und Morden** in der Taverne kommen ✔.
 - Folgen: Ansehen bei Fraktionen, Stammkundschaft, die Sternenwacht ermittelt, das Gastrecht ist verletzt.
-- *[Vorschlag]* Ein eigener **Gastrecht-Wert**: sinkt bei Gewalt in der Taverne; ist er niedrig, meiden Gäste den Ort, und das Ende „Neutraler Hafen“ wird unmöglich.
+- **Gastrecht-Wert (umgesetzt):** 0–100, Start 100; sinkt bei Gewalt in der Taverne. Unter 50 meiden Gäste den Ort, und das Ende „Neutraler Hafen“ ist unmöglich.
+- **Voraussetzungen der Enden (umgesetzter Arbeitsstand):** Die Enden „An der Seite der Rebellen“, „An der Seite des Imperiums“ und „Offene Söldnergilde“ brauchen Ansehen **ab +60** bei der jeweiligen Fraktion **und** eine lebende Schlüsselfigur. „Neutraler Hafen“ braucht Gastrecht **ab 50**, lebende Schlüsselfiguren **beider** Großmächte und dass keine von beiden Feind ist.
 - **Getötete Figuren bleiben dauerhaft tot** ✔; das wirkt sich auf Geschichten und KI-Gespräche aus.
 - **Schlüsselfiguren** ✔: Jede Fraktion hat eine Schlüsselfigur. **Stirbt sie, schließt sich der Pfad ihrer Fraktion** – keine Aufträge, keine weiteren Ansehensgewinne und keine Enden mehr, die an sie gebunden sind. *[Vorschlag für die Zuordnung:]*
   - Imperium: Inspektorin **Vesna Arkan** → Ende „An der Seite des Imperiums“
@@ -404,6 +406,8 @@ In der Krise zeigt sich, wer Floki wirklich ist: Er bleibt – egal, wofür sich
 Siehe 8.4: häufig, ungefragt, nur der Spieler reagiert; Darstellung als eigener Dialog in *Sternchen* über das Headset. Die Häufigkeit ist im Einstellungsmenü regelbar (siehe 10.7).
 
 ### 10.7 Einstellungsmenü ✔
+**Umgesetzt (Stand v0.11):** Das Menü erreicht man mit Esc (Pause); Einstellungen werden sofort gespeichert. Wirksam sind derzeit: Kraftausdrücke, Humor-Härte, Gewaltdarstellung (fließen als verbindliche Regeln in jeden KI-Prompt), Textgeschwindigkeit, Gesamtlautstärke (wirkt auf die Sprachausgabe), Vollbild und Dialog-Schriftgröße. Kommentar-Häufigkeit, Konflikt-Häufigkeit und Radio sind schon einstellbar, wirken aber erst, wenn die jeweiligen Systeme existieren.
+
 Ein Menü im Spiel, in dem sich vieles regulieren lässt. *[Vorschlag für den Umfang:]*
 
 | Bereich | Mögliche Einstellungen |
@@ -416,6 +420,8 @@ Ein Menü im Spiel, in dem sich vieles regulieren lässt. *[Vorschlag für den U
 - **Technisch:** Einstellungen wie „Kraftausdrücke aus“ oder „Kommentare selten“ werden dem jeweiligen KI-Prompt als zusätzliche Regel mitgegeben oder direkt vom Spiel umgesetzt.
 
 ### 10.8 Launcher – KI & Sprachausgabe ✔
+**Umgesetzt (Stand v0.11):** Launcher-Bildschirm als Startszene (auch über Esc → „KI & Stimme“ im Spiel erreichbar): Anbieter Gemini oder Offline-Demo, optionaler Ersatzanbieter (Standard: keiner, damit Ausfälle sichtbar bleiben), Modell, Schlüssel (Umgebungsvariable oder eigener), Antwortlänge, Kreativität, Verbindungstest, Echtzeit-Protokoll, Sprachausgabe mit Systemstimmen und eine Stimme pro Figur.
+
 Ein eigener **Launcher-Bildschirm** vor dem Spielstart steuert **die KI und die Sprachausgabe** (und weitere technische Dinge). Er ist kein eigenes Programm, sondern ein Bildschirm des Spiels. *[Vorschlag für den Umfang:]*
 - Anbieter der Dialog-KI wählen (Modell, API-Schlüssel), Ersatzanbieter festlegen.
 - Anbieter und Stimmen der Sprachausgabe wählen; eine Stimme pro Figur.
@@ -452,7 +458,7 @@ Beziehung zum Spieler (Startwert):
 
 1. **Ruf der Kupferlerche:** Wie bekannt ist das Piratenschiff? Gibt es ein Kopfgeld? Wie gefeiert oder gefürchtet ist Varga?
 2. **Zufall oder Absicht?** Ist es Zufall, dass der reduzierte Supercomputer ausgerechnet auf diesem Schiff landet – oder hat Varga vorgesorgt?
-3. **Reputationssystem im Detail:** Skala, Stufen, Schwellen (z. B. für die Söldnergilde); verfällt Ansehen mit der Zeit?
+3. **Kein Ende erreichbar:** Wenn Ansehen zu niedrig, Gastrecht zerstört oder Schlüsselfiguren tot sind, ist kein Ende mehr verfügbar. Was passiert dann – ein Auffang-Ende („Allein auf weiter Flur“), Game Over, oder soll das Spiel das verhindern? Verfällt Ansehen außerdem mit der Zeit?
 4. **Forts und Pfade im Spiel:** Sind sie nur Informationen, die man weitergibt, oder auch spielbare Orte und Einsätze?
 5. **Galaktisches Radio:** Ein Sender oder mehrere (Reichssender, Piratensender, Knotensender)? Gibt es eine feste Sprecherfigur?
 6. **Menü & Launcher:** Passen die Optionen aus 10.7 und der Umfang des Launchers (10.8)? Soll der Launcher-Bildschirm auch während des Spiels erreichbar sein (für Echtzeit-Kontrolle)?
