@@ -26,3 +26,6 @@ obj/
 
 # Offline neural voices (Piper + models), fetched by Tools/get_voices.py
 /voices/
+
+# Exported demo builds
+/build/

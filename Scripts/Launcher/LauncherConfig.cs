@@ -156,7 +156,9 @@ public static class LauncherConfig
 	{
 		ConfigFile config = ConfigIo.LoadOrEmpty(FilePath);
 
-		_provider = ConfigIo.ReadEnum(config, Section, "provider", LlmProviderKind.Gemini);
+		// First start on a machine without a Gemini key: play with the offline demo instead of showing errors.
+		LlmProviderKind firstRunProvider = string.IsNullOrWhiteSpace(EnvironmentApiKey) ? LlmProviderKind.OfflineDemo : LlmProviderKind.Gemini;
+		_provider = ConfigIo.ReadEnum(config, Section, "provider", firstRunProvider);
 
 		int fallbackRaw = ConfigIo.ReadInt(config, Section, "fallback", -1, -1, 99);
 		_fallback = System.Enum.IsDefined(typeof(LlmProviderKind), fallbackRaw) ? (LlmProviderKind)fallbackRaw : null;
