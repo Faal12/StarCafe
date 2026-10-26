@@ -1,10 +1,13 @@
-# Handlung & Weltentwurf – Arbeitsstand v0.11
+# Handlung & Weltentwurf – Arbeitsstand v0.12
 
 > **Status:** Entwurf zum Streichen, Ändern und Weiterspinnen.
-> Alles mit **[Vorschlag]** ist ein Angebot, keine Festlegung. Offene Entscheidungen stehen am Ende (Kapitel 12).
+> Alles mit **[Vorschlag]** ist ein Angebot, keine Festlegung. Offene Fragen stehen am Ende (Kapitel 12); sie beantwortet der Projektleiter, es wird nichts vorab entschieden.
 > Projektsprache ist **Deutsch** (Dialoge, UI, KI-Personas).
 
 ## Entschieden
+
+- **Darstellung** ✔: Die Karte ist eine **Draufsicht unter 45°** wie in *Among Us*; Figuren werden im **Profil** gezeigt (eine Blickrichtung, die andere ist gespiegelt). Gespräche laufen als **Visual Novel** mit großen Ganzkörper-Porträts (siehe 4, 11 und `Docs/Spisok_dlya_hudozhnika`).
+- **Der Hauptwendepunkt ist das Schiff** ✔: Die *Kupferlerche* war ein ehemaliges **Aufklärungsschiff der Rebellen** und hält bis heute die Aufklärungsdaten über das Imperium. Es gibt keinen zweiten, konkurrierenden Wendepunkt (z. B. um Floki).
 
 - **Schiffsname:** *Kupferlerche* → *Die Letzte Runde* ✔
 - **Maskottchen:** **Krümel** ✔
@@ -226,7 +229,7 @@ Die Gästeschar soll bunt sein. Für die KI-Personas reicht zunächst eine kurze
 - **Alter:** Ende zwanzig / Anfang dreißig *[Vorschlag]*.
 - **Herkunft:** Osthal, ein abgelegener Planet. Sein Leben lang Barkeeper.
 - **Aussehen:** Auburn-braunes Haar, blaugrüne Augen, **weiße Zeichnung im Gesicht und an den Oberarmen**.
-- **Bedeutung der Zeichnung** *[Vorschlag]*: Auf Osthal tragen **Gastgeber** diese weißen Zeichen als Ritual. Sie bedeuten: *„Wer unter meinem Dach sitzt, steht unter meinem Schutz.“* Das ist das **Gastrecht** – die Grundlage, warum Gilden, Schmuggler und Zoll in seiner Taverne friedlich nebeneinander sitzen können. *(Falls du eine eigene Bedeutung im Kopf hast: ersetzen.)*
+- **Bedeutung der Zeichnung** ✔: Die weißen Zeichen sind **reine Kosmetik** (Körperbemalung), die auf der Kultur seines Volkes von seinem Heimatplaneten Osthal beruht. Sie haben keine Spielwirkung und keine verborgene Bedeutung. Das **Gastrecht** der Taverne ist davon unabhängig (siehe 2 und 10.5).
 - **Charakter:** Freundlich, aufmerksam, zuhörend; kein Kämpfer, aber sturer, als er aussieht.
 
 ### 8.2 Kapitänin Ilse Varga – die Erblasserin
@@ -249,7 +252,7 @@ Zwei Angestellte, die im Lauf des Spiels einziehen. Aus den Fraktionen rekrutier
 - **Rechenkern:** sitzt in der Technikecke des Schankraums (Serverschrank, Monitorwand, Tech-Kapsel).
 - **Bordnetz:** Über das gemeinsame Netz steuert Floki Türen, Licht, Aufzug, Bildschirme, Kameras und Lautsprecher. Er kann überall mithören. *(„Ich sehe alles. Leider.“)*
 - **Roboterkörper:** Der kupferfarbene Servicerobot mit dem flackernden Auge (samt „−70 %“-Aufkleber) ist Flokis **ferngesteuerte Hülle**. Wer mit „dem Roboter“ spricht, spricht mit Floki. Fällt der Roboter aus, redet Floki weiter über das Headset.
-- *[Vorschlag]* Er kann auch die anderen Servicerobots der Taverne übernehmen – zum Beispiel, um den Spieler zu ärgern.
+- Es gibt **nur diesen einen Körper** ✔; Floki übernimmt keine anderen Servicerobots. Ansprechbar ist er auch am **Rechenkern** in der Technikecke ✔.
 
 **Kommentare & Wahrnehmung (entschieden).** Floki kommentiert das Geschehen **häufig und ungefragt**. **Nur der Spieler reagiert darauf**; andere Figuren reagieren nie auf Flokis Einwürfe. Der Grund in der Spielwelt: Der Barkeeper trägt ein **Headset**, über das nur er Floki hört. **Darstellung:** Jeder Kommentar erscheint als **eigener Dialog in *Sternchen***, getrennt vom Gespräch mit dem gerade anwesenden Charakter. Der Spieler kann darauf antworten (dann läuft ein Gespräch mit Floki) oder ihn ignorieren. Technisch: Die Kommentare fließen **nicht** in die Prompts anderer NPCs.
 
@@ -260,7 +263,7 @@ Zwei Angestellte, die im Lauf des Spiels einziehen. Aus den Fraktionen rekrutier
 2. **Später:** Er hilft widerwillig, meckert dabei, aber hilft.
 3. **Dann:** Ihm rutscht Wärme heraus („Ich bin nicht gerührt. Das ist nur Kondenswasser.“).
 4. **In der Krise:** Er bleibt, wenn alle anderen gehen.
-*[Vorschlag: Das Spiel misst einen **Bindungswert** und speist ihn in den Prompt ein, damit Floki über die Spielzeit glaubwürdig auftaut.]*
+**Bindungswert** ✔: Das Spiel misst die Beziehung zu Floki und speist sie in den Prompt ein, damit Floki über die Spielzeit glaubwürdig auftaut.
 
 **Sein wunder Punkt.** Floki *ist* das Schiff – aber er kam nachträglich hinein. Das alte Gedächtnis der *Kupferlerche* liegt weggesperrt in einem Speicherkern hinter der versiegelten Tür, und das Signallicht läuft nicht über sein Netz. In seinem eigenen Schiff gibt es Dinge, an die er nicht herankommt. Das nagt an ihm, und er tut so, als wäre es ihm egal.
 
@@ -362,6 +365,7 @@ In der Krise zeigt sich, wer Floki wirklich ist: Er bleibt – egal, wofür sich
 - **Startwert: 0 (neutral) bei allen Fraktionen** ✔. Nach der Komplettsanierung ist die Taverne ein unbeschriebenes Blatt; niemand kennt sie, und Vargas Ruf überträgt sich nicht.
 - Jede Fraktion hat ein **eigenes Ansehen**. **Umgesetzt:** Skala −100 bis +100; Stufen **Feind** (bis −60), **Misstrauisch** (bis −20), **Neutral**, **Wohlwollend** (ab +20), **Verbündet** (ab +60).
 - **Rivalität (umgesetzt):** Eine Tat für das Imperium oder die Rebellen wirkt zur Hälfte gegenläufig auf die Gegenseite – das Gewicht der *Tat* zählt, nicht, was am Maximum noch hineinpasst. Die lokalen Gruppen haben keinen festen Rivalen.
+- **Ansehen klingt langsam in Richtung 0 ab** ✔ (umgesetzt, vorläufig: 1 Punkt pro Woche zu allen Fraktionen; bei toter Schlüsselfigur bleibt der Wert eingefroren). Die Werte sind Platzhalter und lassen sich in `ReputationState` ändern.
 - Höheres Ansehen schaltet frei: Aufträge, Rabatte, Personal, Umbauten, Informationen, besondere Gäste.
 - Entscheidungen verschieben mehrere Werte gleichzeitig: Wer den Rebellen hilft, verliert beim Imperium.
 - **Das Ende hängt von den Ansehenswerten ab** – von allen zusammen, nicht nur von zweien – sowie vom Gastrecht-Wert (10.5).
@@ -376,7 +380,11 @@ In der Krise zeigt sich, wer Floki wirklich ist: Er bleibt – egal, wofür sich
 ### 10.3 Galaktisches Radio *[Arbeitsname]*
 - Die Ergebnisse der Konflikte werden im **Galaktischen Radio** gemeldet: Gefechte, Gewinner, Verluste, neue Zölle.
 - Es läuft in der Taverne (Radio, Bildschirme). Floki kommentiert schadenfroh – für den Spieler hörbar.
-- *[Vorschlag]* Mehrere Sender mit eigenem Ton: ein offizieller **Reichssender** des Imperiums (Propaganda), ein **Piratensender** der Rebellen und ein lokaler Knotensender mit Klatsch. Dieselbe Nachricht klingt bei jedem anders.
+- **Drei Sender** ✔ mit je einem festen Sprecher, dessen Ton zur Fraktion passt. Dieselbe Nachricht klingt bei jedem anders:
+  - **Reichssender** (Imperium): Der Sprecher ist **aggressiv und spöttisch**.
+  - **Piratensender** (Rebellen): Der Sprecher **setzt auf Hoffnung** und versucht, sie zu verbreiten.
+  - **Knotensender:** der **lokale Sender für alle Wirte** am Knoten; hier laufen Gerüchte, Klatsch und Alltägliches, nicht die große Politik.
+  - **Die Namen der Sprecher sind immer verschieden** ✔: Sie werden jedes Mal neu vergeben und gehören nicht zu festen Figuren; nur Ton und Haltung bleiben gleich.
 - Die Nachrichten spiegeln die Taten des Spielers („Unbekannter Barkeeper vermittelt Waffenruhe am Knoten.“).
 - Auch **Nachfolge und Machtkämpfe** in geschwächten Fraktionen werden hier gemeldet – das ist die einzige Stelle, an der der Spieler Nachfolger zu Gesicht bekommt (bzw. zu Ohren).
 
@@ -387,7 +395,7 @@ In der Krise zeigt sich, wer Floki wirklich ist: Er bleibt – egal, wofür sich
 ### 10.5 Gewalt in der Taverne
 - Je nach Handlungen des Spielers kann es zu **Streit, Schlägereien, Bedrohungen und Morden** in der Taverne kommen ✔.
 - Folgen: Ansehen bei Fraktionen, Stammkundschaft, die Sternenwacht ermittelt, das Gastrecht ist verletzt.
-- **Gastrecht-Wert (umgesetzt):** 0–100, Start 100; sinkt bei Gewalt in der Taverne. Unter 50 meiden Gäste den Ort, und das Ende „Neutraler Hafen“ ist unmöglich.
+- **Gastrecht-Wert (umgesetzt):** 0–100, Start 100; sinkt bei Gewalt in der Taverne. Unter 50 meiden Gäste den Ort, und das Ende „Neutraler Hafen“ ist unmöglich. Ohne Gewalt in der Taverne **erholt sich der Wert langsam** ✔ (umgesetzt, vorläufig: +2 pro Woche, nur nach einer Woche ohne Verlust).
 - **Voraussetzungen der Enden (umgesetzter Arbeitsstand):** Die Enden „An der Seite der Rebellen“, „An der Seite des Imperiums“ und „Offene Söldnergilde“ brauchen Ansehen **ab +60** bei der jeweiligen Fraktion **und** eine lebende Schlüsselfigur. „Neutraler Hafen“ braucht Gastrecht **ab 50**, lebende Schlüsselfiguren **beider** Großmächte und dass keine von beiden Feind ist.
 - **Getötete Figuren bleiben dauerhaft tot** ✔; das wirkt sich auf Geschichten und KI-Gespräche aus.
 - **Schlüsselfiguren** ✔: Jede Fraktion hat eine Schlüsselfigur. **Stirbt sie, schließt sich der Pfad ihrer Fraktion** – keine Aufträge, keine weiteren Ansehensgewinne und keine Enden mehr, die an sie gebunden sind. *[Vorschlag für die Zuordnung:]*
@@ -406,16 +414,16 @@ In der Krise zeigt sich, wer Floki wirklich ist: Er bleibt – egal, wofür sich
 Siehe 8.4: häufig, ungefragt, nur der Spieler reagiert; Darstellung als eigener Dialog in *Sternchen* über das Headset. Die Häufigkeit ist im Einstellungsmenü regelbar (siehe 10.7).
 
 ### 10.7 Einstellungsmenü ✔
-**Umgesetzt (Stand v0.11):** Das Menü erreicht man mit Esc (Pause); Einstellungen werden sofort gespeichert. Wirksam sind derzeit: Kraftausdrücke, Humor-Härte, Gewaltdarstellung (fließen als verbindliche Regeln in jeden KI-Prompt), Textgeschwindigkeit, Gesamtlautstärke (wirkt auf die Sprachausgabe), Vollbild und Dialog-Schriftgröße. Kommentar-Häufigkeit, Konflikt-Häufigkeit und Radio sind schon einstellbar, wirken aber erst, wenn die jeweiligen Systeme existieren.
+**Umgesetzt (Stand v0.11):** Das Menü erreicht man mit Esc (Pause); Einstellungen werden sofort gespeichert. Wirksam sind derzeit: Kraftausdrücke, Humor-Härte, Gewaltdarstellung (fließen als verbindliche Regeln in jeden KI-Prompt), Textgeschwindigkeit, Gesamtlautstärke (wirkt auf die Sprachausgabe), Vollbild und Dialog-Schriftgröße. Kommentar-Häufigkeit, Ereignis-Häufigkeit (früher „Konflikt-Häufigkeit“) und Radio sind schon einstellbar, wirken aber erst, wenn die jeweiligen Systeme existieren.
 
 Ein Menü im Spiel, in dem sich vieles regulieren lässt. *[Vorschlag für den Umfang:]*
 
 | Bereich | Mögliche Einstellungen |
 |---|---|
 | **Floki** | Häufigkeit der Kommentare (aus / selten / normal / oft); Kraftausdrücke an/aus; Härte des Humors |
-| **Inhalt** | Gewaltdarstellung (angedeutet / normal); Häufigkeit von Konflikten; Radio-Nachrichten an/aus |
-| **Spielgefühl** | Textgeschwindigkeit; Schwierigkeit (Ansehensverlust, Wirtschaft); Länge der Konjunktion |
-| **Anzeige & Ton** | Lautstärke, Sprache, Untertitelgröße |
+| **Inhalt** | Gewaltdarstellung (angedeutet / normal); **Häufigkeit der Ereignisse** (regelt die kleinen Ereignisse pro Woche, das Hauptereignis bleibt immer eines, siehe 10.10); Radio-Nachrichten an/aus |
+| **Spielgefühl** | Textgeschwindigkeit *(Schwierigkeit und Länge der Konjunktion entfallen: die Konjunktion folgt fest dem 40-Tage-Kalender, Game Over folgt den Regeln aus 10.9)* |
+| **Anzeige & Ton** | Lautstärke, Vollbild, Dialog-Schriftgröße; **Sprache** erst, wenn Englisch hinzukommt |
 
 - **Technisch:** Einstellungen wie „Kraftausdrücke aus“ oder „Kommentare selten“ werden dem jeweiligen KI-Prompt als zusätzliche Regel mitgegeben oder direkt vom Spiel umgesetzt.
 
@@ -425,9 +433,36 @@ Ein Menü im Spiel, in dem sich vieles regulieren lässt. *[Vorschlag für den U
 Ein eigener **Launcher-Bildschirm** vor dem Spielstart steuert **die KI und die Sprachausgabe** (und weitere technische Dinge). Er ist kein eigenes Programm, sondern ein Bildschirm des Spiels. *[Vorschlag für den Umfang:]*
 - Anbieter der Dialog-KI wählen (Modell, API-Schlüssel), Ersatzanbieter festlegen.
 - Anbieter und Stimmen der Sprachausgabe wählen; eine Stimme pro Figur.
-- Antwortlänge, Tempo- und Kostenlimits, Verbindungstest.
+- Antwortlänge, Verbindungstest, **Anfragenlimit pro Minute und ein Zähler** ✔ (Schutz der Kontingente, weil jede Spielwoche eine zusätzliche Anfrage für die Ereignisauswahl braucht; noch nicht im Code).
+- **Sprachausgabe** ✔ (umgesetzt, Stand v0.12): Standard ist eine **Offline-Neuralstimme (Piper)**; wählbar sind außerdem **Gemini-Stimmen**, ein **Cloud-Dienst (ElevenLabs, noch ungeprüft)** und die **Windows-Systemstimmen** als Ersatz. Floki spricht mit lebendiger, spöttischer Stimme (Piper: „Thorsten emotional“, Sprecher „amused“; Gemini: Stimme Algenib mit Stilanweisung). Jede Figur bekommt automatisch eine feste Stimme. Der Satz wird zuerst erzeugt, dann starten Ton und Text gemeinsam (der Text tippt im Tempo der Stimme). Gesprochene Sätze werden zwischengespeichert. Das Voice-Paket (ca. 176 MB, Ordner `voices/`, nicht im Repository) lädt `python Tools/get_voices.py`.
+- **Nennungspflicht** bei Veröffentlichung: Piper (MIT), Stimme „Thorsten“ (Thorsten Müller, CC0), Stimmen „MLS“ (Multilingual LibriSpeech / OpenSLR 94, CC BY 4.0).
+- **Stimmen für das Radio** ✔ *(sobald das Radio existiert)*: eine Stimme je Sender (Reichssender, Piratensender, Knotensender), da die Sprecher-Namen wechseln.
 - Echtzeit-Kontrolle: Anfragen und Antworten mitlesen, Fehler und Ausfälle sehen. *[Vorschlag: Dafür ist der Bildschirm auch während des Spiels erreichbar, etwa über das Pausenmenü.]*
 - **Abgrenzung:** Alles, was das **Spielerlebnis** betrifft (Kommentare, Inhalt, Tempo), liegt im Menü im Spiel (10.7); alles Technische im Launcher.
+
+### 10.9 Wenn es schlecht läuft – Folgen statt Sackgasse ✔
+Beschlossen vom Projektleiter; die Einzelheiten stehen noch nicht im Code.
+
+- **Niedriges Ansehen bei den kleineren Fraktionen:** Sie legen dem Spieler **Steine in den Weg**. Beispiel: Die Silberkiel-Gilde liefert keinen Alkohol mehr. Der Spieler muss dann **andere Fraktionen um Hilfe bitten**. Findet er keine Hilfe, ist das **Game Over**.
+- **Zerstörtes Gastrecht:** Die Besucher **rebellieren**, und das Spiel endet mit einem **schlechten Ende**.
+- **Tote Schlüsselfiguren stärken die anderen Fraktionen:** Stirbt das Oberhaupt des Imperiums, **übernehmen die Rebellen** die Kontrolle über die Region. Das ist ein **Zustand, kein Ende**: Das Spiel läuft weiter, der Weg zum Imperium bleibt für den Spieler geschlossen.
+- **Hauptfraktionen** sind **Imperium, Rebellen und Söldner**. Sind **alle Schlüsselfiguren dieser drei** tot, geht die Kontrolle über die Region an **Piraten oder Söldner** – **zufällig** ausgewürfelt.
+- Ein eigenes Auffang-Ende „Allein auf weiter Flur“ ist damit **nicht vorgesehen**; die Fälle oben ersetzen es.
+
+**Zum Abgleichen:** Die Regeln für die Enden in 10.5 (Ansehen ab +60 und lebende Schlüsselfigur) sind im Code umgesetzt, die Folgen aus 10.9 (Lieferstopp, Aufstand der Besucher, Machtübernahme) **noch nicht**. Dass die Söldner sowohl Hauptfraktion als auch möglicher Gewinner der Zufallsentscheidung sind, ist so übernommen; fällt ihre Schlüsselfigur mit aus, gelten sie als Gruppe ohne Führung.
+
+### 10.10 Zeit und Ereignisse ✔
+Beschlossen vom Projektleiter. **Umgesetzt (Stand v0.12):** Kalender (`GameClock`), Schichtende im Pausenmenü („Schicht beenden“) mit Wochensprung, Anzeige oben links (Woche, Tag, Tage bis zur Konjunktion), Schichtende-Bildschirm, Konjunktion nach dem 40-Tage-Kalender, Autosave am Schichtende und „Weiter“ im Launcher. **Noch nicht im Code:** die Auswahl der Ereignisse durch die KI.
+
+- **Schichtende spult das Datum vor:** Mit dem Ende jeder Schicht springt das Spieldatum um **eine Woche** weiter.
+- **Das Spiel führt Buch über die Zeit** und wählt Ereignisse nach drei Dingen: dem **Ansehen** bei den Fraktionen, dem **aktuellen Datum** und den **Dialogen des Spielers**.
+- **Die KI wählt das Ereignis:** Aus den vorgeschriebenen Ereignissen (siehe 12 Nr. 12) sucht die KI auf Grundlage dieser drei Dinge dasjenige aus, das gerade passt. Der Spieler lenkt sie also durch seine Gespräche, ohne dass es feste Stichworte gibt.
+- Zeitgesteuerte Dinge (Abklingen des Ansehens, Erholung des Gastrechts, Konjunktion) laufen über dasselbe Datum.
+- **Automatisch gespeichert wird am Ende jeder Schicht** ✔, zusätzlich gibt es manuelle Spielstände. Tote bleiben tot, auch nach dem Laden (siehe 10.5).
+
+- **Konjunktion nach Kalender** ✔: Sie tritt alle **40 Tage** ein, auch mitten in einer Schichtwoche; das Spiel löst sie in der nächstliegenden Schicht aus.
+- **Kein festes Zeitlimit** ✔: Das Finale ergibt sich aus Ereignissen und Ansehen, nicht aus einer Wochenzahl.
+- **Pro Woche ein Hauptereignis plus kleine Ereignisse** ✔: Die KI wählt ein großes Ereignis und dazu mehrere kleine (Gerüchte, Nebenepisoden, kurze Gäste-Szenen).
 
 ---
 
@@ -456,16 +491,19 @@ Beziehung zum Spieler (Startwert):
 
 ## 12. Offene Fragen
 
-1. **Ruf der Kupferlerche:** Wie bekannt ist das Piratenschiff? Gibt es ein Kopfgeld? Wie gefeiert oder gefürchtet ist Varga?
-2. **Zufall oder Absicht?** Ist es Zufall, dass der reduzierte Supercomputer ausgerechnet auf diesem Schiff landet – oder hat Varga vorgesorgt?
-3. **Kein Ende erreichbar:** Wenn Ansehen zu niedrig, Gastrecht zerstört oder Schlüsselfiguren tot sind, ist kein Ende mehr verfügbar. Was passiert dann – ein Auffang-Ende („Allein auf weiter Flur“), Game Over, oder soll das Spiel das verhindern? Verfällt Ansehen außerdem mit der Zeit?
-4. **Forts und Pfade im Spiel:** Sind sie nur Informationen, die man weitergibt, oder auch spielbare Orte und Einsätze?
-5. **Galaktisches Radio:** Ein Sender oder mehrere (Reichssender, Piratensender, Knotensender)? Gibt es eine feste Sprecherfigur?
-6. **Menü & Launcher:** Passen die Optionen aus 10.7 und der Umfang des Launchers (10.8)? Soll der Launcher-Bildschirm auch während des Spiels erreichbar sein (für Echtzeit-Kontrolle)?
-7. **Bindungswert:** Soll das Spiel die Beziehung zu Floki messen und in seinen Prompt einspeisen?
-8. **Roboterkörper:** Bleibt es bei einem Körper, oder übernimmt Floki auch andere Servicerobots?
-9. **Technikecke:** Soll man Floki auch am Rechenkern (Monitorwand) ansprechen können, nicht nur am Roboter?
-10. **Weiße Gesichtszeichen:** Bedeutung als Gastrecht-Ritual ok oder eigene Idee?
-11. **Krümel:** reine Deko oder spielbarer Begleiter?
-12. **Feste Handlung vs. KI:** Wie viel ist fest geschrieben, wie viel darf die KI frei erfinden?
-13. **Lokalisierung:** UI und Dialoge sind jetzt deutsch. Soll es später weitere Sprachen geben?
+Antworten kommen vom Projektleiter; hier wird nichts vorab entschieden. Stand der Einzelfragen steht jeweils dahinter.
+
+1. **Ruf der Kupferlerche:** ✔ *Legende bei den einen, Feind bei den anderen* (Weitwanderer und Rebellen verehren Varga; das Imperium kennt das Schiff und behält den Erben im Auge; Startansehen bleibt 0). Auf Varga stand ein Kopfgeld, das mit ihrem Tod **erlosch**.
+2. **Zufall oder Absicht?** ✔ *Zufall.* Floki ist einfach der Sonderposten, den der Barkeeper sich leisten konnte; es gibt keinen zweiten Wendepunkt neben dem Schiff.
+3. **Kein Ende erreichbar:** ✔ beantwortet, siehe **10.9**. ✔ *Ansehen klingt langsam in Richtung 0 ab, und das Gastrecht erholt sich langsam, solange es in der Taverne keine Gewalt gibt* (Geschwindigkeit noch festzulegen, noch nicht im Code).
+4. **Forts und Pfade im Spiel:** ✔ *nur Informationen*, keine spielbaren Orte und Einsätze.
+5. **Galaktisches Radio:** ✔ *drei Sender* (Reichssender, Piratensender, Knotensender), je ein fester Sprecher: Imperium aggressiv und spöttisch, Rebellen hoffnungsvoll, Knotensender mit Gerüchten für alle Wirte. Die Namen der Sprecher wechseln immer.
+6. ~~**Menü & Launcher:** Soll der Launcher-Bildschirm auch während des Spiels erreichbar sein?~~ *Erledigt: ja, über Esc → „KI & Stimme“ (v0.9/v0.11).* Offen bleibt nur, ob die Optionen aus 10.7 und der Umfang des Launchers (10.8) so passen.
+7. **Bindungswert:** ✔ *ja*: Das Spiel misst die Beziehung zu Floki und speist sie in seinen Prompt ein.
+8. **Roboterkörper:** ✔ *ein Körper*; Floki übernimmt keine anderen Servicerobots.
+9. **Technikecke:** ✔ *ja*: Floki ist auch am Rechenkern (Monitorwand) ansprechbar.
+10. **Weiße Gesichtszeichen:** ✔ *Reine Kosmetik, begründet in der Kultur seines Volkes von Osthal.* Keine Spielwirkung.
+11. **Krümel:** ✔ *nur Maskottchen*.
+12. **Feste Handlung vs. KI:** ✔ Der **Prolog ist vollständig ausgeschrieben**. Danach gibt es **sehr viele vorgeschriebene Ereignisse**, und der Spieler **lenkt die KI im Gespräch** zu dem einen oder anderen Ereignis. Wie ein Ereignis ausgelöst wird, steht in **10.10**.
+13. **Lokalisierung:** ✔ Deutsch zuerst, **Englisch später**; UI-Texte und Persona-Prompts bleiben deshalb getrennt von der Logik.
+14. ✔ **Aufklärungsschiff und Piratenschiff:** Die *Kupferlerche* war ein Aufklärungsschiff der Rebellen **und** raubte imperiale Fracht (so steht es in 8.2 und 9.3).
