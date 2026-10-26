@@ -93,12 +93,18 @@ public sealed class ReputationState
 
 	public const int NeutralHarborMinGastrecht = 50;
 
+	// Placeholder tuning for how fast time heals: every week all standing drifts this far towards 0,
+	// and Gastrecht recovers this much if nobody lost any in that week.
+	public const int WeeklyDecay = 1;
+	public const int WeeklyGastrechtRecovery = 2;
+
 	private const int HistoryLimit = 50;
 
 	private readonly Dictionary<Faction, int> _values = new();
 	private readonly HashSet<Faction> _deadKeyFigures = new();
 	private readonly List<ReputationEvent> _history = new();
 	private int _version;
+	private bool _gastrechtLostThisWeek;
 
 	public event Action Changed;
 
@@ -150,6 +156,9 @@ public sealed class ReputationState
 			return 0;
 
 		Gastrecht = updated;
+		if (applied < 0)
+			_gastrechtLostThisWeek = true;
+
 		AddEvent(new ReputationEvent(null, applied, updated, reason));
 		Changed?.Invoke();
 		return applied;
@@ -174,6 +183,93 @@ public sealed class ReputationState
 		_deadKeyFigures.Clear();
 		_history.Clear();
 		Gastrecht = StartingGastrecht;
+		_gastrechtLostThisWeek = false;
+		_version++;
+		Changed?.Invoke();
+	}
+
+	/// <summary>
+	/// A week passes: standing slowly fades towards neutral (frozen for factions whose key figure is dead, their path is closed)
+	/// and Gastrecht recovers after a week without violence. Returns whether anything changed.
+	/// </summary>
+	public bool ApplyWeeklyDrift()
+	{
+		bool changed = false;
+
+		foreach (Faction faction in FactionInfo.All)
+		{
+			if (!IsKeyFigureAlive(faction))
+				continue;
+
+			int value = _values[faction];
+			if (value == 0)
+				continue;
+
+			_values[faction] = value > 0 ? Math.Max(0, value - WeeklyDecay) : Math.Min(0, value + WeeklyDecay);
+			changed = true;
+		}
+
+		if (!_gastrechtLostThisWeek && Gastrecht < StartingGastrecht)
+		{
+			Gastrecht = Math.Min(StartingGastrecht, Gastrecht + WeeklyGastrechtRecovery);
+			changed = true;
+		}
+
+		_gastrechtLostThisWeek = false;
+
+		if (changed)
+		{
+			_version++;
+			Changed?.Invoke();
+		}
+
+		return changed;
+	}
+
+	public ReputationSnapshot Export()
+	{
+		var snapshot = new ReputationSnapshot { Gastrecht = Gastrecht, GastrechtLostThisWeek = _gastrechtLostThisWeek };
+
+		foreach (Faction faction in FactionInfo.All)
+			snapshot.Values[faction.ToString()] = _values[faction];
+
+		foreach (Faction faction in _deadKeyFigures)
+			snapshot.DeadKeyFigures.Add(faction.ToString());
+
+		foreach (ReputationEvent entry in _history)
+			snapshot.History.Add(new EventSnapshot
+			{
+				Subject = entry.Subject?.ToString(),
+				Delta = entry.Delta,
+				NewValue = entry.NewValue,
+				Reason = entry.Reason
+			});
+
+		return snapshot;
+	}
+
+	/// <summary>Replaces the whole state. Unknown faction names in the file are ignored, values are clamped.</summary>
+	public void Import(ReputationSnapshot snapshot)
+	{
+		foreach (Faction faction in FactionInfo.All)
+			_values[faction] = snapshot.Values.TryGetValue(faction.ToString(), out int value)
+				? Math.Clamp(value, MinValue, MaxValue)
+				: 0;
+
+		_deadKeyFigures.Clear();
+		foreach (string name in snapshot.DeadKeyFigures)
+			if (Enum.TryParse(name, out Faction dead))
+				_deadKeyFigures.Add(dead);
+
+		_history.Clear();
+		foreach (EventSnapshot entry in snapshot.History)
+		{
+			Faction? subject = Enum.TryParse(entry.Subject, out Faction parsed) ? parsed : null;
+			_history.Add(new ReputationEvent(subject, entry.Delta, entry.NewValue, entry.Reason));
+		}
+
+		Gastrecht = Math.Clamp(snapshot.Gastrecht, 0, StartingGastrecht);
+		_gastrechtLostThisWeek = snapshot.GastrechtLostThisWeek;
 		_version++;
 		Changed?.Invoke();
 	}

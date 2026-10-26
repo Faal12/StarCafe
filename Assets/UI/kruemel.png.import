@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://brk4i6f1wbwv6"
-path="res://.godot/imported/player_front.png-d9e0293f39da0a8cc1f77bd5db62f4a0.ctex"
+uid="uid://c0qkfujtf245g"
+path="res://.godot/imported/kruemel.png-d9b02bd109a529c751c464fff6d291a7.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Sprites/player_front.png"
-dest_files=["res://.godot/imported/player_front.png-d9e0293f39da0a8cc1f77bd5db62f4a0.ctex"]
+source_file="res://Assets/UI/kruemel.png"
+dest_files=["res://.godot/imported/kruemel.png-d9b02bd109a529c751c464fff6d291a7.ctex"]
 
 [params]
 
@@ -23,7 +23,7 @@ compress/rdo_quality_loss=0.0
 compress/hdr_compression=1
 compress/normal_map=0
 compress/channel_pack=0
-mipmaps/generate=false
+mipmaps/generate=true
 mipmaps/limit=-1
 roughness/mode=0
 roughness/src_normal=""

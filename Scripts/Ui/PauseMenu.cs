@@ -4,6 +4,7 @@ public partial class PauseMenu : CanvasLayer
 {
 	private Control _root;
 	private Button _resumeButton;
+	private Label _dateLabel;
 
 	public override void _Ready()
 	{
@@ -41,6 +42,7 @@ public partial class PauseMenu : CanvasLayer
 
 	private void Open()
 	{
+		_dateLabel.Text = GameSession.DescribeDate();
 		_root.Visible = true;
 		GetTree().Paused = true;
 		_resumeButton.GrabFocus();
@@ -54,7 +56,7 @@ public partial class PauseMenu : CanvasLayer
 
 	private void BuildUi()
 	{
-		_root = new Control();
+		_root = new Control { Theme = UiTheme.Get() };
 		_root.SetAnchorsPreset(Control.LayoutPreset.FullRect);
 		AddChild(_root);
 
@@ -75,9 +77,13 @@ public partial class PauseMenu : CanvasLayer
 		panel.AddChild(column);
 
 		var title = new Label { Text = "Pause", HorizontalAlignment = HorizontalAlignment.Center };
-		title.AddThemeFontSizeOverride("font_size", 26);
+		title.AddThemeFontSizeOverride("font_size", 30);
 		title.AddThemeColorOverride("font_color", UiKit.Amber);
 		column.AddChild(title);
+
+		_dateLabel = new Label { HorizontalAlignment = HorizontalAlignment.Center };
+		_dateLabel.AddThemeColorOverride("font_color", UiTheme.TextDim);
+		column.AddChild(_dateLabel);
 
 		var tabs = new TabContainer { SizeFlagsVertical = Control.SizeFlags.ExpandFill };
 		column.AddChild(tabs);
@@ -93,17 +99,27 @@ public partial class PauseMenu : CanvasLayer
 		buttons.AddThemeConstantOverride("separation", 16);
 		column.AddChild(buttons);
 
-		_resumeButton = new Button { Text = "Weiter", CustomMinimumSize = new Vector2(160, 36) };
+		_resumeButton = new Button { Text = "Weiter", ThemeTypeVariation = UiTheme.PrimaryButton, CustomMinimumSize = new Vector2(160, 38) };
 		_resumeButton.Pressed += Close;
 		buttons.AddChild(_resumeButton);
 
-		var toLauncher = new Button { Text = "Zum Launcher", CustomMinimumSize = new Vector2(160, 36) };
+		var endShift = new Button { Text = "Schicht beenden", CustomMinimumSize = new Vector2(160, 38) };
+		endShift.Pressed += OnEndShiftPressed;
+		buttons.AddChild(endShift);
+
+		var toLauncher = new Button { Text = "Zum Launcher", CustomMinimumSize = new Vector2(160, 38) };
 		toLauncher.Pressed += OnToLauncherPressed;
 		buttons.AddChild(toLauncher);
 
-		var quit = new Button { Text = "Spiel beenden", CustomMinimumSize = new Vector2(160, 36) };
+		var quit = new Button { Text = "Spiel beenden", CustomMinimumSize = new Vector2(160, 38) };
 		quit.Pressed += () => GetTree().Quit();
 		buttons.AddChild(quit);
+	}
+
+	private void OnEndShiftPressed()
+	{
+		Close();
+		GameSession.EndShift();
 	}
 
 	private void OnToLauncherPressed()

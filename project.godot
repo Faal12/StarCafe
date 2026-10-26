@@ -28,9 +28,14 @@ project/assembly_name="ai-game"
 
 import/blender/enabled=false
 
+[gui]
+
+common/snap_controls_to_pixels=false
+
 [physics]
 
 3d/physics_engine="Jolt Physics"
+common/physics_interpolation=true
 
 [rendering]
 

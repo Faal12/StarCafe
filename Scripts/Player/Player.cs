@@ -1,17 +1,34 @@
 using Godot;
+using Godot.Collections;
 
 public partial class Player : CharacterBody2D
 {
+	private const float WalkFramesPerSecond = 8f;
+	private const float BackBobHeight = 1.5f;
+
 	[Export] public float Speed = 220f;
 	[Export] private Sprite2D _sprite;
-	[Export] private Texture2D _frontTexture;
-	[Export] private Texture2D _backTexture;
+	[Export] private Camera2D _camera;
+	[Export] public float CameraSmoothing = 7f;
+	[Export] private Texture2D _idleFront;
+	[Export] private Texture2D _idleBack;
+	[Export] private Array<Texture2D> _walkFrames = new();
 
 	public bool CanMove = true;
+
+	private float _walkClock;
+	private float _spriteBaseY;
 
 	public override void _Ready()
 	{
 		AddToGroup("Player");
+		_spriteBaseY = _sprite?.Position.Y ?? 0f;
+
+		if (_camera != null)
+		{
+			_camera.PositionSmoothingEnabled = true;
+			_camera.PositionSmoothingSpeed = CameraSmoothing;
+		}
 	}
 
 	public override void _PhysicsProcess(double delta)
@@ -20,6 +37,7 @@ public partial class Player : CharacterBody2D
 		{
 			Velocity = Vector2.Zero;
 			MoveAndSlide();
+			UpdateAnimation(Vector2.Zero, delta);
 			return;
 		}
 
@@ -27,23 +45,44 @@ public partial class Player : CharacterBody2D
 		Velocity = direction * Speed;
 		MoveAndSlide();
 
-		UpdateFacing(direction);
+		UpdateAnimation(direction, delta);
 	}
 
-	private void UpdateFacing(Vector2 direction)
+	// The hand-drawn walk frames face right, so moving left mirrors them. Walking straight up shows
+	// the back view (there is no back walk cycle, so it gets a small bob); standing still shows the front.
+	private void UpdateAnimation(Vector2 direction, double delta)
 	{
-		if (direction == Vector2.Zero || _sprite == null)
+		if (_sprite == null)
 			return;
 
-		if (Mathf.Abs(direction.Y) > Mathf.Abs(direction.X))
-		{
-			_sprite.Texture = direction.Y < 0 ? _backTexture : _frontTexture;
-			_sprite.FlipH = false;
-		}
-		else
-		{
-			_sprite.Texture = _frontTexture;
+		bool moving = direction != Vector2.Zero;
+		bool movingUp = moving && direction.Y < 0 && Mathf.Abs(direction.Y) > Mathf.Abs(direction.X);
+
+		if (Mathf.Abs(direction.X) > 0.01f)
 			_sprite.FlipH = direction.X < 0;
+
+		if (!moving)
+		{
+			_walkClock = 0f;
+			_sprite.Texture = _idleFront;
+			_sprite.FlipH = false;
+			_sprite.Position = new Vector2(_sprite.Position.X, _spriteBaseY);
+			return;
 		}
+
+		_walkClock += (float)delta * WalkFramesPerSecond;
+
+		if (movingUp)
+		{
+			_sprite.Texture = _idleBack;
+			_sprite.FlipH = false;
+			float bob = Mathf.Abs(Mathf.Sin(_walkClock * Mathf.Pi / 2f)) * BackBobHeight;
+			_sprite.Position = new Vector2(_sprite.Position.X, _spriteBaseY - bob);
+			return;
+		}
+
+		_sprite.Position = new Vector2(_sprite.Position.X, _spriteBaseY);
+		if (_walkFrames.Count > 0)
+			_sprite.Texture = _walkFrames[(int)_walkClock % _walkFrames.Count];
 	}
 }

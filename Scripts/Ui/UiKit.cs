@@ -16,12 +16,16 @@ public static class UiKit
 	{
 		var style = new StyleBoxFlat
 		{
-			BgColor = new Color(0.08f, 0.09f, 0.11f, 0.97f),
-			BorderColor = Amber
+			BgColor = UiTheme.Card,
+			BorderColor = new Color(0.58f, 0.47f, 0.27f),
+			ShadowColor = new Color(0, 0, 0, 0.55f),
+			ShadowSize = 20,
+			ShadowOffset = new Vector2(0, 6),
+			AntiAliasing = true
 		};
-		style.SetBorderWidthAll(2);
-		style.SetCornerRadiusAll(8);
-		style.SetContentMarginAll(16);
+		style.SetBorderWidthAll(1);
+		style.SetCornerRadiusAll(12);
+		style.SetContentMarginAll(22);
 		return style;
 	}
 

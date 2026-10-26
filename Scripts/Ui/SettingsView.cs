@@ -32,7 +32,7 @@ public partial class SettingsView : VBoxContainer
 		AddChild(UiKit.Row("Gewaltdarstellung",
 			UiKit.EnumOptions(GameSettings.Violence, value => GameSettings.Violence = value),
 			"Angedeutet: ohne Details. Normal: konkreter, aber ohne drastische Schilderung."));
-		AddChild(UiKit.Row("Konflikte (Häufigkeit)",
+		AddChild(UiKit.Row("Ereignisse (Häufigkeit)",
 			UiKit.EnumOptions(GameSettings.Conflicts, value => GameSettings.Conflicts = value),
 			NotActiveYet));
 		AddChild(UiKit.Row("Radio-Nachrichten",

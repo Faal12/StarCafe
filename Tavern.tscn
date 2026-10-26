@@ -4,6 +4,8 @@
 [ext_resource type="Script" uid="uid://bg1twepmpwfdo" path="res://Scripts/Npc/NpcInteractable.cs" id="2_npc_script"]
 [ext_resource type="Script" uid="uid://yt2akma8kjuq" path="res://Scripts/Dialogue/DialogueController.cs" id="3_dialogue_script"]
 [ext_resource type="Script" path="res://Scripts/Ui/PauseMenu.cs" id="38_pause_script"]
+[ext_resource type="Script" path="res://Scripts/Core/DepthSorter.cs" id="39_depth_script"]
+[ext_resource type="Script" path="res://Scripts/Ui/GameHud.cs" id="40_hud_script"]
 [ext_resource type="Resource" path="res://Resources/Npc/Floki.tres" id="4_floki_persona"]
 [ext_resource type="Texture2D" uid="uid://dwnh4wps0srrg" path="res://Assets/Ship/floor_hall.png" id="5_floor_tex"]
 [ext_resource type="Texture2D" uid="uid://db1210e0t1cnk" path="res://Assets/Ship/wall_top.png" id="6_wall_top_tex"]
@@ -12,8 +14,12 @@
 [ext_resource type="Texture2D" uid="uid://dn3apj74ntjop" path="res://Assets/Ship/wall_right.png" id="9_wall_right_tex"]
 [ext_resource type="Texture2D" uid="uid://bx1fug0dhxvr0" path="res://Assets/Ship/bar_screen.png" id="10b_barscreen_tex"]
 [ext_resource type="Texture2D" uid="uid://crl0qs5bnvdww" path="res://Assets/Ship/bar_counter_scifi.png" id="10_counter_tex"]
-[ext_resource type="Texture2D" uid="uid://brk4i6f1wbwv6" path="res://Assets/Sprites/player_front.png" id="11_player_front_tex"]
-[ext_resource type="Texture2D" uid="uid://ci1qdgx8nrieg" path="res://Assets/Sprites/player_back.png" id="12_player_back_tex"]
+[ext_resource type="Texture2D" path="res://Assets/Sprites/Player/player_idle_front.png" id="11_player_front_tex"]
+[ext_resource type="Texture2D" path="res://Assets/Sprites/Player/player_idle_back.png" id="12_player_back_tex"]
+[ext_resource type="Texture2D" path="res://Assets/Sprites/Player/player_walk_1.png" id="12a_walk1"]
+[ext_resource type="Texture2D" path="res://Assets/Sprites/Player/player_walk_2.png" id="12b_walk2"]
+[ext_resource type="Texture2D" path="res://Assets/Sprites/Player/player_walk_3.png" id="12c_walk3"]
+[ext_resource type="Texture2D" path="res://Assets/Sprites/Player/player_walk_4.png" id="12d_walk4"]
 [ext_resource type="Texture2D" path="res://Assets/Ship/floki_robot.png" id="13_npc_tex"]
 [ext_resource type="Texture2D" path="res://Assets/Portraits/player_fullbody.png" id="14b_player_fullbody_tex"]
 [ext_resource type="Texture2D" uid="uid://bf1a5riijyji2" path="res://Assets/Ship/door_airlock.png" id="15_door_tex"]
@@ -104,8 +110,8 @@ size = Vector2(20, 16)
 radius = 70.0
 
 [sub_resource type="CapsuleShape2D" id="shape_player_body"]
-radius = 9.0
-height = 20.0
+radius = 11.0
+height = 26.0
 
 [node name="Tavern" type="Node2D" unique_id=1559072604]
 
@@ -397,7 +403,7 @@ shape = SubResource("shape_techpod")
 position = Vector2(1500, 900)
 texture = ExtResource("35_spiderdrone_tex")
 
-[node name="Floki" type="Node2D" parent="." unique_id=1054952415]
+[node name="Floki" type="Node2D" parent="." unique_id=1054952415 groups=["Actor"]]
 position = Vector2(936, 300)
 
 [node name="Sprite2D" type="Sprite2D" parent="Floki" unique_id=664627261]
@@ -428,19 +434,23 @@ _dialogueController = NodePath("../../DialogueUI")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Floki/InteractionArea" unique_id=1856979459]
 shape = SubResource("shape_interaction")
 
-[node name="Player" type="CharacterBody2D" parent="." unique_id=2104138456 node_paths=PackedStringArray("_sprite")]
+[node name="Player" type="CharacterBody2D" parent="." unique_id=2104138456 node_paths=PackedStringArray("_sprite", "_camera")]
 position = Vector2(936, 980)
 script = ExtResource("1_player_script")
 _sprite = NodePath("Sprite2D")
-_frontTexture = ExtResource("11_player_front_tex")
-_backTexture = ExtResource("12_player_back_tex")
+_camera = NodePath("Camera2D")
+_idleFront = ExtResource("11_player_front_tex")
+_idleBack = ExtResource("12_player_back_tex")
+_walkFrames = Array[Texture2D]([ExtResource("12a_walk1"), ExtResource("12b_walk2"), ExtResource("12c_walk3"), ExtResource("12d_walk4")])
 
 [node name="Sprite2D" type="Sprite2D" parent="Player" unique_id=1183537308]
+texture_filter = 4
+position = Vector2(0, -39)
+scale = Vector2(0.5, 0.5)
 texture = ExtResource("11_player_front_tex")
-offset = Vector2(0, -20)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player" unique_id=256018482]
-position = Vector2(0, -8)
+position = Vector2(0, -11)
 shape = SubResource("shape_player_body")
 
 [node name="Camera2D" type="Camera2D" parent="Player" unique_id=1308245037]
@@ -525,3 +535,9 @@ text = "Senden"
 
 [node name="PauseMenu" type="CanvasLayer" parent="."]
 script = ExtResource("38_pause_script")
+
+[node name="DepthSorter" type="Node" parent="."]
+script = ExtResource("39_depth_script")
+
+[node name="GameHud" type="CanvasLayer" parent="."]
+script = ExtResource("40_hud_script")
