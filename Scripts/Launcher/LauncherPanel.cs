@@ -1,4 +1,5 @@
 using System.Diagnostics;
+using System.Linq;
 using Godot;
 
 // Shared by the launcher screen and the pause menu, so the live log can be watched during play.
@@ -10,12 +11,20 @@ public partial class LauncherPanel : VBoxContainer
 
 	private static readonly string[] ProviderNames = { "Gemini (Google)", "Offline-Demo (ohne Internet)" };
 	private static readonly string[] FallbackNames = { "Keiner", "Gemini (Google)", "Offline-Demo" };
+	private static readonly string[] TtsProviderNames =
+		{ "Piper (offline, Standard)", "Gemini (Cloud)", "ElevenLabs (Cloud)", "Windows-Systemstimmen" };
 
 	private Label _keyStatus;
 	private Label _testResult;
 	private Button _testButton;
 	private RichTextLabel _log;
 	private bool _testing;
+	private VBoxContainer _voiceDetails;
+	private Button _voiceTestFloki;
+	private Button _voiceTestGuest;
+	private Label _voiceTestResult;
+	private Label _cacheLabel;
+	private bool _voiceTesting;
 
 	public override void _EnterTree()
 	{
@@ -118,18 +127,21 @@ public partial class LauncherPanel : VBoxContainer
 	{
 		AddChild(UiKit.Header("Sprachausgabe"));
 
-		var voices = TtsService.GetVoices();
-		if (voices.Count == 0)
-		{
-			AddChild(UiKit.Hint("Auf diesem System sind keine Stimmen verfügbar. Unter Windows lassen sich Stimmen in den Spracheinstellungen nachinstallieren."));
-			return;
-		}
-
 		AddChild(UiKit.Row("Antworten vorlesen",
 			UiKit.StateToggle("an", "aus", LauncherConfig.TtsEnabled, on => LauncherConfig.TtsEnabled = on)));
 
-		foreach (string slot in LauncherConfig.VoiceSlots)
-			AddChild(UiKit.Row($"Stimme: {slot}", BuildVoiceOptions(slot, voices)));
+		AddChild(UiKit.Row("Stimmen-Anbieter",
+			UiKit.Options(TtsProviderNames, (int)LauncherConfig.TtsProvider, index =>
+			{
+				LauncherConfig.TtsProvider = (TtsProviderKind)index;
+				RebuildVoiceDetails();
+			}),
+			"Piper läuft offline auf dem Rechner. Gemini und ElevenLabs sind Cloud-Dienste."));
+
+		_voiceDetails = new VBoxContainer();
+		_voiceDetails.AddThemeConstantOverride("separation", 10);
+		AddChild(_voiceDetails);
+		RebuildVoiceDetails();
 
 		AddChild(UiKit.SliderRow("Lautstärke", 0, 100, 5, LauncherConfig.TtsVolume,
 			value => $"{value:0} %",
@@ -139,31 +151,174 @@ public partial class LauncherPanel : VBoxContainer
 			value => $"{value:0.0}x",
 			value => LauncherConfig.TtsRate = value));
 
-		var test = new Button { Text = "Stimme testen", SizeFlagsHorizontal = SizeFlags.ShrinkBegin };
-		test.Pressed += () => TtsService.Speak("Floki", VoiceTestText, force: true);
-		AddChild(test);
+		_voiceTestFloki = new Button { Text = "Floki testen", SizeFlagsHorizontal = SizeFlags.ShrinkBegin };
+		_voiceTestFloki.Pressed += () => OnTestVoicePressed("Floki");
+		_voiceTestGuest = new Button { Text = "Gast testen", SizeFlagsHorizontal = SizeFlags.ShrinkBegin };
+		_voiceTestGuest.Pressed += () => OnTestVoicePressed("Gast");
+		_voiceTestResult = new Label
+		{
+			AutowrapMode = TextServer.AutowrapMode.WordSmart,
+			SizeFlagsHorizontal = SizeFlags.ExpandFill,
+			VerticalAlignment = VerticalAlignment.Center
+		};
+
+		var testRow = new HBoxContainer();
+		testRow.AddThemeConstantOverride("separation", 12);
+		testRow.AddChild(_voiceTestFloki);
+		testRow.AddChild(_voiceTestGuest);
+		testRow.AddChild(_voiceTestResult);
+		AddChild(testRow);
+
+		_cacheLabel = new Label { VerticalAlignment = VerticalAlignment.Center };
+		var clearCache = new Button { Text = "Stimmen-Cache leeren", SizeFlagsHorizontal = SizeFlags.ShrinkBegin };
+		clearCache.Pressed += () =>
+		{
+			TtsService.ClearCache();
+			RefreshCacheLabel();
+		};
+		var cacheRow = new HBoxContainer();
+		cacheRow.AddThemeConstantOverride("separation", 12);
+		cacheRow.AddChild(clearCache);
+		cacheRow.AddChild(_cacheLabel);
+		AddChild(UiKit.Row("Zwischenspeicher", cacheRow, "Bereits gesprochene Sätze werden gespeichert und nicht neu erzeugt."));
+		RefreshCacheLabel();
 	}
 
-	private static OptionButton BuildVoiceOptions(string slot, System.Collections.Generic.IReadOnlyList<VoiceInfo> voices)
+	private void RebuildVoiceDetails()
+	{
+		UiKit.ClearChildren(_voiceDetails);
+		TtsProviderKind kind = LauncherConfig.TtsProvider;
+
+		var status = new Label { AutowrapMode = TextServer.AutowrapMode.WordSmart, SizeFlagsHorizontal = SizeFlags.ExpandFill };
+		_voiceDetails.AddChild(UiKit.Row("Status", status));
+
+		switch (kind)
+		{
+			case TtsProviderKind.Gemini:
+				var ttsModel = new LineEdit { Text = LauncherConfig.GeminiTtsModel, PlaceholderText = LauncherConfig.DefaultGeminiTtsModel };
+				ttsModel.TextSubmitted += text => LauncherConfig.GeminiTtsModel = text;
+				ttsModel.FocusExited += () => LauncherConfig.GeminiTtsModel = ttsModel.Text;
+				_voiceDetails.AddChild(UiKit.Row("Sprachmodell", ttsModel));
+				_voiceDetails.AddChild(UiKit.Hint("Nutzt denselben Gemini-Schlüssel wie die Dialog-KI und verbraucht Kontingent. Dauert pro Satz etwa 1–3 Sekunden."));
+				break;
+
+			case TtsProviderKind.ElevenLabs:
+				var key = new LineEdit { Text = LauncherConfig.ElevenLabsKey, Secret = true, PlaceholderText = "API-Schlüssel (oder Umgebungsvariable ELEVENLABS_API_KEY)" };
+				key.TextSubmitted += text => { LauncherConfig.ElevenLabsKey = text; RebuildVoiceDetails(); };
+				key.FocusExited += () => LauncherConfig.ElevenLabsKey = key.Text;
+				_voiceDetails.AddChild(UiKit.Row("Schlüssel", key));
+
+				var model = new LineEdit { Text = LauncherConfig.ElevenLabsModel, PlaceholderText = LauncherConfig.DefaultElevenLabsModel };
+				model.TextSubmitted += text => LauncherConfig.ElevenLabsModel = text;
+				model.FocusExited += () => LauncherConfig.ElevenLabsModel = model.Text;
+				_voiceDetails.AddChild(UiKit.Row("Modell", model));
+				_voiceDetails.AddChild(UiKit.Hint("Für jede Figur die Voice-ID aus deinem ElevenLabs-Konto eintragen. Dieser Anbieter ist noch nicht mit einem echten Schlüssel geprüft."));
+				break;
+
+			case TtsProviderKind.System:
+				_voiceDetails.AddChild(UiKit.Hint("Windows-Stimmen klingen oft mechanisch. Weitere lassen sich in den Windows-Spracheinstellungen nachinstallieren."));
+				break;
+		}
+
+		ITtsProvider provider = TtsService.ProviderFor(kind);
+		string problem = null;
+		bool ready = kind == TtsProviderKind.System
+			? TtsService.GetSystemVoices().Count > 0
+			: provider.IsReady(out problem);
+		if (kind == TtsProviderKind.System && !ready)
+			problem = "Auf diesem System sind keine Stimmen verfügbar.";
+
+		status.Text = ready ? "Bereit" : problem;
+		status.AddThemeColorOverride("font_color", ready ? UiKit.Good : UiKit.Bad);
+
+		foreach (string slot in LauncherConfig.VoiceSlots)
+		{
+			if (kind == TtsProviderKind.ElevenLabs)
+			{
+				var voiceId = new LineEdit { Text = LauncherConfig.GetVoice(kind, slot), PlaceholderText = "Voice-ID" };
+				voiceId.TextSubmitted += text => LauncherConfig.SetVoice(kind, slot, text.Trim());
+				voiceId.FocusExited += () => LauncherConfig.SetVoice(kind, slot, voiceId.Text.Trim());
+				_voiceDetails.AddChild(UiKit.Row($"Stimme: {slot}", voiceId));
+				continue;
+			}
+
+			System.Collections.Generic.IReadOnlyList<TtsVoice> voices = kind == TtsProviderKind.System
+				? TtsService.GetSystemVoices().Select(v => new TtsVoice(v.Id, $"{v.Name} ({v.Language})")).ToList()
+				: provider.GetVoices();
+
+			if (voices.Count > 0)
+				_voiceDetails.AddChild(UiKit.Row($"Stimme: {slot}", BuildVoiceOptions(kind, slot, voices)));
+		}
+	}
+
+	private static OptionButton BuildVoiceOptions(TtsProviderKind kind, string slot, System.Collections.Generic.IReadOnlyList<TtsVoice> voices)
 	{
 		var options = new OptionButton();
-		options.AddItem("Automatisch (erste deutsche Stimme)");
+		options.AddItem(slot == "Floki" ? "Automatisch (Flokis Standardstimme)" : "Automatisch (je Figur eine feste Stimme)");
 		options.SetItemMetadata(0, "");
 
-		string configured = LauncherConfig.GetVoice(slot);
+		string configured = LauncherConfig.GetVoice(kind, slot);
 		int selected = 0;
 
 		for (int i = 0; i < voices.Count; i++)
 		{
-			options.AddItem($"{voices[i].Name} ({voices[i].Language})");
+			options.AddItem(voices[i].Label);
 			options.SetItemMetadata(i + 1, voices[i].Id);
 			if (voices[i].Id == configured)
 				selected = i + 1;
 		}
 
 		options.Selected = selected;
-		options.ItemSelected += index => LauncherConfig.SetVoice(slot, options.GetItemMetadata((int)index).AsString());
+		options.ItemSelected += index => LauncherConfig.SetVoice(kind, slot, options.GetItemMetadata((int)index).AsString());
 		return options;
+	}
+
+	private async void OnTestVoicePressed(string character)
+	{
+		if (_voiceTesting)
+			return;
+
+		_voiceTesting = true;
+		_voiceTestFloki.Disabled = true;
+		_voiceTestGuest.Disabled = true;
+		SetVoiceResult("Erzeuge Sprache …", UiKit.Muted);
+		Stopwatch watch = Stopwatch.StartNew();
+
+		TtsClip clip = await TtsService.PrepareAsync(character, VoiceTestText, force: true);
+
+		if (IsInstanceValid(this) && IsInsideTree())
+		{
+			if (clip != null)
+			{
+				TtsService.Play(clip);
+				SetVoiceResult($"OK ({watch.ElapsedMilliseconds} ms, {clip.Source})", UiKit.Good);
+			}
+			else
+			{
+				SetVoiceResult("Keine Sprache erzeugt – Details im Protokoll unten.", UiKit.Bad);
+			}
+
+			_voiceTestFloki.Disabled = false;
+			_voiceTestGuest.Disabled = false;
+			RefreshCacheLabel();
+		}
+
+		_voiceTesting = false;
+	}
+
+	private void SetVoiceResult(string text, Color color)
+	{
+		_voiceTestResult.Text = text;
+		_voiceTestResult.AddThemeColorOverride("font_color", color);
+	}
+
+	private void RefreshCacheLabel()
+	{
+		if (_cacheLabel == null)
+			return;
+
+		(int files, long bytes) = TtsService.CacheStats();
+		_cacheLabel.Text = files == 0 ? "leer" : $"{files} Sätze, {bytes / 1_000_000.0:0.0} MB";
 	}
 
 	private void BuildLogSection()

@@ -19,6 +19,8 @@ public partial class DialogueController : CanvasLayer
 	private static readonly Color BackgroundColor = new Color(0.42f, 0.42f, 0.42f);
 	private const double SpeakerTransitionSeconds = 0.25;
 	private const double EntranceSeconds = 0.4;
+	// The text finishes slightly before the voice does, which reads more naturally than lagging behind it.
+	private const double TextLeadFactor = 0.92;
 	private const float EntranceSlideDistance = 500f;
 
 	private NpcPersona _persona;
@@ -113,7 +115,8 @@ public partial class DialogueController : CanvasLayer
 		}
 	}
 
-	private void ShowText(string text, bool animate = true)
+	// spokenSeconds: length of the voice line. The text then types along with it instead of at the fixed speed.
+	private void ShowText(string text, bool animate = true, double? spokenSeconds = null)
 	{
 		_textTween?.Kill();
 		_dialogueLabel.Text = text;
@@ -125,9 +128,13 @@ public partial class DialogueController : CanvasLayer
 			return;
 		}
 
+		double duration = spokenSeconds.HasValue && spokenSeconds.Value > 0.5
+			? spokenSeconds.Value * TextLeadFactor
+			: text.Length / charactersPerSecond;
+
 		_dialogueLabel.VisibleRatio = 0f;
 		_textTween = CreateTween();
-		_textTween.TweenProperty(_dialogueLabel, "visible_ratio", 1.0f, text.Length / charactersPerSecond);
+		_textTween.TweenProperty(_dialogueLabel, "visible_ratio", 1.0f, duration);
 	}
 
 	private void SetSpeaker(bool playerSpeaking, bool animate = true)
@@ -175,12 +182,15 @@ public partial class DialogueController : CanvasLayer
 			string systemPrompt = PromptComposer.Compose(_persona);
 			string reply = await LlmProviderFactory.Create().GetReplyAsync(systemPrompt, playerText);
 
+			// The voice is made first (cache, Piper, cloud), so text and sound start together.
+			TtsClip clip = IsOpen ? await TtsService.PrepareAsync(_persona.DisplayName, reply) : null;
+
 			// The player may have closed the dialogue while the reply was on its way.
 			if (IsOpen)
 			{
-				ShowText(reply);
+				ShowText(reply, spokenSeconds: clip?.Seconds);
 				SetSpeaker(playerSpeaking: false);
-				TtsService.Speak(_persona.DisplayName, reply);
+				TtsService.Play(clip);
 			}
 		}
 		catch (LlmRequestException ex)

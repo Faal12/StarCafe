@@ -17,9 +17,12 @@ obj/
 
 # Source artwork the game does not load directly (the derived, cropped
 # Assets/Portraits/*_fullbody.png files are what ships). Kept on disk only.
-/Assets/Portraits/Character.png*
-/Assets/Portraits/Characteronly.png*
+/Assets/Portraits/Character*
+/Assets/Portraits/Animation/
 /Assets/Portraits/Logo.png*
 
 # Raw working files Godot can't import anyway — keep the PNG derivatives only
 *.tiff
+
+# Offline neural voices (Piper + models), fetched by Tools/get_voices.py
+/voices/
