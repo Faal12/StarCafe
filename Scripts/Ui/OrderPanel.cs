@@ -27,7 +27,7 @@ public partial class OrderPanel : CanvasLayer
 
 	private HBoxContainer _buttons;
 
-	public static bool IsOpen { get; private set; }
+	public static bool IsOpen { get => UiBus.IsOpen(UiWindow.Order); private set => UiBus.SetOpen(UiWindow.Order, value); }
 
 	public override void _Ready()
 	{

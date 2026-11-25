@@ -43,7 +43,7 @@ public partial class PressureGame : CanvasLayer
 
 	private readonly RandomNumberGenerator _rng = new RandomNumberGenerator();
 
-	public static bool IsOpen { get; private set; }
+	public static bool IsOpen { get => UiBus.IsOpen(UiWindow.Pressure); private set => UiBus.SetOpen(UiWindow.Pressure, value); }
 
 	internal float Pressure => _pressure;
 

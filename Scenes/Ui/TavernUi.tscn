@@ -1,0 +1,120 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://Scripts/Ui/UiHost.cs" id="1_ui_host"]
+[ext_resource type="Script" uid="uid://yt2akma8kjuq" path="res://Scripts/Dialogue/DialogueController.cs" id="2_dialogue_script"]
+[ext_resource type="Script" path="res://Scripts/Ui/PauseMenu.cs" id="3_pause_script"]
+[ext_resource type="Script" path="res://Scripts/Ui/GameHud.cs" id="4_hud_script"]
+[ext_resource type="Script" path="res://Scripts/Ui/InventoryHud.cs" id="5_inventory_hud_script"]
+[ext_resource type="Script" path="res://Scripts/Ui/BarPanel.cs" id="6_bar_panel_script"]
+[ext_resource type="Script" path="res://Scripts/Ui/OrderPanel.cs" id="7_order_panel_script"]
+[ext_resource type="Script" path="res://Scripts/Ui/CombatHud.cs" id="8_combat_hud_script"]
+[ext_resource type="Script" path="res://Scripts/Ui/EventPanel.cs" id="9_event_panel_script"]
+[ext_resource type="Texture2D" path="res://Assets/Portraits/player_fullbody.png" id="10_player_fullbody_tex"]
+
+[node name="TavernUi" type="Node"]
+script = ExtResource("1_ui_host")
+
+[node name="DialogueUI" type="CanvasLayer" parent="." node_paths=PackedStringArray("_panel", "_nameLabel", "_dialogueLabel", "_inputField", "_sendButton", "_dimBackground", "_playerPortraitBig", "_npcPortraitBig", "_npcEmotion")]
+script = ExtResource("2_dialogue_script")
+_panel = NodePath("Panel")
+_nameLabel = NodePath("Panel/NameLabel")
+_dialogueLabel = NodePath("Panel/DialogueLabel")
+_inputField = NodePath("Panel/InputField")
+_sendButton = NodePath("Panel/SendButton")
+_dimBackground = NodePath("DimBackground")
+_playerPortraitBig = NodePath("PlayerPortraitBig")
+_npcPortraitBig = NodePath("NpcPortraitBig")
+_npcEmotion = NodePath("NpcPortraitBig/Emotion")
+
+[node name="DimBackground" type="ColorRect" parent="DialogueUI"]
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 1152.0
+offset_bottom = 648.0
+color = Color(0, 0, 0, 0.55)
+
+[node name="PlayerPortraitBig" type="TextureRect" parent="DialogueUI"]
+offset_left = 30.0
+offset_top = 16.0
+offset_right = 413.0
+offset_bottom = 648.0
+texture = ExtResource("10_player_fullbody_tex")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="NpcPortraitBig" type="TextureRect" parent="DialogueUI"]
+offset_left = 784.0
+offset_top = 113.0
+offset_right = 1102.0
+offset_bottom = 648.0
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Emotion" type="TextureRect" parent="DialogueUI/NpcPortraitBig"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Panel" type="Panel" parent="DialogueUI"]
+offset_left = 40.0
+offset_top = 518.0
+offset_right = 1112.0
+offset_bottom = 648.0
+
+[node name="NameLabel" type="Label" parent="DialogueUI/Panel"]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 6.0
+offset_right = 300.0
+offset_bottom = 28.0
+text = "NPC"
+
+[node name="DialogueLabel" type="Label" parent="DialogueUI/Panel"]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 30.0
+offset_right = 1056.0
+offset_bottom = 92.0
+autowrap_mode = 3
+
+[node name="InputField" type="LineEdit" parent="DialogueUI/Panel"]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 96.0
+offset_right = 860.0
+offset_bottom = 124.0
+
+[node name="SendButton" type="Button" parent="DialogueUI/Panel"]
+layout_mode = 0
+offset_left = 870.0
+offset_top = 96.0
+offset_right = 1056.0
+offset_bottom = 124.0
+text = "Senden"
+
+[node name="PauseMenu" type="CanvasLayer" parent="."]
+script = ExtResource("3_pause_script")
+
+[node name="GameHud" type="CanvasLayer" parent="."]
+script = ExtResource("4_hud_script")
+
+[node name="InventoryHud" type="CanvasLayer" parent="."]
+script = ExtResource("5_inventory_hud_script")
+
+[node name="BarPanel" type="CanvasLayer" parent="."]
+script = ExtResource("6_bar_panel_script")
+
+[node name="OrderPanel" type="CanvasLayer" parent="."]
+script = ExtResource("7_order_panel_script")
+
+[node name="CombatHud" type="CanvasLayer" parent="."]
+script = ExtResource("8_combat_hud_script")
+
+[node name="EventPanel" type="CanvasLayer" parent="."]
+script = ExtResource("9_event_panel_script")

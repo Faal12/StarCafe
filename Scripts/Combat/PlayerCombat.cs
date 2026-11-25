@@ -209,7 +209,7 @@ public partial class PlayerCombat : Node
 		_player.Knock((away == Vector2.Zero ? Vector2.Down : away.Normalized()) * 300f);
 		CombatFx.FloatText(_player.GetParent(), _player.GlobalPosition, "-" + Mathf.RoundToInt(amount), new Color(1f, 0.35f, 0.3f), 18);
 		CombatFx.Shake(_player.Camera, 6f);
-		CombatHud.FlashDamage();
+		UiBus.NotifyPlayerHurt();
 		if (Health <= 0f)
 		{
 			Faint(source);
@@ -239,7 +239,7 @@ public partial class PlayerCombat : Node
 			PlayerState.Inventory.TakeSlot(PlayerState.Inventory.Selected);
 			Heal(healing ? 60f : 12f, healing ? 40f : 20f);
 			PlayerState.Record("getrunken", $"{stack.DisplayName} selbst getrunken.", new[] { "rezept:" + (stack.Get("recipe") ?? "") });
-			InventoryHud.Toast($"{stack.DisplayName} getrunken.", new Color(0.55f, 1f, 0.7f));
+			UiBus.Toast($"{stack.DisplayName} getrunken.", new Color(0.55f, 1f, 0.7f));
 		}
 	}
 
@@ -265,7 +265,7 @@ public partial class PlayerCombat : Node
 				{
 					PlayerState.AddCredits(-loss, "Ohnmacht – Flokis Bergungsgebühr");
 				}
-				InventoryHud.Toast("Du wachst in deinem Bett auf.", Holo.TextDim);
+				UiBus.Toast("Du wachst in deinem Bett auf.", Holo.TextDim);
 			});
 		};
 	}

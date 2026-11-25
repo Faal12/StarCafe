@@ -5,8 +5,11 @@ Spiellogik und Inhalte (Ereignisse, Rezepte …) stehen in `Data/README.md`.
 
 ## Grundsätze
 
-- **Oberflächen werden im Code gebaut**, nicht als Szene (siehe README, „Arbeiten im Team“). Jedes Fenster ist eine
-  Klasse in `Scripts/Ui/` (bzw. `Scripts/Minigames/`), die ihre Knoten in `Build…()`-Methoden anlegt.
+- **Alle Fenster der Taverne hängen in einer eigenen Szene: `Scenes/Ui/TavernUi.tscn`** (Wurzel `UiHost`).
+  `Tavern.tscn` bindet sie nur ein (Knoten `Ui`). Die bestehenden Fenster sind Klassen in `Scripts/Ui/`
+  (bzw. `Scripts/Minigames/`), die ihre Knoten im Code anlegen (`Build…()`).
+- **Neue oder umgebaute Fenster dürfen als Szene im Godot-Editor gebaut werden** (`Scenes/Ui/*.tscn` mit Skript in
+  `Scripts/Ui/`) – siehe „Zusammenarbeit“ unten.
 - **Bildschirmgröße:** 1152 × 648, Stretch-Modus `canvas_items`, Seitenverhältnis `expand`.
 - **Schrift:** `UiTheme.BodyFont`, `HeadingFont`, `TitleFont` (`Scripts/Ui/UiTheme.cs`).
 - **Logik bleibt getrennt:** Fenster lesen Zustände (`PlayerState`, `EventService`, `TaskService` …) und rufen Methoden auf –
@@ -37,9 +40,10 @@ Spiellogik und Inhalte (Ereignisse, Rezepte …) stehen in `Data/README.md`.
 | `CircuitGame` / `PressureGame` | Minispiele Schaltkreis / Druckventil (selbst gezeichnet in `CircuitBoard._Draw` / `PressureGauge._Draw`) | 32 |
 | `DeckManager` | Aufzug-Menü, Abblende beim Deckwechsel | 40 |
 | `PauseMenu` | Pause | 100 |
-| `DialogueController` (Szene) | Gespräch mit Floki, Porträts | Szene `Tavern.tscn` → `DialogueUI` |
+| `DialogueController` (Szene) | Gespräch mit Floki, Porträts | `Scenes/Ui/TavernUi.tscn` → `DialogueUI` |
 
 Fenster, die das Spiel anhalten, setzen `GetTree().Paused = true` und laufen selbst mit `ProcessMode = Always`.
+Alle Fenster außer Minispielen und Aufzug-Menü sind Kinder von `TavernUi.tscn`.
 
 ## Platzhalter → echte Grafik
 
@@ -60,8 +64,71 @@ Knoten **GuestSeats**. Beide sind Marker – im Editor verschieben genügt.
 
 ## Bitte nicht umbenennen
 
-- Knoten, auf die Skripte per Pfad zeigen: `Player`, `Player/Camera2D`, `DialogueUI/NpcPortraitBig/Emotion`, `WorldSpots`, `GuestSeats`, `Events`, `WorldStage`, `Technikdeck`.
+- Knoten, auf die Skripte per Pfad zeigen: in `Tavern.tscn` `Player`, `Player/Camera2D`, `WorldSpots`, `GuestSeats`,
+  `Events`, `WorldStage`, `Technikdeck`, `Ui`; in `TavernUi.tscn` `DialogueUI`, `EventPanel` (Pfade als Export in `UiHost`
+  änderbar) und `DialogueUI/NpcPortraitBig/Emotion`.
+- Die Namen in `UiBus` (Methoden, Events, `UiWindow`, `MinigameId`) – nur nach Absprache beider Seiten.
 - Eingabe-Aktionen: `move_*`, `interact`, `walk_careful`, `attack`, `use_item`, `debug_event` (Tasten dürfen geändert werden).
+
+## Zusammenarbeit Frontend ↔ Backend
+
+**Ziel:** beide arbeiten gleichzeitig, ohne sich gegenseitig Dateien kaputtzumachen.
+
+### Wer besitzt was
+
+| Frontend | Backend | Gemeinsam (nur nach Absprache) |
+|---|---|---|
+| `Scenes/Ui/` (TavernUi.tscn, neue Fenster-Szenen) | `Tavern.tscn` (Welt, Möbel, Marker, Systeme) | `Scripts/Core/UiBus.cs` (der Vertrag) |
+| `Scripts/Ui/`, Zeichnen der Minispiele (`…Board._Draw`, `…Gauge._Draw`) | `Scripts/Events`, `Bar`, `Guests`, `Items`, `Combat`, `Decks`, `Tasks`, `World`, `Core`, `Llm`, `Voice` | `project.godot` (Input Map) |
+| `Assets/` (Grafik, Schriften) | `Data/` (JSON-Inhalte), `Docs/Handlung.md` | dieser Leitfaden |
+
+Festgehalten in `.github/CODEOWNERS`: ändert jemand eine Datei der anderen Seite, fragt GitHub die andere Seite automatisch um ein Review.
+
+### Der Vertrag: `UiBus`
+
+Spiellogik ruft **nie** ein Fenster direkt auf, sondern nur `UiBus` (`Scripts/Core/UiBus.cs`).
+`UiHost` (Wurzel von `TavernUi.tscn`) hört zu und reicht weiter an das passende Fenster.
+
+| Logik ruft … | bedeutet | Fenster heute |
+|---|---|---|
+| `UiBus.Toast(text, farbe)` | kurzer Hinweis unten | `InventoryHud.Toast` |
+| `UiBus.OpenDialogue(persona)` | freies Gespräch (Floki) | `DialogueController` |
+| `UiBus.OpenBar()` | Mix-Bildschirm | `BarPanel` |
+| `UiBus.ShowOrder / ShowWaiting / ShowRating` | Bestellung, Warten, Bewertung am Tisch | `OrderPanel` |
+| `UiBus.ShowEvent(def)` | Ereignis als Gespräch | `EventPanel` |
+| `UiBus.ShowAftermath(def, ausgang, ergebnis)` | Ergebnis nach einer Aufgabe | `EventPanel` |
+| `UiBus.NotifyPlayerHurt()` | Spieler getroffen | `CombatHud.FlashDamage` |
+| `UiBus.RunMinigame(MinigameId.…, fertig)` | Minispiel starten, `fertig(true)` = geschafft | `CircuitGame`, `PressureGame` |
+
+Umgekehrt melden Fenster, ob sie offen sind: `UiBus.SetOpen(UiWindow.Bar, true)`. Die Logik fragt nur
+`UiBus.IsOpen(UiWindow.Dialogue)` oder `UiBus.AnyOpen` (z. B. „kein Ereignis während eines Gesprächs“).
+Wer ein Fenster neu baut, muss nur diese Meldung beibehalten – bei den bestehenden Fenstern steckt sie in der
+Eigenschaft `IsOpen`.
+
+Daten lesen die Fenster direkt aus der Logik (`PlayerState`, `OrderBook.Open`, `TaskService` …), ändern sie aber nur
+über deren Methoden.
+
+### Ein Fenster neu bauen (z. B. als Szene)
+
+1. Neue Szene in `Scenes/Ui/` anlegen, Skript in `Scripts/Ui/`.
+2. In `TavernUi.tscn` den alten Fenster-Knoten durch die neue Szene ersetzen.
+3. In `UiHost.Connect()` die passende Zeile auf das neue Fenster umstellen.
+4. Offen/zu über `UiBus.SetOpen(UiWindow.…, …)` melden.
+
+Die Spiellogik muss dafür nicht angefasst werden.
+
+### Etwas Neues braucht beide Seiten
+
+1. Backend fügt in `UiBus` **eine Methode + ein Event** hinzu und ruft sie auf (ohne Fenster passiert nichts,
+   ein Toast landet dann in der Konsole).
+2. Frontend hängt das Event in `UiHost` an ein Fenster.
+3. Beides kann in getrennten PRs passieren – der Vertrag ist der Treffpunkt.
+
+### Arbeitsablauf (Git)
+
+- `main` nur über Pull Requests. Eigene Branches: `ui/…` (Frontend), `feature/…` (Backend).
+- Kleine PRs (1–3 Tage Arbeit), `main` täglich in den eigenen Branch holen.
+- Neue Inhalte zuerst mit **Platzhaltern** (Backend); das Frontend ersetzt sie später (Tabelle oben) – keiner wartet auf den anderen.
 
 ## Testen ohne Durchspielen
 

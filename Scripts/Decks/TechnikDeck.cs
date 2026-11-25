@@ -61,7 +61,7 @@ public partial class TechnikDeck : Node2D
 		{
 			if (!TaskService.IsActive)
 			{
-				InventoryHud.Toast("Der Generator brummt zufrieden.", Holo.TextDim);
+				UiBus.Toast("Der Generator brummt zufrieden.", Holo.TextDim);
 			}
 		};
 
@@ -79,12 +79,12 @@ public partial class TechnikDeck : Node2D
 			if (PlayerState.Inventory.TryAdd(new ItemStack { ItemId = "rohrzange" }))
 			{
 				WorldService.State.Apply(new WorldEffectDef { Type = "flag", Id = "rohrzange_genommen" }, GameSession.Clock.Week);
-				InventoryHud.Toast("Rohrzange genommen – Werkzeug und Waffe.", Holo.Accent);
+				UiBus.Toast("Rohrzange genommen – Werkzeug und Waffe.", Holo.Accent);
 				VoiceQueue.Enqueue(FlokiAdvisor.Name, "Eine Rohrzange. Repariert Rohre. Und Meinungen.");
 			}
 			else
 			{
-				InventoryHud.Toast("Kein Platz im Inventar.", new Color(1f, 0.6f, 0.5f));
+				UiBus.Toast("Kein Platz im Inventar.", new Color(1f, 0.6f, 0.5f));
 			}
 		};
 
@@ -101,7 +101,7 @@ public partial class TechnikDeck : Node2D
 		door.Used += () =>
 		{
 			bool seal = WorldService.State.HasFlag("spant_geoeffnet");
-			InventoryHud.Toast(seal ? "Das Lerchen-Siegel passt in die Vertiefung … aber das Schloss klemmt noch." : "Versiegelt. In der Mitte eine Vertiefung in Form einer Lerche.", Holo.Strong);
+			UiBus.Toast(seal ? "Das Lerchen-Siegel passt in die Vertiefung … aber das Schloss klemmt noch." : "Versiegelt. In der Mitte eine Vertiefung in Form einer Lerche.", Holo.Strong);
 			VoiceQueue.Enqueue(FlokiAdvisor.Name, seal ? "Das Siegel passt! Jetzt fehlt nur noch … alles andere." : "Die Tür. Mein Lieblingsrätsel. Ich hasse sie.");
 		};
 

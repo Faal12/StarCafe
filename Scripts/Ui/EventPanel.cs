@@ -73,7 +73,7 @@ public partial class EventPanel : CanvasLayer
 
 	private static EventPanel _instance;
 
-	public static bool IsOpen { get; private set; }
+	public static bool IsOpen { get => UiBus.IsOpen(UiWindow.Event); private set => UiBus.SetOpen(UiWindow.Event, value); }
 
 	/// <summary>Shows the final result of an event after its task (no conversation).</summary>
 	public static void ShowAftermath(GameEventDef def, EventOutcomeDef outcome, EventResolution resolution)

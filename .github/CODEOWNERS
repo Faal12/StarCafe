@@ -1,0 +1,19 @@
+# Who reviews what (see Docs/UI_Leitfaden.md, "Zusammenarbeit").
+# Later lines win. GitHub asks the owners for a review when a pull request touches their files.
+#
+# TODO: replace @FRONTEND_NICK with the frontend developer's GitHub name and remove the "# " in front
+# of the frontend lines. They need write access to the repository (Settings -> Collaborators).
+
+# Default: backend
+*                           @Faal12
+
+# Frontend
+# /Scenes/Ui/               @FRONTEND_NICK
+# /Scripts/Ui/              @FRONTEND_NICK
+# /Scripts/Minigames/       @FRONTEND_NICK
+# /Assets/                  @FRONTEND_NICK
+
+# Shared contract: both sides
+# /Scripts/Core/UiBus.cs    @Faal12 @FRONTEND_NICK
+# /Docs/UI_Leitfaden.md     @Faal12 @FRONTEND_NICK
+# /project.godot            @Faal12 @FRONTEND_NICK

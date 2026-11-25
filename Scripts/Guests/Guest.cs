@@ -129,7 +129,7 @@ public partial class Guest : Node2D
 		if (Current == State.WantsToOrder)
 		{
 			GetViewport().SetInputAsHandled();
-			OrderPanel.ShowOrder(this, AcceptOrder);
+			UiBus.ShowOrder(this, AcceptOrder);
 		}
 		else if (Current == State.WaitingForDrink)
 		{
@@ -144,7 +144,7 @@ public partial class Guest : Node2D
 		{
 			return;
 		}
-		BarPanel.OpenOrders.Add(Order);
+		OrderBook.Open.Add(Order);
 		SetState(State.WaitingForDrink);
 		PlayerState.Record("bestellung_aufgenommen", $"Bestellung von {DisplayName} aufgenommen.", Tags());
 	}
@@ -166,12 +166,12 @@ public partial class Guest : Node2D
 		}
 		if (slot < 0)
 		{
-			OrderPanel.ShowWaiting(this);
+			UiBus.ShowWaiting(this);
 			return;
 		}
 		ItemStack drink = inventory.TakeSlot(slot);
 		DrinkRating rating = DrinkMixer.Rate(Order, drink);
-		BarPanel.OpenOrders.Remove(Order);
+		OrderBook.Open.Remove(Order);
 		if (rating.Tip > 0)
 		{
 			PlayerState.AddCredits(rating.Tip, "Trinkgeld von " + DisplayName);
@@ -195,7 +195,7 @@ public partial class Guest : Node2D
 			tags.Add("wirkung:" + effect);
 		}
 		PlayerState.Record("serviert", $"{drink.DisplayName} an {DisplayName} serviert ({rating.Band}).", tags);
-		OrderPanel.ShowRating(this, drink.DisplayName, rating);
+		UiBus.ShowRating(this, drink.DisplayName, rating);
 		SetState(State.Drinking);
 		_bubble.Text = rating.Band switch
 		{
@@ -209,13 +209,13 @@ public partial class Guest : Node2D
 
 	private void LeaveAnnoyed()
 	{
-		BarPanel.OpenOrders.Remove(Order);
+		OrderBook.Open.Remove(Order);
 		if (EventLibrary.TryFaction(Faction, out Faction faction))
 		{
 			ReputationService.State.Change(faction, -1, $"{DisplayName} hat zu lange gewartet", applyRivalry: false);
 		}
 		PlayerState.Record("warten_lassen", $"{DisplayName} ist nach langem Warten gegangen.", Tags());
-		InventoryHud.Toast($"{DisplayName} ist verärgert gegangen.", new Color(1f, 0.6f, 0.5f));
+		UiBus.Toast($"{DisplayName} ist verärgert gegangen.", new Color(1f, 0.6f, 0.5f));
 		Leave();
 	}
 
@@ -226,7 +226,7 @@ public partial class Guest : Node2D
 		{
 			return;
 		}
-		BarPanel.OpenOrders.Remove(Order);
+		OrderBook.Open.Remove(Order);
 		SetState(State.Leaving);
 		Left?.Invoke(this);
 		Walk(GuestDirector.ExitPath(Position), () =>

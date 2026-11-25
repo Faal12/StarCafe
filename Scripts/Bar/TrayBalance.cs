@@ -53,7 +53,7 @@ public partial class TrayBalance : Node
 	public override void _PhysicsProcess(double delta)
 	{
 		int drinks = PlayerState.Inventory.All().Count(s => s.Stack.ItemId == "getraenk");
-		_hud.Visible = drinks > 0 && !DialogueController.IsOpen && !EventPanel.IsOpen;
+		_hud.Visible = drinks > 0 && !UiBus.IsOpen(UiWindow.Dialogue) && !UiBus.IsOpen(UiWindow.Event);
 		if (_player == null || drinks == 0)
 		{
 			_tilt = 0f;
@@ -106,7 +106,7 @@ public partial class TrayBalance : Node
 			Appear = "pop"
 		}, GameSession.Clock.Week);
 		PlayerState.Record("verschuettet", $"{drink.Stack.DisplayName} verschüttet.", new[] { "rezept:" + (drink.Stack.Get("recipe") ?? "") }, witnessed: true);
-		InventoryHud.Toast($"Verschüttet: {drink.Stack.DisplayName}!", new Color(1f, 0.55f, 0.45f));
+		UiBus.Toast($"Verschüttet: {drink.Stack.DisplayName}!", new Color(1f, 0.55f, 0.45f));
 		VoiceQueue.Enqueue(FlokiAdvisor.Name, SpillLines[_rng.RandiRange(0, SpillLines.Length - 1)]);
 	}
 

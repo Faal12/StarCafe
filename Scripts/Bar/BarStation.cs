@@ -34,10 +34,10 @@ public partial class BarStation : Node2D
 
 	public override void _UnhandledInput(InputEvent @event)
 	{
-		if (_playerInRange && @event.IsActionPressed("interact") && !@event.IsEcho() && !DialogueController.IsOpen)
+		if (_playerInRange && @event.IsActionPressed("interact") && !@event.IsEcho() && !UiBus.IsOpen(UiWindow.Dialogue))
 		{
 			GetViewport().SetInputAsHandled();
-			BarPanel.Open();
+			UiBus.OpenBar();
 		}
 	}
 }

@@ -42,7 +42,7 @@ public partial class CircuitGame : CanvasLayer
 
 	private readonly RandomNumberGenerator _rng = new RandomNumberGenerator();
 
-	public static bool IsOpen { get; private set; }
+	public static bool IsOpen { get => UiBus.IsOpen(UiWindow.Circuit); private set => UiBus.SetOpen(UiWindow.Circuit, value); }
 
 	public static void Open(Action<bool> done)
 	{

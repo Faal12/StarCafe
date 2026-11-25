@@ -69,7 +69,7 @@ public partial class InventoryHud : CanvasLayer
 
 	private int _detailSlot = -1;
 
-	public static bool IsPanelOpen { get; private set; }
+	public static bool IsPanelOpen { get => UiBus.IsOpen(UiWindow.Inventory); private set => UiBus.SetOpen(UiWindow.Inventory, value); }
 
 	/// <summary>Short message above the hotbar ("+₡12 Trinkgeld", "Neues Rezept …").</summary>
 	public static void Toast(string text, Color? color = null)

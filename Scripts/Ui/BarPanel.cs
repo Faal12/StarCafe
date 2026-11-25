@@ -45,10 +45,10 @@ public partial class BarPanel : CanvasLayer
 
 	private GuestOrder _selectedOrder;
 
-	public static bool IsOpen { get; private set; }
+	public static bool IsOpen { get => UiBus.IsOpen(UiWindow.Bar); private set => UiBus.SetOpen(UiWindow.Bar, value); }
 
-	/// <summary>Accepted orders waiting for a drink (filled by guests).</summary>
-	public static readonly List<GuestOrder> OpenOrders = new List<GuestOrder>();
+	/// <summary>Accepted orders waiting for a drink (logic: <see cref="OrderBook"/>).</summary>
+	private static List<GuestOrder> OpenOrders => OrderBook.Open;
 
 	public static void Open()
 	{

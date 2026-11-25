@@ -7,7 +7,8 @@ public partial class DialogueController : CanvasLayer
 	[Export] private Label _dialogueLabel;
 	[Export] private LineEdit _inputField;
 	[Export] private Button _sendButton;
-	[Export] private Player _player;
+	// The UI lives in its own scene (Scenes/Ui/TavernUi.tscn), so the player is found by group, not by path.
+	private Player _player => GetTree().GetFirstNodeInGroup("Player") as Player;
 
 	[Export] private Control _dimBackground;
 	[Export] private TextureRect _playerPortraitBig;
@@ -34,7 +35,7 @@ public partial class DialogueController : CanvasLayer
 	private Vector2 _npcRestPosition;
 
 	// The pause menu uses this to leave Escape to the dialogue while one is open.
-	public static bool IsOpen { get; private set; }
+	public static bool IsOpen { get => UiBus.IsOpen(UiWindow.Dialogue); private set => UiBus.SetOpen(UiWindow.Dialogue, value); }
 
 	public override void _Ready()
 	{
