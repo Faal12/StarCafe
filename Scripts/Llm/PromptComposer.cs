@@ -14,6 +14,10 @@ public static class PromptComposer
         if (worldState.Length > 0)
             builder.Append("\n\n").Append(worldState);
 
+        // Personas with facial expressions tag every reply with a mood (see EmotionTag).
+        if (persona.HasEmotions)
+            builder.Append(EmotionTag.PromptRule(persona));
+
         return builder.ToString();
     }
 }

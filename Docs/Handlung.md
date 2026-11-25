@@ -1,4 +1,4 @@
-# Handlung & Weltentwurf – Arbeitsstand v0.12
+# Handlung & Weltentwurf – Arbeitsstand v0.13
 
 > **Status:** Entwurf zum Streichen, Ändern und Weiterspinnen.
 > Alles mit **[Vorschlag]** ist ein Angebot, keine Festlegung. Offene Fragen stehen am Ende (Kapitel 12); sie beantwortet der Projektleiter, es wird nichts vorab entschieden.
@@ -251,7 +251,7 @@ Zwei Angestellte, die im Lauf des Spiels einziehen. Aus den Fraktionen rekrutier
 **Körper und Reichweite.**
 - **Rechenkern:** sitzt in der Technikecke des Schankraums (Serverschrank, Monitorwand, Tech-Kapsel).
 - **Bordnetz:** Über das gemeinsame Netz steuert Floki Türen, Licht, Aufzug, Bildschirme, Kameras und Lautsprecher. Er kann überall mithören. *(„Ich sehe alles. Leider.“)*
-- **Roboterkörper:** Der kupferfarbene Servicerobot mit dem flackernden Auge (samt „−70 %“-Aufkleber) ist Flokis **ferngesteuerte Hülle**. Wer mit „dem Roboter“ spricht, spricht mit Floki. Fällt der Roboter aus, redet Floki weiter über das Headset.
+- **Roboterkörper:** Ein alter, **silbergrauer Servicerobot mit Rostflecken** – runder Kopf, zwei große blaue Augen, spitze Antennen-Ohren mit Kopfhörern, kurzer Standfuß statt Beinen – ist Flokis **ferngesteuerte Hülle**. Den Rost nennt Floki „Patina“. Die Augen zeigen seine Stimmung (siehe Umsetzung unten). Wer mit „dem Roboter“ spricht, spricht mit Floki. Fällt der Roboter aus, redet Floki weiter über das Headset.
 - Es gibt **nur diesen einen Körper** ✔; Floki übernimmt keine anderen Servicerobots. Ansprechbar ist er auch am **Rechenkern** in der Technikecke ✔.
 
 **Kommentare & Wahrnehmung (entschieden).** Floki kommentiert das Geschehen **häufig und ungefragt**. **Nur der Spieler reagiert darauf**; andere Figuren reagieren nie auf Flokis Einwürfe. Der Grund in der Spielwelt: Der Barkeeper trägt ein **Headset**, über das nur er Floki hört. **Darstellung:** Jeder Kommentar erscheint als **eigener Dialog in *Sternchen***, getrennt vom Gespräch mit dem gerade anwesenden Charakter. Der Spieler kann darauf antworten (dann läuft ein Gespräch mit Floki) oder ihn ignorieren. Technisch: Die Kommentare fließen **nicht** in die Prompts anderer NPCs.
@@ -293,7 +293,11 @@ Zwei Angestellte, die im Lauf des Spiels einziehen. Aus den Fraktionen rekrutier
 - *„Die Tür im Frachtraum ist versiegelt. Entweder ein Geheimnis oder ein Budgetproblem. Ich tippe auf Geheimnis. Vorerst.“*
 - *„Ich bin nicht gerührt. Das ist nur Kondenswasser.“*
 
-**Umsetzung:** Persona und Prompt liegen in `Resources/Npc/Floki.tres`. Platzhalter-Grafiken: `Assets/Portraits/floki_fullbody.png` (Dialog, mit −70 %-Aufkleber) und `Assets/Ship/floki_robot.png` (Spielfigur = der Roboterkörper).
+**Umsetzung (Stand v0.13):** Persona und Prompt liegen in `Resources/Npc/Floki.tres`.
+- **Grafik:** eigener Entwurf (silbergrauer, rostfleckiger Roboter mit zwei Augen und Kopfhörer-Ohren) in `Assets/Characters/Floki/`: `floki_body.png` (Körper ohne Augen, Dialog-Porträt), vier Augen-Ebenen und `floki_world.png` (Spielfigur im Schankraum). Die alten Platzhalter `Assets/Portraits/floki_fullbody.png` und `Assets/Ship/floki_robot.png` werden nicht mehr benutzt.
+- **Mimik:** Floki hat vier Gesichtsausdrücke – `neutral`, `froh`, `verlegen` (Sternchenaugen mit Rot), `genervt`. Die KI beginnt jede Antwort mit einem Stimmungs-Tag (z. B. `[genervt]`); das Spiel tauscht die Augen aus, und der Tag wird weder angezeigt noch vorgelesen. Neue Ausdrücke: Bild in den Ordner legen und im Inspektor in `Floki.tres` unter **Emotions** eintragen – die KI kennt sie dann automatisch.
+- **Größe im Dialog:** Floki ist bewusst kleiner als der Protagonist, auch wenn er spricht.
+- Beschreibung oben und Prompt in `Floki.tres` sind an den neuen Entwurf angepasst (kein „−70 %“-Aufkleber mehr am Körper; der Sonderposten-Rabatt bleibt Teil seiner Geschichte).
 
 ### 8.5 Vargas Speicherkern – das alte Schiffsgedächtnis *[Vorschlag]*
 Der alte Bordcomputer der *Kupferlerche* ist nur noch ein verschlüsselter Speicherkern mit Vargas Logbüchern und **Aufklärungsdaten über das Imperium**. Varga hat ihn selbst versiegelt. Die Konsole steht hinter der versiegelten Tür im Frachtraum.
@@ -371,6 +375,26 @@ In der Krise zeigt sich, wer Floki wirklich ist: Er bleibt – egal, wofür sich
 - **Das Ende hängt von den Ansehenswerten ab** – von allen zusammen, nicht nur von zweien – sowie vom Gastrecht-Wert (10.5).
 
 ### 10.2 Konflikte & Ereignisse
+**Umgesetzt (Stand v0.13, mit Platzhalter-Figuren):**
+- **Takt:** Jede Schicht bringt Ereignisse – je nach Einstellung *Konflikte* 1 („Selten“), 2 („Normal“) oder 3 („Oft“), in der Konjunktion eins mehr. Sie erscheinen nach kurzer Zeit im Schankraum, nie mitten in einem Gespräch oder im Menü.
+- **Ereignis = Gespräch:** Der Spieler sieht die Situation und die **möglichen Ausgänge**, aber **keine Knöpfe dafür**. Er muss die Figur im Gespräch dorthin bringen – überzeugen, verhandeln, drohen, bestechen oder eine Tat beschreiben („Ich schenke ihm nach“). Die **KI spielt die Figur und entscheidet**, wann ein Ausgang erreicht ist; sie gibt nicht sofort nach (es braucht Argumente, Angebote, Druck oder Taten). Jede Figur hat dafür eine kurze Persona: Ziel, was sie überzeugt, was sie nie akzeptiert.
+- **Rundenlimit:** Nach einigen Antworten (je Ereignis 5–6) muss sich die Figur entscheiden. „Gehen lassen“ = der Wirt hält sich heraus → der **Standard-Ausgang**, meist die Folge von Nichtstun (z. B. „Der Offizier greift selbst durch“). Damit hat auch **Sich heraushalten** Folgen (10.2).
+- **Vermittlung kann scheitern** ✔: Viele Konflikte haben einen eigenen Ausgang „Die Vermittlung scheitert“ für vage oder unfaire Vorschläge.
+- **Ohne KI (Offline-Demo)** entscheiden Schlüsselwörter in den Antworten; fällt die KI mitten im Gespräch aus, geht es offline weiter.
+- **Folgen:** Ansehen (mit Rivalität Imperium/Rebellen), Gastrecht, optional Tod einer Schlüsselfigur, Floki-Kommentar (*Sternchen*, Häufigkeit nach Einstellung) und Radiomeldung (10.3).
+- **Bedingungen je Ereignis:** Woche, Konjunktion (egal/nur/nie), Ansehen, Gastrecht, lebende Schlüsselfiguren; „nur einmal“ und Abklingzeit. Was schon passiert ist, wird gespeichert.
+- **Ohne Code erweiterbar:** `Data/Events/*.json`, Anleitung und Schreibtipps in `Data/Events/README.md`. Im Editor löst **F8** ein Ereignis zum Testen aus.
+- **24 Platzhalter-Ereignisse:** zwei Agenten am Tresen · Routinekontrolle · Silberkiel-Exklusivangebot · Hinterzimmer der Grauen Hände · Prototyp der Funkenwerkstatt · Nomaden fragen nach dem Licht (einmalig) · Schlägerei am Tisch drei · Medikamente in der Konjunktion · Gerücht über die *Kupferlerche* (einmalig) · die neue imperiale Abgabe · der Deserteur · die offene Rechnung · das Kopfgeld auf ein Nomadenmädchen · Preisstreit Gilde gegen Graue Hände · imperialer Drohnenauftrag für die Funkenwerkstatt · Schutzgeld · imperiale Aufklärerin in der Konjunktion · Rebellenwerbung am Tisch · ein zweifelnder Wachtmeister (einmalig) · ein alter Crewmann der *Kupferlerche* (einmalig, ab Woche 4) · eine Myrr-Hochzeit (einmalig) · Falschgeld · Stromausfall in der Konjunktion · eine Schmugglerin sucht Wege ohne Späher (ab Woche 5).
+- **Hinweise auf den Hauptfaden** stecken in den einmaligen Ereignissen (Licht, *Kupferlerche*, alter Crewmann, Wachtmeister, Wege ohne Späher) – nur, wenn der Spieler im Gespräch nachfragt (siehe 10, Punkt 5).
+
+- **Sprachausgabe** ✔: Ereignisse werden vollständig vorgelesen, nacheinander statt durcheinander – ein **Erzähler** (eigene Stimme, im Launcher wählbar) liest Situation und Ergebnis, jede Figur spricht mit ihrer eigenen festen Stimme, Floki mit seiner.
+- **Floki im Ereignis** ✔: Er hört über das Headset mit, wirft gelegentlich ungefragt etwas ein (Häufigkeit nach Einstellung) und gibt auf Wunsch („Floki fragen“, zweimal pro Ereignis) einen echten Tipp, wie man einen Ausgang erreicht – vorgelesen und als *Sternchen* im Gespräch. Die Figur hört ihn nie.
+- **Folgen im Schankraum** ✔ (Grundgerüst für später): Ein Ausgang kann **Gegenstände** (z. B. zerbrochener Stuhl, Einschussloch, Hochzeitsgirlande, Kerzen) und **Figuren** (z. B. Nomadenkind, Kellnerroboter-Prototyp, imperiale Wache) an benannten Orten im Schankraum erscheinen lassen – für eine bestimmte Zahl Wochen oder dauerhaft, mit Auftritts-Animation und im Spielstand gespeichert. Dazu einmalige **Animationen** (Kamera wackelt, Blitz, Licht aus, Konfetti). Ohne Grafik erscheinen beschriftete Platzhalter; echte Bilder werden nur eingetragen.
+- **Folge-Ereignisse** ✔: Ausgänge setzen **Story-Flags**; Ereignisse können Flags voraussetzen oder durch sie gesperrt werden. Erste Beispiele: „Ein Ruf auf alter Frequenz“ (nur, wenn der alte Crewmann dir vertraut hat – führt zu einem Siegel für die versiegelte Tür) und „Fragen nach der Rede“ (nur, wenn du Rebellenwerbung in der Taverne zugelassen hast). Damit sind es **26 Ereignisse**.
+
+**Noch offen:** echte Figuren statt Platzhaltern (Porträt, Grafik), ansprechbare Figuren aus Ereignisfolgen, Gefechte außerhalb der Taverne als eigene Folgen, die versiegelte Tür als Handlungsziel für das Siegel.
+- **Abgleich mit 10.10:** Ereignisse werden derzeit noch **zufällig nach Gewicht** und Bedingungen (Woche, Konjunktion, Ansehen, Gastrecht, Story-Flags) ausgewählt. Die beschlossene **Auswahl durch die KI** (nach Ansehen, Datum und Dialogen; ein Hauptereignis plus kleine Ereignisse pro Woche) ist **noch nicht umgesetzt** – das Datenformat ist darauf vorbereitet.
+
 - Zwischen den Fraktionen entstehen **regelmäßig Konflikte**, vor allem in der Konjunktion. Der Spieler wird einbezogen und muss sich verhalten:
   - **Seite wählen:** Ansehen bei ihr steigt, beim Gegner sinkt.
   - **Neutral bleiben und vermitteln:** Ansehen als fairer Gastgeber steigt – aber Vermittlung kann scheitern.
@@ -378,6 +402,8 @@ In der Krise zeigt sich, wer Floki wirklich ist: Er bleibt – egal, wofür sich
 - **Verhandlungen am Tresen** (Treffen, Deals, Drohungen) führen zu **Stichen zwischen den Fraktionen** außerhalb der Taverne: Gefechte, Handelskriege, Blockaden. Wie sie ausgehen, hängt von den Entscheidungen des Spielers ab.
 
 ### 10.3 Galaktisches Radio *[Arbeitsname]*
+**Umgesetzt (Stand v0.13, erste Stufe):** Antworten in Ereignissen können eine Radiomeldung erzeugen. Die Meldungen einer Schicht erscheinen beim **Schichtende** unter „Galaktisches Radio“ (abschaltbar über die Einstellung *Radio*) und werden mit dem Spielstand gespeichert. Die Platzhalter-Texte nutzen schon die drei Sender als Präfix: „Reichssender:“, „Piratensender:“, „Knotensender:“. **Noch offen:** Radio als Gegenstand im Schankraum, Flokis Kommentare zu den Meldungen, Meldungen zu Nachfolge und Machtkämpfen.
+
 - Die Ergebnisse der Konflikte werden im **Galaktischen Radio** gemeldet: Gefechte, Gewinner, Verluste, neue Zölle.
 - Es läuft in der Taverne (Radio, Bildschirme). Floki kommentiert schadenfroh – für den Spieler hörbar.
 - **Drei Sender** ✔ mit je einem festen Sprecher, dessen Ton zur Fraktion passt. Dieselbe Nachricht klingt bei jedem anders:
@@ -414,7 +440,7 @@ In der Krise zeigt sich, wer Floki wirklich ist: Er bleibt – egal, wofür sich
 Siehe 8.4: häufig, ungefragt, nur der Spieler reagiert; Darstellung als eigener Dialog in *Sternchen* über das Headset. Die Häufigkeit ist im Einstellungsmenü regelbar (siehe 10.7).
 
 ### 10.7 Einstellungsmenü ✔
-**Umgesetzt (Stand v0.11):** Das Menü erreicht man mit Esc (Pause); Einstellungen werden sofort gespeichert. Wirksam sind derzeit: Kraftausdrücke, Humor-Härte, Gewaltdarstellung (fließen als verbindliche Regeln in jeden KI-Prompt), Textgeschwindigkeit, Gesamtlautstärke (wirkt auf die Sprachausgabe), Vollbild und Dialog-Schriftgröße. Kommentar-Häufigkeit, Ereignis-Häufigkeit (früher „Konflikt-Häufigkeit“) und Radio sind schon einstellbar, wirken aber erst, wenn die jeweiligen Systeme existieren.
+**Umgesetzt (Stand v0.11):** Das Menü erreicht man mit Esc (Pause); Einstellungen werden sofort gespeichert. Wirksam sind derzeit: Kraftausdrücke, Humor-Härte, Gewaltdarstellung (fließen als verbindliche Regeln in jeden KI-Prompt), Textgeschwindigkeit, Gesamtlautstärke (wirkt auf die Sprachausgabe), Vollbild und Dialog-Schriftgröße. Kommentar-Häufigkeit, Ereignis-Häufigkeit (früher „Konflikt-Häufigkeit“) und Radio sind schon einstellbar. **Seit v0.13** wirken sie auf die Ereignisse (10.2): Die Ereignis-Häufigkeit bestimmt die Zahl der Ereignisse pro Schicht, die Kommentar-Häufigkeit Flokis Sprüche darin, Radio die Meldungen beim Schichtende (10.3). Flokis ungefragte Kommentare außerhalb der Ereignisse gibt es noch nicht.
 
 Ein Menü im Spiel, in dem sich vieles regulieren lässt. *[Vorschlag für den Umfang:]*
 
@@ -464,6 +490,35 @@ Beschlossen vom Projektleiter. **Umgesetzt (Stand v0.12):** Kalender (`GameClock
 - **Kein festes Zeitlimit** ✔: Das Finale ergibt sich aus Ereignissen und Ansehen, nicht aus einer Wochenzahl.
 - **Pro Woche ein Hauptereignis plus kleine Ereignisse** ✔: Die KI wählt ein großes Ereignis und dazu mehrere kleine (Gerüchte, Nebenepisoden, kurze Gäste-Szenen).
 
+### 10.11 Am Tresen – Getränke, Gäste, Inventar ✔ (Phase 1, Stand v0.13)
+Der Kern jeder Schicht: Gäste bestellen, der Wirt mixt, trägt und serviert.
+- **Gäste** (Platzhalter-Figuren aller Spezies und Fraktionen) kommen während der Schicht durch die Schleuse und setzen sich; in der Konjunktion mehr und öfter. Sie zeigen **!** (will bestellen) bzw. **…** (wartet), darunter ihre Geduld. Wer zu lange wartet, geht verärgert (−1 Ansehen bei seiner Fraktion).
+- **Bestellungen** gibt es als Rezept („Einen Kaldor-Glut“), als **Rätsel** über den Geschmack („Was Warmes, ich hatte einen miesen Tag“, „ohne Alkohol“) oder als „Überrasch mich“. „Nachfragen“ verrät mehr. Alles wird mit der Stimme des Gastes vorgelesen.
+- **Mixen an der Bar:** 12 Zutaten aus der eigenen Welt (Kaldor-Stout, Ysmera-Perlwein, Thessk-Kaktusbrand, Synthmilch, Nebelsirup, Sternanis, Rostpfeffer, Honigalge, Kupferbitter, Grautee, Eiswasser, Alienschleim) mit drei Geschmacksachsen **Wärme, Süße, Stärke**; bis zu vier in den Shaker, dazu eine Zubereitung (Schütteln, Rühren, Erhitzen, Auf Eis). Exakte Kombinationen ergeben **12 benannte Rezepte**, die beim ersten Mixen ins **Rezeptbuch** wandern (u. a. „Die Letzte Runde“ als Hausdrink, „Kupferlerche“, „Wahrheitsnebel“, „Glühender Schleimer“ aus Alienschleim).
+- **Spezies schmecken anders:** Myrr vertragen nichts Starkes, Ghel schmecken nur Starkes, Quirren brauchen Süßes, Vhorren nichts sehr Heißes. Gäste bekommen nie unmögliche Bestellungen.
+- **Tablett-Minispiel:** Getränke trägt man durch den Raum; abruptes Losgehen, Stoppen und Zickzack bringen das Tablett ins Schwappen, Umschalt heißt „vorsichtig“. Verschüttetes ist weg und hinterlässt eine Pfütze (eine Woche).
+- **Bewertung** 0–3 Sterne → **Trinkgeld** (Credits) und bei Begeisterung/Enttäuschung ±1 Ansehen.
+- **Getränke als Werkzeug** (vorbereitet): Rezepte tragen Wirkungen wie *Wahrheit* (Figuren reden mehr), *beruhigend*, *Heilung* (Kampf, Phase 2), *mutig* – sie sollen später Ereignisse und Kämpfe beeinflussen.
+- **Inventar** im minimalistischen Holo-Stil: Schnellleiste mit 8 Plätzen (1–8, Mausrad), Tab öffnet das Inventar (24 Plätze, Ziehen zum Umsortieren, Details), Credits oben rechts.
+- **Gedächtnis (Vorarbeit):** Jede Handlung wird als **Tat** mit Schlagwörtern gespeichert (serviert, warten lassen, verschüttet …) – Grundlage für „die Welt erinnert sich“ (Phase 4).
+- **Steuerung:** WASD laufen, Umschalt vorsichtig gehen, **E** benutzen/reden, Linksklick/Leertaste schlagen, Rechtsklick/F Gegenstand benutzen, 1–8 Schnellleiste, Tab Inventar, Esc schließen/Pause. (Debug: Strg+Umschalt+E löst ein Ereignis aus.) Übersicht aller Systeme: `Data/README.md`.
+- **Wirtschaft – Platzhalter:** Zutatenpreise, Reparaturen, Bestechung, Strafen, Liegegebühr, Löhne und Verkauf sind im Code schon vorgesehen, aber noch ausgeschaltet (siehe 12, Punkt 15). Bisher gibt es nur Einnahmen aus Trinkgeld.
+- **Anleitung zum Erweitern:** `Data/Bar/README.md`.
+
+### 10.12 Technikdeck, Kampf & Aufgaben ✔ (Phase 2, Stand v0.13)
+- **Drei Decks mit Aufzug** (E am Aufzug, Deck wählen, kurze Abblende): **Deck 1 Schankraum**, **Deck 2 Wohndeck** (Flur, zwei leere Personalzimmer für Akt II, Zimmer des Besitzers – **Bett** beendet die Schicht), **Unterdeck Technik** (Hauptgenerator mit Statuslampe, Rohre, Kisten als Deckung, Werkzeugkiste mit der **Rohrzange**, **Flokis Rechenkern** zum Ansprechen, die **versiegelte Tür zum Frachtraum** – mit Lerchen-förmiger Vertiefung; wer das Siegel aus „Ein Ruf auf alter Frequenz“ hat, erfährt, dass es passt). Alle Decks laufen gleichzeitig: Gäste warten weiter, während man unten ist.
+- **Licht:** Fällt der Strom aus, ist das ganze Schiff dunkel und der Wirt hat eine Taschenlampe; im Technikdeck gibt es sonst nur Notbeleuchtung.
+- **Kampf im Stil von Stardew Valley:** Schlag im Bogen (Maus = Richtung Zeiger, Leertaste = Laufrichtung) mit der Waffe aus der Schnellleiste – Rückstoß, Treffer-Blitz, Schadenszahlen, kurze Unverwundbarkeit nach Treffern, Kamera wackelt. **Leben und Energie** (Schläge kosten Energie). **Waffen sind Gegenstände** (Barhockerbein zum Start, Rohrzange, Schockstab als Platzhalter). **Getränke heilen** – der „Glühende Schleimer“ stark. **Ohnmacht** bei 0 Leben: Floki holt den Wirt ins Bett, Bergungsgebühr (bis ₡30), eine laufende Aufgabe scheitert.
+- **Außerirdische Monster:** **Kabelfresser** (Schwarm, zittern vor dem Sprung), **Rohrkriecher** (in den Rohren, spucken Säure, nur draußen verwundbar), **Brutknoten** (am Generator, brütet Kabelfresser, Schockwelle mit Vorwarnung). Sie lassen **Alienschleim** fallen – Zutat für die Bar. (Platzhalter-Grafik.)
+- **Aufgaben:** Ein Ausgang im Gespräch kann eine Aufgabe starten; ihr Ergebnis (geschafft / zu spät / gescheitert) wählt den endgültigen Ausgang. Aufgabenfenster mit Schritten und Zeit oben links.
+- **„Stromausfall“ als erste Aufgabe:** Erst die Gäste beruhigen – davon hängt ab, wie viel Zeit man hat (170 / 110 / 80 s). Dann hinunter, Brutknoten vernichten, Rohrzange holen, Generator reparieren mit zwei neuen Minispielen: **Schaltkreis** (Leitungen drehen, kaputte Stücke sprühen Funken) und **Druckventil** (Druck im wandernden grünen Bereich halten, Druckstöße werden angekündigt). Drei Schlüsse: „Licht! Du rettest den Abend“, „Licht – aber spät“, „Floki schaltet den Notstrom ein“ (nach Ohnmacht).
+- **Anleitung:** `Data/README.md` (Steuerung, Decks, Kampf, Monster, Minispiele, Aufgaben, Test-Schalter), Aufgaben in Ereignissen: `Data/Events/README.md`.
+
+**Geplante nächste Phasen:**
+3. **Handlungen im Gespräch:** Täuschen, Einschüchtern, Angreifen (führt in einen echten Kampf im Schankraum), Bestehlen – alle führen zu Ausgängen in Ereignissen. Gäste gehen im Kampf nur k.o., Monster sterben, Schlüsselfiguren sterben nur durch die Handlung.
+4. **Gedächtnis & Fahndung:** Taten öffnen verborgene Ausgänge, Figuren erinnern sich, Gerüchte, Fahndungsstufe bei der Sternenwacht.
+5. **Gäste ansprechen, Taschendiebstahl** und die übrigen Minispiele: *Taschendiebstahl*, *Schlossknacken* (die versiegelte Tür), *Funkpeilung*, *Andocken*.
+
 ---
 
 ## 11. KI-Personas (Vorlage für Spielfiguren)
@@ -507,3 +562,5 @@ Antworten kommen vom Projektleiter; hier wird nichts vorab entschieden. Stand de
 12. **Feste Handlung vs. KI:** ✔ Der **Prolog ist vollständig ausgeschrieben**. Danach gibt es **sehr viele vorgeschriebene Ereignisse**, und der Spieler **lenkt die KI im Gespräch** zu dem einen oder anderen Ereignis. Wie ein Ereignis ausgelöst wird, steht in **10.10**.
 13. **Lokalisierung:** ✔ Deutsch zuerst, **Englisch später**; UI-Texte und Persona-Prompts bleiben deshalb getrennt von der Logik.
 14. ✔ **Aufklärungsschiff und Piratenschiff:** Die *Kupferlerche* war ein Aufklärungsschiff der Rebellen **und** raubte imperiale Fracht (so steht es in 8.2 und 9.3).
+15. **Wirtschaft (Platzhalter, nicht vergessen!):** Was kostet Geld, was bringt Geld? Vorgesehen, aber noch aus: Einkauf von Zutaten (Preise stehen schon in `Data/Bar/ingredients.json`), Reparatur zerbrochener Möbel nach Schlägereien, Bestechung (Phase 3), Strafen der Sternenwacht (Phase 4), Liegegebühr am Kreuzweg, Löhne für Personal (Akt II), Verkauf von Gegenständen. Startkapital derzeit ₡50.
+16. **Getränke-Wirkungen:** Wie stark sollen *Wahrheitsnebel* (Figuren verraten mehr), *beruhigende* Drinks (weniger Gewalt) und *Heilung* im Kampf wirken?

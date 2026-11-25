@@ -142,6 +142,14 @@ public sealed class PiperTtsProvider : ITtsProvider
 				return floki.Id;
 		}
 
+		// The narrator: same expressive model as Floki, but the calm "neutral" speaker.
+		if (request.Slot == LauncherConfig.NarratorSlot)
+		{
+			var narrator = voices.FirstOrDefault(v => v.Id.StartsWith(PreferredFlokiModel + "|") && v.Label.EndsWith("neutral"));
+			if (narrator != null)
+				return narrator.Id;
+		}
+
 		// Everybody else: a stable voice per character, never the emotional Floki voices.
 		var pool = voices.Where(v => !v.Id.StartsWith(PreferredFlokiModel)).ToList();
 		if (pool.Count == 0)

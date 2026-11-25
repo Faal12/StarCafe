@@ -1,0 +1,10 @@
+{
+  "items": [
+    { "id": "getraenk", "name": "Getränk", "category": "Getraenk", "description": "Ein frisch gemixter Drink. Name und Geschmack stehen auf dem Tablett. Trinken (Rechtsklick/F) heilt ein wenig.", "stack": 1, "color": "#40c8e0", "icon": "G" },
+    { "id": "alienschleim", "name": "Alienschleim", "category": "Zutat", "description": "Leuchtend grün, warm, zuckt manchmal. Fällt von Monstern im Technikdeck. Zutat für den „Glühenden Schleimer“.", "stack": 20, "color": "#60e060", "icon": "AS", "value": 6 },
+    { "id": "barhockerbein", "name": "Barhockerbein", "category": "Waffe", "description": "Schnell, leicht, peinlich. Hat schon so manche Diskussion beendet.", "stack": 1, "color": "#b08050", "icon": "BH", "damage": 2, "cooldown": 0.32, "reach": 50, "knockback": 220 },
+    { "id": "rohrzange", "name": "Rohrzange", "category": "Werkzeug", "description": "Repariert Rohre. Und Meinungen. Werkzeug für den Generator und eine ordentliche Waffe.", "stack": 1, "color": "#909aa8", "icon": "RZ", "damage": 4, "cooldown": 0.5, "reach": 56, "knockback": 320 },
+    { "id": "schockstab", "name": "Schockstab", "category": "Waffe", "description": "Platzhalter: stärkere Waffe für später (Funkenwerkstatt?).", "stack": 1, "color": "#e0d040", "icon": "SS", "damage": 6, "cooldown": 0.45, "reach": 60, "knockback": 360 },
+    { "id": "datenchip", "name": "Datenchip", "category": "Beweis", "description": "Ein verschlüsselter Chip. Platzhalter für Beweise und Schlüsselgegenstände.", "stack": 5, "color": "#e0c040", "icon": "DC" }
+  ]
+}

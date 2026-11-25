@@ -1,0 +1,16 @@
+{
+  "ingredients": [
+    { "id": "kaldor_stout", "name": "Kaldor-Stout", "description": "Schwarzes Bier aus den Bergbaukantinen von Kaldor. Schmeckt nach Rauch und Feierabend.", "waerme": 1, "suesse": 0, "staerke": 2, "alcohol": true, "color": "#3a2618", "price": 2 },
+    { "id": "ysmera_perlwein", "name": "Ysmera-Perlwein", "description": "Perlender Wein von den Küsten Ysmeras. Teuer, leicht, elegant.", "waerme": 0, "suesse": 2, "staerke": 1, "alcohol": true, "color": "#d8e8a0", "price": 4 },
+    { "id": "thessk_kaktusbrand", "name": "Thessk-Kaktusbrand", "description": "Klarer Schnaps aus Wüstenkakteen. Brennt zweimal: im Hals und im Gedächtnis.", "waerme": 1, "suesse": 0, "staerke": 3, "alcohol": true, "color": "#e8f0e0", "price": 3 },
+    { "id": "synthmilch", "name": "Synthmilch", "description": "Milch ohne Kuh. Cremig, neutral, beruhigend.", "waerme": 0, "suesse": 1, "staerke": 0, "alcohol": false, "color": "#f0ece0", "price": 1 },
+    { "id": "nebelsirup", "name": "Nebelsirup", "description": "Dickflüssig, violett, sehr süß. Aus den Nebelblüten der Gasriesen.", "waerme": 0, "suesse": 3, "staerke": 0, "alcohol": false, "color": "#9a6ad0", "price": 2 },
+    { "id": "sternanis", "name": "Sternanis", "description": "Gewürz, das Wärme in jede Tasse bringt. Duftet nach Heimat – egal, woher man kommt.", "waerme": 2, "suesse": 1, "staerke": 0, "alcohol": false, "color": "#a0582a", "price": 1 },
+    { "id": "rostpfeffer", "name": "Rostpfeffer", "description": "Rotbraunes Pulver aus den Minen Kaldors. Scharf wie ein Schweißbrenner.", "waerme": 3, "suesse": 0, "staerke": 1, "alcohol": false, "color": "#b0402a", "price": 1 },
+    { "id": "honigalge", "name": "Honigalge", "description": "Süße Meeresalge von Ysmera. Myrr lieben sie.", "waerme": 0, "suesse": 2, "staerke": 0, "alcohol": false, "color": "#c0b040", "price": 2 },
+    { "id": "kupferbitter", "name": "Kupferbitter", "description": "Bitterer Kräuterauszug mit metallischem Nachgeschmack. Nimmt jedem Drink die Süße.", "waerme": 0, "suesse": -1, "staerke": 1, "alcohol": true, "color": "#b87333", "price": 2 },
+    { "id": "grautee", "name": "Grautee", "description": "Raumfahrertee aus gepressten Graublättern. Hält wach, beruhigt trotzdem.", "waerme": 1, "suesse": 0, "staerke": 0, "alcohol": false, "color": "#7a8070", "price": 1 },
+    { "id": "eiswasser", "name": "Eiswasser", "description": "Geschmolzenes Kometeneis. Kühlt alles runter.", "waerme": -1, "suesse": 0, "staerke": 0, "alcohol": false, "color": "#a0d8f0", "price": 0 },
+    { "id": "alienschleim", "name": "Alienschleim", "description": "Leuchtend grün, warm, leicht zuckend. Aus dem Technikdeck. Frag nicht.", "waerme": 2, "suesse": 1, "staerke": 2, "alcohol": false, "color": "#60e060", "price": 0, "requiresItem": "alienschleim" }
+  ]
+}

@@ -118,6 +118,28 @@ public partial class GameHud : CanvasLayer
 			: $"\n\nBis zur nächsten Konjunktion: {summary.DaysUntilConjunction} Tage.";
 		if (summary.StandingChanged)
 			text += "\n\nMit der Zeit verblasst manches Ansehen, und alte Wunden heilen.";
+		var ledger = GameSession.LastShiftLedger;
+		if (ledger.Count > 0)
+		{
+			int income = 0, expenses = 0;
+			foreach (LedgerEntry entry in ledger)
+			{
+				if (entry.Amount > 0)
+					income += entry.Amount;
+				else
+					expenses -= entry.Amount;
+			}
+			text += $"\n\nKASSE: Einnahmen ₡{income}" + (expenses > 0 ? $", Ausgaben ₡{expenses}" : "") + $"  ·  Stand ₡{PlayerState.Credits}";
+		}
+
+		var news = GameSession.LastShiftRadio;
+		if (GameSettings.RadioEnabled && news.Count > 0)
+		{
+			text += "\n\nGALAKTISCHES RADIO";
+			foreach (RadioNews item in news)
+				text += "\n• " + item.Text;
+		}
+
 		text += summary.Saved ? "\n\nSpielstand gespeichert." : "\n\nAchtung: Der Spielstand konnte nicht gespeichert werden.";
 		_shiftEndText.Text = text;
 
@@ -130,5 +152,6 @@ public partial class GameHud : CanvasLayer
 	{
 		_shiftEndScreen.Visible = false;
 		GetTree().Paused = false;
+		GameSession.BeginShift();
 	}
 }

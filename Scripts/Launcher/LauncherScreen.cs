@@ -21,6 +21,14 @@ public partial class LauncherScreen : Control
 	private TextureRect _mascot;
 	private double _floatClock;
 
+	// Launcher art: a soft pastel haze over the stars and a spaceship that flies in and bobs.
+	private const string BackgroundPath = "res://Assets/Art/pastel_background.png";
+	private const string ShipPath = "res://Assets/Art/spaceship.png";
+	private const double ShipEntranceSeconds = 1.6;
+	private const float ShipBobPixels = 6f;
+	private const double ShipBobSeconds = 4.0;
+	private TextureRect _ship;
+
 	public override void _Ready()
 	{
 		GameSettings.Apply();
@@ -35,6 +43,7 @@ public partial class LauncherScreen : Control
 		BuildMainMenu();
 		BuildSettingsOverlay();
 		PlayEntrance();
+		PlayShipEntrance();
 
 		(_continueButton.Disabled ? _newGameButton : _continueButton).GrabFocus();
 	}
@@ -53,6 +62,17 @@ public partial class LauncherScreen : Control
 	private void BuildBackground()
 	{
 		AddChild(new SpaceBackground());
+
+		// Pastel art: a mostly transparent haze, laid over the stars as a soft nebula.
+		var pastel = new TextureRect
+		{
+			Texture = GD.Load<Texture2D>(BackgroundPath),
+			ExpandMode = TextureRect.ExpandModeEnum.IgnoreSize,
+			StretchMode = TextureRect.StretchModeEnum.KeepAspectCovered,
+			MouseFilter = MouseFilterEnum.Ignore
+		};
+		pastel.SetAnchorsPreset(LayoutPreset.FullRect);
+		AddChild(pastel);
 
 		// Lamplight of the tavern against the cold space: a warm glow behind the mascot.
 		var glow = new TextureRect
@@ -78,6 +98,33 @@ public partial class LauncherScreen : Control
 		};
 		vignette.SetAnchorsPreset(LayoutPreset.FullRect);
 		AddChild(vignette);
+
+		// Spaceship floating across the top right, behind the menu.
+		_ship = new TextureRect
+		{
+			Texture = GD.Load<Texture2D>(ShipPath),
+			ExpandMode = TextureRect.ExpandModeEnum.IgnoreSize,
+			StretchMode = TextureRect.StretchModeEnum.KeepAspectCentered,
+			TextureFilter = TextureFilterEnum.LinearWithMipmapsAnisotropic,
+			MouseFilter = MouseFilterEnum.Ignore
+		};
+		_ship.SetAnchorsPreset(LayoutPreset.FullRect);
+		_ship.AnchorLeft = 0.44f;
+		_ship.AnchorRight = 1.0f;
+		_ship.AnchorTop = -0.02f;
+		_ship.AnchorBottom = 0.40f;
+		AddChild(_ship);
+	}
+
+	private void PlayShipEntrance()
+	{
+		// Fly in from the right edge.
+		float slide = GetViewportRect().Size.X * 0.6f;
+		_ship.OffsetLeft = slide;
+		_ship.OffsetRight = slide;
+		Tween tween = CreateTween().SetParallel();
+		tween.TweenProperty(_ship, "offset_left", 0f, ShipEntranceSeconds).SetTrans(Tween.TransitionType.Cubic).SetEase(Tween.EaseType.Out);
+		tween.TweenProperty(_ship, "offset_right", 0f, ShipEntranceSeconds).SetTrans(Tween.TransitionType.Cubic).SetEase(Tween.EaseType.Out);
 	}
 
 	// ---------- main menu
@@ -281,6 +328,13 @@ public partial class LauncherScreen : Control
 		float offset = Mathf.Sin((float)(_floatClock * Mathf.Tau / FloatSeconds)) * FloatPixels;
 		_mascot.OffsetTop = MascotHeadroom + offset;
 		_mascot.OffsetBottom = -MascotHeadroom + offset;
+
+		if (_ship != null)
+		{
+			float bob = Mathf.Sin((float)(_floatClock * Mathf.Tau / ShipBobSeconds)) * ShipBobPixels;
+			_ship.OffsetTop = bob;
+			_ship.OffsetBottom = bob;
+		}
 	}
 
 	// ---------- actions

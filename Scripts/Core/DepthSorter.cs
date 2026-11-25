@@ -50,7 +50,8 @@ public partial class DepthSorter : Node
 			mover.ZIndex = ToZ(mover.GlobalPosition.Y);
 	}
 
-	private static int ToZ(float y) => Mathf.Clamp(Mathf.RoundToInt(y), -4000 + 1, 4000);
+	// Decks are stacked far apart in one scene; sort by the height inside the deck.
+	private static int ToZ(float y) => DeckManager.SortZ(y);
 
 	/// <summary>World y of the lowest point that touches the ground.</summary>
 	private static float FootprintBottom(Node2D node, bool originIsFeet)

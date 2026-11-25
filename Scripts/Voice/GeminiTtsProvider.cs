@@ -32,6 +32,10 @@ public sealed class GeminiTtsProvider : ITtsProvider
 
 	private const string FlokiVoice = "Algenib";
 
+	// The narrator of events (situations, results): calm, warm, a little wink.
+	private const string NarratorVoice = "Sadaltager";
+	private const string NarratorStyle = "Auf Deutsch gesprochen, mit deutscher Aussprache und ohne fremden Akzent; ruhig, warm und bildhaft erzählend wie ein Hörbuchsprecher, mit einem Augenzwinkern";
+
 	public TtsProviderKind Kind => TtsProviderKind.Gemini;
 	public string Name => "Gemini (Cloud)";
 
@@ -129,37 +133,36 @@ public sealed class GeminiTtsProvider : ITtsProvider
 		if (request.Slot == "Floki")
 			return FlokiVoice;
 
+		if (request.Slot == LauncherConfig.NarratorSlot)
+			return NarratorVoice;
+
 		uint hash = 2166136261;
 		foreach (char c in request.CharacterName ?? "")
 			hash = (hash ^ c) * 16777619;
 
-		var pool = Catalog.Where(v => v.Name != FlokiVoice).ToArray();
+		// Every other character gets a stable voice of their own, never Floki's or the narrator's.
+		var pool = Catalog.Where(v => v.Name != FlokiVoice && v.Name != NarratorVoice).ToArray();
 		return pool[(int)(hash % (uint)pool.Length)].Name;
 	}
 
-	private static string StyleFor(TtsRequest request) => request.Slot == "Floki" ? FlokiStyle : DefaultStyle;
+	private static string StyleFor(TtsRequest request) => request.Slot switch
+	{
+		"Floki" => FlokiStyle,
+		LauncherConfig.NarratorSlot => NarratorStyle,
+		_ => DefaultStyle,
+	};
 
 	private static byte[] ExtractAudio(string json)
 	{
 		try
 		{
 			using JsonDocument document = JsonDocument.Parse(json);
-			string data = null;
-
-			if (document.RootElement.TryGetProperty("steps", out JsonElement steps))
-				foreach (JsonElement step in steps.EnumerateArray())
-				{
-					if (!step.TryGetProperty("content", out JsonElement content) || content.ValueKind != JsonValueKind.Array)
-						continue;
-
-					foreach (JsonElement part in content.EnumerateArray())
-						if (part.TryGetProperty("type", out JsonElement type) && type.GetString() == "audio"
-							&& part.TryGetProperty("data", out JsonElement payload))
-							data = payload.GetString();
-				}
+			// The response layout has changed before; search the whole document for audio instead of
+			// relying on one fixed path ({"type":"audio","data":…} or {"inlineData":{"mimeType":"audio/…","data":…}}).
+			string data = FindAudio(document.RootElement, 0);
 
 			if (string.IsNullOrEmpty(data))
-				throw new TtsException("Gemini-Stimme: Antwort ohne Audio");
+				throw new TtsException("Gemini-Stimme: Antwort ohne Audio (Aufbau: " + Shape(document.RootElement, 0) + ")");
 
 			byte[] bytes = Convert.FromBase64String(data);
 
@@ -177,18 +180,79 @@ public sealed class GeminiTtsProvider : ITtsProvider
 		}
 	}
 
+	/// <summary>Finds base64 audio anywhere in the response.</summary>
+	private static string FindAudio(JsonElement element, int depth)
+	{
+		if (depth > 12)
+			return null;
+		switch (element.ValueKind)
+		{
+			case JsonValueKind.Object:
+			{
+				bool isAudio = (element.TryGetProperty("type", out JsonElement type) && type.ValueKind == JsonValueKind.String && type.GetString() == "audio")
+					|| IsAudioMime(element, "mimeType") || IsAudioMime(element, "mime_type");
+				if (isAudio && element.TryGetProperty("data", out JsonElement data) && data.ValueKind == JsonValueKind.String)
+					return data.GetString();
+				foreach (JsonProperty property in element.EnumerateObject())
+				{
+					string found = FindAudio(property.Value, depth + 1);
+					if (!string.IsNullOrEmpty(found))
+						return found;
+				}
+				return null;
+			}
+			case JsonValueKind.Array:
+				foreach (JsonElement item in element.EnumerateArray())
+				{
+					string found = FindAudio(item, depth + 1);
+					if (!string.IsNullOrEmpty(found))
+						return found;
+				}
+				return null;
+			default:
+				return null;
+		}
+	}
+
+	private static bool IsAudioMime(JsonElement element, string property) =>
+		element.TryGetProperty(property, out JsonElement mime) && mime.ValueKind == JsonValueKind.String
+		&& (mime.GetString() ?? "").StartsWith("audio", StringComparison.OrdinalIgnoreCase);
+
+	/// <summary>Layout of a response without any values (for the log when no audio is found).</summary>
+	private static string Shape(JsonElement element, int depth)
+	{
+		if (depth > 4)
+			return "…";
+		return element.ValueKind switch
+		{
+			JsonValueKind.Object => "{" + string.Join(", ", element.EnumerateObject().Take(8).Select(p => p.Name + ":" + Shape(p.Value, depth + 1))) + "}",
+			JsonValueKind.Array => "[" + (element.GetArrayLength() > 0 ? Shape(element[0], depth + 1) : "") + "]",
+			JsonValueKind.String => "text",
+			JsonValueKind.Number => "zahl",
+			_ => element.ValueKind.ToString().ToLowerInvariant(),
+		};
+	}
+
 	private static string Describe(string body, string key)
 	{
 		try
 		{
 			using JsonDocument document = JsonDocument.Parse(body);
-			if (document.RootElement.TryGetProperty("error", out JsonElement error)
-				&& error.TryGetProperty("message", out JsonElement message))
+			// Errors come as {"error":{…}} or as [{"error":{…}}] (e.g. HTTP 402 "prepayment credits are depleted").
+			JsonElement root = document.RootElement;
+			if (root.ValueKind == JsonValueKind.Array && root.GetArrayLength() > 0)
+				root = root[0];
+			if (root.ValueKind == JsonValueKind.Object && root.TryGetProperty("error", out JsonElement error)
+				&& error.ValueKind == JsonValueKind.Object && error.TryGetProperty("message", out JsonElement message))
 				body = message.GetString();
 		}
 		catch (JsonException)
 		{
 			// plain text body
+		}
+		catch (InvalidOperationException)
+		{
+			// unexpected layout – keep the raw body
 		}
 
 		body = Regex.Replace(body ?? "", @"\s+", " ").Trim().Replace(key, "***");

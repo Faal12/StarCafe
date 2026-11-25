@@ -1,0 +1,60 @@
+{
+  "species": [
+    {
+      "id": "mensch", "name": "Mensch", "weight": 4,
+      "roles": ["Frachtpilotin", "Hafenarbeiter", "Händlerin", "Mechaniker", "Söldnerin", "Schmuggler", "Funkerin"],
+      "description": "Menschen trinken alles. Leider."
+    },
+    {
+      "id": "myrr", "name": "Myrr", "weight": 2,
+      "roles": ["Perlentaucherin", "Händler", "Poetin", "Navigator"],
+      "maxStaerke": 1,
+      "tooStrong": "(hustet blubbernd) Viel zu stark … wir Myrr vertragen das nicht.",
+      "description": "Amphibisch, von den Ozeanen Ysmeras. Vertragen keinen starken Alkohol (Stärke höchstens 1)."
+    },
+    {
+      "id": "ghel", "name": "Ghel", "weight": 2,
+      "roles": ["Bergmann", "Steinmetzin", "Sprengmeister"],
+      "minStaerke": 4,
+      "tooWeak": "(starrt ins Glas) … Wasser? Ich schmecke nichts.",
+      "description": "Gesteinsartige Bergleute von Kaldor. Schmecken nur sehr Starkes (Stärke mindestens 4)."
+    },
+    {
+      "id": "quirren", "name": "Quirren", "weight": 2,
+      "roles": ["Buchhalter", "Händlerin", "Wettbüro-Betreiber"],
+      "minSuesse": 2,
+      "tooBitter": "(rümpft das Näschen) Bitter! Quirren brauchen Zucker zum Rechnen.",
+      "description": "Klein, flink, pelzig. Mögen es süß (Süße mindestens 2)."
+    },
+    {
+      "id": "vhorren", "name": "Vhorren", "weight": 1,
+      "roles": ["Wanderer", "Archivarin", "Gärtner"],
+      "maxWaerme": 4,
+      "tooHot": "(langsam) Zu … heiß … meine Rinde … knistert.",
+      "description": "Hochgewachsen, rindenartige Haut. Vertragen nichts sehr Heißes (Wärme höchstens 4)."
+    }
+  ],
+  "orders": [
+    { "kind": "rezept", "recipe": "kaldor_glut", "text": "Einen Kaldor-Glut, bitte. Und nicht am Anis sparen.", "hint": "Heißes Stout mit Sternanis." },
+    { "kind": "rezept", "recipe": "ysmera_tau", "text": "Ysmera-Tau. Eiskalt. Ich hatte einen langen Flug.", "hint": "Perlwein und Nebelsirup, auf Eis." },
+    { "kind": "rezept", "recipe": "raumfahrertee", "text": "Raumfahrertee, bitte. Ich muss morgen früh fliegen.", "hint": "Grautee mit Sternanis, erhitzt." },
+    { "kind": "rezept", "recipe": "milchwolke", "text": "Eine Milchwolke. Ja, ich weiß, wie das klingt.", "hint": "Synthmilch und Nebelsirup, heiß." },
+    { "kind": "rezept", "recipe": "letzte_runde", "text": "Ich will den Hausdrink. Den, nach dem der Laden heißt.", "hint": "Drei Welten: Stout, Perlwein, Kaktusbrand – gerührt." },
+    { "kind": "rezept", "recipe": "sandsturm", "text": "Einen Sandsturm. Doppelt. Ich muss gleich etwas Dummes tun.", "hint": "Zweimal Kaktusbrand, Rostpfeffer, geschüttelt." },
+    { "kind": "geschmack", "text": "Was Warmes. Ich hatte einen miesen Tag.", "hint": "Wärme mindestens 3.", "min": { "waerme": 3 } },
+    { "kind": "geschmack", "text": "Irgendwas Süßes. Viel Süßes. Frag nicht.", "hint": "Süße mindestens 4.", "min": { "suesse": 4 } },
+    { "kind": "geschmack", "text": "Was Kaltes, aber nicht zu stark. Ich bin noch im Dienst.", "hint": "Wärme höchstens 0, Stärke höchstens 1.", "max": { "waerme": 0, "staerke": 1 } },
+    { "kind": "geschmack", "text": "Etwas, das brennt. Ich will spüren, dass ich lebe.", "hint": "Stärke mindestens 4.", "min": { "staerke": 4 } },
+    { "kind": "geschmack", "text": "Etwas, das nach Heimat schmeckt. Warm und ein bisschen süß.", "hint": "Wärme mindestens 2, Süße mindestens 2.", "min": { "waerme": 2, "suesse": 2 } },
+    { "kind": "geschmack", "text": "Was ohne Alkohol. Mein Kopf brummt noch von gestern.", "hint": "Keine alkoholische Zutat.", "noAlcohol": true },
+    { "kind": "geschmack", "text": "Bitter. So bitter wie mein Ex-Kapitän.", "hint": "Süße höchstens 0.", "max": { "suesse": 0 } },
+    { "kind": "ueberraschung", "text": "Überrasch mich, Wirt. Aber mit etwas, das einen Namen hat.", "hint": "Irgendein bekanntes Rezept aus dem Rezeptbuch." },
+    { "kind": "ueberraschung", "text": "Was trinkt man hier so? Ich bin neu am Knoten.", "hint": "Irgendein bekanntes Rezept – am besten ein Klassiker." }
+  ],
+  "reactions": {
+    "perfekt": ["Genau das. Wirt, du bist ein Künstler.", "(trinkt, schließt die Augen) … Ja. Ja!", "Das ist der beste Drink seit Wochen. Hier, nimm was extra."],
+    "gut": ["Nicht schlecht. Gar nicht schlecht.", "Passt. Danke.", "Ordentlich gemacht."],
+    "mittel": ["Hm. Trinkbar.", "Nicht ganz, was ich wollte, aber geht schon.", "(nippt) … Na ja."],
+    "schlecht": ["Was ist DAS denn?", "Das hab ich nicht bestellt.", "(schiebt das Glas zurück) Nein danke."]
+  }
+}

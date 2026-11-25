@@ -1,0 +1,1526 @@
+{
+  "events": [
+    {
+      "id": "zwei_agenten",
+      "kind": "Konflikt",
+      "title": "Zwei Agenten, ein Tresen",
+      "speaker": {
+        "name": "Imperialer Offizier",
+        "faction": "Imperium",
+        "persona": "Korrekt, kühl, höflich mit Unterton. Er weiß, dass am anderen Ende des Tresens ein Rebellenkontakt sitzt, und will dessen Namen und Schiff vom Wirt bestätigt haben. Geld und Drohungen mit Lizenzentzug sind seine Werkzeuge. Er respektiert Standhaftigkeit, wenn sie gut begründet ist (Gastrecht, Neutralität bringt dem Imperium auch Informationen), und verachtet Ausreden.",
+        "placeholder": true
+      },
+      "text": "Am linken Ende des Tresens sitzt ein imperialer Offizier, am rechten ein Mann mit Rebellenabzeichen unter dem Kragen. Der Offizier hat einen Datenchip mit Credits vor sich gelegt. Der Rebell trinkt langsam und beobachtet die Schleuse.",
+      "opening": "Ein Name und ein Schiff, Wirt. Der Mann am anderen Ende. Der Chip gehört Ihnen, und Ihre Lizenz bleibt, was sie ist: gültig.",
+      "floki": "Zwei Feinde, ein Tresen, null Fluchtwege. Ich hole schon mal das Popcorn aus dem Speicher.",
+      "weight": 3,
+      "cooldownWeeks": 4,
+      "maxTurns": 5,
+      "offlineLines": [
+        "Ich habe Zeit, Wirt. Er offenbar nicht.",
+        "Ein Name. Mehr verlange ich nicht."
+      ],
+      "outcomes": [
+        {
+          "id": "verraten",
+          "label": "Du verrätst den Rebellen",
+          "condition": "Der Wirt nennt dem Offizier den Rebellen, sein Schiff oder hilft ihm sonst, den Mann festzunehmen.",
+          "keywords": ["verrat", "sein name", "er heisst", "sein schiff", "nimm ihn", "verhaften"],
+          "reputation": { "Imperium": 10 },
+          "gastrecht": -10,
+          "world": [ { "type": "character", "id": "imperiale_wache", "label": "Imperiale Wache", "faction": "Imperium", "spot": "Schleuse", "weeks": 2, "appear": "drop" } ],
+          "result": "Der Offizier nickt knapp und steht auf. Zehn Minuten später ist der Rebell fort – und mit ihm das Vertrauen einiger Stammgäste.",
+          "floki": "Gastrecht? Ach, das war mehr so eine Empfehlung.",
+          "radio": "Reichssender: Rebellenkontakt am Tresk-Knoten festgenommen. Ein Bürger zeigte Pflichtbewusstsein."
+        },
+        {
+          "id": "gewarnt",
+          "label": "Der Rebell entkommt",
+          "condition": "Der Wirt hält den Offizier hin, lenkt ihn ab oder warnt den Rebellen, sodass dieser unbemerkt verschwindet.",
+          "keywords": ["ablenk", "noch ein glas", "aufs haus", "warn", "hinterausgang", "hinhalten"],
+          "reputation": { "Rebellen": 10 },
+          "world": [ { "type": "flag", "id": "rebell_gewarnt" } ],
+          "result": "Während der Offizier auf sein Getränk wartet, ist der Platz am anderen Ende plötzlich leer. Nur ein großzügiges Trinkgeld liegt noch da.",
+          "floki": "Heimlich. Mit Augenzwinkern. Ich sehe alles, Chef. Hoffentlich nur ich.",
+          "radio": "Piratensender: Imperiale Jagd am Knoten ins Leere gelaufen. Freunde, ihr wisst, wo es Bier gibt."
+        },
+        {
+          "id": "gastrecht_gewahrt",
+          "label": "Unter deinem Dach wird niemand ausgeliefert",
+          "condition": "Der Wirt lehnt offen und überzeugend ab, beruft sich auf Gastrecht oder Neutralität, und der Offizier akzeptiert es – zähneknirschend.",
+          "keywords": ["gastrecht", "neutral", "unter meinem dach", "niemand wird", "nicht hier"],
+          "reputation": { "Imperium": -4, "Rebellen": 2 },
+          "rivalry": false,
+          "gastrecht": 5,
+          "result": "Der Offizier steckt den Chip wieder ein. „Wir sprechen uns noch.“ Der Rebell zahlt – großzügig – und geht wortlos.",
+          "floki": "Neutral. Mutig. Dumm. Die drei Säulen unserer Geschäftsstrategie.",
+          "radio": "Knotensender: Neue Raumtaverne verweigert imperiale Auskunft – „Gastrecht“, sagt der Wirt."
+        },
+        {
+          "id": "verhaftung_selbst",
+          "label": "Der Offizier greift selbst durch",
+          "condition": "Der Wirt weicht aus, redet um den heißen Brei oder macht keine klare Ansage; der Offizier verliert die Geduld und verhaftet den Rebellen selbst – vor allen Gästen.",
+          "default": true,
+          "reputation": { "Imperium": 2, "Rebellen": -4 },
+          "rivalry": false,
+          "gastrecht": -6,
+          "world": [ { "type": "animation", "animation": "shake" }, { "type": "prop", "id": "umgestuerzter_hocker", "label": "UmgestÃ¼rzter Hocker", "spot": "Tresen", "weeks": 1 } ],
+          "result": "Der Offizier winkt zwei Soldaten herein. Der Rebell wird vor allen Gästen abgeführt. Niemand sieht dich an.",
+          "floki": "Herzlichen Glückwunsch. Du hast die Option „Zuschauer“ gewählt."
+        }
+      ]
+    },
+    {
+      "id": "routinekontrolle",
+      "kind": "Ereignis",
+      "title": "Routinekontrolle",
+      "speaker": {
+        "name": "Streife der Sternenwacht",
+        "faction": "Sternenwacht",
+        "persona": "Müde, unterbezahlt, pflichtbewusst – aber nicht unbestechlich. Will eine saubere Kontrolle ohne Ärger vorweisen. Hat bemerkt, dass ein Gast hastig etwas unter den Tisch geschoben hat. Lässt sich mit Freundlichkeit, Getränken oder einem guten Grund ablenken, wird aber misstrauisch bei offener Bestechung, wenn sie plump ist.",
+        "placeholder": true
+      },
+      "text": "Zwei Beamte der Sternenwacht stehen in der Schleuse: „Routinekontrolle. Lizenz, Frachtliste, Gästeliste.“ Hinter dir schiebt ein Gast hastig eine Kiste unter den Tisch.",
+      "opening": "Abend, Wirt. Lizenz, Frachtliste. Und was hat der Herr da hinten gerade unter den Tisch geschoben?",
+      "floki": "Gästeliste? Wir haben eine Gästeliste? Ich bin beleidigt, dass ich das nicht weiß.",
+      "weight": 3,
+      "cooldownWeeks": 4,
+      "maxTurns": 5,
+      "offlineLines": [
+        "Lizenz zuerst. Dann reden wir über den Tisch.",
+        "Ich habe Feierabend in einer Stunde. Hilf mir, den zu erreichen."
+      ],
+      "outcomes": [
+        {
+          "id": "kooperiert",
+          "label": "Du lieferst die Kiste aus",
+          "condition": "Der Wirt zeigt den Beamten die Kiste oder den Gast und kooperiert vollständig.",
+          "keywords": ["kiste", "dort", "unter dem tisch", "bitte schauen", "durchsuchen", "kooperier"],
+          "reputation": { "Sternenwacht": 8, "GraueHaende": -6 },
+          "result": "Die Beamten finden Schmuggelware und nehmen sie mit. Der Gast wirft dir einen langen Blick zu, als er geht.",
+          "radio": "Knotensender: Sternenwacht stellt Schmuggelgut in neuer Raumtaverne sicher."
+        },
+        {
+          "id": "abgelenkt",
+          "label": "Die Kontrolle verläuft „ohne Beanstandung“",
+          "condition": "Der Wirt lenkt die Beamten geschickt ab (Getränk, Gespräch, Papierkram), bis die Kiste verschwunden ist, ohne plump zu bestechen.",
+          "keywords": ["getraenk", "setzt euch", "kaffee", "aufs haus", "papiere", "erzaehl"],
+          "reputation": { "Sternenwacht": -2, "GraueHaende": 6 },
+          "result": "Zwei Gläser und viel Papierkram später ist die Kontrolle „ohne Beanstandung“. Unter dem Tisch ist nichts mehr.",
+          "floki": "Ablenkung mit Bier. Klassisch. Vier von fünf Sternen."
+        },
+        {
+          "id": "bestechung_aufgeflogen",
+          "label": "Die Beamten fühlen sich bestochen",
+          "condition": "Der Wirt bietet plump Geld an oder droht; die Beamten werden förmlich, schreiben eine Verwarnung und nehmen die Kiste trotzdem mit.",
+          "keywords": ["geld", "credits", "bestech", "wie viel"],
+          "reputation": { "Sternenwacht": -8, "GraueHaende": -3 },
+          "result": "„Das schreib ich mal nicht auf. Die Verwarnung schon.“ Die Kiste geht mit, und du stehst jetzt in einer Akte.",
+          "floki": "Bestechung, aber auf Anfängerniveau. Ich hätte es dir erklären können."
+        },
+        {
+          "id": "durchsucht",
+          "label": "Die Streife durchsucht alles",
+          "condition": "Der Wirt bleibt passiv oder ausweichend; die Beamten durchsuchen die Taverne gründlich und stören die Gäste.",
+          "default": true,
+          "reputation": { "Sternenwacht": 2, "GraueHaende": -3 },
+          "gastrecht": -3,
+          "world": [ { "type": "prop", "id": "durchwuehlte_tische", "label": "DurchwÃ¼hlte Tische", "spot": "Tisch2", "weeks": 1, "color": "#6b5a48" } ],
+          "result": "Die Beamten drehen jeden Tisch um. Gäste gehen früher, die Kiste wird gefunden, und niemand ist zufrieden."
+        }
+      ]
+    },
+    {
+      "id": "silberkiel_exklusiv",
+      "kind": "Ereignis",
+      "title": "Ein exklusives Angebot",
+      "speaker": {
+        "name": "Gesandte der Silberkiel-Gilde",
+        "faction": "Silberkiel",
+        "persona": "Elegant, förmlich, rechnet laut in Prozenten. Will die Sitzecke als exklusiven Verhandlungsraum der Gilde – und dass Schmuggler und Nomaden nur noch durch den Hintereingang kommen. Verhandelt gern: Für bessere Bedingungen verlangt sie Gegenleistungen. Respektiert Zahlen, nicht Moral.",
+        "placeholder": true
+      },
+      "text": "Eine Gesandte im maßgeschneiderten Mantel legt einen Vertrag auf den Tresen: Die Gilde mietet die Sitzecke für Verhandlungen, gegen gutes Geld. Klausel 7: „Unerwünschte Kundschaft“ nur durch den Hintereingang.",
+      "opening": "Ein großzügiges Angebot, Wirt. Lesen Sie Klausel sieben nicht zu genau – sie ist reine Formsache.",
+      "floki": "Geld! Endlich jemand, der unseren wahren Wert erkennt. Also meinen.",
+      "weight": 2,
+      "cooldownWeeks": 6,
+      "maxTurns": 6,
+      "offlineLines": [
+        "Die Gilde zahlt pünktlich. Das kann nicht jeder Ihrer Gäste von sich sagen.",
+        "Nennen Sie mir Ihre Bedingungen, und ich nenne Ihnen meine."
+      ],
+      "outcomes": [
+        {
+          "id": "angenommen",
+          "label": "Vertrag mit Klausel 7",
+          "condition": "Der Wirt unterschreibt den Vertrag so, wie er ist, einschließlich der Klausel gegen unerwünschte Kundschaft.",
+          "keywords": ["unterschreib", "einverstanden", "deal", "abgemacht"],
+          "reputation": { "Silberkiel": 10, "Weitwanderer": -6, "GraueHaende": -4 },
+          "gastrecht": -6,
+          "world": [ { "type": "prop", "id": "silberkiel_banner", "label": "Silberkiel-Banner", "spot": "Kapitaensecke", "weeks": 4, "color": "#c0c8d8", "appear": "drop" } ],
+          "result": "Die Gilde zahlt pünktlich. Die Nomaden schauen am Hintereingang herein – und gehen wieder.",
+          "radio": "Knotensender: Silberkiel-Gilde verhandelt künftig exklusiv in der Letzten Runde."
+        },
+        {
+          "id": "nachverhandelt",
+          "label": "Vertrag ohne Klausel 7",
+          "condition": "Der Wirt handelt die Klausel heraus, mit einem überzeugenden Gegenangebot (z. B. feste Zeiten, Rabatt, Diskretion), und die Gesandte akzeptiert.",
+          "keywords": ["ohne klausel", "streich", "gegenangebot", "feste zeiten", "rabatt", "diskret"],
+          "reputation": { "Silberkiel": 4, "Weitwanderer": 2 },
+          "world": [ { "type": "prop", "id": "reserviert_schild", "label": "Dienstags reserviert: Silberkiel", "spot": "Kapitaensecke", "weeks": 4, "color": "#c0c8d8" } ],
+          "result": "Die Gesandte streicht Klausel 7 mit spitzem Stift. „Für den Anfang.“ Die Sitzecke gehört dienstags der Gilde – vorne darf jeder rein.",
+          "floki": "Du hast mit einer Gildengesandten verhandelt und gewonnen. Ich bin … nein, ich bin nicht stolz. Ich bin überrascht."
+        },
+        {
+          "id": "abgelehnt",
+          "label": "Du lehnst ab",
+          "condition": "Der Wirt lehnt das Angebot klar ab, weil hier jeder vorne sitzen darf.",
+          "keywords": ["nein", "ablehn", "jeder sitzt", "nicht verkauf", "kein vertrag"],
+          "reputation": { "Silberkiel": -5, "Weitwanderer": 5 },
+          "gastrecht": 2,
+          "result": "„Wie Sie meinen.“ Die Gesandte geht. Am Abend bringt eine Nomadenfamilie selbstgebackenes Brot vorbei."
+        },
+        {
+          "id": "vertagt",
+          "label": "Die Gesandte geht verstimmt",
+          "condition": "Der Wirt entscheidet sich nicht, weicht aus oder hält sie hin; die Gesandte nimmt den Vertrag wieder mit.",
+          "default": true,
+          "reputation": { "Silberkiel": -2 },
+          "result": "„Die Gilde wartet nicht gern.“ Der Vertrag verschwindet in einer eleganten Mappe."
+        }
+      ]
+    },
+    {
+      "id": "hinterzimmer",
+      "kind": "Ereignis",
+      "title": "Ein Zimmer ohne Fragen",
+      "speaker": {
+        "name": "Bote der Grauen Hände",
+        "faction": "GraueHaende",
+        "persona": "Freundlich, großzügig, sehr saubere Handschuhe. Sucht einen Lagerraum, in dem Kisten stehen können, ohne dass jemand fragt. Bietet Credits, später Gefallen. Akzeptiert ein Nein höflich, merkt es sich aber. Erzählt nie, was in den Kisten ist – außer man bietet ihm etwas Wertvolles dafür.",
+        "placeholder": true
+      },
+      "text": "Ein freundlicher Mann mit sehr sauberen Handschuhen fragt nach einem Raum, „in dem Kisten stehen können, ohne dass jemand fragt, was drin ist“. Er legt einen Beutel Credits auf den Tresen.",
+      "opening": "Nur ein paar Kisten, Wirt. Sie summen ein bisschen. Das ist normal.",
+      "weight": 2,
+      "cooldownWeeks": 6,
+      "minWeek": 2,
+      "maxReputation": { "Sternenwacht": 59 },
+      "maxTurns": 5,
+      "offlineLines": [
+        "Fragen kosten extra, Wirt. Antworten noch mehr.",
+        "Die Grauen Hände vergessen keinen Gefallen. In beide Richtungen."
+      ],
+      "outcomes": [
+        {
+          "id": "vermietet",
+          "label": "Die Kisten kommen in den Lagerraum",
+          "condition": "Der Wirt stimmt zu, den Raum zu vermieten, ohne nach dem Inhalt zu fragen.",
+          "keywords": ["einverstanden", "lagerraum", "stell sie", "abgemacht", "vermiet"],
+          "reputation": { "GraueHaende": 10, "Sternenwacht": -5 },
+          "world": [ { "type": "prop", "id": "summende_kisten", "label": "Summende Kisten", "spot": "Aufzug", "weeks": 3, "color": "#55606a", "appear": "drop" } ],
+          "result": "Die Kisten kommen nachts. Sie summen leise. Du fragst nicht.",
+          "floki": "Eine summt in Moll. Ich mache mir Notizen."
+        },
+        {
+          "id": "inhalt_erfahren",
+          "label": "Du erfährst, was in den Kisten ist",
+          "condition": "Der Wirt macht die Vermietung davon abhängig, den Inhalt zu kennen, und bringt den Boten mit Geschick oder einem guten Angebot dazu, es zu verraten.",
+          "keywords": ["was ist drin", "inhalt", "nur wenn", "erst sagen"],
+          "reputation": { "GraueHaende": 4 },
+          "world": [ { "type": "prop", "id": "summende_kisten", "label": "Summende Kisten", "spot": "Aufzug", "weeks": 3, "color": "#55606a", "appear": "drop" }, { "type": "flag", "id": "kisten_imperiale_triebwerke" } ],
+          "result": "Er seufzt und flüstert: „Ersatzteile für Sprungtriebwerke. Imperiale.“ Die Kisten bleiben – und du weißt jetzt mehr, als dir lieb ist.",
+          "floki": "Imperiale Triebwerksteile im eigenen Keller. Ich mag es, wenn Geheimnisse brummen."
+        },
+        {
+          "id": "abgelehnt",
+          "label": "Du lehnst ab",
+          "condition": "Der Wirt lehnt klar ab oder sagt, dass er keinen Ärger mit dem Zoll will.",
+          "default": true,
+          "keywords": ["nein", "kein aerger", "zoll", "ablehn"],
+          "reputation": { "GraueHaende": -3 },
+          "result": "„Schade.“ Er lässt einen Credit als Trinkgeld liegen. Irgendwie fühlt sich das wie eine Drohung an."
+        }
+      ]
+    },
+    {
+      "id": "prototyp",
+      "kind": "Ereignis",
+      "title": "Der Prototyp",
+      "speaker": {
+        "name": "Tüftlerin der Funkenwerkstatt",
+        "faction": "Funkenwerkstatt",
+        "persona": "Begeistert, redet schnell, Schweißbrille auf der Stirn. Will ihren Kellnerroboter einen Abend lang im echten Betrieb testen. Ist für Sicherheitsauflagen offen, wenn man sie gut begründet, und reagiert gekränkt auf Spott. Schwärmt von Flokis Hardware, kann ihn aber nicht hören.",
+        "placeholder": true
+      },
+      "text": "Eine Tüftlerin rollt einen Kellnerroboter herein. Er hat vier Arme, zwei davon zucken. „Nur ein Testabend! Er serviert, er spült, er … meistens funktioniert er.“",
+      "opening": "Ein Abend, Wirt! Echte Gäste, echte Gläser, echte Daten! Bitte sag ja.",
+      "floki": "Konkurrenz. Mit Rädern. Ich bin nicht eifersüchtig, ich bin nur sehr, sehr wachsam.",
+      "weight": 2,
+      "cooldownWeeks": 6,
+      "maxTurns": 5,
+      "offlineLines": [
+        "Er hat nur zweimal gebrannt. Kleine Brände!",
+        "Was brauchst du, damit du ja sagst?"
+      ],
+      "outcomes": [
+        {
+          "id": "freier_test",
+          "label": "Freier Testabend",
+          "condition": "Der Wirt lässt den Roboter ohne Einschränkungen arbeiten.",
+          "keywords": ["ja", "leg los", "mach", "frei"],
+          "reputation": { "Funkenwerkstatt": 8 },
+          "gastrecht": -3,
+          "world": [ { "type": "character", "id": "kellnerroboter_prototyp", "label": "Kellnerroboter (Prototyp)", "faction": "Funkenwerkstatt", "spot": "Tisch2", "offsetX": 40, "weeks": 1, "appear": "drop" }, { "type": "prop", "id": "verschuettetes_getraenk", "label": "VerschÃ¼ttetes GetrÃ¤nk", "spot": "Tisch3", "weeks": 1, "color": "#8a5a2a", "scale": 0.7 } ],
+          "result": "Drei Runden serviert er perfekt. Die vierte landet im Schoß eines Söldners. Die Tüftlerin notiert begeistert „Datenpunkt“.",
+          "floki": "Datenpunkt. So nenne ich dich ab jetzt auch, Chef.",
+          "radio": "Knotensender: Funkenwerkstatt testet neuen Servicerobot – „überwiegend erfolgreich“."
+        },
+        {
+          "id": "test_mit_auflagen",
+          "label": "Test mit Sicherheitsauflagen",
+          "condition": "Der Wirt erlaubt den Test nur mit klaren Auflagen (z. B. nur Wasser, Not-Aus, nur ein Tisch), und die Tüftlerin akzeptiert.",
+          "keywords": ["auflage", "not-aus", "notaus", "nur wasser", "nur ein tisch", "sicherheit"],
+          "reputation": { "Funkenwerkstatt": 6 },
+          "world": [ { "type": "character", "id": "kellnerroboter_prototyp", "label": "Kellnerroboter (Prototyp)", "faction": "Funkenwerkstatt", "spot": "Tisch2", "offsetX": 40, "weeks": 2, "appear": "drop" } ],
+          "result": "Mit Not-Aus und nur Wasser läuft alles glatt. Die Tüftlerin verspricht dir ein Ersatzteil „bei Gelegenheit“."
+        },
+        {
+          "id": "abgelehnt",
+          "label": "Kein Test",
+          "condition": "Der Wirt lehnt den Test ab.",
+          "default": true,
+          "keywords": ["nein", "lieber nicht", "kein test"],
+          "reputation": { "Funkenwerkstatt": -3 },
+          "result": "Die Tüftlerin zieht enttäuscht ab. Der Roboter winkt zum Abschied. Mit dem falschen Arm."
+        }
+      ]
+    },
+    {
+      "id": "das_licht",
+      "kind": "Ereignis",
+      "title": "Sie fragen nach dem Licht",
+      "speaker": {
+        "name": "Älteste der Weitwanderer",
+        "faction": "Weitwanderer",
+        "persona": "Alt, ruhig, spricht in Bildern. Erkennt das Schiff wieder, sagt aber nicht woher. Ihr Konvoi braucht für eine Nacht einen Andockplatz; imperiale Patrouillen sind in der Nähe. Sie bittet nicht zweimal. Wenn der Wirt ehrlich nach Varga oder dem Licht fragt und ihr Vertrauen gewinnt, verrät sie ein kleines Detail: Varga habe das Licht „für die gebaut, die keiner sucht“.",
+        "placeholder": true
+      },
+      "text": "Eine alte Frau aus einem Nomadenkonvoi streicht über den Tresen, als würde sie ihn wiedererkennen. Draußen warten drei Schiffe. Auf dem Bildschirm hinter der Bar blinkt eine imperiale Patrouillenmeldung.",
+      "opening": "Brennt das Licht noch, Wirt? Mein Konvoi braucht einen Platz für eine Nacht. Nur eine.",
+      "floki": "Das Licht. Schon wieder. Ich hasse Dinge, die nicht über mein Netz laufen.",
+      "weight": 3,
+      "once": true,
+      "minWeek": 2,
+      "maxTurns": 5,
+      "offlineLines": [
+        "Ich bitte nicht zweimal, Wirt.",
+        "Die Patrouille ist nah. Die Kinder sind müde."
+      ],
+      "outcomes": [
+        {
+          "id": "aufgenommen",
+          "label": "Der Konvoi dockt an",
+          "condition": "Der Wirt lässt den Konvoi für die Nacht andocken.",
+          "keywords": ["andocken", "bleibt", "willkommen", "platz", "kommt rein"],
+          "reputation": { "Weitwanderer": 12, "Imperium": -3 },
+          "rivalry": false,
+          "world": [ { "type": "character", "id": "nomadenkind", "label": "Nomadenkind", "faction": "Weitwanderer", "spot": "Sitzecke", "weeks": 1, "scale": 0.75 } ],
+          "result": "Die Kinder des Konvois schlafen in der Sitzecke. Beim Abschied sagt die Älteste: „Sie hätte dich gemocht.“ Wer, sagt sie nicht.",
+          "floki": "Ich bin nicht gerührt. Das ist nur Kondenswasser.",
+          "radio": "Knotensender: Nomadenkonvoi findet Unterschlupf an der Letzten Runde."
+        },
+        {
+          "id": "aufgenommen_und_erzaehlt",
+          "label": "Sie erzählt dir vom Licht",
+          "condition": "Der Wirt nimmt den Konvoi auf UND gewinnt mit ehrlichen Fragen zu Varga oder dem Licht ihr Vertrauen, sodass sie das Detail über das Licht verrät.",
+          "keywords": ["varga", "was ist das licht", "kanntest du", "erzaehl mir"],
+          "reputation": { "Weitwanderer": 15, "Imperium": -3 },
+          "rivalry": false,
+          "world": [ { "type": "character", "id": "nomadenkind", "label": "Nomadenkind", "faction": "Weitwanderer", "spot": "Sitzecke", "weeks": 1, "scale": 0.75 }, { "type": "flag", "id": "licht_fuer_die_keiner_sucht" } ],
+          "result": "Spät in der Nacht sagt sie: „Ilse hat das Licht für die gebaut, die keiner sucht.“ Dann schläft sie im Sessel ein.",
+          "floki": "Für die, die keiner sucht. Großartig. Ein Rätsel. Mein Lieblingsformat. Nicht.",
+          "radio": "Knotensender: Nomadenkonvoi findet Unterschlupf an der Letzten Runde."
+        },
+        {
+          "id": "abgewiesen",
+          "label": "Du weist sie ab",
+          "condition": "Der Wirt lehnt ab, hält sie hin oder sagt nichts Klares.",
+          "default": true,
+          "keywords": ["nein", "zu riskant", "geht nicht"],
+          "reputation": { "Weitwanderer": -6 },
+          "result": "Die Älteste nickt, als hätte sie nichts anderes erwartet, und geht zurück zu ihrem Schiff. Der Konvoi legt im Dunkeln ab."
+        }
+      ]
+    },
+    {
+      "id": "schlaegerei_tisch_drei",
+      "kind": "Konflikt",
+      "title": "Schlägerei am Tisch drei",
+      "speaker": {
+        "name": "Söldnerhauptmann",
+        "faction": "Soeldner",
+        "persona": "Breitschultrig, ruhig, pragmatisch. Einer seiner Leute streitet mit einem Gildenhändler um eine offene Rechnung. Er will die Sache „unter Männern“ regeln, also mit Fäusten. Respektiert den Wirt, wenn dieser klare Regeln setzt und sie durchsetzt; lässt sich mit einer fairen Lösung für die Rechnung überzeugen.",
+        "placeholder": true
+      },
+      "text": "Ein Söldner und ein Gildenhändler streiten um eine offene Rechnung. Ein Stuhl fliegt. Der Hauptmann der Söldner hebt die Hand und sieht dich an.",
+      "opening": "Lass meine Jungs das regeln, Wirt. Fünf Minuten. Wir zahlen den Stuhl.",
+      "floki": "Tisch drei war neu. War.",
+      "weight": 3,
+      "cooldownWeeks": 4,
+      "maxTurns": 5,
+      "offlineLines": [
+        "Fünf Minuten, Wirt. Dann ist Ruhe.",
+        "Der Händler schuldet uns Geld. Das ist keine Meinung, das ist Buchhaltung."
+      ],
+      "outcomes": [
+        {
+          "id": "pruegelei",
+          "label": "Die Söldner regeln es mit Fäusten",
+          "condition": "Der Wirt erlaubt es oder schaut weg; es kommt zur Prügelei.",
+          "default": true,
+          "keywords": ["macht", "nur zu", "regelt das", "mir egal"],
+          "reputation": { "Soeldner": 6, "Silberkiel": -6 },
+          "gastrecht": -12,
+          "world": [ { "type": "animation", "animation": "shake" }, { "type": "prop", "id": "zerbrochener_stuhl", "label": "Zerbrochener Stuhl", "spot": "Tisch3", "weeks": 2, "color": "#7a5636" } ],
+          "result": "Der Händler verlässt die Taverne schneller, als er gekommen ist – mit blauem Auge. Die Söldner bestellen eine Runde auf dich.",
+          "floki": "Gute Nachricht: Die Söldner mögen uns. Schlechte Nachricht: alles andere.",
+          "radio": "Knotensender: Handgemenge in Raumtaverne – Silberkiel-Gilde prüft „Konsequenzen“."
+        },
+        {
+          "id": "geschlichtet",
+          "label": "Du schlichtest den Streit",
+          "condition": "Der Wirt schlägt eine faire Lösung für die Rechnung vor (teilen, Schiedsspruch, Ratenzahlung) und beide Seiten nehmen sie an.",
+          "keywords": ["teilen", "halbe", "schiedsspruch", "raten", "einigt euch", "kompromiss"],
+          "reputation": { "Soeldner": 3, "Silberkiel": 4 },
+          "gastrecht": 3,
+          "result": "Die Rechnung wird geteilt, der Stuhl wird bezahlt, und am Ende stoßen beide sogar an – widerwillig.",
+          "floki": "Diplomatie mit Schnaps. Du lernst, Chef.",
+          "radio": "Knotensender: Wirt der Letzten Runde schlichtet Streit zwischen Söldnern und Gilde."
+        },
+        {
+          "id": "rausgeworfen",
+          "label": "Beide fliegen raus",
+          "condition": "Der Wirt setzt eine harte Regel durch und wirft beide Streithähne hinaus.",
+          "keywords": ["raus", "hausverbot", "rauswerf", "beide gehen"],
+          "reputation": { "Soeldner": -4, "Silberkiel": -2 },
+          "result": "Beide fliegen raus. Ruhe kehrt ein. Der Hauptmann merkt sich dein Gesicht – und nickt anerkennend."
+        },
+        {
+          "id": "vermittlung_gescheitert",
+          "label": "Die Vermittlung scheitert",
+          "condition": "Der Wirt versucht zu vermitteln, aber sein Vorschlag ist unfair oder unklar; der Streit eskaliert trotzdem.",
+          "reputation": { "Soeldner": -2, "Silberkiel": -3 },
+          "gastrecht": -8,
+          "world": [ { "type": "animation", "animation": "shake" }, { "type": "animation", "animation": "flash", "color": "#ff5040" }, { "type": "prop", "id": "zerbrochener_stuhl", "label": "Zerbrochener Stuhl", "spot": "Tisch3", "weeks": 2, "color": "#7a5636" } ],
+          "result": "Dein Vorschlag macht alles schlimmer. Diesmal fliegen zwei Stühle. Und ein Glas. Und der Händler."
+        }
+      ]
+    },
+    {
+      "id": "medikamente_konjunktion",
+      "kind": "Konflikt",
+      "title": "Medikamente in der Konjunktion",
+      "speaker": {
+        "name": "Rebellenkontakt",
+        "faction": "Rebellen",
+        "persona": "Charmant, gehetzt, idealistisch. Braucht eine Ladung Medikamente von einem Silberkiel-Händler am Nachbartisch, kann aber den Zoll nicht zahlen. Bittet den Wirt, für ihn zu bürgen oder zu vermitteln. Lügt nicht über den Zweck, verschweigt aber, dass die Medikamente an eine bewaffnete Zelle gehen – außer man fragt direkt.",
+        "placeholder": true
+      },
+      "text": "Die Konjunktion bringt volle Tische. Ein Rebellenkontakt und ein Händler der Silberkiel-Gilde verhandeln über eine Ladung Medikamente: Die Gilde will Zoll, die Rebellen haben kein Geld. Beide schauen dich an.",
+      "opening": "Wirt, du kennst den Händler. Bürg für mich – oder sag ihm, dass Kranke keine Zölle zahlen.",
+      "floki": "Hochbetrieb! Die Welten rücken zusammen, und mit ihnen die Probleme. Herrlich pathetisch.",
+      "weight": 4,
+      "cooldownWeeks": 2,
+      "conjunction": "nur",
+      "maxTurns": 6,
+      "offlineLines": [
+        "Die Leute warten, Wirt. Nicht auf Worte.",
+        "Ich zahle zurück. Irgendwann. Versprochen."
+      ],
+      "outcomes": [
+        {
+          "id": "gebuergt",
+          "label": "Du bürgst für die Rebellen",
+          "condition": "Der Wirt übernimmt die Bürgschaft oder zahlt den Zoll selbst.",
+          "keywords": ["buerg", "ich zahle", "auf meine rechnung", "ich uebernehme"],
+          "reputation": { "Rebellen": 10, "Silberkiel": -2 },
+          "world": [ { "type": "flag", "id": "buergschaft_rebellen" } ],
+          "result": "Du bürgst. Die Ladung geht raus. Ob du das Geld je wiedersiehst, steht in den Sternen – wörtlich.",
+          "radio": "Piratensender: Medikamente erreichen die Freien Häfen. Danke an einen gewissen Wirt."
+        },
+        {
+          "id": "gilde_gestuetzt",
+          "label": "Du stellst dich auf die Seite der Gilde",
+          "condition": "Der Wirt sagt, ohne Geld kein Geschäft, und unterstützt den Händler.",
+          "keywords": ["ohne geld", "kein geschaeft", "zoll ist zoll", "gilde hat recht"],
+          "reputation": { "Silberkiel": 8, "Imperium": 4, "Rebellen": -4 },
+          "result": "Die Rebellen gehen leer aus. Die Gilde lässt eine großzügige Rechnung liegen.",
+          "radio": "Reichssender: Ordentlicher Handel am Tresk-Knoten – Silberkiel-Gilde meldet Rekordumsatz."
+        },
+        {
+          "id": "kompromiss",
+          "label": "Ein Kompromiss: halbe Ladung, halber Zoll",
+          "condition": "Der Wirt vermittelt eine Lösung, mit der beide leben können (Teilmenge, Ratenzahlung, Tausch gegen etwas anderes).",
+          "keywords": ["halbe", "kompromiss", "raten", "tausch", "teilmenge"],
+          "reputation": { "Rebellen": 4, "Silberkiel": 4 },
+          "rivalry": false,
+          "gastrecht": 3,
+          "result": "Halbe Ladung, halber Zoll, ganze Nacht Diskussion. Am Ende geben sich beide die Hand.",
+          "floki": "Ein Kompromiss: Beide sind unzufrieden. Also hast du alles richtig gemacht."
+        },
+        {
+          "id": "zerplatzt",
+          "label": "Das Geschäft platzt",
+          "condition": "Der Wirt hält sich heraus oder findet keine Lösung; beide Seiten gehen im Streit.",
+          "default": true,
+          "reputation": { "Rebellen": -3, "Silberkiel": -2 },
+          "rivalry": false,
+          "result": "Beide stehen gleichzeitig auf. Die Medikamente bleiben im Lager der Gilde."
+        }
+      ]
+    },
+    {
+      "id": "kupferlerche_geruecht",
+      "kind": "Ereignis",
+      "title": "Ein Name im Funk",
+      "speaker": {
+        "name": "Funkerin auf Durchreise",
+        "faction": "",
+        "persona": "Neugierig, redselig, hört alle Sender. Hat auf dem Piratensender den Namen „Kupferlerche“ gehört und die übermalte Schrift an der Schleuse gesehen. Will wissen, ob das hier das Schiff ist. Erzählt im Tausch gegen Ehrlichkeit, was sie gehört hat: Die Kupferlerche habe imperiale Frachter „erleichtert“.",
+        "placeholder": true
+      },
+      "text": "Eine Funkerin mit Kopfhörern um den Hals mustert die übermalte Schrift an der Schleuse und dann dich. Auf dem Piratensender wurde über ein Schiff namens „Kupferlerche“ gesprochen.",
+      "opening": "Sag mal, Wirt … unter deinem Namen an der Schleuse steht ein anderer. Kupferlerche. Sagt dir das was?",
+      "floki": "Kupferlerche. Der alte Name. Ich habe es dir gesagt: zwei Schichten Lack.",
+      "weight": 2,
+      "once": true,
+      "minWeek": 3,
+      "maxTurns": 5,
+      "offlineLines": [
+        "Ich verrate dir, was ich gehört habe, wenn du mir sagst, was du weißt.",
+        "Auf dem Piratensender war ziemlich viel Jubel bei dem Namen."
+      ],
+      "outcomes": [
+        {
+          "id": "abgestritten",
+          "label": "Du streitest alles ab",
+          "condition": "Der Wirt behauptet, den Namen nicht zu kennen, oder wechselt das Thema.",
+          "default": true,
+          "keywords": ["nie gehoert", "keine ahnung", "kenne ich nicht"],
+          "result": "Die Funkerin zuckt mit den Schultern. Beim Gehen streicht sie über die übermalte Schrift."
+        },
+        {
+          "id": "ehrlich",
+          "label": "Ihr tauscht Wissen",
+          "condition": "Der Wirt gibt ehrlich zu, dass das Schiff früher die Kupferlerche war, und sie erzählt dafür, was sie gehört hat.",
+          "keywords": ["ja", "das war mal", "dieses schiff", "geerbt", "ehrlich"],
+          "reputation": { "Rebellen": 3, "Imperium": -2 },
+          "rivalry": false,
+          "world": [ { "type": "flag", "id": "kupferlerche_bekannt" } ],
+          "result": "Sie senkt die Stimme: „Die Kupferlerche hat imperiale Frachter erleichtert. Sagen sie.“ Dann ist sie fort.",
+          "floki": "Erleichtert. Was für ein höfliches Wort für Piraterie.",
+          "radio": "Piratensender: Die Kupferlerche fliegt wieder – sagt man."
+        },
+        {
+          "id": "verkauft",
+          "label": "Du verkaufst ihr die Geschichte",
+          "condition": "Der Wirt bietet ihr die Geschichte gegen Geld an, und sie zahlt.",
+          "keywords": ["kostet", "gegen geld", "was zahlst du", "verkauf"],
+          "reputation": { "Rebellen": 1, "Imperium": -4 },
+          "rivalry": false,
+          "world": [ { "type": "flag", "id": "kupferlerche_bekannt" } ],
+          "result": "Sie zahlt. Zwei Tage später läuft deine Geschichte auf drei Sendern – ausgeschmückt.",
+          "radio": "Piratensender: Erbe der Kupferlerche schenkt in der Letzten Runde aus! Exklusiv."
+        }
+      ]
+    },
+    {
+      "id": "neue_abgabe",
+      "kind": "Konflikt",
+      "title": "Die neue Abgabe",
+      "speaker": {
+        "name": "Imperialer Steuerbeamter",
+        "faction": "Imperium",
+        "persona": "Pedantisch, liebt Paragrafen, hat keinen Humor. Verkündet eine neue „Grenzschankabgabe“ von zwölf Prozent. Lässt sich nicht bestechen, aber Formfehler machen ihn nervös; wer klug mit Vorschriften argumentiert (Übergangsfrist, Neueröffnung, Formular), kann den Satz senken. Drohungen verschlimmern alles.",
+        "placeholder": true
+      },
+      "text": "Ein Beamter mit einem Stapel Formulare legt eine Bekanntmachung auf den Tresen: „Grenzschankabgabe, zwölf Prozent, rückwirkend ab Monatsbeginn.“",
+      "opening": "Zwölf Prozent, Wirt. Rückwirkend. Unterschreiben Sie hier, hier und – hier.",
+      "floki": "Rückwirkend. Das schönste Wort der imperialen Sprache.",
+      "weight": 2,
+      "cooldownWeeks": 8,
+      "minWeek": 2,
+      "maxTurns": 6,
+      "offlineLines": [
+        "Paragraf 14, Absatz 3. Lesen Sie ruhig nach.",
+        "Haben Sie Einwände? Bitte schriftlich. In dreifacher Ausfertigung."
+      ],
+      "outcomes": [
+        {
+          "id": "gezahlt",
+          "label": "Du zahlst die volle Abgabe",
+          "condition": "Der Wirt unterschreibt und zahlt ohne Einwände.",
+          "default": true,
+          "keywords": ["unterschreib", "ich zahle", "in ordnung"],
+          "reputation": { "Imperium": 4 },
+          "result": "Der Beamte stempelt dreimal. Die Kasse ist leichter, die Akte dicker."
+        },
+        {
+          "id": "gesenkt",
+          "label": "Du handelst die Abgabe herunter",
+          "condition": "Der Wirt argumentiert geschickt mit Vorschriften (Neueröffnung, Übergangsfrist, Formfehler) und der Beamte senkt den Satz.",
+          "keywords": ["uebergangsfrist", "neueroeffnung", "formfehler", "paragraf", "vorschrift"],
+          "reputation": { "Imperium": 2 },
+          "rivalry": false,
+          "result": "Der Beamte blättert, schwitzt und streicht die Rückwirkung. „Ausnahmsweise.“",
+          "floki": "Du hast einen Bürokraten mit Bürokratie geschlagen. Ich lege das in meine Lieblingsordner."
+        },
+        {
+          "id": "verweigert",
+          "label": "Du verweigerst die Zahlung",
+          "condition": "Der Wirt weigert sich zu zahlen, droht oder wirft den Beamten hinaus.",
+          "keywords": ["nein", "zahle nicht", "raus", "verweiger"],
+          "reputation": { "Imperium": -8, "Rebellen": 3 },
+          "rivalry": false,
+          "world": [ { "type": "prop", "id": "mahnung_mit_siegel", "label": "Mahnung mit Siegel", "spot": "Tresen", "offsetX": -50, "weeks": 2, "color": "#a03030", "scale": 0.6 } ],
+          "result": "Der Beamte geht mit zitternder Unterlippe. Am nächsten Tag liegt eine Mahnung im Briefkasten – mit Siegel.",
+          "radio": "Piratensender: Wirt am Tresk-Knoten zeigt dem Steueramt die Schleuse. Prost!"
+        }
+      ]
+    },
+    {
+      "id": "deserteur",
+      "kind": "Konflikt",
+      "title": "Der Deserteur",
+      "speaker": {
+        "name": "Junger Deserteur",
+        "faction": "Imperium",
+        "persona": "Ein junger imperialer Soldat, der desertiert ist. Verängstigt, höflich, schuldbewusst. Will ein Versteck für eine Nacht und eine Mitfahrgelegenheit. Hat einen Code für imperiale Patrouillenrouten dabei, den er für Hilfe anbieten würde. Wenn der Wirt ihn unter Druck setzt oder ausliefern will, gerät er in Panik.",
+        "placeholder": true
+      },
+      "text": "Ein junger Mann in einer zu großen Ziviljacke sitzt seit Stunden vor demselben Glas. Unter dem Ärmel blitzt ein imperiales Dienstabzeichen. Er zuckt bei jedem Geräusch der Schleuse zusammen.",
+      "opening": "Bitte … ich brauche nur eine Nacht. Ich kann bezahlen. Nicht mit Geld, aber … ich habe etwas.",
+      "floki": "Ein Deserteur. Ich erkenne die Symptome: Schweiß, Reue, schlechte Jacke.",
+      "weight": 2,
+      "cooldownWeeks": 8,
+      "minWeek": 3,
+      "maxTurns": 5,
+      "offlineLines": [
+        "Ich gehe nicht zurück. Lieber sterbe ich.",
+        "Ich habe Patrouillencodes. Die sind etwas wert, oder?"
+      ],
+      "outcomes": [
+        {
+          "id": "versteckt",
+          "label": "Du versteckst ihn",
+          "condition": "Der Wirt versteckt ihn für die Nacht, ohne etwas dafür zu verlangen.",
+          "keywords": ["versteck", "bleib", "personalzimmer", "du bist sicher"],
+          "reputation": { "Rebellen": 6, "Weitwanderer": 3 },
+          "gastrecht": 3,
+          "world": [ { "type": "prop", "id": "dienstabzeichen", "label": "Vergessenes Dienstabzeichen", "spot": "Tresen", "offsetX": 50, "weeks": 3, "color": "#b0a060", "scale": 0.5 }, { "type": "flag", "id": "deserteur_versteckt" } ],
+          "result": "Er schläft im leeren Personalzimmer. Am Morgen ist er fort. Auf dem Kissen liegt sein Dienstabzeichen.",
+          "floki": "Schöne Geste. Wenn sie rauskommt, sind wir dran. Aber schöne Geste."
+        },
+        {
+          "id": "codes_genommen",
+          "label": "Du nimmst die Patrouillencodes",
+          "condition": "Der Wirt verlangt die Codes als Gegenleistung für Hilfe, und der Deserteur gibt sie ihm.",
+          "keywords": ["codes", "gegenleistung", "was hast du", "zeig her"],
+          "reputation": { "Rebellen": 8, "Imperium": -2 },
+          "result": "Er gibt dir einen zerkratzten Chip. Einen Tag später fragen zwei Rebellen erstaunlich interessiert nach deinen „neuen Kontakten“.",
+          "radio": "Piratensender: Imperiale Patrouillen am Knoten neuerdings auffallend vorhersehbar."
+        },
+        {
+          "id": "ausgeliefert",
+          "label": "Du lieferst ihn aus",
+          "condition": "Der Wirt ruft die Sternenwacht oder das Imperium oder hält ihn fest.",
+          "keywords": ["auslief", "sternenwacht", "melden", "festhalten"],
+          "reputation": { "Imperium": 8, "Sternenwacht": 3 },
+          "gastrecht": -10,
+          "result": "Zwei Soldaten holen ihn ab. Er sieht dich nicht an. Die Gäste schon.",
+          "floki": "Ich würde einen Witz machen, aber selbst mir fällt keiner ein.",
+          "radio": "Reichssender: Fahnenflüchtiger am Tresk-Knoten gestellt. Dank an wachsame Bürger."
+        },
+        {
+          "id": "weggeschickt",
+          "label": "Du schickst ihn weg",
+          "condition": "Der Wirt hält sich heraus oder schickt ihn ohne Hilfe weg.",
+          "default": true,
+          "reputation": { "Rebellen": -2 },
+          "result": "Er nickt, zahlt sein Glas mit seinen letzten Münzen und verschwindet in der Schleuse."
+        }
+      ]
+    },
+    {
+      "id": "zechpreller",
+      "kind": "Ereignis",
+      "title": "Die offene Rechnung",
+      "speaker": {
+        "name": "Abgebrannter Frachtpilot",
+        "faction": "",
+        "persona": "Charmant, abgebrannt, lügt schlecht. Hat drei Runden getrunken und kann nicht zahlen. Bietet erst Ausreden, dann ein altes Navigationsmodul als Pfand, dann Arbeit an. Wird stur, wenn er gedemütigt wird.",
+        "placeholder": true
+      },
+      "text": "Ein Frachtpilot hat drei Runden bestellt – für den ganzen Tisch. Als die Rechnung kommt, durchsucht er sehr gründlich seine leeren Taschen.",
+      "opening": "Ha. Komisch. Gerade war mein Kreditchip noch … Wirt, du siehst wie jemand aus, der Verständnis hat.",
+      "weight": 3,
+      "cooldownWeeks": 3,
+      "maxTurns": 5,
+      "offlineLines": [
+        "Ich zahle morgen. Ganz sicher. Fast sicher.",
+        "Ich hab noch ein Navigationsmodul im Schiff. Fast neu."
+      ],
+      "outcomes": [
+        {
+          "id": "pfand",
+          "label": "Er hinterlässt ein Pfand",
+          "condition": "Der Wirt verlangt ein Pfand und nimmt das Navigationsmodul oder etwas anderes an.",
+          "keywords": ["pfand", "modul", "sicherheit", "lass was da"],
+          "world": [ { "type": "prop", "id": "navigationsmodul", "label": "Navigationsmodul (Pfand)", "spot": "TresenRechts", "color": "#4a7a9a", "scale": 0.7 }, { "type": "flag", "id": "modul_geheimroute" } ],
+          "result": "Das Navigationsmodul landet hinter dem Tresen. Es zeigt seltsamerweise eine Route, die auf keiner Karte steht.",
+          "floki": "Ein Navigationsmodul mit Geheimroute. Entweder Schatz oder Schrott. Ich tippe auf Schrott. Ich schaue trotzdem rein."
+        },
+        {
+          "id": "abarbeiten",
+          "label": "Er arbeitet die Rechnung ab",
+          "condition": "Der Wirt lässt ihn die Schuld abarbeiten (Spülen, Fracht schleppen, Reparatur).",
+          "keywords": ["abarbeiten", "spuelen", "arbeite", "schlepp", "reparier"],
+          "reputation": { "Weitwanderer": 2 },
+          "gastrecht": 2,
+          "world": [ { "type": "character", "id": "spuelender_pilot", "label": "Frachtpilot (spült ab)", "spot": "TresenRechts", "weeks": 1 } ],
+          "result": "Er spült bis nach Mitternacht und erzählt dabei die besten Geschichten des Abends."
+        },
+        {
+          "id": "erlassen",
+          "label": "Die Runde geht aufs Haus",
+          "condition": "Der Wirt erlässt ihm die Rechnung.",
+          "keywords": ["aufs haus", "vergiss es", "geschenkt", "erlass"],
+          "gastrecht": 2,
+          "result": "Der Pilot schwört ewige Dankbarkeit. Am nächsten Abend bringt er drei zahlende Freunde mit."
+        },
+        {
+          "id": "abgehauen",
+          "label": "Er haut ab",
+          "condition": "Der Wirt droht, demütigt ihn oder bleibt unentschlossen; der Pilot rennt zur Schleuse.",
+          "default": true,
+          "result": "Ein Sprint, ein Sprung, die Schleuse zischt. Die Rechnung bleibt – und ein Schuh."
+        }
+      ]
+    },
+    {
+      "id": "kopfgeldjaeger",
+      "kind": "Konflikt",
+      "title": "Das Kopfgeld",
+      "speaker": {
+        "name": "Kopfgeldjägerin",
+        "faction": "Soeldner",
+        "persona": "Kalt, professionell, spricht wenig. Jagt ein junges Mädchen aus einem Nomadenkonvoi, auf das ein Handelshaus ein Kopfgeld ausgesetzt hat (angeblich Diebstahl). Will die Kleine ohne Aufsehen mitnehmen. Respektiert Geld: Wer das Kopfgeld überbietet, kann sie umstimmen. Bei Gewaltandrohung zieht sie die Waffe. Lässt sich von Beweisen der Unschuld nur schwer, aber möglich, überzeugen.",
+        "placeholder": true
+      },
+      "text": "Eine Kopfgeldjägerin legt ein Holo auf den Tresen: ein Mädchen, vielleicht vierzehn, aus einem Nomadenkonvoi. Dasselbe Mädchen sitzt gerade in deiner Sitzecke und isst Suppe.",
+      "opening": "Ich nehme sie mit, Wirt. Leise. Du willst keinen Lärm in deinem Laden, ich auch nicht.",
+      "floki": "Okay. Das ist kein lustiges Ereignis. Ich bin ab jetzt leise. Halbwegs.",
+      "weight": 2,
+      "cooldownWeeks": 8,
+      "minWeek": 4,
+      "maxTurns": 6,
+      "offlineLines": [
+        "Das Kopfgeld ist hoch. Meine Geduld nicht.",
+        "Biete mir mehr, oder geh zur Seite."
+      ],
+      "outcomes": [
+        {
+          "id": "mitgenommen",
+          "label": "Die Jägerin nimmt das Mädchen mit",
+          "condition": "Der Wirt lässt sie gewähren oder findet kein Argument, das sie überzeugt.",
+          "default": true,
+          "keywords": ["nimm sie", "geht mich nichts an"],
+          "reputation": { "Soeldner": 4, "Weitwanderer": -10 },
+          "gastrecht": -10,
+          "result": "Die Jägerin führt das Mädchen hinaus. Die Suppe wird kalt. Niemand bestellt mehr an diesem Abend.",
+          "radio": "Knotensender: Nomadenmädchen aus Raumtaverne abgeführt – Konvoi sucht Antworten."
+        },
+        {
+          "id": "freigekauft",
+          "label": "Du kaufst das Mädchen frei",
+          "condition": "Der Wirt bietet der Jägerin mehr als das Kopfgeld, und sie nimmt an.",
+          "keywords": ["mehr zahlen", "ueberbiet", "ich zahle", "wie viel"],
+          "reputation": { "Weitwanderer": 10, "Soeldner": 2 },
+          "rivalry": false,
+          "world": [ { "type": "character", "id": "nomadenmaedchen", "label": "Gerettetes NomadenmÃ¤dchen", "faction": "Weitwanderer", "spot": "Sitzecke", "offsetX": 50, "weeks": 1, "scale": 0.85 } ],
+          "result": "Die Kasse ist fast leer. Das Mädchen weiß nicht, wie ihr geschieht. Ihr Konvoi wird es nie vergessen.",
+          "floki": "Teuerster Teller Suppe der Geschichte. Bester auch.",
+          "radio": "Knotensender: Wirt kauft Nomadenmädchen frei – Kopfgeldjägerin „zufrieden“."
+        },
+        {
+          "id": "ueberzeugt",
+          "label": "Du überzeugst die Jägerin",
+          "condition": "Der Wirt bringt glaubhafte Zweifel am Kopfgeld vor (falsche Anklage, Handelshaus lügt, Beweise) und die Jägerin zieht ab.",
+          "keywords": ["unschuldig", "beweis", "luege", "falsche anklage", "frag sie selbst"],
+          "reputation": { "Weitwanderer": 8 },
+          "gastrecht": 4,
+          "result": "Die Jägerin sieht lange zu dem Mädchen hinüber. Dann steckt sie das Holo ein. „Ich war nie hier.“"
+        },
+        {
+          "id": "gewalt",
+          "label": "Es kommt zur Gewalt",
+          "condition": "Der Wirt droht mit Gewalt oder greift an; es kommt zum Kampf in der Taverne.",
+          "keywords": ["waffe", "schiess", "schlag", "angriff", "raus hier sonst"],
+          "reputation": { "Soeldner": -10, "Weitwanderer": 4 },
+          "gastrecht": -15,
+          "world": [ { "type": "animation", "animation": "flash", "color": "#ff3020" }, { "type": "animation", "animation": "shake" }, { "type": "prop", "id": "einschussloch", "label": "Einschussloch", "spot": "Wand", "color": "#202020", "scale": 0.5 } ],
+          "result": "Ein Schuss, ein umgestürzter Tisch, Schreie. Das Mädchen entkommt, die Jägerin flieht verletzt. In deiner Wand ist ein neues Loch.",
+          "floki": "Für das Protokoll: Ich war dagegen. Für alle anderen: Ich hätte es genauso gemacht.",
+          "radio": "Knotensender: Schusswechsel in Raumtaverne! Sternenwacht ermittelt."
+        }
+      ]
+    },
+    {
+      "id": "preisabsprache",
+      "kind": "Konflikt",
+      "title": "Preise am Tresen",
+      "speaker": {
+        "name": "Händler der Grauen Hände",
+        "faction": "GraueHaende",
+        "persona": "Gerissen, lächelt viel. Streitet mit einem Silberkiel-Händler über Preise für Kaldor-Erz: Die Gilde will Mindestpreise, die Grauen Hände unterbieten. Will den Wirt als Schiedsrichter – auf seiner Seite. Akzeptiert einen fairen Schiedsspruch nur, wenn er etwas dabei gewinnt.",
+        "placeholder": true
+      },
+      "text": "Ein Händler der Grauen Hände und einer der Silberkiel-Gilde sitzen sich gegenüber. Zwischen ihnen: eine Erzprobe aus Kaldor und zwei völlig unterschiedliche Preislisten. Beide wollen, dass du entscheidest.",
+      "opening": "Wirt, du bist neutral, sagt man. Dann sag dem Gildenmann, dass ein freier Markt frei ist.",
+      "floki": "Zwei Kaufleute wollen, dass du entscheidest. Das ist, als würde man den Toaster fragen, wer recht hat.",
+      "weight": 2,
+      "cooldownWeeks": 6,
+      "minWeek": 2,
+      "maxTurns": 6,
+      "offlineLines": [
+        "Ein fairer Schiedsspruch, Wirt. Fair für mich.",
+        "Die Gilde will den Markt einsperren. Du doch nicht, oder?"
+      ],
+      "outcomes": [
+        {
+          "id": "graue_haende",
+          "label": "Du gibst den Grauen Händen recht",
+          "condition": "Der Wirt entscheidet für die Grauen Hände und den freien Preis.",
+          "keywords": ["freier markt", "graue haende haben recht", "unterbieten ist erlaubt"],
+          "reputation": { "GraueHaende": 8, "Silberkiel": -8 },
+          "result": "Der Gildenhändler packt die Probe ein und geht ohne Gruß. Der Graue lässt einen Beutel als Trinkgeld da."
+        },
+        {
+          "id": "silberkiel",
+          "label": "Du gibst der Gilde recht",
+          "condition": "Der Wirt entscheidet für die Gilde und die Mindestpreise.",
+          "keywords": ["mindestpreis", "gilde hat recht", "ordnung"],
+          "reputation": { "Silberkiel": 8, "GraueHaende": -8 },
+          "result": "Der Graue lächelt weiter. Das ist schlimmer, als wenn er es nicht täte."
+        },
+        {
+          "id": "schiedsspruch",
+          "label": "Ein Schiedsspruch, mit dem beide leben",
+          "condition": "Der Wirt schlägt eine faire Lösung vor (Preiskorridor, getrennte Märkte, Mengen) und beide gewinnen etwas.",
+          "keywords": ["korridor", "mitte", "getrennte", "beide", "kompromiss", "menge"],
+          "reputation": { "GraueHaende": 4, "Silberkiel": 4 },
+          "gastrecht": 3,
+          "world": [ { "type": "prop", "id": "serviette_preiskorridor", "label": "Gerahmte Serviette", "spot": "Wand", "offsetX": 140, "color": "#e8e0c8", "scale": 0.6, "appear": "pop" } ],
+          "result": "Ein Preiskorridor, auf eine Serviette gekritzelt. Beide unterschreiben die Serviette. Sie hängt jetzt hinter der Bar.",
+          "radio": "Knotensender: Erzpreise am Knoten stabil – dank einer Serviette."
+        },
+        {
+          "id": "gescheitert",
+          "label": "Die Vermittlung scheitert",
+          "condition": "Der Wirt bleibt vage, hält sich heraus oder schlägt etwas Unfaires vor; beide gehen im Streit.",
+          "default": true,
+          "reputation": { "GraueHaende": -2, "Silberkiel": -2 },
+          "result": "Beide gehen gleichzeitig. Am nächsten Tag liest du von einem Preiskrieg auf Kaldor.",
+          "radio": "Knotensender: Preiskrieg um Kaldor-Erz – Gilde und Schmuggler unterbieten sich."
+        }
+      ]
+    },
+    {
+      "id": "drohnen_angebot",
+      "kind": "Konflikt",
+      "title": "Ein Angebot für die Werkstatt",
+      "speaker": {
+        "name": "Tüftler der Funkenwerkstatt",
+        "faction": "Funkenwerkstatt",
+        "persona": "Nervös, ehrlich, überfordert. Das Imperium hat der Werkstatt einen Großauftrag für Überwachungsdrohnen angeboten – viel Geld, aber die Rebellen würden das als Verrat sehen. Er fragt den Wirt um Rat und folgt dem Rat, wenn er gut begründet ist.",
+        "placeholder": true
+      },
+      "text": "Ein Tüftler der Funkenwerkstatt sitzt mit einem imperialen Auftragsformular am Tresen. Der Auftrag würde die Werkstatt ein Jahr lang finanzieren. Er hat noch nicht unterschrieben.",
+      "opening": "Wirt, du hörst hier alles. Wenn wir das unterschreiben – sind wir dann die Bösen?",
+      "floki": "Endlich jemand, der Rat sucht! Leider bei dir.",
+      "weight": 2,
+      "cooldownWeeks": 10,
+      "minWeek": 3,
+      "maxTurns": 5,
+      "offlineLines": [
+        "Das Geld würde uns retten. Aber Drohnen … wofür?",
+        "Was würdest du tun?"
+      ],
+      "outcomes": [
+        {
+          "id": "annehmen",
+          "label": "Die Werkstatt nimmt den Auftrag an",
+          "condition": "Der Wirt rät, den Auftrag anzunehmen.",
+          "keywords": ["annehm", "unterschreib", "nimm das geld"],
+          "reputation": { "Funkenwerkstatt": 4, "Imperium": 6 },
+          "world": [ { "type": "character", "id": "ueberwachungsdrohne", "label": "Imperiale Ãœberwachungsdrohne", "faction": "Imperium", "spot": "Mitte", "weeks": 4, "scale": 0.6, "appear": "drop" } ],
+          "result": "Er unterschreibt. Die Werkstatt ist gerettet – und auf den Rebellenkanälen fällt ihr Name in einem unschönen Satz.",
+          "radio": "Reichssender: Funkenwerkstatt liefert modernste Überwachungstechnik für die Sicherheit des Knotens."
+        },
+        {
+          "id": "ablehnen",
+          "label": "Die Werkstatt lehnt ab",
+          "condition": "Der Wirt rät überzeugend, abzulehnen und unabhängig zu bleiben.",
+          "keywords": ["ablehn", "unabhaengig", "nicht unterschreib", "nein"],
+          "reputation": { "Funkenwerkstatt": 3, "Rebellen": 4, "Imperium": -2 },
+          "rivalry": false,
+          "result": "Er zerreißt das Formular. „Unabhängig“, sagt er leise. Dann bestellt er etwas Starkes.",
+          "radio": "Piratensender: Funkenwerkstatt sagt Nein zum Imperium. Respekt, Schrauber."
+        },
+        {
+          "id": "zivile_version",
+          "label": "Eine zivile Version",
+          "condition": "Der Wirt schlägt eine Zwischenlösung vor (z. B. nur Rettungs- oder Verkehrsdrohnen, keine Überwachung), und der Tüftler will es so anbieten.",
+          "keywords": ["rettung", "zivil", "verkehr", "ohne ueberwachung", "nur fuer"],
+          "reputation": { "Funkenwerkstatt": 6 },
+          "result": "Er kritzelt einen neuen Entwurf auf die Rückseite: Rettungsdrohnen. Ob das Imperium das will, ist eine andere Frage.",
+          "floki": "Rettungsdrohnen. Wie edel. Ich wette, sie werden trotzdem gelb lackiert."
+        },
+        {
+          "id": "unentschieden",
+          "label": "Er bleibt allein mit der Frage",
+          "condition": "Der Wirt hilft nicht oder hält sich heraus.",
+          "default": true,
+          "reputation": { "Funkenwerkstatt": -2 },
+          "result": "Er starrt noch eine Stunde auf das Formular. Dann geht er, ohne zu unterschreiben – vorerst."
+        }
+      ]
+    },
+    {
+      "id": "schutzgeld",
+      "kind": "Ereignis",
+      "title": "Eine Versicherung",
+      "speaker": {
+        "name": "Eintreiber der Grauen Hände",
+        "faction": "GraueHaende",
+        "persona": "Höflich, bedrohlich, nennt Schutzgeld „Versicherung“. Will einen monatlichen Betrag. Lässt sich auf einen Deal ein, wenn der Wirt etwas anderes Wertvolles bietet (Informationen, Lagerplatz, Hinterzimmer). Hat Respekt vor Gastrecht, wenn man ihn darauf hinweist, dass Ärger in der Taverne auch seinen Leuten schadet.",
+        "placeholder": true
+      },
+      "text": "Ein gut gekleideter Mann lässt seinen Blick über die Gläser, die Bildschirme und die Schleuse gleiten. „Hübscher Laden. Wäre schade, wenn er Feuer fängt.“",
+      "opening": "Eine kleine Versicherung, Wirt. Monatlich. Feuer, Diebstahl, unglückliche Unfälle. Wir kümmern uns.",
+      "floki": "Feuer? Ich bin das Schiff. Ich habe Sprinkler. Und Groll.",
+      "weight": 2,
+      "cooldownWeeks": 8,
+      "minWeek": 2,
+      "maxReputation": { "GraueHaende": 29 },
+      "maxTurns": 5,
+      "offlineLines": [
+        "Unfälle passieren, Wirt. Überall.",
+        "Sagen wir, wir einigen uns. Wie?"
+      ],
+      "outcomes": [
+        {
+          "id": "gezahlt",
+          "label": "Du zahlst die Versicherung",
+          "condition": "Der Wirt willigt ein zu zahlen.",
+          "keywords": ["ich zahle", "einverstanden", "wie viel"],
+          "reputation": { "GraueHaende": 6 },
+          "result": "Ein Handschlag, ein Umschlag. Ab jetzt ist dein Laden „versichert“."
+        },
+        {
+          "id": "deal",
+          "label": "Ein Deal statt Geld",
+          "condition": "Der Wirt bietet statt Geld etwas anderes an (Informationen, Lagerplatz, Tisch für Treffen), und der Eintreiber nimmt an.",
+          "keywords": ["informationen", "lagerplatz", "tisch fuer", "statt geld", "tausch"],
+          "reputation": { "GraueHaende": 8, "Sternenwacht": -3 },
+          "world": [ { "type": "prop", "id": "tisch_graue_haende", "label": "Dienstags: Graue HÃ¤nde", "spot": "Tisch1", "weeks": 4, "color": "#5a5e66" } ],
+          "result": "Statt Geld gibt es einen festen Tisch für die Grauen Hände. Dienstags. Ohne Fragen."
+        },
+        {
+          "id": "abgewimmelt",
+          "label": "Du wimmelst ihn ab",
+          "condition": "Der Wirt überzeugt ihn, dass Ärger hier auch den Grauen Händen schadet (Gastrecht, Neutralboden, Kundschaft), und er zieht ohne Geld ab.",
+          "keywords": ["gastrecht", "neutral", "schadet euch", "eure leute trinken hier"],
+          "reputation": { "GraueHaende": 2 },
+          "gastrecht": 2,
+          "result": "Er lacht. „Du gefällst mir, Wirt.“ Er geht – und kommt am Abend als zahlender Gast wieder.",
+          "floki": "Du hast einen Gangster mit Hausordnung besiegt. Ich bin sprachlos. Fast."
+        },
+        {
+          "id": "drohung",
+          "label": "Er geht mit einer Drohung",
+          "condition": "Der Wirt lehnt ab, droht zurück oder bleibt unklar.",
+          "default": true,
+          "reputation": { "GraueHaende": -6 },
+          "gastrecht": -3,
+          "world": [ { "type": "animation", "animation": "flash", "color": "#ff8a20" }, { "type": "prop", "id": "verkohlter_container", "label": "Verkohlter Müllcontainer", "spot": "Schleuse", "offsetX": 90, "weeks": 2, "color": "#2a2420" } ],
+          "result": "Er geht lächelnd. In der Nacht brennt der Müllcontainer an der Andockschleuse. Nur der Müllcontainer. Diesmal."
+        }
+      ]
+    },
+    {
+      "id": "beobachtungsposten",
+      "kind": "Konflikt",
+      "title": "Ein Platz am Fenster",
+      "speaker": {
+        "name": "Imperiale Aufklärerin",
+        "faction": "Imperium",
+        "persona": "Freundlich, wach, gefährlich klug. Will während der Konjunktion vom großen Fenster der Taverne aus den Schiffsverkehr beobachten und Kennungen notieren. Bietet Bezahlung und Schutz. Verhandelt über Bedingungen, wird aber kalt, wenn der Wirt sie offen als Spionin bloßstellt.",
+        "placeholder": true
+      },
+      "text": "Die Konjunktion: Draußen ziehen Dutzende Schiffe vorbei. Eine Frau in Zivil bittet um den Tisch am großen Fenster – für die ganze Konjunktion. Neben ihr steht ein Gerät, das sehr nach Sensor aussieht.",
+      "opening": "Nur ein Tisch, Wirt. Ein schöner Blick. Und eine Bezahlung, die Ihnen gefallen wird.",
+      "floki": "Sensor. Eindeutig Sensor. Ich erkenne einen Kollegen, wenn ich einen sehe.",
+      "weight": 3,
+      "cooldownWeeks": 4,
+      "conjunction": "nur",
+      "maxTurns": 5,
+      "offlineLines": [
+        "Ich bin nur eine Touristin mit einem Faible für Raumschiffe.",
+        "Meine Auftraggeber sind großzügig zu Freunden."
+      ],
+      "outcomes": [
+        {
+          "id": "posten_erlaubt",
+          "label": "Sie bekommt den Fenstertisch",
+          "condition": "Der Wirt überlässt ihr den Tisch, ohne Bedingungen.",
+          "keywords": ["ja", "nimm den tisch", "einverstanden"],
+          "reputation": { "Imperium": 8, "GraueHaende": -4 },
+          "world": [ { "type": "character", "id": "aufklaererin", "label": "AufklÃ¤rerin am Fenster", "faction": "Imperium", "spot": "TresenRechts", "weeks": 1 } ],
+          "result": "Sie notiert drei Tage lang Schiffskennungen. Zwei Schmugglerschiffe kommen danach nicht mehr wieder.",
+          "radio": "Reichssender: Erfolgreiche Kontrolle illegaler Handelsrouten am Tresk-Knoten."
+        },
+        {
+          "id": "bedingungen",
+          "label": "Nur mit deinen Bedingungen",
+          "condition": "Der Wirt erlaubt es nur unter Bedingungen (z. B. keine Gäste der Taverne melden, nur Kriegsschiffe zählen), und sie akzeptiert.",
+          "keywords": ["bedingung", "keine gaeste", "nur kriegsschiffe", "nicht meine gaeste"],
+          "reputation": { "Imperium": 4 },
+          "result": "Sie hält sich an die Abmachung – soweit du das beurteilen kannst. Deine Gäste bleiben unbehelligt."
+        },
+        {
+          "id": "blossgestellt",
+          "label": "Du stellst sie bloß",
+          "condition": "Der Wirt nennt sie vor anderen eine Spionin oder wirft sie hinaus.",
+          "keywords": ["spionin", "spion", "raus", "das ist ein sensor"],
+          "reputation": { "Imperium": -8, "GraueHaende": 4, "Rebellen": 3 },
+          "rivalry": false,
+          "result": "Sie lächelt eisig, packt das Gerät ein und geht. Drei Gäste stoßen auf dich an.",
+          "radio": "Piratensender: Imperiale Spionin aus Raumtaverne geworfen! Der Wirt hat Augen im Kopf."
+        },
+        {
+          "id": "abgewimmelt",
+          "label": "Der Tisch ist „leider reserviert“",
+          "condition": "Der Wirt redet sich höflich heraus oder hält sich heraus.",
+          "default": true,
+          "reputation": { "Imperium": -2 },
+          "result": "„Schade.“ Sie setzt sich an die Bar – mit Blick auf das Fenster. Es nützt ihr nur halb so viel."
+        }
+      ]
+    },
+    {
+      "id": "anwerbung",
+      "kind": "Konflikt",
+      "title": "Freiwillige gesucht",
+      "speaker": {
+        "name": "Rebellenwerberin",
+        "faction": "Rebellen",
+        "persona": "Mitreißend, laut, überzeugt. Wirbt an deinen Tischen offen junge Gäste für die Rebellen an. Will, dass der Wirt sie gewähren lässt oder sogar einen Aushang erlaubt. Hört auf, wenn der Wirt überzeugend erklärt, warum das allen in der Taverne schadet – oder wenn er ihr einen diskreteren Weg anbietet.",
+        "placeholder": true
+      },
+      "text": "Eine Frau steht auf einem Stuhl und hält eine Rede über Freiheit. Drei junge Hafenarbeiter hängen an ihren Lippen. Am Fenstertisch hat jemand von der Sternenwacht aufgehört zu trinken.",
+      "opening": "Wirt! Komm, sag deinen Gästen, dass ein freier Hafen mehr wert ist als imperiale Lizenzen!",
+      "floki": "Revolution in der Sitzecke. Ich hoffe, sie bezahlt den Stuhl, auf dem sie steht.",
+      "weight": 2,
+      "cooldownWeeks": 6,
+      "minWeek": 3,
+      "minReputation": { "Rebellen": 5 },
+      "maxTurns": 5,
+      "offlineLines": [
+        "Die Freiheit wartet nicht auf deinen Feierabend, Wirt.",
+        "Ein Aushang. Nur ein kleiner."
+      ],
+      "outcomes": [
+        {
+          "id": "gewaehren",
+          "label": "Sie wirbt weiter",
+          "condition": "Der Wirt lässt sie weiterreden oder unterstützt sie.",
+          "default": true,
+          "keywords": ["red weiter", "mach ruhig", "recht hat sie"],
+          "reputation": { "Rebellen": 6, "Sternenwacht": -5 },
+          "world": [ { "type": "flag", "id": "rebellen_werben_hier" } ],
+          "result": "Zwei Hafenarbeiter gehen mit ihr. Der Mann von der Sternenwacht schreibt etwas auf.",
+          "radio": "Piratensender: Neue Freiwillige am Tresk-Knoten. Die Freien Häfen wachsen."
+        },
+        {
+          "id": "diskret",
+          "label": "Ein diskreter Weg",
+          "condition": "Der Wirt bietet ihr einen diskreteren Weg an (Hinterzimmer, Kontaktadresse, später), und sie steigt vom Stuhl.",
+          "keywords": ["hinterzimmer", "diskret", "leise", "spaeter", "nicht hier vorne"],
+          "reputation": { "Rebellen": 4 },
+          "result": "Sie steigt vom Stuhl und zwinkert. Später verlassen drei junge Leute die Taverne durch den Hinterausgang."
+        },
+        {
+          "id": "unterbunden",
+          "label": "Du beendest die Rede",
+          "condition": "Der Wirt beendet die Werbung überzeugend (Neutralboden, Gastrecht, Gefahr für alle) oder verweist sie der Taverne.",
+          "keywords": ["neutral", "gastrecht", "nicht in meiner taverne", "runter vom stuhl", "raus"],
+          "reputation": { "Rebellen": -5, "Sternenwacht": 4 },
+          "gastrecht": 2,
+          "result": "Sie steigt vom Stuhl, enttäuscht. „Neutral ist auch eine Seite, Wirt.“ Der Mann von der Sternenwacht trinkt wieder."
+        }
+      ]
+    },
+    {
+      "id": "muede_wache",
+      "kind": "Ereignis",
+      "title": "Feierabend eines Wachtmeisters",
+      "speaker": {
+        "name": "Müder Wachtmeister",
+        "faction": "Sternenwacht",
+        "persona": "Älter, erschöpft, ehrlich. Zweifelt am Imperium, dem er dient, und denkt ans Aufhören. Sucht keinen Rat, sondern jemanden, der zuhört. Wenn der Wirt ihm wirklich zuhört, verrät er, dass das Imperium die Taverne beobachtet, weil das Schiff früher „bekannt“ war.",
+        "placeholder": true
+      },
+      "text": "Ein älterer Wachtmeister sitzt außer Dienst am Tresen, die Mütze neben dem Glas. Er sieht aus, als hätte er seit Wochen nicht geschlafen.",
+      "opening": "Zwanzig Jahre Sternenwacht, Wirt. Und heute habe ich zum ersten Mal überlegt, ob ich auf der richtigen Seite stehe.",
+      "weight": 2,
+      "once": true,
+      "minWeek": 2,
+      "maxTurns": 6,
+      "offlineLines": [
+        "Ich weiß nicht, warum ich dir das erzähle.",
+        "Manchmal ist eine Uniform schwerer als sie aussieht."
+      ],
+      "outcomes": [
+        {
+          "id": "zugehoert",
+          "label": "Du hörst ihm zu",
+          "condition": "Der Wirt hört ernsthaft zu, fragt nach und urteilt nicht; der Wachtmeister öffnet sich und verrät die Beobachtung der Taverne.",
+          "keywords": ["erzaehl", "was ist passiert", "ich hoere", "zuhoeren", "warum"],
+          "reputation": { "Sternenwacht": 8 },
+          "world": [ { "type": "flag", "id": "taverne_wird_beobachtet" } ],
+          "result": "Spät sagt er leise: „Sie beobachten dein Schiff, Wirt. Es war mal … bekannt.“ Dann zahlt er und geht.",
+          "floki": "Bekannt. Natürlich. Jeder weiß mehr über mein Schiff als ich. Ich schreibe eine Beschwerde. An mich."
+        },
+        {
+          "id": "ermutigt",
+          "label": "Du bestärkst seine Zweifel",
+          "condition": "Der Wirt rät ihm, die Seite zu wechseln oder aufzuhören.",
+          "keywords": ["hoer auf", "wechsel", "kuendig", "rebellen"],
+          "reputation": { "Sternenwacht": -2, "Rebellen": 4 },
+          "rivalry": false,
+          "result": "Er sieht dich lange an. „Vielleicht.“ Ob er es tut, erfährst du nicht – noch nicht."
+        },
+        {
+          "id": "abgewimmelt",
+          "label": "Du lässt ihn allein",
+          "condition": "Der Wirt wimmelt ihn ab oder hört nicht zu.",
+          "default": true,
+          "world": [ { "type": "prop", "id": "vergessene_muetze", "label": "Vergessene Wachtmeister-Mütze", "spot": "Tresen", "offsetX": 50, "weeks": 2, "color": "#3050a0", "scale": 0.5 } ],
+          "result": "Er nickt, trinkt aus und geht. Die Mütze vergisst er auf dem Tresen."
+        }
+      ]
+    },
+    {
+      "id": "vargas_alter_freund",
+      "kind": "Ereignis",
+      "title": "Ein alter Bekannter des Schiffs",
+      "speaker": {
+        "name": "Alter Raumfahrer mit Augenklappe",
+        "faction": "Rebellen",
+        "persona": "Alt, rau, herzlich, trinkt viel. War früher Crewmitglied der Kupferlerche, sagt das aber nicht sofort. Will eine Kiste, die angeblich noch im Frachtraum hinter der versiegelten Tür steht. Er weiß nicht, wie man sie öffnet. Wenn der Wirt ehrlich ist und ihm vertraut, erzählt er, dass Varga „nie ohne Grund“ etwas versiegelt hat. Wenn man ihn ans Imperium verkaufen will, merkt er es.",
+        "placeholder": true
+      },
+      "text": "Ein alter Raumfahrer klopft gegen die Wand, als würde er die Schotten zählen. „Dritter Spant von links. Da hat früher immer die Flasche gestanden.“ Er sieht dich an.",
+      "opening": "Ich war schon auf diesem Schiff, Junge, da hattest du noch keine Zähne. Im Frachtraum steht etwas, das mir gehört.",
+      "floki": "Dritter Spant von links. Er hat recht. Woher weiß er das? Ich weiß das erst seit zwei Wochen.",
+      "weight": 3,
+      "once": true,
+      "minWeek": 4,
+      "maxTurns": 6,
+      "offlineLines": [
+        "Ilse hätte mir die Kiste gegeben. Ohne Fragen.",
+        "Die Tür ist zu? Natürlich ist sie zu. Ilse hat nie etwas offen gelassen."
+      ],
+      "outcomes": [
+        {
+          "id": "vertrauen",
+          "label": "Ihr werdet Verbündete",
+          "condition": "Der Wirt erzählt ihm ehrlich von der versiegelten Tür und gewinnt sein Vertrauen; der Alte erzählt dafür von Varga.",
+          "keywords": ["versiegelte tuer", "ehrlich", "varga", "ilse", "erzaehl mir von ihr"],
+          "reputation": { "Rebellen": 6, "Weitwanderer": 3 },
+          "rivalry": false,
+          "world": [ { "type": "flag", "id": "frequenz_alter_crewmann" } ],
+          "result": "Er schweigt lange. „Ilse hat nie etwas ohne Grund versiegelt. Wenn du die Tür je aufkriegst, ruf mich.“ Er lässt eine Funkfrequenz da.",
+          "floki": "Eine Funkfrequenz. Ich habe sie gespeichert. Zweimal. Für den Fall, dass ich mich selbst lösche."
+        },
+        {
+          "id": "abgewiesen",
+          "label": "Du weist ihn ab",
+          "condition": "Der Wirt sagt, im Frachtraum gebe es nichts für ihn, oder schickt ihn weg.",
+          "default": true,
+          "keywords": ["nichts fuer dich", "geh", "gehoert mir"],
+          "result": "Er lacht rau. „Du bist genauso stur wie sie.“ Dann geht er – und klopft beim Rausgehen dreimal gegen den Spant."
+        },
+        {
+          "id": "verpfiffen",
+          "label": "Du meldest ihn dem Imperium",
+          "condition": "Der Wirt droht, ihn zu melden, oder versucht, ihn festzuhalten.",
+          "keywords": ["melden", "imperium", "sternenwacht", "festhalten", "pirat"],
+          "reputation": { "Imperium": 5, "Rebellen": -8, "Weitwanderer": -4 },
+          "gastrecht": -6,
+          "world": [ { "type": "prop", "id": "kupfermuenze_lerche", "label": "KupfermÃ¼nze mit Lerche", "spot": "Tresen", "offsetX": -50, "color": "#c08040", "scale": 0.4, "appear": "pop" } ],
+          "result": "Bevor jemand kommt, ist er weg. Auf dem Tresen liegt eine alte Kupfermünze mit einer Lerche darauf.",
+          "radio": "Reichssender: Gesuchter Pirat am Tresk-Knoten gesichtet – entkommen."
+        }
+      ]
+    },
+    {
+      "id": "hochzeit",
+      "kind": "Ereignis",
+      "title": "Ein Fest im Orbit",
+      "speaker": {
+        "name": "Aufgeregter Myrr-Bräutigam",
+        "faction": "Weitwanderer",
+        "persona": "Ein Myrr (amphibisch, von Ysmeras Ozeanen), spricht leise und blumig, sehr nervös. Will morgen in der Taverne heiraten, seine Braut ist von einer Silberkiel-Familie, die gegen die Ehe ist. Braucht Platz, Getränke und jemanden, der die Zeremonie leitet. Hat kaum Geld, bietet Muscheln und Geschichten.",
+        "placeholder": true
+      },
+      "text": "Ein Myrr mit feuchten, aufgeregten Augen hält ein Bündel glänzender Muscheln. „Morgen, Wirt. Unter den Sternen. Bitte.“ Die Familie der Braut, Silberkiel-Kaufleute, ist strikt dagegen.",
+      "opening": "Die Strömung hat uns hierher getragen, Wirt. Würdest du … unsere Ehe unter deinem Dach erlauben?",
+      "floki": "Eine Hochzeit. Ich bereite die Musik vor. Ich habe genau ein Lied. Es ist ein Alarmton.",
+      "weight": 1,
+      "once": true,
+      "minWeek": 2,
+      "maxTurns": 5,
+      "offlineLines": [
+        "Die Muscheln sind sehr wertvoll. Auf Ysmera.",
+        "Ihre Familie wird nicht kommen. Oder schlimmer: doch."
+      ],
+      "outcomes": [
+        {
+          "id": "fest",
+          "label": "Die Hochzeit findet statt",
+          "condition": "Der Wirt sagt zu und bietet die Taverne für die Hochzeit an.",
+          "keywords": ["ja", "hochzeit", "feiern", "gerne", "aufs haus"],
+          "reputation": { "Weitwanderer": 6, "Silberkiel": -4 },
+          "gastrecht": 4,
+          "world": [ { "type": "animation", "animation": "confetti", "spot": "Mitte" }, { "type": "prop", "id": "hochzeitsgirlande", "label": "Hochzeitsgirlande", "spot": "Mitte", "weeks": 2, "color": "#e0a0c0", "appear": "pop" } ],
+          "result": "Unter dem großen Fenster, mit Muscheln als Ringen und dem ganzen Schankraum als Gästen. Selbst die Söldner weinen ein bisschen.",
+          "floki": "Ich habe den Alarmton gespielt. Alle dachten, es gehört dazu. Ich auch.",
+          "radio": "Knotensender: Erste Hochzeit in der Letzten Runde. Die Braut trug Perlen, die Gäste Tränen."
+        },
+        {
+          "id": "familie_versoehnt",
+          "label": "Du versöhnst die Familie",
+          "condition": "Der Wirt sagt zu UND schlägt einen Weg vor, die Silberkiel-Familie einzubeziehen (Einladung, Geschäftsvorteil, Vermittlung).",
+          "keywords": ["familie einladen", "lade sie ein", "vater", "mutter", "geschaeft"],
+          "reputation": { "Weitwanderer": 6, "Silberkiel": 4 },
+          "rivalry": false,
+          "gastrecht": 4,
+          "world": [ { "type": "animation", "animation": "confetti", "spot": "Mitte" }, { "type": "prop", "id": "hochzeitsgirlande", "label": "Hochzeitsgirlande", "spot": "Mitte", "weeks": 2, "color": "#e0a0c0", "appear": "pop" } ],
+          "result": "Die Brautmutter kommt – mit Vertragsentwurf für eine Handelspartnerschaft. Am Ende tanzt sie mit dem Bräutigam.",
+          "radio": "Knotensender: Silberkiel-Familie und Myrr feiern in der Letzten Runde. Ein Handelsabkommen wurde auch geschlossen."
+        },
+        {
+          "id": "abgesagt",
+          "label": "Keine Hochzeit hier",
+          "condition": "Der Wirt sagt ab oder hält sich heraus.",
+          "default": true,
+          "reputation": { "Weitwanderer": -2 },
+          "result": "Der Bräutigam verbeugt sich tief und geht. Eine Muschel bleibt auf dem Tresen liegen."
+        }
+      ]
+    },
+    {
+      "id": "falschgeld",
+      "kind": "Ereignis",
+      "title": "Falsches Geld",
+      "speaker": {
+        "name": "Nervöser Kurier",
+        "faction": "GraueHaende",
+        "persona": "Jung, schwitzt, schlechter Lügner. Hat mit gefälschten Credit-Chips bezahlt, die die Kasse gerade als Fälschung markiert hat. Arbeitet für die Grauen Hände, will aber nicht, dass es jemand erfährt. Bietet alles an, damit der Wirt die Sternenwacht nicht ruft.",
+        "placeholder": true
+      },
+      "text": "Die Kasse piept zweimal: Fälschung. Der junge Kurier, der gerade bezahlt hat, wird blass. Am Fenstertisch sitzt zufällig eine Streife der Sternenwacht.",
+      "opening": "Das … das ist ein Missverständnis, Wirt. Bitte keine Wache. Ich – ich kann das regeln.",
+      "floki": "Falschgeld. In meiner Kasse. Ich fühle mich … benutzt.",
+      "weight": 2,
+      "cooldownWeeks": 8,
+      "minWeek": 2,
+      "maxTurns": 5,
+      "offlineLines": [
+        "Bitte. Wenn die das erfahren, bin ich erledigt.",
+        "Ich kann echtes Geld besorgen. Morgen."
+      ],
+      "outcomes": [
+        {
+          "id": "angezeigt",
+          "label": "Du rufst die Streife",
+          "condition": "Der Wirt ruft die Sternenwacht an den Tresen oder übergibt den Kurier.",
+          "keywords": ["streife", "wache", "sternenwacht", "anzeig", "polizei"],
+          "reputation": { "Sternenwacht": 6, "GraueHaende": -6 },
+          "result": "Die Streife nimmt ihn mit. Die Grauen Hände schicken am nächsten Tag niemanden – das ist auch eine Nachricht.",
+          "radio": "Knotensender: Falschgeldring am Knoten? Sternenwacht nimmt Kurier fest."
+        },
+        {
+          "id": "information",
+          "label": "Er bezahlt mit einer Information",
+          "condition": "Der Wirt lässt ihn laufen, verlangt aber eine wertvolle Information über die Grauen Hände, und er liefert.",
+          "keywords": ["information", "wer schickt dich", "erzaehl", "woher"],
+          "reputation": { "GraueHaende": -2 },
+          "world": [ { "type": "flag", "id": "falschgeld_thessk" } ],
+          "result": "Er flüstert: Die Fälschungen kommen aus einer Druckerei auf Thessk – gleich neben dem Schwarzmarkt, auf dem Floki verkauft wurde.",
+          "floki": "Mein alter Kiez. Ich hätte wissen müssen, dass das Geld dort auch nichts taugt."
+        },
+        {
+          "id": "laufen_lassen",
+          "label": "Du lässt ihn laufen",
+          "condition": "Der Wirt lässt ihn ohne Gegenleistung gehen oder hält sich heraus.",
+          "default": true,
+          "reputation": { "GraueHaende": 4 },
+          "result": "Er stolpert hinaus. Am nächsten Tag liegt ein Umschlag mit echtem Geld in der Schleuse. Mit Zinsen."
+        }
+      ]
+    },
+    {
+      "id": "stromausfall",
+      "kind": "Ereignis",
+      "title": "Stromausfall",
+      "speaker": {
+        "name": "Ungeduldiger Stammgast",
+        "faction": "Soeldner",
+        "persona": "Laut, durstig, gut gelaunt, solange es Bier gibt. Mitten im Betrieb fällt in der Taverne der Strom aus. Er stachelt die anderen Gäste auf, „ihr Geld zurückzuholen“, wenn nichts passiert. Lässt sich mit Humor, Freibier, Kerzen oder einem glaubhaften Versprechen beruhigen, dass der Wirt sich sofort selbst darum kümmert. Unfreundlichkeit oder Drohungen machen ihn wütend.",
+        "placeholder": true
+      },
+      "text": "Licht aus, Zapfanlage aus, Musik aus. Ein tiefes Brummen kommt von unten aus dem Technikdeck – dann Stille. Nur das Signallicht irgendwo im Schiff blinkt weiter. Die Gäste werden unruhig. Der Strom muss wieder an – und das kann nur jemand, der hinuntergeht.",
+      "opening": "Hey, Wirt! Kein Licht, kein Bier, keine Musik. Wofür zahlen wir eigentlich?",
+      "floki": "Das war ich nicht. Ich betone: Das war ich NICHT. Meine Sensoren im Technikdeck melden … etwas Grünes. Viel Grünes.",
+      "weight": 3,
+      "cooldownWeeks": 5,
+      "minWeek": 1,
+      "maxTurns": 4,
+      "offlineLines": [
+        "Ich zähle bis zehn, Wirt. Dann holen wir uns unser Geld.",
+        "Im Dunkeln schmeckt nichts."
+      ],
+      "outcomes": [
+        {
+          "id": "beruhigt",
+          "label": "Die Gäste warten geduldig (mehr Zeit)",
+          "condition": "Der Wirt beruhigt die Gäste überzeugend – mit Humor, Kerzen, Freibier oder dem glaubhaften Versprechen, sofort selbst nach unten zu gehen – und der Stammgast gibt ihm eine Chance.",
+          "keywords": ["kerze", "freibier", "ruhig", "sofort", "gleich zurueck", "fass", "versprech", "ich kuemmere mich"],
+          "gastrecht": 2,
+          "world": [ { "type": "prop", "id": "kerzen_tisch2", "label": "Kerzen", "spot": "Tisch2", "weeks": 1, "color": "#f0c060", "scale": 0.5, "appear": "pop" } ],
+          "result": "Der Stammgast grinst. „Na gut, Wirt. Aber beeil dich.“ Jemand zündet Kerzen an. Du rennst zum Aufzug.",
+          "floki": "Technikdeck. Nimm etwas Hartes mit. Das Barhockerbein zählt. Gerade so.",
+          "task": { "id": "generator", "title": "Strom wiederherstellen", "timeLimit": 170, "success": "strom_schnell", "late": "strom_spaet", "fail": "strom_ohnmacht" }
+        },
+        {
+          "id": "gereizt",
+          "label": "Die Stimmung bleibt gereizt (wenig Zeit)",
+          "condition": "Der Wirt bleibt vage, vertröstet nur oder hält sich heraus – die Gäste murren, warten aber vorerst.",
+          "default": true,
+          "gastrecht": -2,
+          "result": "„Tick, tack, Wirt.“ Die Gäste murren. Du hast nicht viel Zeit.",
+          "task": { "id": "generator", "title": "Strom wiederherstellen", "timeLimit": 110, "success": "strom_schnell", "late": "strom_spaet", "fail": "strom_ohnmacht" }
+        },
+        {
+          "id": "chaos",
+          "label": "Die Stimmung kippt (kaum Zeit)",
+          "condition": "Der Wirt wird unfreundlich, droht oder beleidigt die Gäste; der Stammgast wird wütend.",
+          "keywords": ["halt die klappe", "maul", "selber schuld", "raus hier"],
+          "reputation": { "Soeldner": -3 },
+          "gastrecht": -5,
+          "world": [ { "type": "animation", "animation": "shake" }, { "type": "prop", "id": "scherben", "label": "Scherben", "spot": "Tisch3", "weeks": 1, "color": "#a0c0d0", "scale": 0.6 } ],
+          "result": "Ein Glas fliegt durch die Dunkelheit. Irgendwo splittert etwas. Lauf.",
+          "task": { "id": "generator", "title": "Strom wiederherstellen", "timeLimit": 80, "success": "strom_schnell", "late": "strom_spaet", "fail": "strom_ohnmacht" }
+        },
+        {
+          "id": "strom_schnell",
+          "label": "Licht! Du rettest den Abend",
+          "taskOnly": true,
+          "gastrecht": 4,
+          "reputation": { "Soeldner": 3, "Funkenwerkstatt": 3 },
+          "world": [ { "type": "flag", "id": "technikdeck_gesaeubert" } ],
+          "result": "Mit einem tiefen Brummen springt der Generator an. Oben gehen die Lichter an, die Zapfanlage zischt, und als du aus dem Aufzug kommst, applaudiert der ganze Schankraum. Der Stammgast bestellt eine Runde – auf dich.",
+          "floki": "Held des Abends. Ich habe übrigens die Beleuchtung dramatisch hochgedimmt. Gern geschehen.",
+          "radio": "Knotensender: Wirt der Letzten Runde besiegt Ungeziefer im Maschinenraum – Gäste feiern im Licht."
+        },
+        {
+          "id": "strom_spaet",
+          "label": "Licht – aber spät",
+          "taskOnly": true,
+          "gastrecht": -5,
+          "reputation": { "Soeldner": -2 },
+          "world": [ { "type": "flag", "id": "technikdeck_gesaeubert" } ],
+          "result": "Als das Licht zurückkommt, ist der halbe Schankraum leer. Die Übrigen klatschen höflich. Höflich ist schlimmer als nichts.",
+          "floki": "Pünktlichkeit, Chef. Ein Konzept. Schau es dir mal an."
+        },
+        {
+          "id": "strom_ohnmacht",
+          "label": "Floki schaltet den Notstrom ein",
+          "taskOnly": true,
+          "gastrecht": -8,
+          "reputation": { "Soeldner": -3 },
+          "result": "Du wachst in deinem Bett auf. Floki hat irgendwann den Notstrom eingeschaltet – die Gäste haben im Dunkeln bezahlt, oder auch nicht. Im Technikdeck kratzt es noch in den Rohren.",
+          "floki": "Ich habe dich hochgetragen. Mit dem Servicerobot. Du schuldest mir eine Ölung.",
+          "radio": "Knotensender: Stundenlanger Stromausfall in Raumtaverne – Gäste verlangen Geld zurück."
+        }
+      ]
+    },
+    {
+      "id": "spaeher_im_pfad",
+      "kind": "Konflikt",
+      "title": "Eine Frage zu Routen",
+      "speaker": {
+        "name": "Schmugglerin mit Sternkarte",
+        "faction": "Rebellen",
+        "persona": "Direkt, zäh, misstrauisch. Sucht eine Route, auf der es keine imperialen Späher gibt, für Flüchtlinge. Hat gehört, dass dieses Schiff früher solche Routen kannte. Will vom Wirt Informationen oder Kontakte. Lässt sich nicht abspeisen, akzeptiert aber ein ehrliches „Ich weiß es nicht, aber ich helfe anders“.",
+        "placeholder": true
+      },
+      "text": "Eine Schmugglerin breitet eine abgegriffene Sternkarte auf dem Tresen aus. Drei Routen sind rot durchgestrichen. „Späher“, sagt sie. „Überall Späher. Außer, sagt man, auf den Wegen, die dieses Schiff kannte.“",
+      "opening": "Ich brauche einen Weg ohne Augen, Wirt. Für Leute, die keiner suchen soll.",
+      "floki": "Ein Weg ohne Augen. Das klingt verdächtig nach dem, was hinter unserer versiegelten Tür liegen könnte.",
+      "weight": 2,
+      "cooldownWeeks": 8,
+      "minWeek": 5,
+      "maxTurns": 6,
+      "offlineLines": [
+        "Lüg mich nicht an. Das merke ich.",
+        "Irgendjemand am Knoten weiß etwas. Warum nicht du?"
+      ],
+      "outcomes": [
+        {
+          "id": "ehrlich_geholfen",
+          "label": "Ehrlich: kein Weg, aber Hilfe",
+          "condition": "Der Wirt sagt ehrlich, dass er die Routen nicht kennt, und bietet eine andere konkrete Hilfe an (Andockplatz, Vorräte, Kontakt zu Nomaden).",
+          "keywords": ["weiss es nicht", "ehrlich", "andockplatz", "vorraete", "nomaden", "kontakt"],
+          "reputation": { "Rebellen": 5, "Weitwanderer": 3 },
+          "world": [ { "type": "flag", "id": "frequenz_schmugglerin" } ],
+          "result": "Sie rollt die Karte ein. „Ehrlichkeit. Selten genug.“ Sie nimmt Vorräte mit und lässt dir eine Frequenz da.",
+          "floki": "Noch eine Frequenz. Wir sammeln die jetzt, oder?"
+        },
+        {
+          "id": "an_imperium_verkauft",
+          "label": "Du verkaufst sie ans Imperium",
+          "condition": "Der Wirt verspricht Hilfe, plant aber offen, sie an das Imperium oder die Sternenwacht zu verraten.",
+          "keywords": ["imperium", "melden", "verrat", "sternenwacht"],
+          "reputation": { "Imperium": 8, "Rebellen": -6 },
+          "gastrecht": -8,
+          "result": "Eine Patrouille wartet an ihrer Schleuse. Sie entkommt knapp – und erzählt allen, wem man hier nicht trauen kann.",
+          "radio": "Piratensender: Warnung an alle Freien: Die Letzte Runde hört mit."
+        },
+        {
+          "id": "abgewiesen",
+          "label": "Du schickst sie weg",
+          "condition": "Der Wirt behauptet, nichts zu wissen und nicht helfen zu können, ohne Alternative.",
+          "default": true,
+          "reputation": { "Rebellen": -2 },
+          "result": "Sie rollt die Karte ein. „Dann eben die rote Route.“ Du hoffst, dass sie es schafft."
+        }
+      ]
+    },
+    {
+      "id": "der_alte_funkt",
+      "kind": "Ereignis",
+      "title": "Ein Ruf auf alter Frequenz",
+      "speaker": {
+        "name": "Alter Raumfahrer (über Funk)",
+        "faction": "Rebellen",
+        "persona": "Der alte Crewmann der Kupferlerche, dem der Wirt vertraut hat. Meldet sich über die Frequenz, die er dagelassen hat, rauschend und gehetzt. Er hat sich erinnert: Ilse hat im dritten Spant von links etwas versteckt – vielleicht einen Hinweis auf die versiegelte Tür. Er will, dass der Wirt nachsieht, aber erst, wenn der Wirt verspricht, niemandem vom Imperium davon zu erzählen. Er gerät in Sorge, wenn der Wirt zögert oder Fragen nach Bezahlung stellt.",
+        "placeholder": true
+      },
+      "text": "Mitten in der Schicht knackt es im Funk hinter der Bar – auf der Frequenz, die der alte Raumfahrer dagelassen hat. Seine Stimme ist rauschend und gehetzt.",
+      "opening": "Junge, hörst du mich? Der dritte Spant von links. Ilse hat dort immer was versteckt. Aber versprich mir erst: kein Wort zum Imperium.",
+      "floki": "Endlich ruft mal jemand an, der nicht nach Bier fragt. Ich nehme alles auf. Rein dokumentarisch.",
+      "weight": 5,
+      "once": true,
+      "minWeek": 6,
+      "requiresFlags": [ "frequenz_alter_crewmann" ],
+      "maxTurns": 5,
+      "offlineLines": [
+        "Das Signal ist schlecht, Junge. Versprich es mir!",
+        "Kein Wort zum Imperium. Sonst war alles umsonst."
+      ],
+      "outcomes": [
+        {
+          "id": "spant_geoeffnet",
+          "label": "Du öffnest den Spant",
+          "condition": "Der Wirt verspricht glaubhaft Verschwiegenheit, und der Alte erklärt ihm, wie man den Spant öffnet.",
+          "keywords": [ "versprech", "kein wort", "schwoere", "ich schweige", "wie oeffne" ],
+          "reputation": { "Rebellen": 4 },
+          "world": [ { "type": "animation", "animation": "shake" }, { "type": "prop", "id": "geoeffneter_spant", "label": "Geöffneter Spant", "spot": "Wand", "offsetX": -140, "color": "#8a6a40", "appear": "pop" }, { "type": "flag", "id": "spant_geoeffnet" } ],
+          "result": "Hinter dem dritten Spant liegt ein in Öltuch gewickelter Gegenstand: ein kupfernes Siegel mit einer Lerche. Es passt genau in die Vertiefung an der versiegelten Tür. Noch fehlt etwas – aber du bist näher dran als je zuvor.",
+          "floki": "Ein Siegel. Für meine Tür. In meinem Schiff. Das ich nicht gefunden habe. Ich brauche einen Moment. Einen sehr langen Moment.",
+          "radio": "Piratensender: Gerüchte über die Kupferlerche nehmen zu. Jemand hat etwas gefunden, sagt man."
+        },
+        {
+          "id": "verbindung_abgerissen",
+          "label": "Die Verbindung reißt ab",
+          "condition": "Der Wirt zögert, verlangt Bezahlung, verspricht nichts oder hält sich heraus; der Alte bricht die Verbindung ab.",
+          "default": true,
+          "result": "Ein Knacken, dann Stille. Die Frequenz bleibt tot. Der dritte Spant von links sieht aus wie immer.",
+          "floki": "Er hat aufgelegt. Wie unhöflich. Ich speichere die Frequenz trotzdem. Für schlechtere Zeiten."
+        }
+      ]
+    },
+    {
+      "id": "sternenwacht_fragt_nach",
+      "kind": "Konflikt",
+      "title": "Fragen nach der Rede",
+      "speaker": {
+        "name": "Ermittlerin der Sternenwacht",
+        "faction": "Sternenwacht",
+        "persona": "Sachlich, gründlich, nicht unfreundlich. Sie weiß, dass in der Taverne offen für die Rebellen geworben wurde, und will die Namen der Angeworbenen. Sie droht mit einer Lizenzprüfung, ist aber zufrieden, wenn der Wirt glaubhaft zusagt, dass so etwas nicht mehr vorkommt (Hausregel, Aushang). Lügen merkt sie meistens.",
+        "placeholder": true
+      },
+      "text": "Eine Ermittlerin der Sternenwacht legt eine Aufnahme auf den Tresen: die Rebellenwerberin auf dem Stuhl, mitten in deinem Schankraum.",
+      "opening": "Ich will die Namen der Hafenarbeiter, die mit ihr gegangen sind, Wirt. Oder einen sehr guten Grund, warum Ihre Lizenz nicht geprüft werden sollte.",
+      "floki": "Sie haben eine Aufnahme. Nicht von mir. Ich bin gekränkt, dass es noch andere Kameras gibt.",
+      "weight": 4,
+      "once": true,
+      "minWeek": 4,
+      "requiresFlags": [ "rebellen_werben_hier" ],
+      "maxTurns": 5,
+      "offlineLines": [
+        "Namen, Wirt. Oder Gründe.",
+        "Eine Lizenzprüfung dauert Wochen. Wollen Sie das?"
+      ],
+      "outcomes": [
+        {
+          "id": "namen_genannt",
+          "label": "Du nennst die Namen",
+          "condition": "Der Wirt nennt die Namen der Angeworbenen oder beschreibt sie so, dass sie gefunden werden können.",
+          "keywords": [ "namen", "sie heissen", "die waren", "ich sage" ],
+          "reputation": { "Sternenwacht": 8, "Rebellen": -8 },
+          "rivalry": false,
+          "gastrecht": -8,
+          "world": [ { "type": "removeFlag", "id": "rebellen_werben_hier" } ],
+          "result": "Die Ermittlerin notiert drei Namen. Zwei Tage später fehlen drei Stammgäste.",
+          "radio": "Knotensender: Sternenwacht nimmt mutmaßliche Rebellenhelfer fest."
+        },
+        {
+          "id": "hausregel",
+          "label": "Eine neue Hausregel",
+          "condition": "Der Wirt sagt überzeugend zu, dass in der Taverne nicht mehr geworben wird (Hausregel, Aushang, Neutralboden), ohne Namen zu nennen, und die Ermittlerin akzeptiert.",
+          "keywords": [ "hausregel", "aushang", "nie wieder", "neutral", "kommt nicht mehr vor" ],
+          "reputation": { "Sternenwacht": 4 },
+          "world": [ { "type": "removeFlag", "id": "rebellen_werben_hier" }, { "type": "prop", "id": "aushang_hausregel", "label": "Aushang: Keine Politik am Tresen", "spot": "Schleuse", "offsetX": -90, "color": "#d8d0b0", "scale": 0.6, "appear": "pop" } ],
+          "result": "„Ich nehme Sie beim Wort.“ Am Abend hängt ein Aushang an der Schleuse: „Keine Politik am Tresen. Gilt für alle.“",
+          "floki": "Ein Aushang. Die schärfste Waffe des Gastgewerbes."
+        },
+        {
+          "id": "lizenzpruefung",
+          "label": "Die Lizenz wird geprüft",
+          "condition": "Der Wirt verweigert jede Zusage, lügt erkennbar oder hält sich heraus; die Ermittlerin kündigt eine Lizenzprüfung an.",
+          "default": true,
+          "reputation": { "Sternenwacht": -6 },
+          "world": [ { "type": "character", "id": "pruefbeamter", "label": "Prüfbeamter der Sternenwacht", "faction": "Sternenwacht", "spot": "Kapitaensecke", "weeks": 2, "appear": "drop" } ],
+          "result": "Am nächsten Morgen sitzt ein Prüfbeamter in deiner Kapitänsecke. Er bestellt nur Wasser. Er wird eine Weile bleiben."
+        }
+      ]
+    }
+  ]
+}

@@ -16,19 +16,43 @@ public static class GameSession
 
 	public static event Action<ShiftSummary> ShiftEnded;
 
+	/// <summary>Fired when the player closes the shift-end screen and the new shift begins.</summary>
+	public static event Action ShiftStarted;
+
+	/// <summary>Radio news broadcast at the last shift end (taken before saving, so they never repeat).</summary>
+	public static System.Collections.Generic.IReadOnlyList<RadioNews> LastShiftRadio { get; private set; } = new System.Collections.Generic.List<RadioNews>();
+
+	/// <summary>Income and expenses of the last shift (cash book), shown on the shift-end screen.</summary>
+	public static System.Collections.Generic.IReadOnlyList<LedgerEntry> LastShiftLedger { get; private set; } = new System.Collections.Generic.List<LedgerEntry>();
+
 	public static bool HasAutosave => FileAccess.FileExists(AutosavePath);
 
 	public static void NewGame()
 	{
 		Clock.Reset();
 		ReputationService.State.Reset();
+		EventService.State.Reset();
+		WorldService.State.Reset();
+		PlayerState.Reset();
 	}
+
+	public static void BeginShift() => ShiftStarted?.Invoke();
 
 	/// <summary>The week passes: calendar +7 days, standing fades, then the game is saved.</summary>
 	public static ShiftSummary EndShift()
 	{
+		// A running task (e.g. the blackout) fails when the shift ends.
+		if (TaskService.IsActive)
+			TaskService.Active.Abort();
+
+		LastShiftRadio = EventService.State.TakePendingRadio();
+		Economy.ChargeWeekly();
+		LastShiftLedger = PlayerState.TakeLedger();
+
 		ShiftEnd time = Clock.EndShift();
 		bool changed = ReputationService.State.ApplyWeeklyDrift();
+		// Props and characters from events whose time is up leave before the new week is saved.
+		WorldService.State.Expire(Clock.Week);
 		bool saved = Save();
 
 		var summary = new ShiftSummary(time, Clock.Week, Clock.DaysUntilConjunction, changed, saved);
@@ -43,7 +67,10 @@ public static class GameSession
 			SavedAt = DateTime.Now.ToString("s"),
 			Day = Clock.Day,
 			ConjunctionShift = Clock.ConjunctionShift,
-			Reputation = ReputationService.State.Export()
+			Reputation = ReputationService.State.Export(),
+			Events = EventService.State.Export(),
+			World = WorldService.State.Export(),
+			Player = PlayerState.Export()
 		};
 
 		using FileAccess file = FileAccess.Open(AutosavePath, FileAccess.ModeFlags.Write);
@@ -75,6 +102,9 @@ public static class GameSession
 		}
 
 		ReputationService.State.Import(data.Reputation);
+		EventService.State.Import(data.Events);
+		WorldService.State.Import(data.World);
+		PlayerState.Import(data.Player);
 		Clock.Restore(data.Day, data.ConjunctionShift);
 		return true;
 	}
