@@ -81,7 +81,7 @@ public partial class GuestDirector : Node2D
 	{
 		GameSession.ShiftEnded -= OnShiftEnded;
 		GameSession.ShiftStarted -= OnShiftStarted;
-		BarPanel.OpenOrders.Clear();
+		OrderBook.Open.Clear();
 	}
 
 	public override void _Process(double delta)
@@ -137,7 +137,7 @@ public partial class GuestDirector : Node2D
 			guest.QueueFree();
 		}
 		_occupied.Clear();
-		BarPanel.OpenOrders.Clear();
+		OrderBook.Open.Clear();
 	}
 
 	private void OnShiftStarted()

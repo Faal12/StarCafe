@@ -61,7 +61,13 @@ Debug: **Strg+Umschalt+E** löst sofort ein Ereignis aus (nicht F8 – das beend
 ## Arbeiten im Team
 
 * **Szenen (`*.tscn`) nur in Godot bearbeiten** und nicht gleichzeitig von zwei Personen ändern, sonst gibt es
-  Merge-Konflikte. Menüs und Oberflächen werden bewusst **im Code** gebaut (`Scripts/Ui`), nicht als Szene.
+  Merge-Konflikte. Deshalb ist die Taverne geteilt: `Tavern.tscn` (Welt, Logik) und `Scenes/Ui/TavernUi.tscn`
+  (alle Fenster und HUDs) – jede Seite arbeitet in ihrer eigenen Szene.
+* **Frontend & Backend arbeiten parallel:** Spiellogik spricht die Oberfläche nur über `Scripts/Core/UiBus.cs` an.
+  Wer was besitzt und wie man zusammenarbeitet: `Docs/UI_Leitfaden.md` → „Zusammenarbeit“. Zuständigkeiten
+  stehen in `.github/CODEOWNERS`.
+* **Ablauf:** `main` nur über Pull Requests; eigene Branches (`ui/…` fürs Frontend, `feature/…` fürs Backend);
+  kleine PRs, `main` täglich in den eigenen Branch holen.
 * Neue Grafiken nur einchecken, wenn das Spiel sie wirklich benutzt. Rohdateien und große Quellbilder bleiben lokal.
 * Vor dem Push: Projekt in Godot starten und prüfen, dass es baut (`dotnet build` im Projektordner).
 

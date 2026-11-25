@@ -209,7 +209,7 @@ public partial class DeckManager : Node
 		tween.TweenCallback(Callable.From(() =>
 		{
 			IsTraveling = false;
-			player.CanMove = !DialogueController.IsOpen;
+			player.CanMove = !UiBus.IsOpen(UiWindow.Dialogue);
 			arrived?.Invoke();
 		}));
 	}

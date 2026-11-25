@@ -27,7 +27,7 @@ public partial class WohnDeck : Node2D
 			Interactable door = DeckBuilder.Use(this, new Vector2(x, 2175f), "[E] Tür", 60f);
 			door.Used += () =>
 			{
-				InventoryHud.Toast("Noch leer. Hier ziehen später Angestellte ein.", Holo.TextDim);
+				UiBus.Toast("Noch leer. Hier ziehen später Angestellte ein.", Holo.TextDim);
 				VoiceQueue.Enqueue(FlokiAdvisor.Name, "Leer. Wie dein Personalplan, Chef.");
 			};
 		}

@@ -21,8 +21,6 @@ public partial class EventDirector : Node
 	[Export]
 	public float BetweenDelayMax { get; set; } = 45f;
 
-	private EventPanel _panel;
-
 	private int _remaining;
 
 	private double _timer;
@@ -31,8 +29,6 @@ public partial class EventDirector : Node
 
 	public override void _Ready()
 	{
-		_panel = new EventPanel();
-		AddChild(_panel);
 		StartShift();
 	}
 
@@ -100,13 +96,13 @@ public partial class EventDirector : Node
 			return false;
 		}
 		_usedThisShift.Add(def.Id);
-		_panel.ShowEvent(def);
+		UiBus.ShowEvent(def);
 		return true;
 	}
 
 	private bool IsBusy()
 	{
 		// No events while a task runs, below deck, or during the elevator ride.
-		return EventPanel.IsOpen || DialogueController.IsOpen || GetTree().Paused || TaskService.IsActive || !DeckManager.InTavern || DeckManager.IsTraveling;
+		return UiBus.IsOpen(UiWindow.Event) || UiBus.IsOpen(UiWindow.Dialogue) || GetTree().Paused || TaskService.IsActive || !DeckManager.InTavern || DeckManager.IsTraveling;
 	}
 }

@@ -4,7 +4,6 @@ public partial class NpcInteractable : Area2D
 {
 	[Export] public NpcPersona Persona;
 	[Export] private Label _promptLabel;
-	[Export] private DialogueController _dialogueController;
 
 	private bool _playerInRange;
 
@@ -40,9 +39,9 @@ public partial class NpcInteractable : Area2D
 	public override void _UnhandledInput(InputEvent @event)
 	{
 		// E talks (action "interact" in the Input Map).
-		if (_playerInRange && @event.IsActionPressed("interact") && !@event.IsEcho() && !DialogueController.IsOpen)
+		if (_playerInRange && @event.IsActionPressed("interact") && !@event.IsEcho() && !UiBus.IsOpen(UiWindow.Dialogue))
 		{
-			_dialogueController?.OpenDialogue(Persona);
+			UiBus.OpenDialogue(Persona);
 			GetViewport().SetInputAsHandled();
 		}
 	}

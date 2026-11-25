@@ -119,7 +119,7 @@ public static class TaskService
 			if (outcome != null)
 			{
 				EventResolution resolution = EventService.Resolve(def, outcome);
-				EventPanel.ShowAftermath(def, outcome, resolution);
+				UiBus.ShowAftermath(def, outcome, resolution);
 			}
 			PlayerState.Record(success ? "aufgabe_geschafft" : "aufgabe_gescheitert", task.Title + (success ? " geschafft." : " gescheitert."), new[] { "aufgabe:" + taskDef.Id, "ereignis:" + def.Id });
 		};

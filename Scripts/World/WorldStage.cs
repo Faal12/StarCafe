@@ -53,7 +53,7 @@ public partial class WorldStage : Node2D
 	public override void _Process(double delta)
 	{
 		// Pausable node: this only runs once the event window has closed and the game continues.
-		if (EventPanel.IsOpen)
+		if (UiBus.IsOpen(UiWindow.Event))
 		{
 			return;
 		}

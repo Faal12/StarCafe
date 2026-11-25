@@ -78,24 +78,24 @@ public sealed class GeneratorTask : GameTask
 		}
 		if (!_killBrood.Done)
 		{
-			InventoryHud.Toast("Der Brutknoten klebt am Generator – erst weg damit!", new Color(1f, 0.6f, 0.5f));
+			UiBus.Toast("Der Brutknoten klebt am Generator – erst weg damit!", new Color(1f, 0.6f, 0.5f));
 			return;
 		}
 		if (PlayerState.Inventory.Count("rohrzange") == 0)
 		{
-			InventoryHud.Toast("Ohne Rohrzange geht nichts. Die Werkzeugkiste steht am Aufzug.", Holo.Strong);
+			UiBus.Toast("Ohne Rohrzange geht nichts. Die Werkzeugkiste steht am Aufzug.", Holo.Strong);
 			VoiceQueue.Enqueue(FlokiAdvisor.Name, "Mit bloßen Händen? Mutig. Dumm, aber mutig. Werkzeugkiste, links hinten.");
 			return;
 		}
 		_repairing = true;
-		CircuitGame.Open(circuitOk =>
+		UiBus.RunMinigame(MinigameId.Circuit, circuitOk =>
 		{
 			if (!circuitOk)
 			{
 				_repairing = false;
 				return;
 			}
-			PressureGame.Open(pressureOk =>
+			UiBus.RunMinigame(MinigameId.Pressure, pressureOk =>
 			{
 				_repairing = false;
 				if (pressureOk)

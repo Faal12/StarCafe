@@ -232,7 +232,7 @@ public partial class Pickup : Node2D
 		{
 			if (PlayerState.Inventory.TryAdd(new ItemStack { ItemId = ItemId }))
 			{
-				InventoryHud.Toast("+1 " + (ItemLibrary.Get(ItemId)?.Name ?? ItemId), new Color(0.6f, 1f, 0.6f));
+				UiBus.Toast("+1 " + (ItemLibrary.Get(ItemId)?.Name ?? ItemId), new Color(0.6f, 1f, 0.6f));
 				QueueFree();
 			}
 		}
