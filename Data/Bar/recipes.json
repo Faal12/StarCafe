@@ -1,0 +1,22 @@
+{
+  "methods": [
+    { "id": "schuetteln", "name": "Schütteln", "waerme": 0, "suesse": 1, "staerke": 0, "description": "Luftig, frisch – macht alles ein bisschen süßer." },
+    { "id": "ruehren", "name": "Rühren", "waerme": 0, "suesse": 0, "staerke": 1, "description": "Ruhig und konzentriert – der Drink wird kräftiger." },
+    { "id": "erhitzen", "name": "Erhitzen", "waerme": 2, "suesse": 0, "staerke": 0, "description": "Heiß serviert." },
+    { "id": "auf_eis", "name": "Auf Eis", "waerme": -2, "suesse": 0, "staerke": 0, "description": "Eiskalt serviert." }
+  ],
+  "recipes": [
+    { "id": "kaldor_glut", "name": "Kaldor-Glut", "ingredients": ["kaldor_stout", "sternanis"], "method": "erhitzen", "price": 9, "description": "Heißes Stout mit Sternanis. Das Lieblingsgetränk der Nachtschicht auf Kaldor." },
+    { "id": "ysmera_tau", "name": "Ysmera-Tau", "ingredients": ["ysmera_perlwein", "nebelsirup"], "method": "auf_eis", "price": 12, "description": "Eisgekühlter Perlwein mit einem Hauch Nebel. Für Leute, die Geld haben und es zeigen wollen." },
+    { "id": "sandsturm", "name": "Thessk-Sandsturm", "ingredients": ["thessk_kaktusbrand", "thessk_kaktusbrand", "rostpfeffer"], "method": "schuetteln", "price": 11, "effects": ["mutig"], "description": "Doppelter Kaktusbrand mit Rostpfeffer. Macht mutig. Oder dumm. Meistens beides." },
+    { "id": "milchwolke", "name": "Milchwolke", "ingredients": ["synthmilch", "nebelsirup"], "method": "erhitzen", "price": 6, "description": "Heiße Synthmilch mit Nebelsirup. Wie eine Umarmung in einer Tasse." },
+    { "id": "wahrheitsnebel", "name": "Wahrheitsnebel", "ingredients": ["ysmera_perlwein", "grautee", "synthmilch"], "method": "ruehren", "price": 14, "effects": ["wahrheit"], "description": "Wer ihn trinkt, redet mehr, als er sollte. Ein Werkzeug, kein Getränk." },
+    { "id": "letzte_runde", "name": "Die Letzte Runde", "ingredients": ["kaldor_stout", "ysmera_perlwein", "thessk_kaktusbrand"], "method": "ruehren", "price": 15, "description": "Der Hausdrink. Drei Welten in einem Glas." },
+    { "id": "kupferlerche", "name": "Kupferlerche", "ingredients": ["kupferbitter", "honigalge", "thessk_kaktusbrand"], "method": "auf_eis", "price": 13, "description": "Bitter, süß, stark – wie das Schiff, nach dem er benannt ist. Manche Gäste werden still, wenn sie ihn sehen." },
+    { "id": "raumfahrertee", "name": "Raumfahrertee", "ingredients": ["grautee", "sternanis"], "method": "erhitzen", "price": 5, "effects": ["beruhigend"], "description": "Heißer Grautee mit Sternanis. Beruhigt Nerven, Fäuste und Mägen." },
+    { "id": "meeresgruss", "name": "Meeresgruß", "ingredients": ["honigalge", "eiswasser", "synthmilch"], "method": "schuetteln", "price": 8, "description": "Kühl, süß, sanft. Myrr nennen ihn „Heimat im Glas“." },
+    { "id": "felsbrecher", "name": "Felsbrecher", "ingredients": ["thessk_kaktusbrand", "kaldor_stout", "rostpfeffer", "kupferbitter"], "method": "ruehren", "price": 14, "description": "Das Einzige, was ein Ghel überhaupt schmeckt. Für alle anderen: Lebensgefahr." },
+    { "id": "gluehender_schleimer", "name": "Glühender Schleimer", "ingredients": ["alienschleim", "kaldor_stout"], "method": "schuetteln", "price": 18, "effects": ["heilung"], "description": "Leuchtet im Dunkeln. Heilt Wunden. Schmeckt … umstritten." },
+    { "id": "stille_nacht", "name": "Stille Nacht", "ingredients": ["grautee", "honigalge", "synthmilch"], "method": "erhitzen", "price": 7, "effects": ["beruhigend"], "description": "Warm, mild, süß. Wer ihn trinkt, will niemandem mehr wehtun." }
+  ]
+}

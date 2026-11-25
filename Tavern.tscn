@@ -6,6 +6,19 @@
 [ext_resource type="Script" path="res://Scripts/Ui/PauseMenu.cs" id="38_pause_script"]
 [ext_resource type="Script" path="res://Scripts/Core/DepthSorter.cs" id="39_depth_script"]
 [ext_resource type="Script" path="res://Scripts/Ui/GameHud.cs" id="40_hud_script"]
+[ext_resource type="Script" path="res://Scripts/Events/EventDirector.cs" id="46_events_script"]
+[ext_resource type="Script" path="res://Scripts/World/WorldStage.cs" id="47_worldstage_script"]
+[ext_resource type="Script" path="res://Scripts/Guests/GuestDirector.cs" id="48_guests_script"]
+[ext_resource type="Script" path="res://Scripts/Bar/BarStation.cs" id="49_bar_script"]
+[ext_resource type="Script" path="res://Scripts/Bar/TrayBalance.cs" id="50_tray_script"]
+[ext_resource type="Script" path="res://Scripts/Ui/InventoryHud.cs" id="51_inventory_hud_script"]
+[ext_resource type="Script" path="res://Scripts/Ui/BarPanel.cs" id="52_bar_panel_script"]
+[ext_resource type="Script" path="res://Scripts/Ui/OrderPanel.cs" id="53_order_panel_script"]
+[ext_resource type="Script" path="res://Scripts/Decks/DeckManager.cs" id="54_decks_script"]
+[ext_resource type="Script" path="res://Scripts/Decks/WohnDeck.cs" id="55_wohndeck_script"]
+[ext_resource type="Script" path="res://Scripts/Decks/TechnikDeck.cs" id="56_technikdeck_script"]
+[ext_resource type="Script" path="res://Scripts/Combat/PlayerCombat.cs" id="57_player_combat_script"]
+[ext_resource type="Script" path="res://Scripts/Ui/CombatHud.cs" id="58_combat_hud_script"]
 [ext_resource type="Resource" path="res://Resources/Npc/Floki.tres" id="4_floki_persona"]
 [ext_resource type="Texture2D" uid="uid://dwnh4wps0srrg" path="res://Assets/Ship/floor_hall.png" id="5_floor_tex"]
 [ext_resource type="Texture2D" uid="uid://db1210e0t1cnk" path="res://Assets/Ship/wall_top.png" id="6_wall_top_tex"]
@@ -20,7 +33,7 @@
 [ext_resource type="Texture2D" path="res://Assets/Sprites/Player/player_walk_2.png" id="12b_walk2"]
 [ext_resource type="Texture2D" path="res://Assets/Sprites/Player/player_walk_3.png" id="12c_walk3"]
 [ext_resource type="Texture2D" path="res://Assets/Sprites/Player/player_walk_4.png" id="12d_walk4"]
-[ext_resource type="Texture2D" path="res://Assets/Ship/floki_robot.png" id="13_npc_tex"]
+[ext_resource type="Texture2D" path="res://Assets/Characters/Floki/floki_world.png" id="13_npc_tex"]
 [ext_resource type="Texture2D" path="res://Assets/Portraits/player_fullbody.png" id="14b_player_fullbody_tex"]
 [ext_resource type="Texture2D" uid="uid://bf1a5riijyji2" path="res://Assets/Ship/door_airlock.png" id="15_door_tex"]
 [ext_resource type="Texture2D" uid="uid://s31aj8xv6aln" path="res://Assets/Ship/elevator_door.png" id="16_elevator_tex"]
@@ -407,9 +420,10 @@ texture = ExtResource("35_spiderdrone_tex")
 position = Vector2(936, 300)
 
 [node name="Sprite2D" type="Sprite2D" parent="Floki" unique_id=664627261]
+texture_filter = 4
 texture = ExtResource("13_npc_tex")
-scale = Vector2(0.75, 0.75)
-offset = Vector2(0, -30)
+scale = Vector2(0.4, 0.4)
+offset = Vector2(0, -84)
 
 [node name="Body" type="StaticBody2D" parent="Floki" unique_id=1716214941]
 
@@ -419,10 +433,10 @@ shape = SubResource("shape_npc_body")
 
 [node name="PromptLabel" type="Label" parent="Floki" unique_id=1648033304]
 offset_left = -70.0
-offset_top = -84.0
+offset_top = -98.0
 offset_right = 70.0
-offset_bottom = -62.0
-text = "[Enter] Sprechen"
+offset_bottom = -76.0
+text = "[E] Sprechen"
 horizontal_alignment = 1
 
 [node name="InteractionArea" type="Area2D" parent="Floki" unique_id=1700359529 node_paths=PackedStringArray("_promptLabel", "_dialogueController")]
@@ -460,7 +474,7 @@ limit_right = 1872
 limit_bottom = 1152
 position_smoothing_enabled = true
 
-[node name="DialogueUI" type="CanvasLayer" parent="." unique_id=1869773562 node_paths=PackedStringArray("_panel", "_nameLabel", "_dialogueLabel", "_inputField", "_sendButton", "_player", "_dimBackground", "_playerPortraitBig", "_npcPortraitBig")]
+[node name="DialogueUI" type="CanvasLayer" parent="." unique_id=1869773562 node_paths=PackedStringArray("_panel", "_nameLabel", "_dialogueLabel", "_inputField", "_sendButton", "_player", "_dimBackground", "_playerPortraitBig", "_npcPortraitBig", "_npcEmotion")]
 script = ExtResource("3_dialogue_script")
 _panel = NodePath("Panel")
 _nameLabel = NodePath("Panel/NameLabel")
@@ -471,6 +485,7 @@ _player = NodePath("../Player")
 _dimBackground = NodePath("DimBackground")
 _playerPortraitBig = NodePath("PlayerPortraitBig")
 _npcPortraitBig = NodePath("NpcPortraitBig")
+_npcEmotion = NodePath("NpcPortraitBig/Emotion")
 
 [node name="DimBackground" type="ColorRect" parent="DialogueUI"]
 offset_left = 0.0
@@ -489,10 +504,21 @@ expand_mode = 1
 stretch_mode = 5
 
 [node name="NpcPortraitBig" type="TextureRect" parent="DialogueUI"]
-offset_left = 786.0
-offset_top = 16.0
+offset_left = 784.0
+offset_top = 113.0
 offset_right = 1102.0
 offset_bottom = 648.0
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Emotion" type="TextureRect" parent="DialogueUI/NpcPortraitBig"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
 expand_mode = 1
 stretch_mode = 5
 
@@ -541,3 +567,116 @@ script = ExtResource("39_depth_script")
 
 [node name="GameHud" type="CanvasLayer" parent="."]
 script = ExtResource("40_hud_script")
+
+[node name="Events" type="Node" parent="."]
+script = ExtResource("46_events_script")
+
+[node name="WorldSpots" type="Node2D" parent="."]
+
+[node name="Tresen" type="Marker2D" parent="WorldSpots"]
+position = Vector2(700, 300)
+
+[node name="TresenRechts" type="Marker2D" parent="WorldSpots"]
+position = Vector2(1180, 300)
+
+[node name="Tisch1" type="Marker2D" parent="WorldSpots"]
+position = Vector2(430, 480)
+
+[node name="Tisch2" type="Marker2D" parent="WorldSpots"]
+position = Vector2(930, 480)
+
+[node name="Tisch3" type="Marker2D" parent="WorldSpots"]
+position = Vector2(1270, 480)
+
+[node name="Tisch4" type="Marker2D" parent="WorldSpots"]
+position = Vector2(930, 810)
+
+[node name="Sitzecke" type="Marker2D" parent="WorldSpots"]
+position = Vector2(350, 780)
+
+[node name="Schleuse" type="Marker2D" parent="WorldSpots"]
+position = Vector2(1060, 1050)
+
+[node name="Kapitaensecke" type="Marker2D" parent="WorldSpots"]
+position = Vector2(1500, 660)
+
+[node name="Technikecke" type="Marker2D" parent="WorldSpots"]
+position = Vector2(1700, 720)
+
+[node name="Aufzug" type="Marker2D" parent="WorldSpots"]
+position = Vector2(1560, 980)
+
+[node name="Wand" type="Marker2D" parent="WorldSpots"]
+position = Vector2(620, 150)
+
+[node name="Mitte" type="Marker2D" parent="WorldSpots"]
+position = Vector2(936, 640)
+
+[node name="WorldStage" type="Node2D" parent="."]
+script = ExtResource("47_worldstage_script")
+
+[node name="GuestSeats" type="Node2D" parent="."]
+
+[node name="Seat1" type="Marker2D" parent="GuestSeats"]
+position = Vector2(272, 470)
+
+[node name="Seat2" type="Marker2D" parent="GuestSeats"]
+position = Vector2(428, 470)
+
+[node name="Seat3" type="Marker2D" parent="GuestSeats"]
+position = Vector2(772, 470)
+
+[node name="Seat4" type="Marker2D" parent="GuestSeats"]
+position = Vector2(928, 470)
+
+[node name="Seat5" type="Marker2D" parent="GuestSeats"]
+position = Vector2(1272, 470)
+
+[node name="Seat6" type="Marker2D" parent="GuestSeats"]
+position = Vector2(1426, 470)
+
+[node name="Seat7" type="Marker2D" parent="GuestSeats"]
+position = Vector2(772, 800)
+
+[node name="Seat8" type="Marker2D" parent="GuestSeats"]
+position = Vector2(928, 800)
+
+[node name="Seat9" type="Marker2D" parent="GuestSeats"]
+position = Vector2(250, 850)
+
+[node name="Seat10" type="Marker2D" parent="GuestSeats"]
+position = Vector2(450, 850)
+
+[node name="Guests" type="Node2D" parent="."]
+script = ExtResource("48_guests_script")
+
+[node name="Bar" type="Node2D" parent="."]
+position = Vector2(620, 292)
+script = ExtResource("49_bar_script")
+
+[node name="Tray" type="Node" parent="."]
+script = ExtResource("50_tray_script")
+
+[node name="InventoryHud" type="CanvasLayer" parent="."]
+script = ExtResource("51_inventory_hud_script")
+
+[node name="BarPanel" type="CanvasLayer" parent="."]
+script = ExtResource("52_bar_panel_script")
+
+[node name="OrderPanel" type="CanvasLayer" parent="."]
+script = ExtResource("53_order_panel_script")
+
+[node name="Wohndeck" type="Node2D" parent="."]
+script = ExtResource("55_wohndeck_script")
+
+[node name="Technikdeck" type="Node2D" parent="."]
+script = ExtResource("56_technikdeck_script")
+
+[node name="Decks" type="Node" parent="."]
+script = ExtResource("54_decks_script")
+
+[node name="CombatHud" type="CanvasLayer" parent="."]
+script = ExtResource("58_combat_hud_script")
+
+[node name="Combat" type="Node" parent="Player"]
+script = ExtResource("57_player_combat_script")

@@ -16,6 +16,16 @@ public partial class Player : CharacterBody2D
 
 	public bool CanMove = true;
 
+	/// <summary>Last direction the player walked in (for attacks without a mouse).</summary>
+	public Vector2 Facing { get; private set; } = Vector2.Down;
+
+	public Camera2D Camera => _camera;
+
+	/// <summary>Speed multiplier (e.g. while swinging a weapon).</summary>
+	public float SpeedFactor { get; set; } = 1f;
+
+	private Vector2 _knockback;
+
 	private float _walkClock;
 	private float _spriteBaseY;
 
@@ -33,19 +43,37 @@ public partial class Player : CharacterBody2D
 
 	public override void _PhysicsProcess(double delta)
 	{
+		_knockback = _knockback.Lerp(Vector2.Zero, Mathf.Clamp((float)delta * 10f, 0f, 1f));
 		if (!CanMove)
 		{
-			Velocity = Vector2.Zero;
+			Velocity = _knockback;
 			MoveAndSlide();
 			UpdateAnimation(Vector2.Zero, delta);
 			return;
 		}
 
-		Vector2 direction = Input.GetVector("ui_left", "ui_right", "ui_up", "ui_down");
-		Velocity = direction * Speed;
+		// WASD (actions in Project Settings → Input Map; physical keys, so it works on any keyboard layout).
+		Vector2 direction = Input.GetVector("move_left", "move_right", "move_up", "move_down");
+		if (direction != Vector2.Zero)
+			Facing = direction.Normalized();
+
+		// Shift: walk carefully (slower, steadier tray).
+		Velocity = direction * Speed * SpeedFactor * (Input.IsActionPressed("walk_careful") ? 0.55f : 1f) + _knockback;
 		MoveAndSlide();
 
 		UpdateAnimation(direction, delta);
+	}
+
+	/// <summary>Pushes the player away (hit by a monster).</summary>
+	public void Knock(Vector2 impulse) => _knockback += impulse;
+
+	/// <summary>Moves the player instantly (elevator, fainting) and stops all motion.</summary>
+	public void Teleport(Vector2 position)
+	{
+		GlobalPosition = position;
+		_knockback = Vector2.Zero;
+		Velocity = Vector2.Zero;
+		_camera?.ResetSmoothing();
 	}
 
 	// The hand-drawn walk frames face right, so moving left mirrors them. Walking straight up shows

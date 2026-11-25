@@ -29,6 +29,15 @@ public sealed class SaveData
 	public int Day { get; set; } = GameClock.FirstDay;
 	public bool ConjunctionShift { get; set; }
 	public ReputationSnapshot Reputation { get; set; } = new();
+
+	/// <summary>Event history and radio news. Missing in older saves (then empty).</summary>
+	public EventStateSnapshot Events { get; set; } = new();
+
+	/// <summary>Story flags and props/characters placed by events. Missing in older saves (then empty).</summary>
+	public WorldSnapshot World { get; set; } = new();
+
+	/// <summary>Credits, inventory, recipe book, deeds. Missing in older saves (then a fresh start).</summary>
+	public PlayerSnapshot Player { get; set; }
 }
 
 public static class SaveSerializer
@@ -67,6 +76,8 @@ public static class SaveSerializer
 		}
 
 		data.Reputation ??= new ReputationSnapshot();
+		data.Events ??= new EventStateSnapshot();
+		data.World ??= new WorldSnapshot();
 		return true;
 	}
 }

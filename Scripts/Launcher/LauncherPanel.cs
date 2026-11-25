@@ -254,7 +254,12 @@ public partial class LauncherPanel : VBoxContainer
 	private static OptionButton BuildVoiceOptions(TtsProviderKind kind, string slot, System.Collections.Generic.IReadOnlyList<TtsVoice> voices)
 	{
 		var options = new OptionButton();
-		options.AddItem(slot == "Floki" ? "Automatisch (Flokis Standardstimme)" : "Automatisch (je Figur eine feste Stimme)");
+		options.AddItem(slot switch
+		{
+			"Floki" => "Automatisch (Flokis Standardstimme)",
+			LauncherConfig.NarratorSlot => "Automatisch (Erzählerstimme)",
+			_ => "Automatisch (je Figur eine feste Stimme)",
+		});
 		options.SetItemMetadata(0, "");
 
 		string configured = LauncherConfig.GetVoice(kind, slot);
@@ -385,6 +390,8 @@ public partial class LauncherPanel : VBoxContainer
 		try
 		{
 			string reply = await LlmProviderFactory.Create().GetReplyAsync(TestSystemPrompt, TestUserText);
+			// The offline demo answers with a mood tag – not part of the test output.
+			reply = EmotionTag.Split(reply, null, out _);
 			text = $"OK ({watch.ElapsedMilliseconds} ms): {reply}";
 			color = UiKit.Good;
 		}

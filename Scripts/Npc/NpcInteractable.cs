@@ -39,7 +39,8 @@ public partial class NpcInteractable : Area2D
 
 	public override void _UnhandledInput(InputEvent @event)
 	{
-		if (_playerInRange && @event.IsActionPressed("ui_accept"))
+		// E talks (action "interact" in the Input Map).
+		if (_playerInRange && @event.IsActionPressed("interact") && !@event.IsEcho() && !DialogueController.IsOpen)
 		{
 			_dialogueController?.OpenDialogue(Persona);
 			GetViewport().SetInputAsHandled();

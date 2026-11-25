@@ -13,7 +13,10 @@ public static class LauncherConfig
 	public const string DefaultGeminiTtsModel = "gemini-3.8-flash-tts";
 	public const string DefaultElevenLabsModel = "eleven_multilingual_v2";
 	public const string DefaultVoiceSlot = "Standard";
-	public static readonly string[] VoiceSlots = { "Floki", DefaultVoiceSlot };
+	/// <summary>Voice slot of the narrator (event situations and results).</summary>
+	public const string NarratorSlot = "Erzähler";
+
+	public static readonly string[] VoiceSlots = { "Floki", NarratorSlot, DefaultVoiceSlot };
 
 	private const string FilePath = "user://launcher.cfg";
 	private const string Section = "launcher";

@@ -12,9 +12,12 @@ public partial class DialogueController : CanvasLayer
 	[Export] private Control _dimBackground;
 	[Export] private TextureRect _playerPortraitBig;
 	[Export] private TextureRect _npcPortraitBig;
+	// Eye/emotion layer on top of the NPC portrait (child of _npcPortraitBig, same rect).
+	[Export] private TextureRect _npcEmotion;
 
 	private const float ForegroundScale = 1.0f;
-	private const float BackgroundScale = 0.85f;
+	// 0.9 keeps the hero (632 px) taller than Floki (535 px) even while Floki is speaking.
+	private const float BackgroundScale = 0.9f;
 	private static readonly Color ForegroundColor = Colors.White;
 	private static readonly Color BackgroundColor = new Color(0.42f, 0.42f, 0.42f);
 	private const double SpeakerTransitionSeconds = 0.25;
@@ -72,6 +75,7 @@ public partial class DialogueController : CanvasLayer
 		_playerPortraitBig.Visible = true;
 		_npcPortraitBig.Visible = true;
 		_npcPortraitBig.Texture = persona.Portrait;
+		SetEmotion(persona.DefaultEmotion);
 		_inputField.GrabFocus();
 
 		SetSpeaker(playerSpeaking: true, animate: false);
@@ -137,6 +141,15 @@ public partial class DialogueController : CanvasLayer
 		_textTween.TweenProperty(_dialogueLabel, "visible_ratio", 1.0f, duration);
 	}
 
+	private void SetEmotion(string emotion)
+	{
+		if (_npcEmotion == null)
+			return;
+		Texture2D texture = _persona?.GetEmotion(emotion);
+		_npcEmotion.Texture = texture;
+		_npcEmotion.Visible = texture != null;
+	}
+
 	private void SetSpeaker(bool playerSpeaking, bool animate = true)
 	{
 		TweenPortrait(_playerPortraitBig, playerSpeaking, animate);
@@ -180,7 +193,9 @@ public partial class DialogueController : CanvasLayer
 		try
 		{
 			string systemPrompt = PromptComposer.Compose(_persona);
-			string reply = await LlmProviderFactory.Create().GetReplyAsync(systemPrompt, playerText);
+			string rawReply = await LlmProviderFactory.Create().GetReplyAsync(systemPrompt, playerText);
+			// The AI starts with a mood tag ([genervt] …): it drives the eyes and is neither shown nor spoken.
+			string reply = EmotionTag.Split(rawReply, _persona, out string emotion);
 
 			// The voice is made first (cache, Piper, cloud), so text and sound start together.
 			TtsClip clip = IsOpen ? await TtsService.PrepareAsync(_persona.DisplayName, reply) : null;
@@ -188,6 +203,7 @@ public partial class DialogueController : CanvasLayer
 			// The player may have closed the dialogue while the reply was on its way.
 			if (IsOpen)
 			{
+				SetEmotion(emotion);
 				ShowText(reply, spokenSeconds: clip?.Seconds);
 				SetSpeaker(playerSpeaking: false);
 				TtsService.Play(clip);

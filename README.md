@@ -27,9 +27,15 @@ Der Ordner `.godot/` entsteht automatisch und ist nicht im Repository.
 
 | Taste | Aktion |
 |---|---|
-| Pfeiltasten | laufen |
-| Enter | mit Floki sprechen (am Roboter) |
-| Esc | Pause: Ansehen, Einstellungen, „KI & Stimme“, „Schicht beenden“ |
+| **WASD** | laufen (Umschalt = vorsichtig, z. B. mit vollem Tablett) |
+| **E** | benutzen / reden (Floki, Gäste, Bar, Aufzug, Generator …) |
+| **Linksklick / Leertaste** | Schlag (Richtung Mauszeiger / Laufrichtung) |
+| **Rechtsklick / F** | ausgewählten Gegenstand benutzen (Getränk trinken = heilen) |
+| **1–8 / Mausrad** | Schnellleiste · **Tab** Inventar |
+| **Esc** | Pause: Ansehen, Einstellungen, „KI & Stimme“, „Schicht beenden“ |
+
+Alle Tasten sind Aktionen unter *Projekt → Projekteinstellungen → Input Map* und dort änderbar.
+Debug: **Strg+Umschalt+E** löst sofort ein Ereignis aus (nicht F8 – das beendet im Editor das laufende Spiel).
 
 ## KI und Sprachausgabe
 
@@ -44,10 +50,11 @@ Der Ordner `.godot/` entsteht automatisch und ist nicht im Repository.
 
 | Ordner | Inhalt |
 |---|---|
-| `Scripts/` | C#-Code: `Player`, `Dialogue`, `Llm` (KI-Anbieter), `Voice`, `Reputation`, `Time`, `Ui`, `Launcher`, `Core` |
+| `Scripts/` | C#-Code: `Player`, `Dialogue`, `Llm` (KI-Anbieter), `Voice`, `Reputation`, `Time`, `Ui`, `Launcher`, `Core`, `Events` (Ereignisse), `Bar` (Mixen, Tablett), `Guests`, `Items` (Inventar), `Combat` (Kampf, Monster), `Decks` (Aufzug, Wohn- und Technikdeck), `Tasks` (Aufgaben), `Minigames`, `World` (Folgen im Schankraum) |
+| `Data/` | Spielinhalte als JSON, ohne Code änderbar: Ereignisse, Bar (Zutaten, Rezepte, Gäste), Gegenstände – Übersicht in `Data/README.md` |
 | `Resources/Npc/` | Figuren (Persona-Prompts), z. B. `Floki.tres` |
 | `Assets/` | Grafiken, die das Spiel wirklich lädt (Ship, Sprites/Player, Portraits, UI) |
-| `Docs/` | Handlung (`Handlung.md`), Zeichenlisten für Grafik, Demo-README |
+| `Docs/` | Handlung (`Handlung.md`), Zeichenlisten für Grafik, Demo-README, **Leitfaden für Oberfläche und Grafik** (`UI_Leitfaden.md`) |
 | `Tools/` | Hilfsskripte (Python): Voice-Paket laden, Spielerbilder und UI-Grafik aus den Quellbildern bauen |
 | `export_presets.cfg` | Export-Einstellung „Windows Demo“ |
 

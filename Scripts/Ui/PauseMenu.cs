@@ -26,7 +26,8 @@ public partial class PauseMenu : CanvasLayer
 			Close();
 			GetViewport().SetInputAsHandled();
 		}
-		else if (!DialogueController.IsOpen)
+		else if (!DialogueController.IsOpen && !EventPanel.IsOpen && !BarPanel.IsOpen && !OrderPanel.IsOpen && !InventoryHud.IsPanelOpen
+			&& !CircuitGame.IsOpen && !PressureGame.IsOpen && !DeckManager.MenuOpen)
 		{
 			Open();
 			GetViewport().SetInputAsHandled();

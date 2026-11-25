@@ -7,11 +7,11 @@ public sealed class OfflineDemoProvider : ILlmProvider
 
     private static readonly string[] Lines =
     {
-        "Ich höre dich, Chef. Ohne echte KI kann ich nur so tun, als wäre ich schlau. (Offline-Demo)",
-        "Interessant. Falsch, aber interessant. (Offline-Demo)",
-        "Ich würde ja antworten, aber mein Gehirn liegt gerade im Funkloch. (Offline-Demo)",
-        "Notiz an mich: später etwas Gescheites sagen. (Offline-Demo)",
-        "Das ist eine Standardantwort. Gewöhn dich nicht dran. (Offline-Demo)"
+        "[neutral] Ich höre dich, Chef. Ohne echte KI kann ich nur so tun, als wäre ich schlau. (Offline-Demo)",
+        "[genervt] Interessant. Falsch, aber interessant. (Offline-Demo)",
+        "[froh] Ich würde ja antworten, aber mein Gehirn liegt gerade im Funkloch. (Offline-Demo)",
+        "[verlegen] Notiz an mich: später etwas Gescheites sagen. (Offline-Demo)",
+        "[genervt] Das ist eine Standardantwort. Gewöhn dich nicht dran. (Offline-Demo)"
     };
 
     private static int _next;

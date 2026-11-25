@@ -150,6 +150,24 @@ public static class TtsService
 
 	public static bool IsSpeaking => _player != null && GodotObject.IsInstanceValid(_player) && _player.Playing;
 
+	/// <summary>True while an audio clip or the Windows voice is speaking (used by the VoiceQueue).</summary>
+	public static bool IsSpeakingAny
+	{
+		get
+		{
+			if (IsSpeaking)
+				return true;
+			try
+			{
+				return DisplayServer.TtsIsSpeaking();
+			}
+			catch (Exception)
+			{
+				return false;
+			}
+		}
+	}
+
 	// ----- Cache -----
 
 	public static string CacheDirectory => ProjectSettings.GlobalizePath("user://tts_cache");
@@ -257,7 +275,8 @@ public static class TtsService
 		if (Engine.GetMainLoop() is not SceneTree tree)
 			return null;
 
-		_player = new AudioStreamPlayer { Name = "TtsPlayer" };
+		// Events pause the game while they are open; voices must keep playing.
+		_player = new AudioStreamPlayer { Name = "TtsPlayer", ProcessMode = Node.ProcessModeEnum.Always };
 		tree.Root.AddChild(_player);
 		return _player;
 	}
