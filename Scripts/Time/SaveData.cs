@@ -38,6 +38,9 @@ public sealed class SaveData
 
 	/// <summary>Credits, inventory, recipe book, deeds. Missing in older saves (then a fresh start).</summary>
 	public PlayerSnapshot Player { get; set; }
+
+	/// <summary>Wanted level, what factions know, unspread rumours. Missing in older saves (then empty).</summary>
+	public MemorySnapshot Memory { get; set; }
 }
 
 public static class SaveSerializer

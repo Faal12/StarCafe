@@ -89,6 +89,10 @@ public static class EventService
 				return false;
 			}
 		}
+		if (MemoryService.Wanted < def.MinWanted || (def.MaxWanted > 0 && MemoryService.Wanted > def.MaxWanted))
+		{
+			return false;
+		}
 		WorldState world = WorldService.State;
 		if (def.RequiresFlags.Any(flag => !world.HasFlag(flag)) || def.BlockedByFlags.Any(world.HasFlag))
 		{
@@ -107,10 +111,10 @@ public static class EventService
 		{
 			return null;
 		}
-		int roll = Rng.RandiRange(1, pool.Sum(e => e.Weight));
+		int roll = Rng.RandiRange(1, pool.Sum(EffectiveWeight));
 		foreach (GameEventDef def in pool)
 		{
-			roll -= def.Weight;
+			roll -= EffectiveWeight(def);
 			if (roll <= 0)
 			{
 				return def;
@@ -119,7 +123,13 @@ public static class EventService
 		return pool[^1];
 	}
 
-	/// <summary>Applies an outcome: standing, Gastrecht, key figure, radio, history.</summary>
+	/// <summary>Weight for the random pick: "wantedBoost" events become more likely with the wanted level (×2 at 30, ×4 at 90).</summary>
+	public static int EffectiveWeight(GameEventDef def)
+	{
+		return def.WantedBoost ? def.Weight * (1 + MemoryService.Wanted / MemoryService.Patrols) : def.Weight;
+	}
+
+	/// <summary>Applies an outcome: standing, Gastrecht, key figure, wanted level, radio, history.</summary>
 	public static EventResolution Resolve(GameEventDef def, EventOutcomeDef choice)
 	{
 		ReputationState rep = ReputationService.State;
@@ -155,6 +165,16 @@ public static class EventService
 		if (gastrechtDelta != 0)
 		{
 			effects.Add("Gastrecht " + Signed(gastrechtDelta));
+		}
+		if (choice.Wanted != 0)
+		{
+			int wantedBefore = MemoryService.Wanted;
+			MemoryService.ChangeWanted(choice.Wanted, reason);
+			int wantedDelta = MemoryService.Wanted - wantedBefore;
+			if (wantedDelta != 0)
+			{
+				effects.Add("Fahndung " + Signed(wantedDelta));
+			}
 		}
 		State.RecordHappened(def.Id, week);
 		bool hasRadio = !string.IsNullOrWhiteSpace(choice.Radio);

@@ -123,6 +123,16 @@ Methoden aus `Scripts/Events/ConversationActions.cs` und zeigt das Ergebnis:
 `Outcome` (≠ null → Ereignis entschieden, wie beim Reden anzeigen), `StartsBrawl` (→ Fenster schließen; die Schlägerei
 beginnt, sobald es zu ist). Weitere Zustände für die Anzeige: `gespräch.TurnsLeft`, `gespräch.Anger`, `BrawlService.IsActive`.
 
+**Gedächtnis & Fahndung** (`Scripts/Memory/MemoryService.cs`) – nur lesen:
+
+| Was | Woher |
+|---|---|
+| Verborgene Ausgänge („???“) eines Ereignisses | `def.LockedOutcomes` – Tipp: `ausgang.Requires.Hint` |
+| Erschlossene verborgene Ausgänge (★) | in `def.TalkOutcomes` mit `ausgang.IsSecret == true` – Grund: `ausgang.Requires.Reason` |
+| Fahndungsstufe 0–100 und Stufenname | `MemoryService.Wanted`, `MemoryService.WantedStage(stufe)`; Schwellen `Patrols` (30), `Search` (60), `Hearing` (90) |
+| Änderung der Fahndung | Event `MemoryService.WantedChanged (alt, neu, grund)` |
+| Schichtende: Gerüchte, Fahndung über die Woche | `MemoryService.LastShiftRumors`, `MemoryService.LastShiftWantedChange` (gefüllt vor `GameSession.ShiftEnded`) |
+
 ### Ein Fenster neu bauen (z. B. als Szene)
 
 1. Neue Szene in `Scenes/Ui/` anlegen, Skript in `Scripts/Ui/`.

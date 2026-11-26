@@ -197,6 +197,23 @@ public static class EventLibrary
 			{
 				return $"Ausgang \"{outcome.Id}\": der Standard-Ausgang kann nicht durch eine \"action\" erreicht werden";
 			}
+			if (outcome.Requires != null)
+			{
+				outcome.Requires.Items ??= new List<string>();
+				outcome.Requires.Flags ??= new List<string>();
+				outcome.Requires.Deeds ??= new List<string>();
+				if (outcome.Default)
+				{
+					return $"Ausgang \"{outcome.Id}\": der Standard-Ausgang kann nicht verborgen sein (\"requires\")";
+				}
+				foreach (string item in outcome.Requires.Items)
+				{
+					if (ItemLibrary.Get(item) == null)
+					{
+						return $"Ausgang \"{outcome.Id}\": \"requires\" nennt unbekannten Gegenstand \"{item}\" (siehe Data/Items/items.json)";
+					}
+				}
+			}
 			if (string.IsNullOrWhiteSpace(outcome.Condition) && !outcome.TaskOnly && !byAction)
 			{
 				return $"Ausgang \"{outcome.Id}\" hat keine \"condition\" (die KI braucht sie)";

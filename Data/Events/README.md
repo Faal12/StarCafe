@@ -185,6 +185,47 @@ schon jetzt Folge-Ereignisse auslösen (`requiresFlags`).
 
 Test ohne Würfelglück: `STARCAFE_ACTION_ROLL=hit` (gelingt immer) oder `=miss` (misslingt immer).
 
+## Gedächtnis: verborgene Ausgänge, Gerüchte, Fahndung
+
+**Verborgene Ausgänge** (`requires` am Ausgang): Solange die Bedingung nicht erfüllt ist, sieht der Spieler nur
+„??? (verborgen)“ mit dem `hint`, und die KI kennt den Ausgang nicht. Sobald sie erfüllt ist, erscheint er mit ★
+und die KI erfährt den `reason`.
+
+```json
+"requires": {
+  "items": ["dienstchip"],              // Gegenstände im Inventar
+  "flags": ["schlaegerei"],             // Story-Flags
+  "deeds": ["diebstahl|erwischt"],      // frühere Taten: "art" oder "art|schlagwort"
+  "minWanted": 0, "maxWanted": 0,       // Fahndungsstufe (0 = egal)
+  "hint": "Hättest du etwas gegen ihn in der Hand …",
+  "reason": "Der Wirt hat den Dienstchip des Offiziers."
+}
+```
+
+Taten-Arten: `serviert`, `warten_lassen`, `verschuettet`, `getrunken`, `ohnmacht`, `luege`, `drohung`, `diebstahl`,
+`schlaegerei`. Schlagwörter z. B. `geglaubt`, `durchschaut`, `erwischt`, `unbemerkt`, `sieg`, `niederlage`, `flucht`,
+`fraktion:Imperium`, `opfer:Imperialer Offizier`, `angefangen:wirt`.
+
+**Figuren erinnern sich:** Die KI bekommt, was die Figur selbst erlebt hat (gleicher Name) und was ihre Fraktion über
+den Wirt weiß. Beobachtete Taten erfährt die Fraktion des Opfers sofort; am Schichtende verbreiten sie sich als
+**Gerüchte** an andere Fraktionen, Schlägereien und erwischte Diebstähle landen manchmal im Radio („Gerüchteküche“).
+Floki weiß ohnehin alles, was an Bord passiert.
+
+**Fahndung bei der Sternenwacht (0–100):**
+
+| Tat | Fahndung |
+|---|---|
+| Beim Stehlen erwischt | +15 |
+| Schlägerei | +10, selbst angefangen +5 |
+| Drohung vor Zeugen | +3 |
+| Lüge durchschaut | +1 |
+| alles gegen die Sternenwacht | doppelt (Diebstahl bei ihr auch unbemerkt +6) |
+| jedes Schichtende | −8 |
+
+Ab **30** kommen Ereignisse mit `"wantedBoost": true` öfter (Streifen, Ermittler: ×2 bei 30, ×4 bei 90),
+ab **60** ist die **Durchsuchung** möglich, ab **90** die **Anhörung zur Schanklizenz**.
+Felder: Ereignis `minWanted` / `maxWanted` / `wantedBoost`, Ausgang `wanted` (z. B. `-15`, wenn der Verdacht sinkt).
+
 ## Folgen im Schankraum (`world`)
 
 Jeder Ausgang kann eine Liste von Folgen haben. Gegenstände und Figuren **bleiben** (auch im Spielstand),

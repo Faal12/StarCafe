@@ -23,6 +23,18 @@
       ],
       "outcomes": [
         {
+          "id": "dienstchip_erpressung",
+          "label": "Du erpresst ihn mit seinem eigenen Dienstchip",
+          "condition": "Der Wirt zeigt oder erwähnt den imperialen Dienstchip des Offiziers und droht, ihn der Sternenwacht oder den Vorgesetzten des Offiziers zu übergeben. Dann zieht der Offizier ab – ohne Namen.",
+          "requires": { "items": ["dienstchip"], "hint": "Hättest du etwas gegen ihn in der Hand …", "reason": "Der Wirt hat den Dienstchip des Offiziers (aus dessen Tasche) – ohne ihn ist der Offizier aufgeschmissen." },
+          "keywords": ["dienstchip", "chip", "erpress"],
+          "reputation": { "Imperium": -6 },
+          "rivalry": false,
+          "gastrecht": 2,
+          "result": "Der Offizier erbleicht, als er seinen Chip in deiner Hand sieht. Ohne ein weiteres Wort steht er auf und geht. Den Chip behältst du – vorerst.",
+          "floki": "Erpressung. Ich trage es unter „kreative Konfliktlösung“ ein."
+        },
+        {
           "id": "verraten",
           "label": "Du verrätst den Rebellen",
           "condition": "Der Wirt nennt dem Offizier den Rebellen, sein Schiff oder hilft ihm sonst, den Mann festzunehmen.",
@@ -85,7 +97,7 @@
       "text": "Zwei Beamte der Sternenwacht stehen in der Schleuse: „Routinekontrolle. Lizenz, Frachtliste, Gästeliste.“ Hinter dir schiebt ein Gast hastig eine Kiste unter den Tisch.",
       "opening": "Abend, Wirt. Lizenz, Frachtliste. Und was hat der Herr da hinten gerade unter den Tisch geschoben?",
       "floki": "Gästeliste? Wir haben eine Gästeliste? Ich bin beleidigt, dass ich das nicht weiß.",
-      "weight": 3,
+      "wantedBoost": true, "weight": 3,
       "cooldownWeeks": 4,
       "maxTurns": 5,
       "offlineLines": [
@@ -93,6 +105,18 @@
         "Ich habe Feierabend in einer Stunde. Hilf mir, den zu erreichen."
       ],
       "outcomes": [
+        {
+          "id": "falschgeld_spur",
+          "label": "Du lenkst die Streife auf das Falschgeld der Grauen Hände",
+          "condition": "Der Wirt übergibt das Falschgeld-Bündel und erzählt, woher es kommt. Die Streife verfolgt lieber diese Spur als die Taverne.",
+          "requires": { "items": ["falschgeld"], "hint": "Mit einem handfesten Beweis gegen andere sähe die Kontrolle anders aus …", "reason": "Der Wirt hat ein Bündel Falschgeld aus den Kreisen der Grauen Hände." },
+          "keywords": ["falschgeld", "buendel", "beweis"],
+          "reputation": { "Sternenwacht": 5, "GraueHaende": -6 },
+          "rivalry": false,
+          "wanted": -15,
+          "result": "Die Streife wiegt das Bündel in der Hand, pfeift leise und vergisst die Taverne. „Das hier ist eine echte Spur, Wirt. Danke.“",
+          "floki": "Wir sind jetzt offiziell Informanten. Ich habe uns einen Codenamen ausgedacht. Du willst ihn nicht wissen."
+        },
         {
           "id": "streife_getaeuscht",
           "label": "Die Streife glaubt deine Geschichte und zieht ab",
@@ -103,7 +127,7 @@
           "floki": "Für das Protokoll: Ich habe nichts gehört. Für dich: Das war knapp."
         },
         {
-          "id": "kooperiert",
+          "id": "kooperiert", "wanted": -5,
           "label": "Du lieferst die Kiste aus",
           "condition": "Der Wirt zeigt den Beamten die Kiste oder den Gast und kooperiert vollständig.",
           "keywords": ["kiste", "dort", "unter dem tisch", "bitte schauen", "durchsuchen", "kooperier"],
@@ -121,7 +145,7 @@
           "floki": "Ablenkung mit Bier. Klassisch. Vier von fünf Sternen."
         },
         {
-          "id": "bestechung_aufgeflogen",
+          "id": "bestechung_aufgeflogen", "wanted": 15,
           "label": "Die Beamten fühlen sich bestochen",
           "condition": "Der Wirt bietet plump Geld an oder droht; die Beamten werden förmlich, schreiben eine Verwarnung und nehmen die Kiste trotzdem mit.",
           "keywords": ["geld", "credits", "bestech", "wie viel"],
@@ -130,7 +154,7 @@
           "floki": "Bestechung, aber auf Anfängerniveau. Ich hätte es dir erklären können."
         },
         {
-          "id": "durchsucht",
+          "id": "durchsucht", "wanted": -5,
           "label": "Die Streife durchsucht alles",
           "condition": "Der Wirt bleibt passiv oder ausweichend; die Beamten durchsuchen die Taverne gründlich und stören die Gäste.",
           "default": true,
@@ -776,6 +800,17 @@
       ],
       "outcomes": [
         {
+          "id": "respekt_der_faust",
+          "label": "Sie hat von deiner Schlägerei gehört – und bietet dir einen Deal",
+          "condition": "Die Kopfgeldjägerin hat gehört, dass der Wirt jemanden k.o. geschlagen hat. Spricht der Wirt sie darauf an oder schlägt eine Zusammenarbeit vor, macht sie keinen Ärger in der Taverne und zieht mit einem Handschlag ab.",
+          "requires": { "deeds": ["schlaegerei|sieg"], "hint": "Söldner respektieren Stärke. Hast du schon mal jemanden umgehauen?", "reason": "Der Wirt hat in seiner Taverne eine Schlägerei gewonnen – das hat sich herumgesprochen." },
+          "keywords": ["schlaegerei", "deal", "zusammen", "handschlag"],
+          "reputation": { "Soeldner": 5 },
+          "rivalry": false,
+          "result": "Sie grinst schief. „Einer, der zuschlagen kann. Gut. Dann regeln wir das draußen, nicht in deinem Laden.“ Ein Handschlag, dann ist sie fort.",
+          "floki": "Wir haben jetzt Kontakte in der Kopfgeldbranche. Ich weiß nicht, ob ich stolz oder besorgt sein soll. Beides."
+        },
+        {
           "id": "mitgenommen",
           "label": "Die Jägerin nimmt das Mädchen mit",
           "condition": "Der Wirt lässt sie gewähren oder findet kein Argument, das sie überzeugt.",
@@ -969,6 +1004,18 @@
       ],
       "outcomes": [
         {
+          "id": "schuldschein_druck",
+          "label": "Die Schuldschein-Liste dreht den Spieß um",
+          "condition": "Der Wirt zeigt die Schuldschein-Liste der Grauen Hände und droht, sie der Sternenwacht zu geben. Der Eintreiber verzichtet auf das Schutzgeld.",
+          "requires": { "items": ["schuldschein"], "hint": "Wer die Grauen Hände unter Druck setzen will, braucht etwas, das sie fürchten …", "reason": "Der Wirt hat die Schuldschein-Liste der Grauen Hände." },
+          "keywords": ["liste", "schuldschein", "sternenwacht"],
+          "reputation": { "GraueHaende": -4 },
+          "rivalry": false,
+          "result": "Der Eintreiber starrt auf die Liste, dann auf dich. „Behalt dein Geld, Wirt. Und vergiss, was da drinsteht.“ Er geht – schneller, als er gekommen ist.",
+          "floki": "Ich habe die Liste digitalisiert. Nur für den Fall. Ich bin ein vorsichtiger Roboter.",
+          "world": [ { "type": "flag", "id": "graue_haende_erpresst", "weeks": 6 } ]
+        },
+        {
           "id": "eintreiber_verpruegelt",
           "label": "Du verprügelst den Eintreiber",
           "action": "angreifen",
@@ -1158,7 +1205,19 @@
       ],
       "outcomes": [
         {
-          "id": "zugehoert",
+          "id": "diebstahl_vergessen",
+          "label": "Er vergisst die Anzeige – gegen ein Getränk aufs Haus",
+          "condition": "Der Wachtmeister hat die Anzeige wegen des Diebstahls in der Taverne auf dem Tisch. Bietet der Wirt ihm ehrlich ein Getränk und ein offenes Ohr an, lässt er sie liegen.",
+          "requires": { "deeds": ["diebstahl|erwischt"], "hint": "Manchmal hilft ein müder Polizist, wenn man selbst Ärger hat …", "reason": "Der Wirt wurde in seiner Taverne beim Stehlen erwischt; die Anzeige liegt beim Wachtmeister." },
+          "keywords": ["aufs haus", "anzeige", "vergessen", "getraenk"],
+          "reputation": { "Sternenwacht": 2 },
+          "rivalry": false,
+          "wanted": -20,
+          "result": "Der Wachtmeister nimmt das Glas, seufzt und schiebt einen Zettel zurück in die Tasche. „Ich habe nichts gesehen. Ich sehe sowieso kaum noch was.“",
+          "floki": "Eine Anzeige weniger, eine Flasche weniger. Das Universum ist im Gleichgewicht."
+        },
+        {
+          "id": "zugehoert", "wanted": -5,
           "label": "Du hörst ihm zu",
           "condition": "Der Wirt hört ernsthaft zu, fragt nach und urteilt nicht; der Wachtmeister öffnet sich und verrät die Beobachtung der Taverne.",
           "keywords": ["erzaehl", "was ist passiert", "ich hoere", "zuhoeren", "warum"],
@@ -1168,7 +1227,7 @@
           "floki": "Bekannt. Natürlich. Jeder weiß mehr über mein Schiff als ich. Ich schreibe eine Beschwerde. An mich."
         },
         {
-          "id": "ermutigt",
+          "id": "ermutigt", "wanted": -5,
           "label": "Du bestärkst seine Zweifel",
           "condition": "Der Wirt rät ihm, die Seite zu wechseln oder aufzuhören.",
           "keywords": ["hoer auf", "wechsel", "kuendig", "rebellen"],
@@ -1549,7 +1608,7 @@
       "text": "Eine Ermittlerin der Sternenwacht legt eine Aufnahme auf den Tresen: die Rebellenwerberin auf dem Stuhl, mitten in deinem Schankraum.",
       "opening": "Ich will die Namen der Hafenarbeiter, die mit ihr gegangen sind, Wirt. Oder einen sehr guten Grund, warum Ihre Lizenz nicht geprüft werden sollte.",
       "floki": "Sie haben eine Aufnahme. Nicht von mir. Ich bin gekränkt, dass es noch andere Kameras gibt.",
-      "weight": 4,
+      "wantedBoost": true, "weight": 4,
       "once": true,
       "minWeek": 4,
       "requiresFlags": [ "rebellen_werben_hier" ],
@@ -1560,7 +1619,7 @@
       ],
       "outcomes": [
         {
-          "id": "namen_genannt",
+          "id": "namen_genannt", "wanted": -10,
           "label": "Du nennst die Namen",
           "condition": "Der Wirt nennt die Namen der Angeworbenen oder beschreibt sie so, dass sie gefunden werden können.",
           "keywords": [ "namen", "sie heissen", "die waren", "ich sage" ],
@@ -1572,7 +1631,7 @@
           "radio": "Knotensender: Sternenwacht nimmt mutmaßliche Rebellenhelfer fest."
         },
         {
-          "id": "hausregel",
+          "id": "hausregel", "wanted": 5,
           "label": "Eine neue Hausregel",
           "condition": "Der Wirt sagt überzeugend zu, dass in der Taverne nicht mehr geworben wird (Hausregel, Aushang, Neutralboden), ohne Namen zu nennen, und die Ermittlerin akzeptiert.",
           "keywords": [ "hausregel", "aushang", "nie wieder", "neutral", "kommt nicht mehr vor" ],
@@ -1582,13 +1641,150 @@
           "floki": "Ein Aushang. Die schärfste Waffe des Gastgewerbes."
         },
         {
-          "id": "lizenzpruefung",
+          "id": "lizenzpruefung", "wanted": 10,
           "label": "Die Lizenz wird geprüft",
           "condition": "Der Wirt verweigert jede Zusage, lügt erkennbar oder hält sich heraus; die Ermittlerin kündigt eine Lizenzprüfung an.",
           "default": true,
           "reputation": { "Sternenwacht": -6 },
           "world": [ { "type": "character", "id": "pruefbeamter", "label": "Prüfbeamter der Sternenwacht", "faction": "Sternenwacht", "spot": "Kapitaensecke", "weeks": 2, "appear": "drop" } ],
           "result": "Am nächsten Morgen sitzt ein Prüfbeamter in deiner Kapitänsecke. Er bestellt nur Wasser. Er wird eine Weile bleiben."
+        }
+      ]
+    },
+    {
+      "id": "durchsuchung",
+      "kind": "Konflikt",
+      "title": "Durchsuchung",
+      "speaker": {
+        "name": "Einsatzleiterin der Sternenwacht",
+        "faction": "Sternenwacht",
+        "persona": "Kühl, korrekt, unbestechlich. Sie hat eine Akte über die Taverne: Diebstahl, Schlägereien, Beschwerden. Sie will eine saubere Durchsuchung und Antworten. Ehrliche Kooperation und Reue besänftigen sie; Ausreden, Drohungen und plumpe Lügen machen alles schlimmer. Beweise gegen echte Verbrecher interessieren sie mehr als ein Wirt.",
+        "placeholder": true,
+        "strength": 3, "wits": 3
+      },
+      "text": "Vier Beamte der Sternenwacht betreten die Taverne. Die Einsatzleiterin legt einen Durchsuchungsbefehl auf den Tresen: Diebstahl, Schlägereien, Beschwerden. Die Gäste rücken von den Tischen ab.",
+      "opening": "Durchsuchungsbefehl, Wirt. Sie kennen die Liste. Kooperieren Sie, dann sind wir in einer Stunde fertig. Wenn nicht, wird es eine lange Nacht.",
+      "floki": "Chef. Das ist der Moment, in dem man nicht lügt. Glaube ich. Ich habe das nie ausprobiert.",
+      "weight": 6,
+      "cooldownWeeks": 2,
+      "minWanted": 60,
+      "maxTurns": 5,
+      "offlineLines": [
+        "Ich warte, Wirt. Meine Leute nicht.",
+        "Jedes Wort, das Sie jetzt sagen, landet in der Akte."
+      ],
+      "outcomes": [
+        {
+          "id": "informant",
+          "label": "Du lieferst ihr die Schuldschein-Liste der Grauen Hände",
+          "condition": "Der Wirt übergibt die Schuldschein-Liste der Grauen Hände als Beweis. Die Einsatzleiterin bricht die Durchsuchung ab.",
+          "requires": { "items": ["schuldschein"], "hint": "Ein dicker Fisch statt eines kleinen Wirts …", "reason": "Der Wirt hat die Schuldschein-Liste der Grauen Hände – ein echter Beweis." },
+          "keywords": ["liste", "schuldschein", "beweis"],
+          "reputation": { "Sternenwacht": 8, "GraueHaende": -10 },
+          "rivalry": false,
+          "wanted": -40,
+          "result": "Die Einsatzleiterin blättert die Liste durch und gibt ihren Leuten ein Zeichen: Abbruch. „Sie haben uns gerade einen Monat Arbeit gespart, Wirt. Wir sind quitt – fürs Erste.“",
+          "floki": "Die Grauen Hände werden das erfahren. Nicht von mir. Aber sie werden es erfahren.",
+          "world": [ { "type": "flag", "id": "graue_haende_verraten", "weeks": 8 } ]
+        },
+        {
+          "id": "kooperiert",
+          "label": "Du kooperierst – sie finden nichts Neues",
+          "condition": "Der Wirt lässt die Beamten suchen, beantwortet Fragen ehrlich und gibt eigene Fehler zu.",
+          "keywords": ["kooperier", "suchen sie", "ehrlich", "zugeben", "fehler"],
+          "reputation": { "Sternenwacht": 4 },
+          "rivalry": false,
+          "gastrecht": -4,
+          "wanted": -30,
+          "result": "Die Beamten drehen jede Kiste um und finden – nichts, was nicht schon in der Akte steht. Die Einsatzleiterin nickt knapp. „Bleiben Sie so langweilig, Wirt.“",
+          "floki": "Ich habe mich die ganze Zeit wie eine Kaffeemaschine verhalten. Niemand hat Fragen gestellt."
+        },
+        {
+          "id": "widerstand",
+          "label": "Du verweigerst die Durchsuchung",
+          "condition": "Der Wirt verweigert die Durchsuchung, beleidigt oder blockiert die Beamten.",
+          "keywords": ["nein", "verweiger", "raus hier", "ohne mich"],
+          "reputation": { "Sternenwacht": -8 },
+          "rivalry": false,
+          "gastrecht": -6,
+          "wanted": 15,
+          "result": "Die Einsatzleiterin notiert etwas, sehr langsam. „Das war ein Fehler, Wirt.“ Dann ziehen die Beamten ab – und lassen einen Wagen vor der Schleuse stehen.",
+          "radio": "Knotensender: Wirt der „Letzten Runde“ verweigert Durchsuchung durch die Sternenwacht.",
+          "world": [ { "type": "character", "id": "sternenwacht_posten", "label": "Sternenwacht-Posten", "faction": "Sternenwacht", "spot": "Schleuse", "offsetX": -60, "weeks": 2 } ]
+        },
+        {
+          "id": "auf_den_kopf",
+          "label": "Sie stellen die Taverne auf den Kopf",
+          "condition": "Der Wirt hält sich heraus oder windet sich nur – die Beamten durchsuchen alles gründlich und rücksichtslos.",
+          "default": true,
+          "keywords": [],
+          "gastrecht": -10,
+          "wanted": -15,
+          "result": "Eine Stunde lang fliegen Kisten, Schubladen und Gäste. Am Ende bleibt Chaos – und eine Akte, die ein bisschen dünner geworden ist.",
+          "floki": "Sie haben meinen Staubfilter beschlagnahmt. Ich will ihn zurück.",
+          "world": [ { "type": "animation", "animation": "shake" }, { "type": "prop", "id": "umgeworfene_kisten", "label": "Umgeworfene Kisten", "spot": "Tresen", "weeks": 1, "appear": "drop" } ]
+        }
+      ]
+    },
+    {
+      "id": "lizenzanhoerung",
+      "kind": "Konflikt",
+      "title": "Anhörung zur Schanklizenz",
+      "speaker": {
+        "name": "Lizenzrichterin der Sternenwacht",
+        "faction": "Sternenwacht",
+        "persona": "Alt, trocken, hat schon hundert Tavernen schließen sehen. Spricht über das Holo-Terminal. Sie will Reue und einen konkreten Plan, keine Ausreden. Sie weiß, dass ein neutraler Hafen am Knoten wertvoll ist, und lässt sich davon überzeugen, wenn es glaubhaft ist. Drohungen und Lügen beenden die Anhörung zu Ungunsten des Wirts.",
+        "placeholder": true,
+        "remote": true,
+        "strength": 3, "wits": 3
+      },
+      "text": "Über das Holo-Terminal am Tresen meldet sich eine Richterin der Sternenwacht: Anhörung zur Schanklizenz der „Letzten Runde“. Die Gäste tun so, als hörten sie nicht zu.",
+      "opening": "Wirt, Ihre Akte ist länger als meine Mittagspause. Nennen Sie mir einen Grund, warum diese Taverne morgen noch öffnen sollte.",
+      "floki": "Ich habe das Holo-Terminal gründlich geputzt. Erster Eindruck und so.",
+      "weight": 10,
+      "cooldownWeeks": 3,
+      "minWanted": 90,
+      "maxTurns": 5,
+      "offlineLines": [
+        "Ich höre, Wirt. Noch.",
+        "Gründe, keine Geschichten."
+      ],
+      "outcomes": [
+        {
+          "id": "bewaehrung",
+          "label": "Lizenz auf Bewährung",
+          "condition": "Der Wirt zeigt glaubhaft Reue und nennt konkrete Änderungen (keine Gewalt mehr, Zusammenarbeit mit der Sternenwacht, Hausregeln).",
+          "keywords": ["reue", "entschuldig", "verspreche", "aendern", "bewaehrung", "hausregel"],
+          "reputation": { "Sternenwacht": 3 },
+          "rivalry": false,
+          "wanted": -40,
+          "result": "Die Richterin schweigt lange. „Bewährung, Wirt. Acht Wochen. Ein Fehler, und Sie schenken das nächste Bier in einer Zelle aus.“ Das Holo erlischt.",
+          "floki": "Acht Wochen brav sein. Ich führe eine Strichliste. Für dich. Nicht gegen dich. Meistens.",
+          "world": [ { "type": "flag", "id": "lizenz_bewaehrung", "weeks": 8 } ]
+        },
+        {
+          "id": "neutraler_hafen",
+          "label": "Sie lässt dich als neutralen Hafen weitermachen",
+          "condition": "Der Wirt überzeugt die Richterin, dass die Taverne als neutraler Hafen am Knoten für alle Seiten – auch die Sternenwacht – unverzichtbar ist.",
+          "keywords": ["neutral", "hafen", "alle seiten", "knoten", "unverzichtbar"],
+          "reputation": { "Sternenwacht": 1 },
+          "rivalry": false,
+          "wanted": -30,
+          "result": "„Ein neutraler Hafen.“ Die Richterin klingt nicht überzeugt, aber müde. „Gut. Dann benehmen Sie sich auch wie einer.“",
+          "floki": "Neutral. Wie ich. Ich bin sehr neutral. Ich verurteile nur innerlich."
+        },
+        {
+          "id": "auflagen",
+          "label": "Harte Auflagen und eine Strafe",
+          "condition": "Der Wirt hat keine überzeugende Antwort, hält sich heraus oder die Anhörung endet ohne Einigung.",
+          "default": true,
+          "keywords": [],
+          "gastrecht": -10,
+          "wanted": -25,
+          "result": "Die Richterin verliest Auflagen: Sperrstunde, Kontrollen, eine Strafe, die erst noch berechnet wird. Die Lizenz bleibt – an einem sehr dünnen Faden.",
+          "floki": "Die Strafe ist noch nicht berechnet. Ich habe den Rechner versteckt.",
+          "radio": "Knotensender: Schanklizenz der „Letzten Runde“ nur unter harten Auflagen verlängert.",
+          "world": [ { "type": "flag", "id": "lizenz_auflagen", "weeks": 8 } ]
         }
       ]
     }

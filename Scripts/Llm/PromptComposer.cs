@@ -14,6 +14,14 @@ public static class PromptComposer
         if (worldState.Length > 0)
             builder.Append("\n\n").Append(worldState);
 
+        // Floki sees everything on board and remembers the Wirt's deeds (phase 4).
+        if (persona.DisplayName == FlokiAdvisor.Name)
+        {
+            string memory = MemoryService.DescribeForFloki();
+            if (memory.Length > 0)
+                builder.Append("\n\n").Append(memory);
+        }
+
         // Personas with facial expressions tag every reply with a mood (see EmotionTag).
         if (persona.HasEmotions)
             builder.Append(EmotionTag.PromptRule(persona));
