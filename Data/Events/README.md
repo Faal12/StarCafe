@@ -99,6 +99,10 @@ Das Spiel lädt **jede** `.json`-Datei hier – man kann also auch neue Dateien 
 | `speaker.faction` | färbt die Platzhalter-Karte; leer = neutral grau | leer |
 | `speaker.persona` | **für die KI**: Charakter, Ziel, was überzeugt, was nie geht. Je genauer, desto besser spielt die KI | leer |
 | `speaker.placeholder` | `true` zeigt „Platzhalter“ – später durch echte Figur ersetzen | `true` |
+| `speaker.strength` | Kampfkraft 1–3: Leben und Schläge in der Schlägerei, wie schwer einzuschüchtern | 2 |
+| `speaker.wits` | Gerissenheit 1–3: wie schwer zu täuschen und zu bestehlen | 2 |
+| `speaker.remote` | `true`: nicht im Raum (Funk, Holo) – kein Angreifen, kein Bestehlen | `false` |
+| `speaker.pockets` | was sich stehlen lässt: `creditsMin`, `creditsMax`, `items` (Ids aus `Data/Items/items.json`) | ₡5–25 |
 | `floki` | Flokis Spruch zu Beginn (in \*Sternchen\*) | keiner |
 | `maxTurns` | Antworten des Spielers, bis entschieden wird | 6 |
 | `offlineLines` | Sätze der Figur im Offline-Modus | ein Standardsatz |
@@ -129,9 +133,57 @@ Das Spiel lädt **jede** `.json`-Datei hier – man kann also auch neue Dateien 
 | `radio` | Meldung beim Schichtende | keine |
 | `killKeyFigure` | Schlüsselfigur dieser Fraktion stirbt (**endgültig**, schließt ihren Pfad) | keine |
 | `world` | Folgen im Schankraum – Liste, siehe nächster Abschnitt | keine |
+| `action` | dieser Ausgang wird durch eine **Handlung** erreicht, nicht durch Reden: `taeuschen`, `einschuechtern`, `bestehlen`, `angreifen` (dann ist `condition` nicht nötig) | keine |
+| `actionResult` | welches Ergebnis der Handlung: `erfolg` / `fehlschlag` – bei `angreifen`: `sieg` / `niederlage` / `flucht`. Leer = jedes | leer |
 
 Zusätzlich beim **Ereignis**: `requiresFlags` (diese Story-Flags müssen gesetzt sein) und
 `blockedByFlags` (diese Flags verhindern es) – damit baut man **Folge-Ereignisse**.
+
+## Handlungen im Gespräch: Täuschen, Einschüchtern, Bestehlen, Angreifen
+
+Neben dem Reden kann der Wirt in **jedem** Ereignis handeln. Jede Handlung ist ein Wagnis mit einer Chance in Prozent:
+
+| Handlung | Chance hängt ab von | Gelingt | Misslingt |
+|---|---|---|---|
+| **Täuschen** (Lüge ins Feld schreiben) | `wits` (1: 70 %, 2: 50 %, 3: 30 %), −15 je durchschauter Lüge; mit KI: wie glaubwürdig die KI die Lüge findet (Mittelwert) | Figur hält die Lüge für wahr (steht im KI-Prompt), Gespräch geht weiter | misstrauisch, **eine Runde weniger**, Fraktion −2 |
+| **Einschüchtern** (Drohung ins Feld schreiben) | `strength` (1: 75 %, 2: 50 %, 3: 20 %), Ansehen bei der Fraktion, Waffe in der Hand +10, gewonnene Schlägereien; mit KI: Einschätzung der KI | Figur hat Angst und gibt eher nach; Gastrecht −1 | wütend, eine Runde weniger, Gastrecht −2, Fraktion −3 |
+| **Bestehlen** (einmal pro Gespräch) | `wits` (wie Täuschen), −10 je Ärger | Beute aus `pockets` (Credits, Gegenstände), niemand merkt es | erwischt – Gespräch endet („Beim Stehlen erwischt“) oder eine **Schlägerei** beginnt |
+| **Angreifen** | – | Das Fenster schließt, es beginnt eine **echte Schlägerei im Schankraum** (Kampfsystem wie im Technikdeck). Ergebnis: `sieg`, `niederlage` (du wirst ohnmächtig) oder `flucht` (die Figur rennt zur Schleuse) | |
+
+**Ärger:** Zweimal durchschaut oder abgeblitzt – dann reicht es der Figur: Starke Figuren (`strength` ≥ 2) greifen an,
+schwache gehen wütend („… geht wütend“). Sitzen Gäste derselben Fraktion im Schankraum, springen sie in der Schlägerei
+bei (einer bei starken Figuren, bei Söldnern einer mehr).
+**Niemand stirbt:** Gäste gehen k.o. und werden hinausgetragen.
+
+**Allgemeine Ausgänge** – gelten automatisch, wenn das Ereignis keinen eigenen Ausgang mit `action` hat:
+
+| Ausgang | Folgen |
+|---|---|
+| Schlägerei gewonnen | Gastrecht −10, Fraktion −8, zerbrochener Stuhl (1 Woche), Flag `schlaegerei` (2 Wochen), Radio |
+| Figur flieht | Gastrecht −8, Fraktion −6, zerbrochener Stuhl, Flag `schlaegerei` |
+| Du gehst k.o. | Gastrecht −15, Fraktion −2, zerbrochener Stuhl, Flag `schlaegerei` (+ Bergungsgebühr der Ohnmacht) |
+| Beim Stehlen erwischt | Gastrecht −8, Fraktion −6, Flag `dieb_erwischt` (3 Wochen) |
+| Figur geht wütend | Gastrecht −3, Fraktion −5 |
+
+Alle Handlungen werden als **Taten** gespeichert (`luege`, `drohung`, `diebstahl`, `schlaegerei` mit Opfer, Fraktion,
+Ergebnis, Zeugen) – Grundlage für Phase 4 (Gedächtnis, Fahndung). Die Flags `schlaegerei` und `dieb_erwischt` können
+schon jetzt Folge-Ereignisse auslösen (`requiresFlags`).
+
+**Eigener Ausgang für eine Handlung** (Beispiel aus `schlaegerei_tisch_drei`):
+
+```json
+{
+  "id": "hauptmann_niedergeschlagen",
+  "label": "Du schlägst den Hauptmann selbst nieder",
+  "action": "angreifen",
+  "actionResult": "sieg",
+  "reputation": { "Soeldner": 4 },
+  "gastrecht": -6,
+  "result": "Der Söldnerhauptmann geht zu Boden – vor seinen eigenen Leuten. …"
+}
+```
+
+Test ohne Würfelglück: `STARCAFE_ACTION_ROLL=hit` (gelingt immer) oder `=miss` (misslingt immer).
 
 ## Folgen im Schankraum (`world`)
 

@@ -89,6 +89,11 @@ public static class UiBus
 
 	public static void NotifyPlayerHurt() => PlayerHurt?.Invoke();
 
+	/// <summary>A tavern brawl started (true) or ended (false); the name is the main opponent.</summary>
+	public static event Action<bool, string> BrawlChanged;
+
+	public static void NotifyBrawl(bool running, string opponent) => BrawlChanged?.Invoke(running, opponent);
+
 	/// <summary>Run a mini-game (<see cref="MinigameId"/>); <c>done(true)</c> = solved.</summary>
 	public static event Action<string, Action<bool>> MinigameRequested;
 

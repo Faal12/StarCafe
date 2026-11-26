@@ -5,6 +5,9 @@
     { "id": "barhockerbein", "name": "Barhockerbein", "category": "Waffe", "description": "Schnell, leicht, peinlich. Hat schon so manche Diskussion beendet.", "stack": 1, "color": "#b08050", "icon": "BH", "damage": 2, "cooldown": 0.32, "reach": 50, "knockback": 220 },
     { "id": "rohrzange", "name": "Rohrzange", "category": "Werkzeug", "description": "Repariert Rohre. Und Meinungen. Werkzeug für den Generator und eine ordentliche Waffe.", "stack": 1, "color": "#909aa8", "icon": "RZ", "damage": 4, "cooldown": 0.5, "reach": 56, "knockback": 320 },
     { "id": "schockstab", "name": "Schockstab", "category": "Waffe", "description": "Platzhalter: stärkere Waffe für später (Funkenwerkstatt?).", "stack": 1, "color": "#e0d040", "icon": "SS", "damage": 6, "cooldown": 0.45, "reach": 60, "knockback": 360 },
-    { "id": "datenchip", "name": "Datenchip", "category": "Beweis", "description": "Ein verschlüsselter Chip. Platzhalter für Beweise und Schlüsselgegenstände.", "stack": 5, "color": "#e0c040", "icon": "DC" }
+    { "id": "datenchip", "name": "Datenchip", "category": "Beweis", "description": "Ein verschlüsselter Chip. Platzhalter für Beweise und Schlüsselgegenstände.", "stack": 5, "color": "#e0c040", "icon": "DC" },
+    { "id": "dienstchip", "name": "Imperialer Dienstchip", "category": "Beweis", "description": "Der Dienstausweis eines imperialen Offiziers. Öffnet Türen – oder Möglichkeiten zur Erpressung. Aus einer fremden Tasche.", "stack": 1, "color": "#d04848", "icon": "IC" },
+    { "id": "falschgeld", "name": "Falschgeld", "category": "Beweis", "description": "Ein Bündel Credits, das sich zu glatt anfühlt. Beweisstück – oder Zahlungsmittel für Leute, die nicht genau hinsehen.", "stack": 10, "color": "#c8a860", "icon": "FG" },
+    { "id": "schuldschein", "name": "Schuldschein-Liste", "category": "Beweis", "description": "Wer den Grauen Händen wie viel schuldet – säuberlich notiert. Gefährlich für alle, die draufstehen, und für den, der sie hat.", "stack": 1, "color": "#9098a0", "icon": "SL" }
   ]
 }

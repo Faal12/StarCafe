@@ -90,8 +90,18 @@ public sealed class GameEventDef
 		return Outcomes.Find(o => string.Equals(o.Id, id?.Trim(), System.StringComparison.OrdinalIgnoreCase));
 	}
 
-	/// <summary>Outcomes that can be reached in the conversation (not the task results).</summary>
-	public List<EventOutcomeDef> TalkOutcomes => Outcomes.FindAll(o => !o.TaskOnly);
+	/// <summary>Outcomes that can be reached by talking (not task results, not action results).</summary>
+	public List<EventOutcomeDef> TalkOutcomes => Outcomes.FindAll(o => !o.TaskOnly && string.IsNullOrWhiteSpace(o.Action));
+
+	/// <summary>Outcomes this event defines for actions (deceive, threaten, steal, attack).</summary>
+	public List<EventOutcomeDef> ActionOutcomes => Outcomes.FindAll(o => !string.IsNullOrWhiteSpace(o.Action));
+
+	/// <summary>The event's own outcome for an action result, e.g. ("angreifen", "sieg"); null = use the general one.</summary>
+	public EventOutcomeDef FindActionOutcome(string action, string result)
+	{
+		return Outcomes.Find(o => string.Equals(o.Action, action, System.StringComparison.OrdinalIgnoreCase)
+			&& (string.IsNullOrWhiteSpace(o.ActionResult) || string.Equals(o.ActionResult, result, System.StringComparison.OrdinalIgnoreCase)));
+	}
 }
 
 public sealed class EventSpeaker
@@ -107,6 +117,29 @@ public sealed class EventSpeaker
 
 	/// <summary>True while no real character/art exists. Shows a placeholder card.</summary>
 	public bool Placeholder { get; set; } = true;
+
+	/// <summary>Fighting strength 1–3: health and punches in a brawl, how hard to intimidate. Default 2.</summary>
+	public int Strength { get; set; } = 2;
+
+	/// <summary>Wits 1–3: how hard to deceive and to steal from. Default 2.</summary>
+	public int Wits { get; set; } = 2;
+
+	/// <summary>Not in the room (radio, holo call): no attacking, no stealing.</summary>
+	public bool Remote { get; set; }
+
+	/// <summary>What can be stolen. Empty = a few credits.</summary>
+	public EventPockets Pockets { get; set; } = new EventPockets();
+}
+
+/// <summary>Contents of a speaker's pockets (JSON "pockets").</summary>
+public sealed class EventPockets
+{
+	public int CreditsMin { get; set; } = 5;
+
+	public int CreditsMax { get; set; } = 25;
+
+	/// <summary>Item ids from Data/Items/items.json, e.g. "datenchip".</summary>
+	public List<string> Items { get; set; } = new List<string>();
 }
 
 public sealed class EventOutcomeDef
@@ -155,4 +188,16 @@ public sealed class EventOutcomeDef
 
 	/// <summary>Only reachable as the result of a task – hidden from the player's list and from the AI.</summary>
 	public bool TaskOnly { get; set; }
+
+	/// <summary>
+	/// Reached by an action instead of talking: "taeuschen", "einschuechtern", "bestehlen" or "angreifen".
+	/// Without it, the general outcome for that action applies (see Data/Events/README.md).
+	/// </summary>
+	public string Action { get; set; } = "";
+
+	/// <summary>
+	/// Which result of the action: "erfolg" / "fehlschlag" (deceive, threaten, steal),
+	/// "sieg" / "niederlage" / "flucht" (attack). Empty = any result.
+	/// </summary>
+	public string ActionResult { get; set; } = "";
 }

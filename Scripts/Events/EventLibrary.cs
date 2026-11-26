@@ -151,6 +151,12 @@ public static class EventLibrary
 			return "\"conjunction\" muss \"egal\", \"nur\" oder \"nie\" sein";
 		}
 		def.Speaker ??= new EventSpeaker();
+		def.Speaker.Strength = Math.Clamp(def.Speaker.Strength, 1, 3);
+		def.Speaker.Wits = Math.Clamp(def.Speaker.Wits, 1, 3);
+		def.Speaker.Pockets ??= new EventPockets();
+		def.Speaker.Pockets.Items ??= new List<string>();
+		def.Speaker.Pockets.CreditsMin = Math.Max(0, def.Speaker.Pockets.CreditsMin);
+		def.Speaker.Pockets.CreditsMax = Math.Max(def.Speaker.Pockets.CreditsMin, def.Speaker.Pockets.CreditsMax);
 		def.MinReputation ??= new Dictionary<string, int>();
 		def.MaxReputation ??= new Dictionary<string, int>();
 		def.RequiresAlive ??= new List<string>();
@@ -176,7 +182,22 @@ public static class EventLibrary
 			{
 				return $"Ausgangs-Id \"{outcome.Id}\" doppelt";
 			}
-			if (string.IsNullOrWhiteSpace(outcome.Condition) && !outcome.TaskOnly)
+			outcome.Action = (outcome.Action ?? "").Trim().ToLowerInvariant();
+			outcome.ActionResult = (outcome.ActionResult ?? "").Trim().ToLowerInvariant();
+			bool byAction = outcome.Action.Length > 0;
+			if (byAction && !ConversationActions.IsKnown(outcome.Action))
+			{
+				return $"Ausgang \"{outcome.Id}\": unbekannte \"action\" \"{outcome.Action}\" (erlaubt: {string.Join(", ", ConversationActions.Ids)})";
+			}
+			if (byAction && outcome.ActionResult.Length > 0 && !ConversationActions.IsKnownResult(outcome.Action, outcome.ActionResult))
+			{
+				return $"Ausgang \"{outcome.Id}\": \"actionResult\" \"{outcome.ActionResult}\" passt nicht zu \"{outcome.Action}\" (erlaubt: {string.Join(", ", ConversationActions.Results(outcome.Action))})";
+			}
+			if (byAction && outcome.Default)
+			{
+				return $"Ausgang \"{outcome.Id}\": der Standard-Ausgang kann nicht durch eine \"action\" erreicht werden";
+			}
+			if (string.IsNullOrWhiteSpace(outcome.Condition) && !outcome.TaskOnly && !byAction)
 			{
 				return $"Ausgang \"{outcome.Id}\" hat keine \"condition\" (die KI braucht sie)";
 			}

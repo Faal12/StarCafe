@@ -24,7 +24,10 @@ public abstract partial class Enemy : CharacterBody2D
 	/// <summary>Hidden/armoured monsters cannot be hit.</summary>
 	public virtual bool CanBeHit => !IsDead;
 
-	public bool IsDead { get; private set; }
+	public bool IsDead { get; protected set; }
+
+	/// <summary>Colour of the hit sparks (green slime for monsters).</summary>
+	protected virtual Color HitColor => new Color(0.5f, 1f, 0.45f);
 
 	public Vector2 HitCenter => GlobalPosition + new Vector2(0f, -Radius);
 
@@ -96,7 +99,7 @@ public abstract partial class Enemy : CharacterBody2D
 		_knockback += impulse * KnockbackTaken;
 		CombatFx.Flash(Body);
 		CombatFx.FloatText(GetParent(), GlobalPosition, damage.ToString(), new Color(1f, 0.95f, 0.6f));
-		CombatFx.Burst(GetParent(), HitCenter, new Color(0.5f, 1f, 0.45f), 6, 120f);
+		CombatFx.Burst(GetParent(), HitCenter, HitColor, 6, 120f);
 		if (Health <= 0)
 		{
 			Die();
