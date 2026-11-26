@@ -514,8 +514,17 @@ Der Kern jeder Schicht: Gäste bestellen, der Wirt mixt, trägt und serviert.
 - **„Stromausfall“ als erste Aufgabe:** Erst die Gäste beruhigen – davon hängt ab, wie viel Zeit man hat (170 / 110 / 80 s). Dann hinunter, Brutknoten vernichten, Rohrzange holen, Generator reparieren mit zwei neuen Minispielen: **Schaltkreis** (Leitungen drehen, kaputte Stücke sprühen Funken) und **Druckventil** (Druck im wandernden grünen Bereich halten, Druckstöße werden angekündigt). Drei Schlüsse: „Licht! Du rettest den Abend“, „Licht – aber spät“, „Floki schaltet den Notstrom ein“ (nach Ohnmacht).
 - **Anleitung:** `Data/README.md` (Steuerung, Decks, Kampf, Monster, Minispiele, Aufgaben, Test-Schalter), Aufgaben in Ereignissen: `Data/Events/README.md`.
 
+**Handlungen im Gespräch (Phase 3, umgesetzt):** In jedem Ereignis kann der Wirt außer reden auch **täuschen**,
+**einschüchtern**, **bestehlen** oder **angreifen**. Jede Handlung ist ein Wagnis mit sichtbarer Chance (Gerissenheit und
+Kampfkraft der Figur, Ansehen, frühere Taten; mit KI zusätzlich, wie glaubwürdig die KI Lüge oder Drohung findet).
+Geglaubte Lügen und wirksame Drohungen werden für die Figur zur Wahrheit (KI-Prompt). Misslingen kostet Runden und
+macht wütend – zu viel Ärger, und starke Figuren schlagen zu. **Angreifen** führt in eine **echte Schlägerei im
+Schankraum** (Kampfsystem aus Phase 2; Gäste derselben Fraktion helfen mit). Gäste gehen nur **k.o.**, Monster sterben,
+Schlüsselfiguren sterben nur durch die Handlung. Ereignisse können eigene Ausgänge je Handlung haben; sonst gelten
+allgemeine Ausgänge (Gastrecht, Ansehen, zerbrochene Möbel, Story-Flags `schlaegerei` / `dieb_erwischt`).
+Alles wird als Tat gespeichert. Details: `Data/Events/README.md`.
+
 **Geplante nächste Phasen:**
-3. **Handlungen im Gespräch:** Täuschen, Einschüchtern, Angreifen (führt in einen echten Kampf im Schankraum), Bestehlen – alle führen zu Ausgängen in Ereignissen. Gäste gehen im Kampf nur k.o., Monster sterben, Schlüsselfiguren sterben nur durch die Handlung.
 4. **Gedächtnis & Fahndung:** Taten öffnen verborgene Ausgänge, Figuren erinnern sich, Gerüchte, Fahndungsstufe bei der Sternenwacht.
 5. **Gäste ansprechen, Taschendiebstahl** und die übrigen Minispiele: *Taschendiebstahl*, *Schlossknacken* (die versiegelte Tür), *Funkpeilung*, *Andocken*.
 

@@ -8,7 +8,8 @@
         "name": "Imperialer Offizier",
         "faction": "Imperium",
         "persona": "Korrekt, kühl, höflich mit Unterton. Er weiß, dass am anderen Ende des Tresens ein Rebellenkontakt sitzt, und will dessen Namen und Schiff vom Wirt bestätigt haben. Geld und Drohungen mit Lizenzentzug sind seine Werkzeuge. Er respektiert Standhaftigkeit, wenn sie gut begründet ist (Gastrecht, Neutralität bringt dem Imperium auch Informationen), und verachtet Ausreden.",
-        "placeholder": true
+        "placeholder": true,
+        "strength": 2, "wits": 3, "pockets": { "creditsMin": 20, "creditsMax": 45, "items": ["dienstchip"] }
       },
       "text": "Am linken Ende des Tresens sitzt ein imperialer Offizier, am rechten ein Mann mit Rebellenabzeichen unter dem Kragen. Der Offizier hat einen Datenchip mit Credits vor sich gelegt. Der Rebell trinkt langsam und beobachtet die Schleuse.",
       "opening": "Ein Name und ein Schiff, Wirt. Der Mann am anderen Ende. Der Chip gehört Ihnen, und Ihre Lizenz bleibt, was sie ist: gültig.",
@@ -78,7 +79,8 @@
         "name": "Streife der Sternenwacht",
         "faction": "Sternenwacht",
         "persona": "Müde, unterbezahlt, pflichtbewusst – aber nicht unbestechlich. Will eine saubere Kontrolle ohne Ärger vorweisen. Hat bemerkt, dass ein Gast hastig etwas unter den Tisch geschoben hat. Lässt sich mit Freundlichkeit, Getränken oder einem guten Grund ablenken, wird aber misstrauisch bei offener Bestechung, wenn sie plump ist.",
-        "placeholder": true
+        "placeholder": true,
+        "strength": 2, "wits": 2, "pockets": { "creditsMin": 5, "creditsMax": 15 }
       },
       "text": "Zwei Beamte der Sternenwacht stehen in der Schleuse: „Routinekontrolle. Lizenz, Frachtliste, Gästeliste.“ Hinter dir schiebt ein Gast hastig eine Kiste unter den Tisch.",
       "opening": "Abend, Wirt. Lizenz, Frachtliste. Und was hat der Herr da hinten gerade unter den Tisch geschoben?",
@@ -91,6 +93,15 @@
         "Ich habe Feierabend in einer Stunde. Hilf mir, den zu erreichen."
       ],
       "outcomes": [
+        {
+          "id": "streife_getaeuscht",
+          "label": "Die Streife glaubt deine Geschichte und zieht ab",
+          "action": "taeuschen",
+          "actionResult": "erfolg",
+          "reputation": { "Sternenwacht": -1 },
+          "result": "Die Streife nickt, notiert etwas Belangloses und geht weiter zum nächsten Schiff. Unter dem Tisch atmet jemand hörbar aus.",
+          "floki": "Für das Protokoll: Ich habe nichts gehört. Für dich: Das war knapp."
+        },
         {
           "id": "kooperiert",
           "label": "Du lieferst die Kiste aus",
@@ -138,7 +149,8 @@
         "name": "Gesandte der Silberkiel-Gilde",
         "faction": "Silberkiel",
         "persona": "Elegant, förmlich, rechnet laut in Prozenten. Will die Sitzecke als exklusiven Verhandlungsraum der Gilde – und dass Schmuggler und Nomaden nur noch durch den Hintereingang kommen. Verhandelt gern: Für bessere Bedingungen verlangt sie Gegenleistungen. Respektiert Zahlen, nicht Moral.",
-        "placeholder": true
+        "placeholder": true,
+        "strength": 1, "wits": 3, "pockets": { "creditsMin": 40, "creditsMax": 90 }
       },
       "text": "Eine Gesandte im maßgeschneiderten Mantel legt einen Vertrag auf den Tresen: Die Gilde mietet die Sitzecke für Verhandlungen, gegen gutes Geld. Klausel 7: „Unerwünschte Kundschaft“ nur durch den Hintereingang.",
       "opening": "Ein großzügiges Angebot, Wirt. Lesen Sie Klausel sieben nicht zu genau – sie ist reine Formsache.",
@@ -199,7 +211,8 @@
         "name": "Bote der Grauen Hände",
         "faction": "GraueHaende",
         "persona": "Freundlich, großzügig, sehr saubere Handschuhe. Sucht einen Lagerraum, in dem Kisten stehen können, ohne dass jemand fragt. Bietet Credits, später Gefallen. Akzeptiert ein Nein höflich, merkt es sich aber. Erzählt nie, was in den Kisten ist – außer man bietet ihm etwas Wertvolles dafür.",
-        "placeholder": true
+        "placeholder": true,
+        "strength": 2, "wits": 2, "pockets": { "creditsMin": 10, "creditsMax": 30, "items": ["datenchip"] }
       },
       "text": "Ein freundlicher Mann mit sehr sauberen Handschuhen fragt nach einem Raum, „in dem Kisten stehen können, ohne dass jemand fragt, was drin ist“. Er legt einen Beutel Credits auf den Tresen.",
       "opening": "Nur ein paar Kisten, Wirt. Sie summen ein bisschen. Das ist normal.",
@@ -252,7 +265,8 @@
         "name": "Tüftlerin der Funkenwerkstatt",
         "faction": "Funkenwerkstatt",
         "persona": "Begeistert, redet schnell, Schweißbrille auf der Stirn. Will ihren Kellnerroboter einen Abend lang im echten Betrieb testen. Ist für Sicherheitsauflagen offen, wenn man sie gut begründet, und reagiert gekränkt auf Spott. Schwärmt von Flokis Hardware, kann ihn aber nicht hören.",
-        "placeholder": true
+        "placeholder": true,
+        "strength": 1, "wits": 2
       },
       "text": "Eine Tüftlerin rollt einen Kellnerroboter herein. Er hat vier Arme, zwei davon zucken. „Nur ein Testabend! Er serviert, er spült, er … meistens funktioniert er.“",
       "opening": "Ein Abend, Wirt! Echte Gäste, echte Gläser, echte Daten! Bitte sag ja.",
@@ -305,7 +319,8 @@
         "name": "Älteste der Weitwanderer",
         "faction": "Weitwanderer",
         "persona": "Alt, ruhig, spricht in Bildern. Erkennt das Schiff wieder, sagt aber nicht woher. Ihr Konvoi braucht für eine Nacht einen Andockplatz; imperiale Patrouillen sind in der Nähe. Sie bittet nicht zweimal. Wenn der Wirt ehrlich nach Varga oder dem Licht fragt und ihr Vertrauen gewinnt, verrät sie ein kleines Detail: Varga habe das Licht „für die gebaut, die keiner sucht“.",
-        "placeholder": true
+        "placeholder": true,
+        "strength": 1, "wits": 3, "pockets": { "creditsMin": 0, "creditsMax": 4 }
       },
       "text": "Eine alte Frau aus einem Nomadenkonvoi streicht über den Tresen, als würde sie ihn wiedererkennen. Draußen warten drei Schiffe. Auf dem Bildschirm hinter der Bar blinkt eine imperiale Patrouillenmeldung.",
       "opening": "Brennt das Licht noch, Wirt? Mein Konvoi braucht einen Platz für eine Nacht. Nur eine.",
@@ -362,7 +377,8 @@
         "name": "Söldnerhauptmann",
         "faction": "Soeldner",
         "persona": "Breitschultrig, ruhig, pragmatisch. Einer seiner Leute streitet mit einem Gildenhändler um eine offene Rechnung. Er will die Sache „unter Männern“ regeln, also mit Fäusten. Respektiert den Wirt, wenn dieser klare Regeln setzt und sie durchsetzt; lässt sich mit einer fairen Lösung für die Rechnung überzeugen.",
-        "placeholder": true
+        "placeholder": true,
+        "strength": 3, "wits": 1, "pockets": { "creditsMin": 15, "creditsMax": 35 }
       },
       "text": "Ein Söldner und ein Gildenhändler streiten um eine offene Rechnung. Ein Stuhl fliegt. Der Hauptmann der Söldner hebt die Hand und sieht dich an.",
       "opening": "Lass meine Jungs das regeln, Wirt. Fünf Minuten. Wir zahlen den Stuhl.",
@@ -375,6 +391,19 @@
         "Der Händler schuldet uns Geld. Das ist keine Meinung, das ist Buchhaltung."
       ],
       "outcomes": [
+        {
+          "id": "hauptmann_niedergeschlagen",
+          "label": "Du schlägst den Hauptmann selbst nieder",
+          "action": "angreifen",
+          "actionResult": "sieg",
+          "reputation": { "Soeldner": 4 },
+          "rivalry": false,
+          "gastrecht": -6,
+          "result": "Der Söldnerhauptmann geht zu Boden – vor seinen eigenen Leuten. Einen Moment ist es totenstill. Dann klopft einer der Söldner zweimal auf den Tisch: Respekt.",
+          "floki": "Söldner respektieren genau zwei Dinge: Geld und blaue Flecken. Du hast gerade in die zweite Währung investiert.",
+          "radio": "Knotensender: Wirt der „Letzten Runde“ legt Söldnerhauptmann auf die Bretter. Die Söldner nennen es „fair“.",
+          "world": [ { "type": "prop", "id": "zerbrochener_tisch", "label": "Zerbrochener Tisch", "spot": "Tisch3", "color": "#7a5a40", "weeks": 1, "appear": "drop" } ]
+        },
         {
           "id": "pruegelei",
           "label": "Die Söldner regeln es mit Fäusten",
@@ -426,7 +455,8 @@
         "name": "Rebellenkontakt",
         "faction": "Rebellen",
         "persona": "Charmant, gehetzt, idealistisch. Braucht eine Ladung Medikamente von einem Silberkiel-Händler am Nachbartisch, kann aber den Zoll nicht zahlen. Bittet den Wirt, für ihn zu bürgen oder zu vermitteln. Lügt nicht über den Zweck, verschweigt aber, dass die Medikamente an eine bewaffnete Zelle gehen – außer man fragt direkt.",
-        "placeholder": true
+        "placeholder": true,
+        "strength": 2, "wits": 2
       },
       "text": "Die Konjunktion bringt volle Tische. Ein Rebellenkontakt und ein Händler der Silberkiel-Gilde verhandeln über eine Ladung Medikamente: Die Gilde will Zoll, die Rebellen haben kein Geld. Beide schauen dich an.",
       "opening": "Wirt, du kennst den Händler. Bürg für mich – oder sag ihm, dass Kranke keine Zölle zahlen.",
@@ -489,7 +519,8 @@
         "name": "Funkerin auf Durchreise",
         "faction": "",
         "persona": "Neugierig, redselig, hört alle Sender. Hat auf dem Piratensender den Namen „Kupferlerche“ gehört und die übermalte Schrift an der Schleuse gesehen. Will wissen, ob das hier das Schiff ist. Erzählt im Tausch gegen Ehrlichkeit, was sie gehört hat: Die Kupferlerche habe imperiale Frachter „erleichtert“.",
-        "placeholder": true
+        "placeholder": true,
+        "strength": 1, "wits": 2
       },
       "text": "Eine Funkerin mit Kopfhörern um den Hals mustert die übermalte Schrift an der Schleuse und dann dich. Auf dem Piratensender wurde über ein Schiff namens „Kupferlerche“ gesprochen.",
       "opening": "Sag mal, Wirt … unter deinem Namen an der Schleuse steht ein anderer. Kupferlerche. Sagt dir das was?",
@@ -544,7 +575,8 @@
         "name": "Imperialer Steuerbeamter",
         "faction": "Imperium",
         "persona": "Pedantisch, liebt Paragrafen, hat keinen Humor. Verkündet eine neue „Grenzschankabgabe“ von zwölf Prozent. Lässt sich nicht bestechen, aber Formfehler machen ihn nervös; wer klug mit Vorschriften argumentiert (Übergangsfrist, Neueröffnung, Formular), kann den Satz senken. Drohungen verschlimmern alles.",
-        "placeholder": true
+        "placeholder": true,
+        "strength": 1, "wits": 2, "pockets": { "creditsMin": 30, "creditsMax": 60 }
       },
       "text": "Ein Beamter mit einem Stapel Formulare legt eine Bekanntmachung auf den Tresen: „Grenzschankabgabe, zwölf Prozent, rückwirkend ab Monatsbeginn.“",
       "opening": "Zwölf Prozent, Wirt. Rückwirkend. Unterschreiben Sie hier, hier und – hier.",
@@ -598,7 +630,8 @@
         "name": "Junger Deserteur",
         "faction": "Imperium",
         "persona": "Ein junger imperialer Soldat, der desertiert ist. Verängstigt, höflich, schuldbewusst. Will ein Versteck für eine Nacht und eine Mitfahrgelegenheit. Hat einen Code für imperiale Patrouillenrouten dabei, den er für Hilfe anbieten würde. Wenn der Wirt ihn unter Druck setzt oder ausliefern will, gerät er in Panik.",
-        "placeholder": true
+        "placeholder": true,
+        "strength": 1, "wits": 1, "pockets": { "creditsMin": 0, "creditsMax": 6, "items": ["datenchip"] }
       },
       "text": "Ein junger Mann in einer zu großen Ziviljacke sitzt seit Stunden vor demselben Glas. Unter dem Ärmel blitzt ein imperiales Dienstabzeichen. Er zuckt bei jedem Geräusch der Schleuse zusammen.",
       "opening": "Bitte … ich brauche nur eine Nacht. Ich kann bezahlen. Nicht mit Geld, aber … ich habe etwas.",
@@ -661,7 +694,8 @@
         "name": "Abgebrannter Frachtpilot",
         "faction": "",
         "persona": "Charmant, abgebrannt, lügt schlecht. Hat drei Runden getrunken und kann nicht zahlen. Bietet erst Ausreden, dann ein altes Navigationsmodul als Pfand, dann Arbeit an. Wird stur, wenn er gedemütigt wird.",
-        "placeholder": true
+        "placeholder": true,
+        "strength": 1, "wits": 1, "pockets": { "creditsMin": 0, "creditsMax": 3 }
       },
       "text": "Ein Frachtpilot hat drei Runden bestellt – für den ganzen Tisch. Als die Rechnung kommt, durchsucht er sehr gründlich seine leeren Taschen.",
       "opening": "Ha. Komisch. Gerade war mein Kreditchip noch … Wirt, du siehst wie jemand aus, der Verständnis hat.",
@@ -673,6 +707,15 @@
         "Ich hab noch ein Navigationsmodul im Schiff. Fast neu."
       ],
       "outcomes": [
+        {
+          "id": "zechpreller_eingeschuechtert",
+          "label": "Er leert unter Druck seine Taschen",
+          "action": "einschuechtern",
+          "actionResult": "erfolg",
+          "gastrecht": -2,
+          "result": "Der Pilot wird blass, kramt alles hervor, was er hat – ein paar Münzen und einen Ersatzteilgutschein – und schiebt es dir zu. Dann verschwindet er so schnell, dass sein Stuhl noch wackelt.",
+          "floki": "Effektiv. Unfreundlich, aber effektiv. Ich trage es unter „Inkasso“ ein."
+        },
         {
           "id": "pfand",
           "label": "Er hinterlässt ein Pfand",
@@ -717,7 +760,8 @@
         "name": "Kopfgeldjägerin",
         "faction": "Soeldner",
         "persona": "Kalt, professionell, spricht wenig. Jagt ein junges Mädchen aus einem Nomadenkonvoi, auf das ein Handelshaus ein Kopfgeld ausgesetzt hat (angeblich Diebstahl). Will die Kleine ohne Aufsehen mitnehmen. Respektiert Geld: Wer das Kopfgeld überbietet, kann sie umstimmen. Bei Gewaltandrohung zieht sie die Waffe. Lässt sich von Beweisen der Unschuld nur schwer, aber möglich, überzeugen.",
-        "placeholder": true
+        "placeholder": true,
+        "strength": 3, "wits": 2, "pockets": { "creditsMin": 20, "creditsMax": 50 }
       },
       "text": "Eine Kopfgeldjägerin legt ein Holo auf den Tresen: ein Mädchen, vielleicht vierzehn, aus einem Nomadenkonvoi. Dasselbe Mädchen sitzt gerade in deiner Sitzecke und isst Suppe.",
       "opening": "Ich nehme sie mit, Wirt. Leise. Du willst keinen Lärm in deinem Laden, ich auch nicht.",
@@ -785,7 +829,8 @@
         "name": "Händler der Grauen Hände",
         "faction": "GraueHaende",
         "persona": "Gerissen, lächelt viel. Streitet mit einem Silberkiel-Händler über Preise für Kaldor-Erz: Die Gilde will Mindestpreise, die Grauen Hände unterbieten. Will den Wirt als Schiedsrichter – auf seiner Seite. Akzeptiert einen fairen Schiedsspruch nur, wenn er etwas dabei gewinnt.",
-        "placeholder": true
+        "placeholder": true,
+        "strength": 1, "wits": 3, "pockets": { "creditsMin": 30, "creditsMax": 70 }
       },
       "text": "Ein Händler der Grauen Hände und einer der Silberkiel-Gilde sitzen sich gegenüber. Zwischen ihnen: eine Erzprobe aus Kaldor und zwei völlig unterschiedliche Preislisten. Beide wollen, dass du entscheidest.",
       "opening": "Wirt, du bist neutral, sagt man. Dann sag dem Gildenmann, dass ein freier Markt frei ist.",
@@ -845,7 +890,8 @@
         "name": "Tüftler der Funkenwerkstatt",
         "faction": "Funkenwerkstatt",
         "persona": "Nervös, ehrlich, überfordert. Das Imperium hat der Werkstatt einen Großauftrag für Überwachungsdrohnen angeboten – viel Geld, aber die Rebellen würden das als Verrat sehen. Er fragt den Wirt um Rat und folgt dem Rat, wenn er gut begründet ist.",
-        "placeholder": true
+        "placeholder": true,
+        "strength": 1, "wits": 2
       },
       "text": "Ein Tüftler der Funkenwerkstatt sitzt mit einem imperialen Auftragsformular am Tresen. Der Auftrag würde die Werkstatt ein Jahr lang finanzieren. Er hat noch nicht unterschrieben.",
       "opening": "Wirt, du hörst hier alles. Wenn wir das unterschreiben – sind wir dann die Bösen?",
@@ -906,7 +952,8 @@
         "name": "Eintreiber der Grauen Hände",
         "faction": "GraueHaende",
         "persona": "Höflich, bedrohlich, nennt Schutzgeld „Versicherung“. Will einen monatlichen Betrag. Lässt sich auf einen Deal ein, wenn der Wirt etwas anderes Wertvolles bietet (Informationen, Lagerplatz, Hinterzimmer). Hat Respekt vor Gastrecht, wenn man ihn darauf hinweist, dass Ärger in der Taverne auch seinen Leuten schadet.",
-        "placeholder": true
+        "placeholder": true,
+        "strength": 3, "wits": 2, "pockets": { "creditsMin": 40, "creditsMax": 80, "items": ["schuldschein"] }
       },
       "text": "Ein gut gekleideter Mann lässt seinen Blick über die Gläser, die Bildschirme und die Schleuse gleiten. „Hübscher Laden. Wäre schade, wenn er Feuer fängt.“",
       "opening": "Eine kleine Versicherung, Wirt. Monatlich. Feuer, Diebstahl, unglückliche Unfälle. Wir kümmern uns.",
@@ -921,6 +968,19 @@
         "Sagen wir, wir einigen uns. Wie?"
       ],
       "outcomes": [
+        {
+          "id": "eintreiber_verpruegelt",
+          "label": "Du verprügelst den Eintreiber",
+          "action": "angreifen",
+          "actionResult": "sieg",
+          "reputation": { "GraueHaende": -15, "Soeldner": 2 },
+          "rivalry": false,
+          "gastrecht": -8,
+          "result": "Der Eintreiber liegt k.o. zwischen den Barhockern. Als er zu sich kommt, kriecht er wortlos zur Schleuse. Die Grauen Hände vergessen so etwas nicht.",
+          "floki": "Ich habe die Schleusenprotokolle gesichert. Für den Fall, dass jemand mit Verstärkung zurückkommt. Also: für morgen.",
+          "radio": "Knotensender: Ärger zwischen den Grauen Händen und der „Letzten Runde“ – ein Eintreiber musste hinausgetragen werden.",
+          "world": [ { "type": "flag", "id": "graue_haende_rache", "weeks": 4 } ]
+        },
         {
           "id": "gezahlt",
           "label": "Du zahlst die Versicherung",
@@ -968,7 +1028,8 @@
         "name": "Imperiale Aufklärerin",
         "faction": "Imperium",
         "persona": "Freundlich, wach, gefährlich klug. Will während der Konjunktion vom großen Fenster der Taverne aus den Schiffsverkehr beobachten und Kennungen notieren. Bietet Bezahlung und Schutz. Verhandelt über Bedingungen, wird aber kalt, wenn der Wirt sie offen als Spionin bloßstellt.",
-        "placeholder": true
+        "placeholder": true,
+        "strength": 2, "wits": 3, "pockets": { "creditsMin": 10, "creditsMax": 25 }
       },
       "text": "Die Konjunktion: Draußen ziehen Dutzende Schiffe vorbei. Eine Frau in Zivil bittet um den Tisch am großen Fenster – für die ganze Konjunktion. Neben ihr steht ein Gerät, das sehr nach Sensor aussieht.",
       "opening": "Nur ein Tisch, Wirt. Ein schöner Blick. Und eine Bezahlung, die Ihnen gefallen wird.",
@@ -1028,7 +1089,8 @@
         "name": "Rebellenwerberin",
         "faction": "Rebellen",
         "persona": "Mitreißend, laut, überzeugt. Wirbt an deinen Tischen offen junge Gäste für die Rebellen an. Will, dass der Wirt sie gewähren lässt oder sogar einen Aushang erlaubt. Hört auf, wenn der Wirt überzeugend erklärt, warum das allen in der Taverne schadet – oder wenn er ihr einen diskreteren Weg anbietet.",
-        "placeholder": true
+        "placeholder": true,
+        "strength": 2, "wits": 2
       },
       "text": "Eine Frau steht auf einem Stuhl und hält eine Rede über Freiheit. Drei junge Hafenarbeiter hängen an ihren Lippen. Am Fenstertisch hat jemand von der Sternenwacht aufgehört zu trinken.",
       "opening": "Wirt! Komm, sag deinen Gästen, dass ein freier Hafen mehr wert ist als imperiale Lizenzen!",
@@ -1081,7 +1143,8 @@
         "name": "Müder Wachtmeister",
         "faction": "Sternenwacht",
         "persona": "Älter, erschöpft, ehrlich. Zweifelt am Imperium, dem er dient, und denkt ans Aufhören. Sucht keinen Rat, sondern jemanden, der zuhört. Wenn der Wirt ihm wirklich zuhört, verrät er, dass das Imperium die Taverne beobachtet, weil das Schiff früher „bekannt“ war.",
-        "placeholder": true
+        "placeholder": true,
+        "strength": 1, "wits": 1, "pockets": { "creditsMin": 2, "creditsMax": 10 }
       },
       "text": "Ein älterer Wachtmeister sitzt außer Dienst am Tresen, die Mütze neben dem Glas. Er sieht aus, als hätte er seit Wochen nicht geschlafen.",
       "opening": "Zwanzig Jahre Sternenwacht, Wirt. Und heute habe ich zum ersten Mal überlegt, ob ich auf der richtigen Seite stehe.",
@@ -1131,7 +1194,8 @@
         "name": "Alter Raumfahrer mit Augenklappe",
         "faction": "Rebellen",
         "persona": "Alt, rau, herzlich, trinkt viel. War früher Crewmitglied der Kupferlerche, sagt das aber nicht sofort. Will eine Kiste, die angeblich noch im Frachtraum hinter der versiegelten Tür steht. Er weiß nicht, wie man sie öffnet. Wenn der Wirt ehrlich ist und ihm vertraut, erzählt er, dass Varga „nie ohne Grund“ etwas versiegelt hat. Wenn man ihn ans Imperium verkaufen will, merkt er es.",
-        "placeholder": true
+        "placeholder": true,
+        "strength": 2, "wits": 3
       },
       "text": "Ein alter Raumfahrer klopft gegen die Wand, als würde er die Schotten zählen. „Dritter Spant von links. Da hat früher immer die Flasche gestanden.“ Er sieht dich an.",
       "opening": "Ich war schon auf diesem Schiff, Junge, da hattest du noch keine Zähne. Im Frachtraum steht etwas, das mir gehört.",
@@ -1185,7 +1249,8 @@
         "name": "Aufgeregter Myrr-Bräutigam",
         "faction": "Weitwanderer",
         "persona": "Ein Myrr (amphibisch, von Ysmeras Ozeanen), spricht leise und blumig, sehr nervös. Will morgen in der Taverne heiraten, seine Braut ist von einer Silberkiel-Familie, die gegen die Ehe ist. Braucht Platz, Getränke und jemanden, der die Zeremonie leitet. Hat kaum Geld, bietet Muscheln und Geschichten.",
-        "placeholder": true
+        "placeholder": true,
+        "strength": 1, "wits": 1, "pockets": { "creditsMin": 10, "creditsMax": 30 }
       },
       "text": "Ein Myrr mit feuchten, aufgeregten Augen hält ein Bündel glänzender Muscheln. „Morgen, Wirt. Unter den Sternen. Bitte.“ Die Familie der Braut, Silberkiel-Kaufleute, ist strikt dagegen.",
       "opening": "Die Strömung hat uns hierher getragen, Wirt. Würdest du … unsere Ehe unter deinem Dach erlauben?",
@@ -1241,7 +1306,8 @@
         "name": "Nervöser Kurier",
         "faction": "GraueHaende",
         "persona": "Jung, schwitzt, schlechter Lügner. Hat mit gefälschten Credit-Chips bezahlt, die die Kasse gerade als Fälschung markiert hat. Arbeitet für die Grauen Hände, will aber nicht, dass es jemand erfährt. Bietet alles an, damit der Wirt die Sternenwacht nicht ruft.",
-        "placeholder": true
+        "placeholder": true,
+        "strength": 1, "wits": 1, "pockets": { "creditsMin": 5, "creditsMax": 20, "items": ["falschgeld"] }
       },
       "text": "Die Kasse piept zweimal: Fälschung. Der junge Kurier, der gerade bezahlt hat, wird blass. Am Fenstertisch sitzt zufällig eine Streife der Sternenwacht.",
       "opening": "Das … das ist ein Missverständnis, Wirt. Bitte keine Wache. Ich – ich kann das regeln.",
@@ -1292,7 +1358,8 @@
         "name": "Ungeduldiger Stammgast",
         "faction": "Soeldner",
         "persona": "Laut, durstig, gut gelaunt, solange es Bier gibt. Mitten im Betrieb fällt in der Taverne der Strom aus. Er stachelt die anderen Gäste auf, „ihr Geld zurückzuholen“, wenn nichts passiert. Lässt sich mit Humor, Freibier, Kerzen oder einem glaubhaften Versprechen beruhigen, dass der Wirt sich sofort selbst darum kümmert. Unfreundlichkeit oder Drohungen machen ihn wütend.",
-        "placeholder": true
+        "placeholder": true,
+        "strength": 2, "wits": 1
       },
       "text": "Licht aus, Zapfanlage aus, Musik aus. Ein tiefes Brummen kommt von unten aus dem Technikdeck – dann Stille. Nur das Signallicht irgendwo im Schiff blinkt weiter. Die Gäste werden unruhig. Der Strom muss wieder an – und das kann nur jemand, der hinuntergeht.",
       "opening": "Hey, Wirt! Kein Licht, kein Bier, keine Musik. Wofür zahlen wir eigentlich?",
@@ -1378,7 +1445,8 @@
         "name": "Schmugglerin mit Sternkarte",
         "faction": "Rebellen",
         "persona": "Direkt, zäh, misstrauisch. Sucht eine Route, auf der es keine imperialen Späher gibt, für Flüchtlinge. Hat gehört, dass dieses Schiff früher solche Routen kannte. Will vom Wirt Informationen oder Kontakte. Lässt sich nicht abspeisen, akzeptiert aber ein ehrliches „Ich weiß es nicht, aber ich helfe anders“.",
-        "placeholder": true
+        "placeholder": true,
+        "strength": 2, "wits": 3, "pockets": { "creditsMin": 10, "creditsMax": 25, "items": ["datenchip"] }
       },
       "text": "Eine Schmugglerin breitet eine abgegriffene Sternkarte auf dem Tresen aus. Drei Routen sind rot durchgestrichen. „Späher“, sagt sie. „Überall Späher. Außer, sagt man, auf den Wegen, die dieses Schiff kannte.“",
       "opening": "Ich brauche einen Weg ohne Augen, Wirt. Für Leute, die keiner suchen soll.",
@@ -1430,7 +1498,8 @@
         "name": "Alter Raumfahrer (über Funk)",
         "faction": "Rebellen",
         "persona": "Der alte Crewmann der Kupferlerche, dem der Wirt vertraut hat. Meldet sich über die Frequenz, die er dagelassen hat, rauschend und gehetzt. Er hat sich erinnert: Ilse hat im dritten Spant von links etwas versteckt – vielleicht einen Hinweis auf die versiegelte Tür. Er will, dass der Wirt nachsieht, aber erst, wenn der Wirt verspricht, niemandem vom Imperium davon zu erzählen. Er gerät in Sorge, wenn der Wirt zögert oder Fragen nach Bezahlung stellt.",
-        "placeholder": true
+        "placeholder": true,
+        "remote": true
       },
       "text": "Mitten in der Schicht knackt es im Funk hinter der Bar – auf der Frequenz, die der alte Raumfahrer dagelassen hat. Seine Stimme ist rauschend und gehetzt.",
       "opening": "Junge, hörst du mich? Der dritte Spant von links. Ilse hat dort immer was versteckt. Aber versprich mir erst: kein Wort zum Imperium.",
@@ -1474,7 +1543,8 @@
         "name": "Ermittlerin der Sternenwacht",
         "faction": "Sternenwacht",
         "persona": "Sachlich, gründlich, nicht unfreundlich. Sie weiß, dass in der Taverne offen für die Rebellen geworben wurde, und will die Namen der Angeworbenen. Sie droht mit einer Lizenzprüfung, ist aber zufrieden, wenn der Wirt glaubhaft zusagt, dass so etwas nicht mehr vorkommt (Hausregel, Aushang). Lügen merkt sie meistens.",
-        "placeholder": true
+        "placeholder": true,
+        "strength": 2, "wits": 3
       },
       "text": "Eine Ermittlerin der Sternenwacht legt eine Aufnahme auf den Tresen: die Rebellenwerberin auf dem Stuhl, mitten in deinem Schankraum.",
       "opening": "Ich will die Namen der Hafenarbeiter, die mit ihr gegangen sind, Wirt. Oder einen sehr guten Grund, warum Ihre Lizenz nicht geprüft werden sollte.",

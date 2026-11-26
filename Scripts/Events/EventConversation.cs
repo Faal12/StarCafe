@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -33,7 +34,47 @@ public sealed class EventConversation
 
 	public bool IsFinished { get; private set; }
 
-	public int TurnsLeft => Def.MaxTurns - Turn;
+	/// <summary>Rounds lost through exposed lies and failed threats.</summary>
+	public int Penalty { get; private set; }
+
+	public int TurnsLeft => Math.Max(0, Def.MaxTurns - Turn - Penalty);
+
+	/// <summary>How angry the speaker is after failed actions (2 = it escalates).</summary>
+	public int Anger { get; set; }
+
+	/// <summary>Failed lies so far – every one makes the speaker more suspicious.</summary>
+	public int FailedLies { get; set; }
+
+	/// <summary>The player already tried to pick the speaker's pocket (once per conversation).</summary>
+	public bool PocketTried { get; set; }
+
+	private readonly List<string> _facts = new List<string>();
+
+	/// <summary>Something the speaker now believes or feels because of an action; goes into the AI prompt.</summary>
+	public void AddFact(string fact)
+	{
+		if (!string.IsNullOrWhiteSpace(fact))
+		{
+			_facts.Add(fact.Trim());
+		}
+	}
+
+	public void AddPenalty(int rounds = 1)
+	{
+		Penalty += rounds;
+	}
+
+	/// <summary>Ends the conversation without an outcome (a brawl or similar takes over).</summary>
+	public void End()
+	{
+		IsFinished = true;
+	}
+
+	/// <summary>Ends the conversation with an outcome reached by an action.</summary>
+	public ConversationStep Conclude(EventOutcomeDef outcome, string speakerLine = null)
+	{
+		return Finish(new ConversationStep(speakerLine, outcome, null));
+	}
 
 	/// <summary>What was said so far (speaker and Wirt). Floki is not part of it – nobody else hears him.</summary>
 	public IReadOnlyList<(string Speaker, string Text)> History => _history;
@@ -50,7 +91,8 @@ public sealed class EventConversation
 
 	public string StartNotice => AiMode ? null : "Offline-Demo: Ohne KI entscheiden Schlüsselwörter in deinen Antworten über den Ausgang.";
 
-	public async Task<ConversationStep> SayAsync(string playerText)
+	/// <param name="offlineLine">Offline mode: speaker line if no keyword matched (instead of the event's offline lines).</param>
+	public async Task<ConversationStep> SayAsync(string playerText, string offlineLine = null)
 	{
 		Turn++;
 		_history.Add((PlayerName, playerText));
@@ -75,7 +117,38 @@ public sealed class EventConversation
 				notice = "KI nicht erreichbar (" + ex.Message + ") – weiter im Offline-Modus: Schlüsselwörter entscheiden.";
 			}
 		}
-		return Finish(Offline(playerText, notice));
+		return Finish(Offline(playerText, notice, offlineLine));
+	}
+
+	/// <summary>
+	/// Asks the AI how believable a lie or threat is for this speaker (0–100). Null without AI or on any error.
+	/// </summary>
+	public async Task<int?> RateAsync(string what, string text)
+	{
+		if (!AiMode)
+		{
+			return null;
+		}
+		try
+		{
+			ILlmProvider provider = new GeminiProvider(LauncherConfig.GeminiModel, LauncherConfig.ResolveGeminiKey(), OutputTokens, 0.2f);
+			StringBuilder system = new StringBuilder();
+			system.Append("Du bist Spielleiter eines Erzählspiels. Bewerte nüchtern, wie ").Append(what).Append(" auf die Figur wirkt, ");
+			system.Append("gemessen an ihrem Charakter, der Situation und dem bisherigen Gespräch. ");
+			system.Append("Antworte NUR mit einer ganzen Zahl von 0 (wirkt überhaupt nicht) bis 100 (wirkt sicher). Keine Erklärung.");
+			StringBuilder user = new StringBuilder();
+			user.Append("FIGUR: ").Append(Def.Speaker.Name).Append(". ").Append(Def.Speaker.Persona).Append('\n');
+			user.Append("SITUATION: ").Append(Def.Text).Append('\n');
+			user.Append(BuildUserText()).Append('\n');
+			user.Append("DER WIRT SAGT JETZT: ").Append(text);
+			string reply = await provider.GetReplyAsync(system.ToString(), user.ToString());
+			Match number = Regex.Match(reply ?? "", @"\d{1,3}");
+			return number.Success ? Math.Clamp(int.Parse(number.Value), 0, 100) : (int?)null;
+		}
+		catch (Exception)
+		{
+			return null;
+		}
 	}
 
 	/// <summary>The player walks away: the default outcome happens.</summary>
@@ -90,7 +163,7 @@ public sealed class EventConversation
 		{
 			_history.Add((Def.Speaker.Name, step.SpeakerLine));
 		}
-		if (step.Outcome == null && Turn >= Def.MaxTurns)
+		if (step.Outcome == null && Turn + Penalty >= Def.MaxTurns)
 		{
 			step = step with { Outcome = Def.DefaultOutcome };
 		}
@@ -132,7 +205,7 @@ public sealed class EventConversation
 		return new ConversationStep(line, outcome, null);
 	}
 
-	private ConversationStep Offline(string playerText, string notice)
+	private ConversationStep Offline(string playerText, string notice, string fallbackLine = null)
 	{
 		// Keywords match at the start of a word: "ja" matches "ja, klar" but not "Jäger".
 		string said = " " + Regex.Replace(Normalize(playerText), @"[^a-z0-9\-]+", " ") + " ";
@@ -151,6 +224,10 @@ public sealed class EventConversation
 		{
 			return new ConversationStep(null, best, notice);
 		}
+		if (!string.IsNullOrWhiteSpace(fallbackLine))
+		{
+			return new ConversationStep(fallbackLine, null, notice);
+		}
 		string line = Def.OfflineLines.Count > 0
 			? Def.OfflineLines[_offlineLine++ % Def.OfflineLines.Count]
 			: "(wartet) Und? Was schlägst du vor, Wirt?";
@@ -165,6 +242,15 @@ public sealed class EventConversation
 		sb.Append("Du sprichst mit dem Wirt, dem Besitzer der Taverne (das ist der Spieler).\n\n");
 		sb.Append("DEINE FIGUR: ").Append(Def.Speaker.Name).Append(faction).Append(". ").Append(Def.Speaker.Persona).Append("\n\n");
 		sb.Append("DIE SITUATION: ").Append(Def.Text).Append("\n\n");
+		if (_facts.Count > 0)
+		{
+			sb.Append("WAS INZWISCHEN PASSIERT IST (gilt für dich als wahr, richte dich danach):\n");
+			foreach (string fact in _facts)
+			{
+				sb.Append("- ").Append(fact).Append('\n');
+			}
+			sb.Append('\n');
+		}
 		sb.Append("MÖGLICHE AUSGÄNGE (nur du entscheidest, wann einer eingetreten ist):\n");
 		foreach (EventOutcomeDef outcome in Def.TalkOutcomes)
 		{
@@ -178,8 +264,8 @@ public sealed class EventConversation
 		sb.Append("- Du kennst keinen Floki und hörst ihn nicht.\n");
 		sb.Append("- Das ist eine eigene Welt: Benutze keine Begriffe aus bekannten Filmen, Serien oder Spielen (z. B. Sturmtruppen, Jedi, Sith, Droiden, Lichtschwert, Warp). Sag „Soldaten“, „Roboter“, „Waffe“.\n");
 		sb.Append("- Beginne JEDE Antwort mit genau einer Markierung: [OFFEN], solange noch nichts entschieden ist, oder [AUSGANG: id], sobald einer der Ausgänge eindeutig eingetreten ist. Danach folgt dein gesprochener Satz, der zum Ausgang passt.\n");
-		sb.Append($"- Dies ist Runde {Turn} von höchstens {Def.MaxTurns}.");
-		if (Turn >= Def.MaxTurns)
+		sb.Append($"- Dies ist Runde {Turn + Penalty} von höchstens {Def.MaxTurns}.");
+		if (Turn + Penalty >= Def.MaxTurns)
 		{
 			sb.Append(" LETZTE RUNDE: Das Gespräch endet jetzt. Wähle den Ausgang, der nach dem bisherigen Gespräch am besten passt, und beginne mit [AUSGANG: id].");
 		}

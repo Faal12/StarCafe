@@ -96,8 +96,9 @@ Spiellogik ruft **nie** ein Fenster direkt auf, sondern nur `UiBus` (`Scripts/Co
 | `UiBus.OpenBar()` | Mix-Bildschirm | `BarPanel` |
 | `UiBus.ShowOrder / ShowWaiting / ShowRating` | Bestellung, Warten, Bewertung am Tisch | `OrderPanel` |
 | `UiBus.ShowEvent(def)` | Ereignis als Gespräch | `EventPanel` |
-| `UiBus.ShowAftermath(def, ausgang, ergebnis)` | Ergebnis nach einer Aufgabe | `EventPanel` |
+| `UiBus.ShowAftermath(def, ausgang, ergebnis)` | Ergebnis nach einer Aufgabe oder Schlägerei | `EventPanel` |
 | `UiBus.NotifyPlayerHurt()` | Spieler getroffen | `CombatHud.FlashDamage` |
+| `UiBus.NotifyBrawl(läuft, gegner)` → Event `BrawlChanged` | Schlägerei im Schankraum beginnt / endet | (noch frei – Banner, Musik …) |
 | `UiBus.RunMinigame(MinigameId.…, fertig)` | Minispiel starten, `fertig(true)` = geschafft | `CircuitGame`, `PressureGame` |
 
 Umgekehrt melden Fenster, ob sie offen sind: `UiBus.SetOpen(UiWindow.Bar, true)`. Die Logik fragt nur
@@ -107,6 +108,20 @@ Eigenschaft `IsOpen`.
 
 Daten lesen die Fenster direkt aus der Logik (`PlayerState`, `OrderBook.Open`, `TaskService` …), ändern sie aber nur
 über deren Methoden.
+
+**Handlungen im Ereignis-Gespräch** (Täuschen, Einschüchtern, Bestehlen, Angreifen) – das Fenster ruft nur diese
+Methoden aus `Scripts/Events/ConversationActions.cs` und zeigt das Ergebnis:
+
+| Fenster ruft … | liefert |
+|---|---|
+| `ConversationActions.CanUse(gespräch, aktion, out grund)` | Knopf an/aus + Tooltip-Grund (z. B. „nicht im Raum“) |
+| `ConversationActions.Label(aktion)`, `Hint(aktion)`, `NeedsText(aktion)` | Beschriftung, Erklärung, ob Text aus dem Eingabefeld nötig ist |
+| `await ConversationActions.DeceiveAsync(gespräch, text)` / `IntimidateAsync(…)` | `ActionReport` |
+| `ConversationActions.Steal(gespräch)` / `Attack(gespräch)` | `ActionReport` |
+
+`ActionReport`: `Narration` (Erzählertext mit Chance), `Success`, `Chance`, `Step.SpeakerLine` (Antwort der Figur),
+`Outcome` (≠ null → Ereignis entschieden, wie beim Reden anzeigen), `StartsBrawl` (→ Fenster schließen; die Schlägerei
+beginnt, sobald es zu ist). Weitere Zustände für die Anzeige: `gespräch.TurnsLeft`, `gespräch.Anger`, `BrawlService.IsActive`.
 
 ### Ein Fenster neu bauen (z. B. als Szene)
 
