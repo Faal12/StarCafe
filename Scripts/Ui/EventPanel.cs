@@ -131,14 +131,31 @@ public partial class EventPanel : CanvasLayer
 		UiKit.ClearChildren(_outcomeList);
 		foreach (EventOutcomeDef outcome in def.TalkOutcomes)
 		{
+			// ★ = hidden outcome the player unlocked (item, deed, flag …).
 			Label label = new Label
 			{
-				Text = "• " + outcome.Label + (outcome.Default ? "  (wenn du dich heraushältst)" : ""),
+				Text = (outcome.IsSecret ? "★ " : "• ") + outcome.Label + (outcome.Default ? "  (wenn du dich heraushältst)" : ""),
+				AutowrapMode = TextServer.AutowrapMode.WordSmart,
+				CustomMinimumSize = new Vector2(220f, 0f),
+				TooltipText = outcome.IsSecret ? "Erschlossen: " + outcome.Requires.Reason : "",
+				MouseFilter = outcome.IsSecret ? Control.MouseFilterEnum.Pass : Control.MouseFilterEnum.Ignore
+			};
+			label.AddThemeFontSizeOverride("font_size", 14);
+			label.AddThemeColorOverride("font_color", outcome.IsSecret ? UiTheme.Cyan : UiTheme.Text);
+			label.SetMeta("outcome", outcome.Id);
+			_outcomeList.AddChild(label);
+		}
+		// Hidden outcomes the player cannot reach yet.
+		foreach (EventOutcomeDef outcome in def.LockedOutcomes)
+		{
+			Label label = new Label
+			{
+				Text = "• ??? (verborgen)" + (string.IsNullOrWhiteSpace(outcome.Requires.Hint) ? "" : " – " + outcome.Requires.Hint),
 				AutowrapMode = TextServer.AutowrapMode.WordSmart,
 				CustomMinimumSize = new Vector2(220f, 0f)
 			};
-			label.AddThemeFontSizeOverride("font_size", 14);
-			label.AddThemeColorOverride("font_color", UiTheme.Text);
+			label.AddThemeFontSizeOverride("font_size", 13);
+			label.AddThemeColorOverride("font_color", UiTheme.TextDim);
 			label.SetMeta("outcome", outcome.Id);
 			_outcomeList.AddChild(label);
 		}
