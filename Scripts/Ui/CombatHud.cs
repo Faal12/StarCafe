@@ -28,6 +28,10 @@ public partial class CombatHud : CanvasLayer
 
 	private const float BarHeight = 130f;
 
+	private PanelContainer _brawlBanner;
+
+	private Label _brawlLabel;
+
 	public static void FlashDamage()
 	{
 		if (_instance == null)
@@ -48,10 +52,32 @@ public partial class CombatHud : CanvasLayer
 		AddChild(_vignette);
 		BuildBars();
 		BuildTask();
+		BuildBrawlBanner();
+		UiBus.BrawlChanged += OnBrawlChanged;
+	}
+
+	/// <summary>"SCHLÄGEREI" banner at the top while a tavern brawl runs (placeholder look).</summary>
+	private void BuildBrawlBanner()
+	{
+		_brawlBanner = new PanelContainer { Visible = false, MouseFilter = Control.MouseFilterEnum.Ignore };
+		_brawlBanner.AddThemeStyleboxOverride("panel", Holo.Panel());
+		_brawlBanner.Position = new Vector2(576f - 190f, 14f);
+		_brawlBanner.CustomMinimumSize = new Vector2(380f, 0f);
+		AddChild(_brawlBanner);
+		_brawlLabel = Holo.Text_("", 15, new Color(1f, 0.6f, 0.45f));
+		_brawlLabel.HorizontalAlignment = HorizontalAlignment.Center;
+		_brawlBanner.AddChild(_brawlLabel);
+	}
+
+	private void OnBrawlChanged(bool running, string opponent)
+	{
+		_brawlBanner.Visible = running;
+		_brawlLabel.Text = "SCHLÄGEREI  ·  " + (opponent ?? "").ToUpperInvariant();
 	}
 
 	public override void _ExitTree()
 	{
+		UiBus.BrawlChanged -= OnBrawlChanged;
 		if (_instance == this)
 		{
 			_instance = null;
@@ -68,7 +94,7 @@ public partial class CombatHud : CanvasLayer
 		bool covered = DialogueController.IsOpen || EventPanel.IsOpen || BarPanel.IsOpen || OrderPanel.IsOpen;
 		if (combat != null)
 		{
-			bool show = !covered && (DeckManager.Current == DeckManager.Technikdeck || combat.Health < PlayerCombat.MaxHealth || combat.Energy < PlayerCombat.MaxEnergy - 1f || TaskService.IsActive);
+			bool show = !covered && (DeckManager.Current == DeckManager.Technikdeck || BrawlService.IsActive || combat.Health < PlayerCombat.MaxHealth || combat.Energy < PlayerCombat.MaxEnergy - 1f || TaskService.IsActive);
 			_bars.Visible = show;
 			SetFill(_healthFill, combat.Health / PlayerCombat.MaxHealth);
 			SetFill(_energyFill, combat.Energy / PlayerCombat.MaxEnergy);

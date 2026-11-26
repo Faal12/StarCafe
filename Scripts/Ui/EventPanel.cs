@@ -42,6 +42,11 @@ public partial class EventPanel : CanvasLayer
 
 	private HBoxContainer _footer;
 
+	/// <summary>Täuschen · Einschüchtern · Bestehlen · Angreifen (placeholder buttons – free for a real design).</summary>
+	private HBoxContainer _actionRow;
+
+	private readonly System.Collections.Generic.List<(ConversationAction Action, Button Button)> _actionButtons = new();
+
 	private Label _turns;
 
 	private Button _askFloki;
@@ -137,6 +142,20 @@ public partial class EventPanel : CanvasLayer
 			label.SetMeta("outcome", outcome.Id);
 			_outcomeList.AddChild(label);
 		}
+		// Outcomes this event has for actions (deceive, threaten, steal, attack).
+		foreach (EventOutcomeDef outcome in def.ActionOutcomes)
+		{
+			Label label = new Label
+			{
+				Text = "• " + outcome.Label + "  (" + ActionName(outcome.Action) + ")",
+				AutowrapMode = TextServer.AutowrapMode.WordSmart,
+				CustomMinimumSize = new Vector2(220f, 0f)
+			};
+			label.AddThemeFontSizeOverride("font_size", 14);
+			label.AddThemeColorOverride("font_color", UiKit.Warn);
+			label.SetMeta("outcome", outcome.Id);
+			_outcomeList.AddChild(label);
+		}
 
 		// Narrator sets the scene, the speaker opens, Floki may add his two cents – in this order.
 		_chat.Clear();
@@ -154,11 +173,13 @@ public partial class EventPanel : CanvasLayer
 		UpdateFlokiButton();
 
 		_inputRow.Visible = true;
+		_actionRow.Visible = true;
 		_footer.Visible = true;
 		_input.Text = "";
 		_input.Editable = true;
 		_send.Disabled = false;
 		_walkAway.Disabled = false;
+		UpdateActions();
 		_effects.Visible = false;
 		_world.Visible = false;
 		_radioHint.Visible = false;
@@ -182,6 +203,7 @@ public partial class EventPanel : CanvasLayer
 		_send.Disabled = true;
 		_walkAway.Disabled = true;
 		UpdateFlokiButton();
+		UpdateActions();
 		AppendPlayer(text);
 		SetStatus(_conversation.Def.Speaker.Name + " überlegt …");
 		EventConversation conversation = _conversation;
@@ -211,16 +233,142 @@ public partial class EventPanel : CanvasLayer
 			ShowResolution(step.Outcome);
 			return;
 		}
+		ReadyForInput();
+	}
+
+	/// <summary>Back to the player after a reply: input, buttons, maybe a remark from Floki.</summary>
+	private void ReadyForInput()
+	{
 		UpdateTurns();
 		_input.Editable = true;
 		_send.Disabled = false;
 		_walkAway.Disabled = false;
 		UpdateFlokiButton();
+		UpdateActions();
 		_input.GrabFocus();
 		if (FlokiAdvisor.ShouldInterject())
 		{
 			FlokiSpeaks(hint: false);
 		}
+	}
+
+	/// <summary>Deceive, threaten, steal, attack – the logic is in <see cref="ConversationActions"/>.</summary>
+	private async void OnAction(ConversationAction action)
+	{
+		if (_busy || _conversation == null || _conversation.IsFinished || !ConversationActions.CanUse(_conversation, action, out _))
+		{
+			return;
+		}
+		string text = _input.Text.Trim();
+		if (ConversationActions.NeedsText(action) && text.Length == 0)
+		{
+			SetStatus(action == ConversationAction.Taeuschen
+				? "Schreib zuerst deine Lüge ins Feld – dann „Täuschen“."
+				: "Schreib zuerst deine Drohung ins Feld – dann „Einschüchtern“.");
+			_input.GrabFocus();
+			return;
+		}
+		_busy = true;
+		VoiceQueue.Clear();
+		_input.Text = "";
+		_input.Editable = false;
+		_send.Disabled = true;
+		_walkAway.Disabled = true;
+		UpdateFlokiButton();
+		UpdateActions();
+		if (text.Length > 0 && ConversationActions.NeedsText(action))
+		{
+			AppendPlayer(text, ConversationActions.Label(action));
+		}
+		EventConversation conversation = _conversation;
+		SetStatus(action == ConversationAction.Angreifen ? null : conversation.Def.Speaker.Name + " reagiert …");
+		ActionReport report;
+		try
+		{
+			report = action switch
+			{
+				ConversationAction.Taeuschen => await ConversationActions.DeceiveAsync(conversation, text),
+				ConversationAction.Einschuechtern => await ConversationActions.IntimidateAsync(conversation, text),
+				ConversationAction.Bestehlen => ConversationActions.Steal(conversation),
+				_ => ConversationActions.Attack(conversation),
+			};
+		}
+		catch (Exception ex)
+		{
+			LlmLog.Add("Ereignis", LlmLogKind.Fehler, "Handlung fehlgeschlagen: " + ex.Message);
+			_busy = false;
+			SetStatus("Das hat nicht geklappt – versuch etwas anderes.");
+			ReadyForInput();
+			return;
+		}
+		if (!IsOpen || conversation != _conversation)
+		{
+			return;
+		}
+		_busy = false;
+		AppendAction(report.Narration, report.Success);
+		VoiceQueue.Enqueue(LauncherConfig.NarratorSlot, StripChance(report.Narration));
+		SetStatus(report.Step?.Notice);
+		if (!string.IsNullOrWhiteSpace(report.Step?.SpeakerLine))
+		{
+			AppendSpeaker(report.Step.SpeakerLine);
+			VoiceQueue.Enqueue(conversation.Def.Speaker.Name, report.Step.SpeakerLine);
+		}
+		if (report.StartsBrawl)
+		{
+			ShowBrawlStart();
+			return;
+		}
+		if (report.Outcome != null)
+		{
+			ShowResolution(report.Outcome);
+			return;
+		}
+		ReadyForInput();
+	}
+
+	/// <summary>The conversation turned into a fight: only "Kämpfen!" is left; the brawl starts when the window closes.</summary>
+	private void ShowBrawlStart()
+	{
+		_inputRow.Visible = false;
+		_actionRow.Visible = false;
+		_footer.Visible = false;
+		SetStatus(null);
+		_effects.Text = "Schlägerei! Schlag mit Linksklick oder Leertaste zu, weich den Schlägen aus. Getränke heilen (Rechtsklick/F).";
+		_effects.Visible = true;
+		_pendingTask = null;
+		_continue.Text = "Kämpfen!";
+		_continue.Visible = true;
+		_continue.GrabFocus();
+	}
+
+	private void UpdateActions()
+	{
+		foreach ((ConversationAction action, Button button) in _actionButtons)
+		{
+			bool usable = ConversationActions.CanUse(_conversation, action, out string reason);
+			button.Disabled = _busy || !usable;
+			button.TooltipText = ConversationActions.Hint(action) + (string.IsNullOrEmpty(reason) ? "" : "\n\n" + reason);
+		}
+	}
+
+	private static string ActionName(string id)
+	{
+		foreach (ConversationAction action in Enum.GetValues<ConversationAction>())
+		{
+			if (ConversationActions.Id(action) == id)
+			{
+				return ConversationActions.Label(action);
+			}
+		}
+		return id;
+	}
+
+	/// <summary>"Täuschen (55 %): …" → "…" for the narrator voice.</summary>
+	private static string StripChance(string narration)
+	{
+		int i = (narration ?? "").IndexOf("): ", StringComparison.Ordinal);
+		return i > 0 ? narration.Substring(i + 3) : narration;
 	}
 
 	private void OnAskFloki()
@@ -308,6 +456,7 @@ public partial class EventPanel : CanvasLayer
 			SayFloki(resolution.Floki);
 		}
 		_inputRow.Visible = false;
+		_actionRow.Visible = false;
 		_footer.Visible = false;
 		SetStatus(null);
 		_effects.Text = "Ausgang: " + outcome.Label + "\n" + resolution.EffectsLine;
@@ -355,6 +504,7 @@ public partial class EventPanel : CanvasLayer
 			SayFloki(resolution.Floki);
 		}
 		_inputRow.Visible = false;
+		_actionRow.Visible = false;
 		_footer.Visible = false;
 		SetStatus(null);
 		_effects.Text = "Ausgang: " + outcome.Label + "\n" + resolution.EffectsLine;
@@ -419,9 +569,17 @@ public partial class EventPanel : CanvasLayer
 		_chat.AppendText($"[color=#{_speakerColor.Lightened(0.35f).ToHtml(false)}][b]{Escape(name)}:[/b][/color] {Escape(text)}\n");
 	}
 
-	private void AppendPlayer(string text)
+	private void AppendPlayer(string text, string actionTag = null)
 	{
-		_chat.AppendText($"[color=#{UiKit.Amber.ToHtml(false)}][b]Du:[/b][/color] {Escape(text)}\n");
+		string tag = string.IsNullOrEmpty(actionTag) ? "" : $" [color=#{UiKit.Warn.ToHtml(false)}]({Escape(actionTag)})[/color]";
+		_chat.AppendText($"[color=#{UiKit.Amber.ToHtml(false)}][b]Du:[/b][/color]{tag} {Escape(text)}\n");
+	}
+
+	/// <summary>Result of an action: green when it worked, red when it went wrong.</summary>
+	private void AppendAction(string text, bool success)
+	{
+		Color color = success ? UiKit.Good : UiKit.Bad;
+		_chat.AppendText($"[color=#{color.ToHtml(false)}][i]▸ {Escape(text)}[/i][/color]\n");
 	}
 
 	private void AppendNarration(string text)
@@ -476,7 +634,7 @@ public partial class EventPanel : CanvasLayer
 		left.AddChild(_outcomeList);
 		Label how = new Label
 		{
-			Text = "Kein Knopf entscheidet: Führ das Gespräch so, dass es dort endet, wo du hinwillst.",
+			Text = "Kein Knopf entscheidet: Führ das Gespräch so, dass es dort endet, wo du hinwillst. Lügen, Drohen, Stehlen oder Zuschlagen sind riskant – und haben Folgen.",
 			AutowrapMode = TextServer.AutowrapMode.WordSmart,
 			CustomMinimumSize = new Vector2(220f, 0f)
 		};
@@ -528,6 +686,22 @@ public partial class EventPanel : CanvasLayer
 		_send = new Button { Text = "Sagen", ThemeTypeVariation = UiTheme.PrimaryButton, CustomMinimumSize = new Vector2(110f, 0f) };
 		_send.Pressed += OnSend;
 		_inputRow.AddChild(_send);
+		_actionRow = new HBoxContainer();
+		_actionRow.AddThemeConstantOverride("separation", 6);
+		body.AddChild(_actionRow);
+		Label orAct = new Label { Text = "Oder handle:" };
+		orAct.AddThemeFontSizeOverride("font_size", 13);
+		orAct.AddThemeColorOverride("font_color", UiTheme.TextDim);
+		_actionRow.AddChild(orAct);
+		foreach (ConversationAction action in Enum.GetValues<ConversationAction>())
+		{
+			Button button = new Button { Text = ConversationActions.Label(action), CustomMinimumSize = new Vector2(120f, 0f) };
+			button.AddThemeColorOverride("font_color", action == ConversationAction.Angreifen ? UiKit.Bad : UiKit.Warn);
+			ConversationAction captured = action;
+			button.Pressed += () => OnAction(captured);
+			_actionRow.AddChild(button);
+			_actionButtons.Add((action, button));
+		}
 		_footer = new HBoxContainer();
 		_footer.AddThemeConstantOverride("separation", 8);
 		body.AddChild(_footer);
