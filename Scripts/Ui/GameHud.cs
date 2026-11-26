@@ -5,6 +5,7 @@ public partial class GameHud : CanvasLayer
 {
 	private Label _date;
 	private Label _conjunction;
+	private Label _wanted;
 	private Control _shiftEndScreen;
 	private Label _shiftEndTitle;
 	private Label _shiftEndText;
@@ -24,12 +25,14 @@ public partial class GameHud : CanvasLayer
 	{
 		GameSession.Clock.Changed += Refresh;
 		GameSession.ShiftEnded += OnShiftEnded;
+		MemoryService.WantedChanged += OnWantedChanged;
 	}
 
 	public override void _ExitTree()
 	{
 		GameSession.Clock.Changed -= Refresh;
 		GameSession.ShiftEnded -= OnShiftEnded;
+		MemoryService.WantedChanged -= OnWantedChanged;
 
 		if (IsShowingShiftEnd)
 			GetTree().Paused = false;
@@ -52,6 +55,11 @@ public partial class GameHud : CanvasLayer
 		_conjunction = new Label { MouseFilter = Control.MouseFilterEnum.Ignore };
 		_conjunction.AddThemeFontSizeOverride("font_size", 13);
 		column.AddChild(_conjunction);
+
+		// Wanted level with the Sternenwacht – only shown when it is above 0 (placeholder look).
+		_wanted = new Label { MouseFilter = Control.MouseFilterEnum.Ignore, Visible = false };
+		_wanted.AddThemeFontSizeOverride("font_size", 13);
+		column.AddChild(_wanted);
 
 		_shiftEndScreen = new Control { Visible = false, Theme = UiTheme.Get() };
 		_shiftEndScreen.SetAnchorsPreset(Control.LayoutPreset.FullRect);
@@ -106,6 +114,22 @@ public partial class GameHud : CanvasLayer
 				: $"Konjunktion in {clock.DaysUntilConjunction} Tagen";
 			_conjunction.AddThemeColorOverride("font_color", UiKit.Muted);
 		}
+		RefreshWanted();
+	}
+
+	private void OnWantedChanged(int old, int now, string reason) => RefreshWanted();
+
+	/// <summary>"Fahndung ▮▮▮▯▯▯▯▯▯▯ 35 · unter Beobachtung"</summary>
+	private void RefreshWanted()
+	{
+		int level = MemoryService.Wanted;
+		_wanted.Visible = level > 0;
+		if (level <= 0)
+			return;
+		int filled = Mathf.Clamp(Mathf.CeilToInt(level / 10f), 1, 10);
+		_wanted.Text = "Fahndung " + new string('▮', filled) + new string('▯', 10 - filled) + $" {level} · {MemoryService.WantedStage(level)}";
+		Color color = level >= MemoryService.Search ? UiKit.Bad : (level >= MemoryService.Patrols ? UiKit.Warn : new Color(0.55f, 0.7f, 1f));
+		_wanted.AddThemeColorOverride("font_color", color);
 	}
 
 	private void OnShiftEnded(ShiftSummary summary)
@@ -138,6 +162,20 @@ public partial class GameHud : CanvasLayer
 			text += "\n\nGALAKTISCHES RADIO";
 			foreach (RadioNews item in news)
 				text += "\n• " + item.Text;
+		}
+
+		var rumors = MemoryService.LastShiftRumors;
+		if (rumors.Count > 0)
+		{
+			text += "\n\nGERÜCHTE";
+			foreach (string rumor in rumors)
+				text += "\n• " + rumor;
+		}
+		int wantedChange = MemoryService.LastShiftWantedChange;
+		if (MemoryService.Wanted > 0 || wantedChange != 0)
+		{
+			string change = wantedChange == 0 ? "" : (wantedChange > 0 ? $" (+{wantedChange})" : $" (−{-wantedChange})");
+			text += $"\n\nFAHNDUNG: {MemoryService.Wanted}{change} · {MemoryService.WantedStage(MemoryService.Wanted)}";
 		}
 
 		text += summary.Saved ? "\n\nSpielstand gespeichert." : "\n\nAchtung: Der Spielstand konnte nicht gespeichert werden.";
