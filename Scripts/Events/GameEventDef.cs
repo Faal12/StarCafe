@@ -90,8 +90,23 @@ public sealed class GameEventDef
 		return Outcomes.Find(o => string.Equals(o.Id, id?.Trim(), System.StringComparison.OrdinalIgnoreCase));
 	}
 
-	/// <summary>Outcomes that can be reached by talking (not task results, not action results).</summary>
-	public List<EventOutcomeDef> TalkOutcomes => Outcomes.FindAll(o => !o.TaskOnly && string.IsNullOrWhiteSpace(o.Action));
+	/// <summary>Wanted level (Sternenwacht) needed for this event (0 = none). For raids and the licence hearing.</summary>
+	public int MinWanted { get; set; }
+
+	/// <summary>0 = no upper limit.</summary>
+	public int MaxWanted { get; set; }
+
+	/// <summary>More likely the higher the wanted level (patrols, investigators).</summary>
+	public bool WantedBoost { get; set; }
+
+	/// <summary>
+	/// Outcomes that can be reached by talking right now: not task results, not action results,
+	/// and hidden outcomes only once their requirements are met.
+	/// </summary>
+	public List<EventOutcomeDef> TalkOutcomes => Outcomes.FindAll(o => !o.TaskOnly && string.IsNullOrWhiteSpace(o.Action) && MemoryService.Meets(o.Requires));
+
+	/// <summary>Hidden outcomes whose requirements are not met yet (shown as "???").</summary>
+	public List<EventOutcomeDef> LockedOutcomes => Outcomes.FindAll(o => o.Requires != null && !o.TaskOnly && string.IsNullOrWhiteSpace(o.Action) && !MemoryService.Meets(o.Requires));
 
 	/// <summary>Outcomes this event defines for actions (deceive, threaten, steal, attack).</summary>
 	public List<EventOutcomeDef> ActionOutcomes => Outcomes.FindAll(o => !string.IsNullOrWhiteSpace(o.Action));
@@ -200,4 +215,40 @@ public sealed class EventOutcomeDef
 	/// "sieg" / "niederlage" / "flucht" (attack). Empty = any result.
 	/// </summary>
 	public string ActionResult { get; set; } = "";
+
+	/// <summary>
+	/// Hidden outcome: only offered (to the player and the AI) once these requirements are met –
+	/// an item in the inventory, a story flag, an earlier deed, a wanted level. Until then it shows as "???".
+	/// </summary>
+	public EventRequirement Requires { get; set; }
+
+	/// <summary>True for hidden outcomes (with <see cref="Requires"/>), whether unlocked or not.</summary>
+	public bool IsSecret => Requires != null;
+
+	/// <summary>Change of the wanted level with the Sternenwacht (negative = suspicion falls).</summary>
+	public int Wanted { get; set; }
+}
+
+/// <summary>What unlocks a hidden outcome (JSON "requires"). All listed conditions must be true.</summary>
+public sealed class EventRequirement
+{
+	/// <summary>Item ids that must be in the inventory, e.g. "dienstchip".</summary>
+	public List<string> Items { get; set; } = new List<string>();
+
+	/// <summary>Story flags that must be set.</summary>
+	public List<string> Flags { get; set; } = new List<string>();
+
+	/// <summary>Earlier deeds: "kind" or "kind|tag", e.g. "diebstahl|erwischt", "schlaegerei|sieg".</summary>
+	public List<string> Deeds { get; set; } = new List<string>();
+
+	public int MinWanted { get; set; }
+
+	/// <summary>0 = no upper limit.</summary>
+	public int MaxWanted { get; set; }
+
+	/// <summary>Shown while locked, e.g. "Wenn du etwas gegen ihn in der Hand hättest …".</summary>
+	public string Hint { get; set; } = "";
+
+	/// <summary>Shown once unlocked: why the player has this option, e.g. "Du hast seinen Dienstchip.".</summary>
+	public string Reason { get; set; } = "";
 }

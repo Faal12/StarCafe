@@ -184,7 +184,8 @@ public sealed class EventConversation
 			if (match.Groups[1].Success)
 			{
 				outcome = Def.FindOutcome(match.Groups[1].Value);
-				if (outcome?.TaskOnly == true)
+				// Only outcomes that are open right now (no task results, no locked hidden ones).
+				if (outcome != null && !Def.TalkOutcomes.Contains(outcome))
 				{
 					outcome = null;
 				}
@@ -254,7 +255,12 @@ public sealed class EventConversation
 		sb.Append("MÖGLICHE AUSGÄNGE (nur du entscheidest, wann einer eingetreten ist):\n");
 		foreach (EventOutcomeDef outcome in Def.TalkOutcomes)
 		{
-			sb.Append("- ").Append(outcome.Id).Append(": ").Append(outcome.Condition).Append('\n');
+			sb.Append("- ").Append(outcome.Id).Append(": ").Append(outcome.Condition);
+			if (outcome.IsSecret && !string.IsNullOrWhiteSpace(outcome.Requires.Reason))
+			{
+				sb.Append(" (Nur möglich, weil: ").Append(outcome.Requires.Reason).Append(')');
+			}
+			sb.Append('\n');
 		}
 		sb.Append("\nREGELN\n");
 		sb.Append("- Bleib in deiner Rolle. Antworte auf Deutsch in ein bis drei kurzen Sätzen gesprochener Rede. Kurze Bühnenanweisungen in runden Klammern sind erlaubt.\n");
@@ -273,6 +279,11 @@ public sealed class EventConversation
 		foreach (string rule in GameSettings.BuildPromptRules())
 		{
 			sb.Append("\n- ").Append(rule);
+		}
+		string memory = MemoryService.DescribeForSpeaker(Def.Speaker);
+		if (memory.Length > 0)
+		{
+			sb.Append("\n\n").Append(memory);
 		}
 		string standing = ReputationText.DescribeForPrompt(ReputationService.State);
 		if (standing.Length > 0)

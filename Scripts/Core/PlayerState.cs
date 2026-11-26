@@ -115,13 +115,24 @@ public static class PlayerState
 		return true;
 	}
 
+	/// <summary>A deed was recorded (memory, rumours and the wanted level listen to this).</summary>
+	public static event Action<Deed> DeedRecorded;
+
 	public static void Record(string kind, string text, IEnumerable<string> tags = null, bool witnessed = false)
 	{
-		_deeds.Add(new Deed { Week = GameSession.Clock.Week, Kind = kind, Text = text, Tags = tags?.ToList() ?? new List<string>(), Witnessed = witnessed });
+		Deed deed = new Deed { Week = GameSession.Clock.Week, Kind = kind, Text = text, Tags = tags?.ToList() ?? new List<string>(), Witnessed = witnessed };
+		_deeds.Add(deed);
 		if (_deeds.Count > DeedLimit)
 		{
 			_deeds.RemoveAt(0);
 		}
+		DeedRecorded?.Invoke(deed);
+	}
+
+	/// <summary>True if a deed of this kind (and with this tag, if given) was ever recorded.</summary>
+	public static bool HasDeed(string kind, string tag = null)
+	{
+		return _deeds.Any(d => d.Kind == kind && (string.IsNullOrEmpty(tag) || d.Tags.Contains(tag)));
 	}
 
 	/// <summary>Takes the cash book of the shift (shown at shift end) and starts a new one.</summary>

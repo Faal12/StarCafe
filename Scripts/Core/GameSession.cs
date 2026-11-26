@@ -27,6 +27,12 @@ public static class GameSession
 
 	public static bool HasAutosave => FileAccess.FileExists(AutosavePath);
 
+	static GameSession()
+	{
+		// Memory listens to deeds from the very first one on.
+		MemoryService.Init();
+	}
+
 	public static void NewGame()
 	{
 		Clock.Reset();
@@ -34,6 +40,7 @@ public static class GameSession
 		EventService.State.Reset();
 		WorldService.State.Reset();
 		PlayerState.Reset();
+		MemoryService.Reset();
 	}
 
 	public static void BeginShift() => ShiftStarted?.Invoke();
@@ -45,6 +52,8 @@ public static class GameSession
 		if (TaskService.IsActive)
 			TaskService.Active.Abort();
 
+		// Rumours spread (some reach the radio) and the wanted level fades.
+		MemoryService.EndShift(Clock.Week);
 		LastShiftRadio = EventService.State.TakePendingRadio();
 		Economy.ChargeWeekly();
 		LastShiftLedger = PlayerState.TakeLedger();
@@ -70,7 +79,8 @@ public static class GameSession
 			Reputation = ReputationService.State.Export(),
 			Events = EventService.State.Export(),
 			World = WorldService.State.Export(),
-			Player = PlayerState.Export()
+			Player = PlayerState.Export(),
+			Memory = MemoryService.Export()
 		};
 
 		using FileAccess file = FileAccess.Open(AutosavePath, FileAccess.ModeFlags.Write);
@@ -105,6 +115,7 @@ public static class GameSession
 		EventService.State.Import(data.Events);
 		WorldService.State.Import(data.World);
 		PlayerState.Import(data.Player);
+		MemoryService.Import(data.Memory);
 		Clock.Restore(data.Day, data.ConjunctionShift);
 		return true;
 	}

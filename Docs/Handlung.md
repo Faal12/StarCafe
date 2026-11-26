@@ -524,8 +524,17 @@ Schlüsselfiguren sterben nur durch die Handlung. Ereignisse können eigene Ausg
 allgemeine Ausgänge (Gastrecht, Ansehen, zerbrochene Möbel, Story-Flags `schlaegerei` / `dieb_erwischt`).
 Alles wird als Tat gespeichert. Details: `Data/Events/README.md`.
 
+**Gedächtnis & Fahndung (Phase 4, umgesetzt):** Die Welt erinnert sich. **Verborgene Ausgänge** zeigen sich als
+„???“ und öffnen sich durch Gegenstände (gestohlener Dienstchip, Falschgeld, Schuldschein-Liste), Story-Flags oder
+frühere Taten (beim Stehlen erwischt, Schlägerei gewonnen). **Figuren erinnern sich** an das, was sie selbst mit dem
+Wirt erlebt haben, und kennen, was ihre Fraktion gehört hat – das steht im KI-Prompt. Beobachtete Taten werden am
+Schichtende zu **Gerüchten** bei anderen Fraktionen, große auch im Radio. **Floki** kennt alle Taten und erinnert
+gern daran. Die **Fahndungsstufe** der Sternenwacht (0–100) steigt durch Diebstahl, Schlägereien und Drohungen und
+sinkt jede Woche: ab 30 mehr Streifen, ab 60 **Durchsuchung**, ab 90 **Anhörung zur Schanklizenz** (Bewährung,
+Auflagen). Senken lässt sie sich durch Kooperation, Beweise gegen andere und gute Worte bei der Sternenwacht.
+Bestechung bleibt ein Wirtschafts-Platzhalter (12, Punkt 15).
+
 **Geplante nächste Phasen:**
-4. **Gedächtnis & Fahndung:** Taten öffnen verborgene Ausgänge, Figuren erinnern sich, Gerüchte, Fahndungsstufe bei der Sternenwacht.
 5. **Gäste ansprechen, Taschendiebstahl** und die übrigen Minispiele: *Taschendiebstahl*, *Schlossknacken* (die versiegelte Tür), *Funkpeilung*, *Andocken*.
 
 ---
