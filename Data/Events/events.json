@@ -65,7 +65,7 @@
           "reputation": { "Imperium": 2, "Rebellen": -4 },
           "rivalry": false,
           "gastrecht": -6,
-          "world": [ { "type": "animation", "animation": "shake" }, { "type": "prop", "id": "umgestuerzter_hocker", "label": "UmgestÃ¼rzter Hocker", "spot": "Tresen", "weeks": 1 } ],
+          "world": [ { "type": "animation", "animation": "shake" }, { "type": "prop", "id": "umgestuerzter_hocker", "label": "Umgestürzter Hocker", "spot": "Tresen", "weeks": 1 } ],
           "result": "Der Offizier winkt zwei Soldaten herein. Der Rebell wird vor allen Gästen abgeführt. Niemand sieht dich an.",
           "floki": "Herzlichen Glückwunsch. Du hast die Option „Zuschauer“ gewählt."
         }
@@ -136,7 +136,7 @@
           "default": true,
           "reputation": { "Sternenwacht": 2, "GraueHaende": -3 },
           "gastrecht": -3,
-          "world": [ { "type": "prop", "id": "durchwuehlte_tische", "label": "DurchwÃ¼hlte Tische", "spot": "Tisch2", "weeks": 1, "color": "#6b5a48" } ],
+          "world": [ { "type": "prop", "id": "durchwuehlte_tische", "label": "Durchwühlte Tische", "spot": "Tisch2", "weeks": 1, "color": "#6b5a48" } ],
           "result": "Die Beamten drehen jeden Tisch um. Gäste gehen früher, die Kiste wird gefunden, und niemand ist zufrieden."
         }
       ]
@@ -286,7 +286,7 @@
           "keywords": ["ja", "leg los", "mach", "frei"],
           "reputation": { "Funkenwerkstatt": 8 },
           "gastrecht": -3,
-          "world": [ { "type": "character", "id": "kellnerroboter_prototyp", "label": "Kellnerroboter (Prototyp)", "faction": "Funkenwerkstatt", "spot": "Tisch2", "offsetX": 40, "weeks": 1, "appear": "drop" }, { "type": "prop", "id": "verschuettetes_getraenk", "label": "VerschÃ¼ttetes GetrÃ¤nk", "spot": "Tisch3", "weeks": 1, "color": "#8a5a2a", "scale": 0.7 } ],
+          "world": [ { "type": "character", "id": "kellnerroboter_prototyp", "label": "Kellnerroboter (Prototyp)", "faction": "Funkenwerkstatt", "spot": "Tisch2", "offsetX": 40, "weeks": 1, "appear": "drop" }, { "type": "prop", "id": "verschuettetes_getraenk", "label": "Verschüttetes Getränk", "spot": "Tisch3", "weeks": 1, "color": "#8a5a2a", "scale": 0.7 } ],
           "result": "Drei Runden serviert er perfekt. Die vierte landet im Schoß eines Söldners. Die Tüftlerin notiert begeistert „Datenpunkt“.",
           "floki": "Datenpunkt. So nenne ich dich ab jetzt auch, Chef.",
           "radio": "Knotensender: Funkenwerkstatt testet neuen Servicerobot – „überwiegend erfolgreich“."
@@ -793,7 +793,7 @@
           "keywords": ["mehr zahlen", "ueberbiet", "ich zahle", "wie viel"],
           "reputation": { "Weitwanderer": 10, "Soeldner": 2 },
           "rivalry": false,
-          "world": [ { "type": "character", "id": "nomadenmaedchen", "label": "Gerettetes NomadenmÃ¤dchen", "faction": "Weitwanderer", "spot": "Sitzecke", "offsetX": 50, "weeks": 1, "scale": 0.85 } ],
+          "world": [ { "type": "character", "id": "nomadenmaedchen", "label": "Gerettetes Nomadenmädchen", "faction": "Weitwanderer", "spot": "Sitzecke", "offsetX": 50, "weeks": 1, "scale": 0.85 } ],
           "result": "Die Kasse ist fast leer. Das Mädchen weiß nicht, wie ihr geschieht. Ihr Konvoi wird es nie vergessen.",
           "floki": "Teuerster Teller Suppe der Geschichte. Bester auch.",
           "radio": "Knotensender: Wirt kauft Nomadenmädchen frei – Kopfgeldjägerin „zufrieden“."
@@ -911,7 +911,7 @@
           "condition": "Der Wirt rät, den Auftrag anzunehmen.",
           "keywords": ["annehm", "unterschreib", "nimm das geld"],
           "reputation": { "Funkenwerkstatt": 4, "Imperium": 6 },
-          "world": [ { "type": "character", "id": "ueberwachungsdrohne", "label": "Imperiale Ãœberwachungsdrohne", "faction": "Imperium", "spot": "Mitte", "weeks": 4, "scale": 0.6, "appear": "drop" } ],
+          "world": [ { "type": "character", "id": "ueberwachungsdrohne", "label": "Imperiale Überwachungsdrohne", "faction": "Imperium", "spot": "Mitte", "weeks": 4, "scale": 0.6, "appear": "drop" } ],
           "result": "Er unterschreibt. Die Werkstatt ist gerettet – und auf den Rebellenkanälen fällt ihr Name in einem unschönen Satz.",
           "radio": "Reichssender: Funkenwerkstatt liefert modernste Überwachungstechnik für die Sicherheit des Knotens."
         },
@@ -995,7 +995,7 @@
           "condition": "Der Wirt bietet statt Geld etwas anderes an (Informationen, Lagerplatz, Tisch für Treffen), und der Eintreiber nimmt an.",
           "keywords": ["informationen", "lagerplatz", "tisch fuer", "statt geld", "tausch"],
           "reputation": { "GraueHaende": 8, "Sternenwacht": -3 },
-          "world": [ { "type": "prop", "id": "tisch_graue_haende", "label": "Dienstags: Graue HÃ¤nde", "spot": "Tisch1", "weeks": 4, "color": "#5a5e66" } ],
+          "world": [ { "type": "prop", "id": "tisch_graue_haende", "label": "Dienstags: Graue Hände", "spot": "Tisch1", "weeks": 4, "color": "#5a5e66" } ],
           "result": "Statt Geld gibt es einen festen Tisch für die Grauen Hände. Dienstags. Ohne Fragen."
         },
         {
@@ -1049,7 +1049,7 @@
           "condition": "Der Wirt überlässt ihr den Tisch, ohne Bedingungen.",
           "keywords": ["ja", "nimm den tisch", "einverstanden"],
           "reputation": { "Imperium": 8, "GraueHaende": -4 },
-          "world": [ { "type": "character", "id": "aufklaererin", "label": "AufklÃ¤rerin am Fenster", "faction": "Imperium", "spot": "TresenRechts", "weeks": 1 } ],
+          "world": [ { "type": "character", "id": "aufklaererin", "label": "Aufklärerin am Fenster", "faction": "Imperium", "spot": "TresenRechts", "weeks": 1 } ],
           "result": "Sie notiert drei Tage lang Schiffskennungen. Zwei Schmugglerschiffe kommen danach nicht mehr wieder.",
           "radio": "Reichssender: Erfolgreiche Kontrolle illegaler Handelsrouten am Tresk-Knoten."
         },
@@ -1235,7 +1235,7 @@
           "keywords": ["melden", "imperium", "sternenwacht", "festhalten", "pirat"],
           "reputation": { "Imperium": 5, "Rebellen": -8, "Weitwanderer": -4 },
           "gastrecht": -6,
-          "world": [ { "type": "prop", "id": "kupfermuenze_lerche", "label": "KupfermÃ¼nze mit Lerche", "spot": "Tresen", "offsetX": -50, "color": "#c08040", "scale": 0.4, "appear": "pop" } ],
+          "world": [ { "type": "prop", "id": "kupfermuenze_lerche", "label": "Kupfermünze mit Lerche", "spot": "Tresen", "offsetX": -50, "color": "#c08040", "scale": 0.4, "appear": "pop" } ],
           "result": "Bevor jemand kommt, ist er weg. Auf dem Tresen liegt eine alte Kupfermünze mit einer Lerche darauf.",
           "radio": "Reichssender: Gesuchter Pirat am Tresk-Knoten gesichtet – entkommen."
         }
