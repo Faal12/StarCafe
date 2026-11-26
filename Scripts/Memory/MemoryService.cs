@@ -201,7 +201,8 @@ public static class MemoryService
 	/// </summary>
 	public static void EndShift(int week)
 	{
-		List<string> lines = new List<string>();
+		// Same kind of rumour = one line ("… (3×)") with everybody who heard it.
+		Dictionary<string, (int Count, HashSet<Faction> Heard, bool Big)> grouped = new Dictionary<string, (int, HashSet<Faction>, bool)>();
 		foreach (Deed deed in _unspread)
 		{
 			string victim = Tag(deed, "fraktion:");
@@ -210,14 +211,24 @@ public static class MemoryService
 			{
 				Learn(new Rumor { Week = deed.Week, Faction = f.ToString(), Text = deed.Text, Kind = deed.Kind, Hearsay = true });
 			}
-			if (listeners.Count > 0 && lines.Count < 4)
-			{
-				lines.Add(RumorLine(deed) + "  (" + string.Join(", ", listeners.Select(FactionInfo.DisplayName)) + ")");
-			}
+			string line = RumorLine(deed);
 			bool big = deed.Kind == "schlaegerei" || (deed.Kind == "diebstahl" && deed.Tags.Contains("erwischt"));
-			if (big && Rng.Randf() < 0.5f)
+			(int count, HashSet<Faction> heard, bool wasBig) = grouped.TryGetValue(line, out var entry) ? entry : (0, new HashSet<Faction>(), false);
+			heard.UnionWith(listeners);
+			grouped[line] = (count + 1, heard, wasBig || big);
+		}
+		List<string> lines = new List<string>();
+		foreach (KeyValuePair<string, (int Count, HashSet<Faction> Heard, bool Big)> pair in grouped)
+		{
+			if (pair.Value.Heard.Count > 0 && lines.Count < 4)
 			{
-				EventService.State.AddRadio(week, "Gerüchteküche: " + RumorLine(deed));
+				string times = pair.Value.Count > 1 ? $" ({pair.Value.Count}×)" : "";
+				lines.Add(pair.Key + times + "  – gehört von: " + string.Join(", ", pair.Value.Heard.Select(FactionInfo.DisplayName)));
+			}
+			// Big stories reach the radio – more likely the more often they happened.
+			if (pair.Value.Big && Rng.Randf() < Math.Min(0.9f, 0.4f + 0.15f * pair.Value.Count))
+			{
+				EventService.State.AddRadio(week, "Gerüchteküche: " + pair.Key);
 			}
 		}
 		_unspread.Clear();
