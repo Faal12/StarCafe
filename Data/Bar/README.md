@@ -8,9 +8,17 @@ Das Herz jeder Schicht. Alles hier ist ohne Code in JSON änderbar.
    und zeigen **!** – sie wollen bestellen. Darunter läuft ihre Geduld ab.
 2. Hingehen, **E** drücken: Bestellung lesen (wird vorgelesen). **Nachfragen** verrät, was gemeint ist.
    **Bestellung aufnehmen** → der Gast zeigt **…** und wartet auf sein Getränk.
-3. An der **Bar** (leuchtender Punkt am Tresen) **E**: Mix-Bildschirm.
-   Bestellung wählen, bis zu **4 Zutaten** in den Shaker, **Zubereitung** wählen, **Fertig – aufs Tablett**.
-   Exakte Rezepte werden beim ersten Mal ins **Rezeptbuch** eingetragen.
+3. An der **Bar** (leuchtender Punkt am Tresen) **E**: Die Ansicht wechselt **hinter den Tresen** (wie ein
+   Schreibtisch in *Papers, Please*). Alles liegt mit Physik herum und wird mit der **Maus gezogen**:
+   - **Flaschen** stehen auf den Regalen. Über den Shaker halten → sie kippen und **gießen ein** (eine Portion pro Moment, höchstens **4**).
+   - **Zubereitung** von Hand: den Shaker greifen und **schütteln** · den **Löffel** im Shaker hin und her = **rühren** ·
+     Shaker auf den **Brenner** stellen = **erhitzen** · den **Eiskübel** über den Shaker halten = **auf Eis**.
+   - **Servieren:** den Shaker über das **Glas** rechts kippen → das Getränk kommt aufs Tablett (Inventar).
+     **Ausgießen:** über der **Spüle** kippen.
+   - **Bestellzettel** liegen auf dem Tresen: anklicken = für diesen Gast mixen (roter Punkt). Der Holo-Bildschirm
+     oben rechts zeigt Bestellung, Mischung, Geschmack und ob es ein bekanntes Rezept ist.
+   - Das **Rezeptbuch** liegt auf dem Tresen: anklicken zum Blättern. Exakte Rezepte werden beim ersten Mal eingetragen.
+   - Das Spiel läuft dabei weiter – die Gäste warten nicht ewig. **Esc** = zurück in den Schankraum.
 4. Das Getränk liegt jetzt im **Inventar** (Schnellleiste unten). **Tragen ist ein Minispiel:**
    Abruptes Losgehen, Stoppen und Zickzack bringen das Tablett ins Schwappen (Anzeige über der Schnellleiste).
    **Umschalt** = vorsichtig gehen. Mehr Getränke = empfindlicher. Zu viel Schwappen → **verschüttet**:

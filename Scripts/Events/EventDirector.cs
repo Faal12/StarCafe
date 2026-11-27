@@ -102,7 +102,8 @@ public partial class EventDirector : Node
 
 	private bool IsBusy()
 	{
-		// No events while a task or brawl runs, below deck, or during the elevator ride.
-		return UiBus.IsOpen(UiWindow.Event) || UiBus.IsOpen(UiWindow.Dialogue) || GetTree().Paused || TaskService.IsActive || BrawlService.IsActive || !DeckManager.InTavern || DeckManager.IsTraveling;
+		// No events while a task or brawl runs, behind the bar, below deck, or during the elevator ride.
+		// (The bar view no longer pauses the game: guests keep waiting while you mix.)
+		return UiBus.IsOpen(UiWindow.Event) || UiBus.IsOpen(UiWindow.Dialogue) || UiBus.IsOpen(UiWindow.Bar) || GetTree().Paused || TaskService.IsActive || BrawlService.IsActive || !DeckManager.InTavern || DeckManager.IsTraveling;
 	}
 }
