@@ -34,7 +34,7 @@ Spiellogik und Inhalte (Ereignisse, Rezepte …) stehen in `Data/README.md`.
 | `InventoryHud` | Schnellleiste, Credits, Hinweise („+₡12“), Inventar (Tab) | 15 |
 | `CombatHud` | Leben/Energie, roter Treffer-Rand, Aufgabenfenster | 14 |
 | `TrayBalance` (Bar) | Tablett-Anzeige über der Schnellleiste | 15 |
-| `BarPanel` | Mix-Bildschirm „Am Tresen“ + Rezeptbuch | 28 |
+| `BarCounterView` (`Scripts/Ui/BarCounter/`) | Ansicht hinter dem Tresen: Regale, Shaker, Werkzeuge, Zettel, Rezeptbuch – mit Physik in eigenem `SubViewport`; Holo-Anzeige, aufgeschlagenes Buch | 28 |
 | `OrderPanel` | Bestellung / Bewertung am Tisch | 28 |
 | `EventPanel` | Ereignis als Gespräch (Chat, Ausgänge, Floki) | 30 |
 | `CircuitGame` / `PressureGame` | Minispiele Schaltkreis / Druckventil (selbst gezeichnet in `CircuitBoard._Draw` / `PressureGauge._Draw`) | 32 |
@@ -57,7 +57,8 @@ Alle Fenster außer Minispielen und Aufzug-Menü sind Kinder von `TavernUi.tscn`
 | **Sprecher in Ereignissen** (Karte mit Anfangsbuchstabe) | `Scripts/Ui/EventPanel.cs` → `_portrait`; Ereignisse haben `speaker.placeholder` |
 | **Floki** | fertig: `Assets/Characters/Floki/` – Körper + 4 Augen-Ebenen (gleiche Leinwand), `floki_world.png` für den Schankraum. Neue Mimik: Bild ablegen, in `Resources/Npc/Floki.tres` unter *Emotions* eintragen |
 | **Launcher-Hintergrund & Schiff** | `Assets/Art/pastel_background.png`, `spaceship.png` (`Scripts/Launcher/LauncherScreen.cs`) |
-| **Bar-Zutaten** (Farbpunkt) | `Data/Bar/ingredients.json` → `color` (Symbol-Grafik später in `BarPanel.RefreshShelf`) |
+| **Bar: Flaschen, Shaker, Eiskübel, Löffel, Zettel, Buch** | `Scripts/Ui/BarCounter/BarProps.cs` – jedes Teil zeichnet sich in `_Draw()`; durch Sprites ersetzen (Kollisionsgröße `Size` beibehalten). Flaschenfarbe: `Data/Bar/ingredients.json` → `color` |
+| **Bar: Wand, Regale, Tresen, Brenner, Spüle, Glas** | `BarBackdrop._Draw()` in derselben Datei; Positionen als Konstanten oben in `BarCounterView` |
 
 Orte im Schankraum, an denen Folgen erscheinen: Knoten **WorldSpots** in `Tavern.tscn`; Sitzplätze der Gäste:
 Knoten **GuestSeats**. Beide sind Marker – im Editor verschieben genügt.
@@ -93,7 +94,7 @@ Spiellogik ruft **nie** ein Fenster direkt auf, sondern nur `UiBus` (`Scripts/Co
 |---|---|---|
 | `UiBus.Toast(text, farbe)` | kurzer Hinweis unten | `InventoryHud.Toast` |
 | `UiBus.OpenDialogue(persona)` | freies Gespräch (Floki) | `DialogueController` |
-| `UiBus.OpenBar()` | Mix-Bildschirm | `BarPanel` |
+| `UiBus.OpenBar()` | Ansicht hinter dem Tresen | `BarCounterView` |
 | `UiBus.ShowOrder / ShowWaiting / ShowRating` | Bestellung, Warten, Bewertung am Tisch | `OrderPanel` |
 | `UiBus.ShowEvent(def)` | Ereignis als Gespräch | `EventPanel` |
 | `UiBus.ShowAftermath(def, ausgang, ergebnis)` | Ergebnis nach einer Aufgabe oder Schlägerei | `EventPanel` |
@@ -108,6 +109,11 @@ Eigenschaft `IsOpen`.
 
 Daten lesen die Fenster direkt aus der Logik (`PlayerState`, `OrderBook.Open`, `TaskService` …), ändern sie aber nur
 über deren Methoden.
+
+**Bar:** Die Tresen-Ansicht hält einen `DrinkMixer` und benutzt nur `BarService` (`Scripts/Bar/BarService.cs`):
+`Available(zutat, mixer)` (Vorrat, z. B. Alienschleim), `TryAdd(mixer, zutat, out grund)`, `Finish(mixer, bestellung)` →
+`ServeResult` (Getränk aufs Tablett, neues Rezept, Meldung), `NextOrder()`, `HasDrinkFor(bestellung)`. Wie geschüttelt,
+gerührt oder eingegossen wird, ist reine Darstellung – die Regeln stehen nur dort.
 
 **Handlungen im Ereignis-Gespräch** (Täuschen, Einschüchtern, Bestehlen, Angreifen) – das Fenster ruft nur diese
 Methoden aus `Scripts/Events/ConversationActions.cs` und zeigt das Ergebnis:

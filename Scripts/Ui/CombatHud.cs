@@ -91,7 +91,7 @@ public partial class CombatHud : CanvasLayer
 			TaskService.Update(GetTree().Paused ? 0 : delta);
 		}
 		PlayerCombat combat = PlayerCombat.Instance;
-		bool covered = DialogueController.IsOpen || EventPanel.IsOpen || BarPanel.IsOpen || OrderPanel.IsOpen;
+		bool covered = DialogueController.IsOpen || EventPanel.IsOpen || BarCounterView.IsOpen || OrderPanel.IsOpen;
 		if (combat != null)
 		{
 			bool show = !covered && (DeckManager.Current == DeckManager.Technikdeck || BrawlService.IsActive || combat.Health < PlayerCombat.MaxHealth || combat.Energy < PlayerCombat.MaxEnergy - 1f || TaskService.IsActive);

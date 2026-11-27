@@ -112,13 +112,13 @@ public partial class InventoryHud : CanvasLayer
 
 	public override void _Process(double delta)
 	{
-		bool covered = DialogueController.IsOpen || EventPanel.IsOpen || BarPanel.IsOpen || OrderPanel.IsOpen;
+		bool covered = DialogueController.IsOpen || EventPanel.IsOpen || BarCounterView.IsOpen || OrderPanel.IsOpen;
 		_hud.Visible = !covered || IsPanelOpen;
 	}
 
 	public override void _UnhandledInput(InputEvent @event)
 	{
-		if (DialogueController.IsOpen || EventPanel.IsOpen || BarPanel.IsOpen || OrderPanel.IsOpen)
+		if (DialogueController.IsOpen || EventPanel.IsOpen || BarCounterView.IsOpen || OrderPanel.IsOpen)
 		{
 			return;
 		}

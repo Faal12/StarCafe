@@ -5,7 +5,7 @@
 [ext_resource type="Script" path="res://Scripts/Ui/PauseMenu.cs" id="3_pause_script"]
 [ext_resource type="Script" path="res://Scripts/Ui/GameHud.cs" id="4_hud_script"]
 [ext_resource type="Script" path="res://Scripts/Ui/InventoryHud.cs" id="5_inventory_hud_script"]
-[ext_resource type="Script" path="res://Scripts/Ui/BarPanel.cs" id="6_bar_panel_script"]
+[ext_resource type="Script" path="res://Scripts/Ui/BarCounter/BarCounterView.cs" id="6_bar_panel_script"]
 [ext_resource type="Script" path="res://Scripts/Ui/OrderPanel.cs" id="7_order_panel_script"]
 [ext_resource type="Script" path="res://Scripts/Ui/CombatHud.cs" id="8_combat_hud_script"]
 [ext_resource type="Script" path="res://Scripts/Ui/EventPanel.cs" id="9_event_panel_script"]
@@ -107,7 +107,7 @@ script = ExtResource("4_hud_script")
 [node name="InventoryHud" type="CanvasLayer" parent="."]
 script = ExtResource("5_inventory_hud_script")
 
-[node name="BarPanel" type="CanvasLayer" parent="."]
+[node name="BarCounter" type="CanvasLayer" parent="."]
 script = ExtResource("6_bar_panel_script")
 
 [node name="OrderPanel" type="CanvasLayer" parent="."]

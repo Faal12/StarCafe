@@ -39,7 +39,7 @@ public partial class UiHost : Node
 		{
 			UiBus.ToastRequested += OnToast;
 			UiBus.DialogueRequested += OnDialogue;
-			UiBus.BarRequested += BarPanel.Open;
+			UiBus.BarRequested += BarCounterView.Open;
 			UiBus.OrderRequested += OrderPanel.ShowOrder;
 			UiBus.WaitingRequested += OrderPanel.ShowWaiting;
 			UiBus.RatingRequested += OrderPanel.ShowRating;
@@ -52,7 +52,7 @@ public partial class UiHost : Node
 		{
 			UiBus.ToastRequested -= OnToast;
 			UiBus.DialogueRequested -= OnDialogue;
-			UiBus.BarRequested -= BarPanel.Open;
+			UiBus.BarRequested -= BarCounterView.Open;
 			UiBus.OrderRequested -= OrderPanel.ShowOrder;
 			UiBus.WaitingRequested -= OrderPanel.ShowWaiting;
 			UiBus.RatingRequested -= OrderPanel.ShowRating;
